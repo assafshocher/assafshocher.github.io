@@ -1,0 +1,505 @@
+<!DOCTYPE HTML>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>Assaf Shocher's homepage</title>
+
+  <meta name="author" content="Assaf Shocher">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <link rel="icon" type="image/png" href="images/me.png">
+</head>
+<style>
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 600px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -300px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+<script>
+const copyToClipboard = str => {
+  const el = document.createElement('textarea');
+  el.value = str;
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+  alert("The following bibtextex has been copied to clipboard:\n\n" + el.value);
+};
+</script>
+<body>
+  <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+    <tr style="padding:0px">
+      <td style="padding:0px">
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+          <tr style="padding:0px">
+            <td style="padding:2.5%;width:63%;vertical-align:middle">
+              <p style="text-align:center">
+                <name>Assaf Shocher</name>
+              </p>
+              <p>I am a PhD candidate at the Weizmann Institute of Science, advised by <a href=''>Prof. Michal Irani</a>. 
+			  My research interests are Deep Learning and Computer Vision, especially Self-Supervision and Generative Models. 
+			  Together with Prof. Irani, I invented a framework called <a href="https://sites.google.com/view/deepinternallearning">"Deep Internal Learning"</a> that combines Deep Neural Networks with internal statistics.
+			  I spent the summer of 2019 at <a href="https://ai.google/research">Google Research</a> where I worked on Generative Models. <br><br>
+			  Teaching: <br>
+			  &nbsp&nbsp&nbsp - Introduction to Computer Vision <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a>Fall 2017</a>, <a>Fall 2018</a> <br>
+			  &nbsp&nbsp&nbsp - Advanced Topics in Deep Learning for Computer Vision <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a>Spring 2017</a>, <a>Spring 2018</a>, <a>Spring 2019</a>, <a>Spring 2020</a>
+			  </p>
+			  <br>
+              <p style="text-align:center">
+                <a href="mailto:assafshocher@gmail.com">Email</a> &nbsp/&nbsp
+                <a href="data/cv.pdf">CV</a> &nbsp/&nbsp
+                <a href="https://scholar.google.co.il/citations?user=ndRmNK8AAAAJ">Google Scholar</a> &nbsp/&nbsp
+				<a href="https://github.com/assafshocher">GitHub</a> &nbsp/&nbsp
+				<a href="https://linkedin.com/in/assaf-shocher-271424b7">LinkedIn</a> &nbsp/&nbsp
+                <a href="https://twitter.com/AssafShocher">Twitter</a>
+				
+              </p>
+			  
+			  
+            </td>
+            <td onmouseout="me_stop()" onmouseover="me_start()" style="padding:2.5%;width:40%;max-width:40%">
+				<div id='me'><img src="images/me.png" width="100%"></div>
+                <div id='me_after'><img src='images/me_after.png' width="100%"></div>
+              </div>
+              <script type="text/javascript">
+				function me_start() {
+                  document.getElementById('me').style.display = 'none';
+                  document.getElementById('me_after').style.display = 'inline';
+                }
+
+                function me_stop() {
+                  document.getElementById('me').style.display = 'inline';
+                  document.getElementById('me_after').style.display = 'none';
+                }
+                me_stop()
+              </script>
+			  
+			
+			
+			
+			
+            </td>
+          </tr>
+        </tbody></table>
+		
+		
+		<table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+            <tr>
+            <td style="padding:20px;width:100%;vertical-align:middle">
+              <name><center>Talks</center></name>
+			  <center>* Videos for oral presentations of published papers can be found in the publications secttion below</center>
+   
+            </td>
+          </tr>
+        </tbody></table>
+		
+		  <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+
+			
+		<tr>
+		<td style="padding:20px;width:100%;vertical-align:middle">
+			08/28/2020<br> <a>ECCV'2020 Workshop on Deep Internal Learning</a href="https://sites.google.com/view/deepinternallearning">; Joint talk with <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>:<br>
+			<papertitle>Deep Internal Learning: Deep Leraning with Zero Examples <a href="https://youtu.be/tjxII31RegQ?t=2395">&nbsp[video]</a></papertitle>
+
+		<tr>
+		<td style="padding:20px;width:100%;vertical-align:middle">
+			03/18/2019<br> <a href="https://2019.imvc.co.il/">IMVC'2019</a> <br>
+			<papertitle>Deep Internal Learning<a href="https://youtu.be/Ly9qNOwtirc">&nbsp[video]</a></papertitle>
+			
+		  
+		  
+	
+		  <tr>
+		  		<td style="padding:20px;width:100%;vertical-align:middle">
+			10/11/2018<br> <a href="https://sites.google.com/view/vision-day-2018">Israel Computer Vision Day 2018</a> <br>
+			<papertitle>Internal Distribution Matching for Natural Image Retargeting<a href="https://www.youtube.com/watch?v=zC8Y4Mhb7Fk">&nbsp[video]</a></papertitle>	
+			
+		  
+		  
+		  </table>
+		  
+		  
+		  <br><br><Br><br>
+		
+		
+		
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+            <tr>
+            <td style="padding:20px;width:100%;vertical-align:middle">
+              <name><center>Selected Publications    <span style="font-size:12px;">&nbsp;&nbsp;(I selected all of them)</span></center></name>
+   
+            </td>
+          </tr>
+        </tbody></table>
+		
+		
+        <table align="left", style="width:150%;border:0px;border-spacing:0px;border-collapse:separate;margin-left:auto;margin-right:auto"><tbody>
+
+			
+
+
+
+        
+
+
+
+	  
+		  
+		  
+	<tr onmouseout="cc_stop()" onmouseover="cc_start()">
+            <td style="padding:20px;width:45%;vertical-align:middle">
+                <div id='cc_before'><img src="images/cc_after.gif" width="100%"></div>
+                <div id='cc_after'><img src='images/cc_before.gif' width="100%"></div>
+              </div>
+              <script type="text/javascript">
+				var bibtexcc = "@InProceedings{Shocher_2020_arxiv_cc,\nauthor = {Shocher, Assaf and Feinstein, Ben and Haim, Niv and Irani, Michal},\ntitle = {From Discrete to Continuous Convolution Layers},\nbooktitle = arXiv,\nyear = {2020}\n}"
+				function cc_start() {
+                  document.getElementById('cc_after').style.display = 'none';
+                  document.getElementById('cc_before').style.display = 'inline';
+                }
+
+                function cc_stop() {
+                  document.getElementById('cc_after').style.display = 'inline';
+                  document.getElementById('cc_before').style.display = 'none';
+                }
+                cc_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:55%;vertical-align:middle">
+                <papertitle>From Discrete to Continuous Convolution Layers</papertitle>
+
+              <br>
+              <strong>Assaf Shocher*</strong>,
+              <a href="ben">Ben Finestein*</a>,
+              <a href="https://scholar.google.co.il/citations?user=f7SCiakAAAAJ&hl=en">Niv Haim*</a>,
+              <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>.
+              <br>
+              <em>arXiv</em>, 2020  
+              <br>
+
+			  <div class="btn-group">
+			  <a href="https://arxiv.org/pdf/2006.11120.pdf"><button>PDF</button></a>
+			  <div class="tooltip"><button>abstract</button><span class="tooltiptext">A basic operation in Convolutional Neural Networks (CNNs) is spatial resizing of feature maps. This is done either by strided convolution (donwscaling) or transposed convolution (upscaling). Such operations are limited to a fixed filter moving at predetermined integer steps (strides). Spatial sizes of consecutive layers are related by integer scale factors, predetermined at architectural design, and remain fixed throughout training and inference time. We propose a generalization of the common Conv-layer, from a discrete layer to a Continuous Convolution (CC) Layer. CC Layers naturally extend Conv-layers by representing the filter as a learned continuous function over sub-pixel coordinates. This allows learnable and principled resizing of feature maps, to any size, dynamically and consistently across scales. Once trained, the CC layer can be used to output any scale/size chosen at inference time. The scale can be non-integer and differ between the axes. CC gives rise to new freedoms for architectural design, such as dynamic layer shapes at inference time, or gradual architectures where the size changes by a small factor at each layer. This gives rise to many desired CNN properties, new architectural design capabilities, and useful applications. We further show that current Conv-layers suffer from inherent misalignments, which are ameliorated by CC layers.</span></div>
+			  <button onclick=copyToClipboard(bibtexcc)>bibtex</button>
+  
+</div>
+            </td>
+          </tr> 
+
+
+
+
+
+
+
+
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		 		  
+	<tr onmouseout="semanticpyramid_stop()" onmouseover="semanticpyramid_start()">
+            <td style="padding:20px;width:45%;vertical-align:middle">
+                <div id='semanticpyramid_before'><img src="images/semanticpyramid_after.gif" width="100%"></div>
+                <div id='semanticpyramid_after'><img src='images/semanticpyramid_before.gif' width="100%"></div>
+              </div>
+              <script type="text/javascript">
+			  var bibtexsemanticpyramid = "@InProceedings{Shocher_2020_CVPR,\nauthor = {Shocher, Assaf and Gandelsman, Yossi and Mosseri, Inbar and Yarom, Michal and Irani, Michal and Freeman, William T. and Dekel, Tali},\ntitle = {Semantic Pyramid for Image Generation},\nbooktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},\nmonth = {June},\nyear = {2020}\n}"
+			  function semanticpyramid_start() {
+                  document.getElementById('semanticpyramid_after').style.display = 'none';
+                  document.getElementById('semanticpyramid_before').style.display = 'inline';
+                }
+
+                function semanticpyramid_stop() {
+                  document.getElementById('semanticpyramid_after').style.display = 'inline';
+                  document.getElementById('semanticpyramid_before').style.display = 'none';
+                }
+                semanticpyramid_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:55%;vertical-align:middle">
+                <papertitle> Semantic Pyramid for Image Generation</papertitle>
+
+              <br>
+              <strong>Assaf Shocher*</strong>,
+              <a href="https://scholar.google.co.il/citations?user=71L4yYMAAAAJ&hl=en">Yossi Gandelsman*</a>,
+              <a href="https://research.google/people/InbarMosseri/">Inbar Mosseri</a>,
+			  <a href="https://www.linkedin.com/in/michal-yarom-767bb281/?originalSubdomain=il">Michal Yarom</a>,
+			  <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>,
+			  <a href="https://billf.mit.edu/">William T. Freeman</a>,
+			  <a href="http://people.csail.mit.edu/talidekel/">Tali Dekel</a>.
+              <br>
+              <em>CVPR</em>'2020  <strong>Oral</strong>
+              <br>
+
+			  <div class="btn-group">
+			  <a href="https://semantic-pyramid.github.io/"><button>project page</button></a>
+			  <a href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Shocher_Semantic_Pyramid_for_Image_Generation_CVPR_2020_paper.pdf"><button>PDF</button></a>
+			  <a href="https://www.youtube.com/watch?v=IXtqiJ7Nufo&feature=emb_logo"><button>video</button></a>
+			  <div class="tooltip"><button>abstract</button><span class="tooltiptext">We present a novel GAN-based model that utilizes the space of deep features learned by a pre-trained classification model. Inspired by classical image pyramid representations, we construct our model as a Semantic Generation Pyramid - a hierarchical framework which leverages the continuum of semantic information encapsulated in such deep features; this ranges from low level information contained in fine features to high level, semantic information contained in deeper features. More specifically, given a set of features extracted from a reference image, our model generates diverse image samples, each with matching features at each semantic level of the classification model. We demonstrate that our model results in a versatile and flexible framework that can be used in various classic and novel image generation tasks. These include: generating images with a controllable extent of semantic similarity to a reference image, and different manipulation tasks such as semantically-controlled inpainting and compositing; all achieved with the same model, with no further training.</span></div>
+			  <button onclick=copyToClipboard(bibtexsemanticpyramid)>bibtex</button>
+  
+</div>
+            </td>
+          </tr> 
+
+
+
+
+
+		  
+		<tr onmouseout="kernelgan_stop()" onmouseover="kernelgan_start()">
+            <td style="padding:20px;width:45%;vertical-align:middle">
+                <div id='kernelgan_before'><img src="images/kernelgan_after_.gif" width="100%"></div>
+                <div id='kernelgan_after'><img src='images/kernelgan_before_.gif' width="100%"></div>
+              </div>
+              <script type="text/javascript">
+			  var bibtexkernelgan = "@incollection{NIPS2019_8321,\ntitle = {Blind Super-Resolution Kernel Estimation using an Internal-GAN},\nauthor = {Bell-Kligler, Sefi and Shocher, Assaf and Irani, Michal},\nbooktitle = {Advances in Neural Information Processing Systems 32},\neditor = {H. Wallach and H. Larochelle and A. Beygelzimer and F. d\textquotesingle Alch\'{e}-Buc and E. Fox and R. Garnett},\npages = {284--293},\nyear = {2019},\npublisher = {Curran Associates, Inc.},\nurl = {http://papers.nips.cc/paper/8321-blind-super-resolution-kernel-estimation-using-an-internal-gan.pdf}\n}"			
+			  function kernelgan_start() {
+                  document.getElementById('kernelgan_after').style.display = 'none';
+                  document.getElementById('kernelgan_before').style.display = 'inline';
+                }
+
+                function kernelgan_stop() {
+                  document.getElementById('kernelgan_after').style.display = 'inline';
+                  document.getElementById('kernelgan_before').style.display = 'none';
+                }
+                kernelgan_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:55%;vertical-align:middle">
+                <papertitle>Blind Super-Resolution Kernel Estimation using an Internal-GAN</papertitle>
+
+              <br>
+			  <a href="sefi">Sefi Bell-Kligler</a>,
+              <strong>Assaf Shocher</strong>,
+              <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>,
+              <br>
+             <em>NeurIPS</em>'2019  <strong>Oral</strong>
+              <br>
+
+			  <div class="btn-group">
+			  <a href="http://www.wisdom.weizmann.ac.il/~vision/kernelgan/"><button>project page</button></a>
+			  <a href=http://papers.nips.cc/paper/8321-blind-super-resolution-kernel-estimation-using-an-internal-gan.pdf"><button>PDF</button></a>
+			  <a href="https://slideslive.com/38923045/blind-superresolution-kernel-estimation-using-an-internalgan?ref=speaker-22501-latest"><button>video</button></a>
+			  <div class="tooltip"><button>abstract</button><span class="tooltiptext">Super-resolution (SR) methods typically assume that the low-resolution (LR) image was downscaled from the unknown high-resolution (HR) image by a fixed 'ideal' downscaling kernel (e.g. Bicubic downscaling). However, this is rarely the case in real LR images, in contrast to synthetically generated SR datasets. When the assumed downscaling kernel deviates from the true one, the performance of SR methods significantly deteriorates. This gave rise to Blind-SR - namely, SR when the downscaling kernel ("SR-kernel") is unknown. It was further shown that the true SR-kernel is the one that maximizes the recurrence of patches across scales of the LR image. In this paper we show how this powerful cross-scale recurrence property can be realized using Deep Internal Learning. We introduce "KernelGAN", an image-specific Internal-GAN, which trains solely on the LR test image at test time, and learns its internal distribution of patches. Its Generator is trained to produce a downscaled version of the LR test image, such that its Discriminator cannot distinguish between the patch distribution of the downscaled image, and the patch distribution of the original LR image. The Generator, once trained, constitutes the downscaling operation with the correct image-specific SR-kernel. KernelGAN is fully unsupervised, requires no training data other than the input image itself, and leads to state-of-the-art results in Blind-SR when plugged into existing SR algorithms.</span></div>
+			  <button onclick=copyToClipboard(bibtexkernelgan)>bibtex</button>
+			  <a href="https://github.com/sefibk/KernelGAN"><button>code</button></a>
+  
+</div>
+            </td>
+          </tr> 
+		  
+ 
+
+
+
+
+
+
+
+
+
+          <tr onmouseout="ingan_stop()" onmouseover="ingan_start()">
+            <td style="padding:20px;width:45%;vertical-align:middle">
+                <div id='ingan_before'><img src="images/ingan.gif" width="100%"></div>
+                <div id='ingan_after'><img src='images/ingan_before.gif' width="100%"></div>
+              </div>
+              <script type="text/javascript">
+			  var bibtexingan = "@InProceedings{Shocher_2019_ICCV,\nauthor = {Shocher, Assaf and Bagon, Shai and Isola, Phillip and Irani, Michal},\ntitle = {InGAN: Capturing and Retargeting the \"DNA\" of a Natural Image},\nbooktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},\nmonth = {October},\nyear = {2019}\n}"
+				function ingan_start() {
+                  document.getElementById('ingan_after').style.display = 'none';
+                  document.getElementById('ingan_before').style.display = 'inline';
+                }
+
+                function ingan_stop() {
+                  document.getElementById('ingan_after').style.display = 'inline';
+                  document.getElementById('ingan_before').style.display = 'none';
+                }
+                ingan_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:55%;vertical-align:middle">
+                <papertitle>InGAN: Capturing and Remapping the "DNA" of a Natural Image</papertitle>
+
+              <br>
+              <strong>Assaf Shocher</strong>,
+              <a href="https://scholar.google.com/citations?user=N_maL_AAAAAJ&hl=en">Shai Bagon</a>,
+              <a href="http://web.mit.edu/phillipi/">Phillip Isola</a>,
+              <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>,
+              <br>
+              <em>ICCV</em>'2019  <strong>Oral</strong>
+              <br>
+
+			  <div class="btn-group">
+			  <a href="http://www.wisdom.weizmann.ac.il/~vision/ingan/"><button>project page</button></a>
+			  <a href="http://www.wisdom.weizmann.ac.il/~vision/ingan/resources/ingan.pdf"><button>PDF</button></a>
+			  <a href="https://youtu.be/OvZVxqUmE3g?t=2429"><button>video</button></a>
+			  <div class="tooltip"><button>abstract</button><span class="tooltiptext">Generative Adversarial Networks (GANs) typically learn a distribution of images in a large image dataset, and are then able to generate new images from this distribution. However, each natural image has its own internal statistics, captured by its unique distribution of patches. In this paper we propose an "Internal GAN" (InGAN) - an image-specific GAN - which trains on a single input image and learns its internal distribution of patches. It is then able to synthesize a plethora of new natural images of significantly different sizes, shapes and aspect-ratios - all with the same internal patch-distribution (same "DNA") as the input image. In particular, despite large changes in global size/shape of the image, all elements inside the image maintain their local size/shape. InGAN is fully unsupervised, requiring no additional data other than the input image itself. Once trained on the input image, it can remap the input to any size or shape in a single feedforward pass, while preserving the same internal patch distribution. InGAN provides a unified framework for a variety of tasks, bridging the gap between textures and natural images.</span></div>
+			  <button onclick=copyToClipboard(bibtexingan)>bibtex</button>
+			  <a href=https://github.com/assafshocher/InGAN"><button>code</button></a>
+  
+</div>
+            </td>
+          </tr> 
+		  
+		  
+
+
+
+
+		  
+		  
+
+
+          <tr onmouseout="doubledip_stop()" onmouseover="doubledip_start()">
+            <td style="padding:20px;width:45%;vertical-align:middle">
+                <div id='doubledip_before'><img src="images/doubledip_after.png" width="100%"></div>
+                <div id='doubledip_after'><img src='images/doubledip_before.png' width="100%"></div>
+              </div>
+              <script type="text/javascript">
+			  var bibtexdoubledip = "@InProceedings{Gandelsman_2019_CVPR,\nauthor = {Gandelsman, Yosef and Shocher, Assaf and Irani, Michal},\ntitle = {Double-DIP: Unsupervised Image Decomposition via Coupled Deep-Image-Priors},\nbooktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},\nmonth = {June},\nyear = {2019}\n}"
+				function doubledip_start() {
+                  document.getElementById('doubledip_after').style.display = 'none';
+                  document.getElementById('doubledip_before').style.display = 'inline';
+                }
+
+                function doubledip_stop() {
+                  document.getElementById('doubledip_after').style.display = 'inline';
+                  document.getElementById('doubledip_before').style.display = 'none';
+                }
+                doubledip_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:55%;vertical-align:middle">
+                <papertitle>Double-DIP: Unsupervised Image Decomposition via Coupled Deep-Image-Priors</papertitle>
+
+              <br>
+			  <a href="https://scholar.google.co.il/citations?user=71L4yYMAAAAJ&hl=en">Yossi Gandelsman</a>,
+              <strong>Assaf Shocher</strong>,
+              <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>,
+              <br>
+              <em>CVPR</em>'2019  <strong>Oral</strong> 
+              <br>
+
+			  <div class="btn-group">
+			  <a href="http://www.wisdom.weizmann.ac.il/~vision/DoubleDIP/index.html"><button>project page</button></a>
+			  <a href="http://www.wisdom.weizmann.ac.il/~vision/DoubleDIP/resources/DoubleDIP.pdf"><button>PDF</button></a>
+			  <a href="https://youtu.be/IyPQqqGPHws?t=1429"><button>video</button></a>
+			  <div class="tooltip"><button>abstract</button><span class="tooltiptext">Many seemingly unrelated computer vision tasks can be viewed as a special case of image decomposition into separate layers. For example, image segmentation (separation into foreground and background layers); transparent layer separation (into reflection and transmission layers); Image dehazing (separation into a clear image and a haze map), and more. In this paper we propose a unified framework for unsupervised layer decomposition of a single image, based on coupled "Deep-image-Prior" (DIP) networks. It was shown [Ulyanov et al] that the structure of a single DIP generator network is sufficient to capture the low-level statistics of a single image. We show that coupling multiple such DIPs provides a powerful tool for decomposing images into their basic components, for a wide variety of applications. This capability stems from the fact that the internal statistics of a mixture of layers is more complex than the statistics of each of its individual components. We show the power of this approach for Image-Dehazing, Fg/Bg Segmentation, Watermark-Removal, Transparency Separation in images and video, and more. These capabilities are achieved in a totally unsupervised way, with no training examples other than the input image/video itself.</span></div>
+			  <button onclick=copyToClipboard(bibtexdoubledip)>bibtex</button>
+			  <a href="https://github.com/yossigandelsman/DoubleDIP"><button>code</button></a>
+  
+</div>
+            </td>
+          </tr> 
+
+
+
+
+
+
+
+
+
+
+ <tr onmouseout="zssr_stop()" onmouseover="zssr_start()">
+            <td style="padding:20px;width:45%;vertical-align:middle">
+                <div id='zssr_before'><img src="images/zssr_after.gif" width="100%"></div>
+                <div id='zssr_after'><img src='images/zssr_before.gif' width="100%"></div>
+              </div>
+              <script type="text/javascript">
+			  var bibtexzssr = "@InProceedings{Shocher_2018_CVPR,\nauthor = {Shocher, Assaf and Cohen, Nadav and Irani, Michal},\ntitle = {“Zero-Shot” Super-Resolution Using Deep Internal Learning},\nbooktitle = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},\nmonth = {June},\nyear = {2018}\n}"
+				function zssr_start() {
+                  document.getElementById('zssr_after').style.display = 'none';
+                  document.getElementById('zssr_before').style.display = 'inline';
+                }
+
+                function zssr_stop() {
+                  document.getElementById('zssr_after').style.display = 'inline';
+                  document.getElementById('zssr_before').style.display = 'none';
+                }
+                zssr_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:55%;vertical-align:middle">
+                <papertitle>Zero Shot Super-Resolution using Deep Internal Learning</papertitle>
+
+              <br>
+              <strong>Assaf Shocher</strong>,
+              <a href="https://www.cohennadav.com/">Nadav Cohen</a>,
+              <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>,
+              <br>
+              <em>CVPR</em>'2018
+              <br>
+
+			  <div class="btn-group">
+			  <a href="http://www.wisdom.weizmann.ac.il/~vision/zssr/"><button>project page</button></a>
+			  <a href="http://www.weizmann.ac.il/math/irani/sites/math.irani/files/uploads/zssr_cameraready.pdf"><button>PDF</button></a>
+			  <div class="tooltip"><button>abstract</button><span class="tooltiptext">Deep Learning has led to a dramatic leap in SuperResolution (SR) performance in the past few years. However, being supervised, these SR methods are restricted to specific training data, where the acquisition of the lowresolution (LR) images from their high-resolution (HR) counterparts is predetermined (e.g., bicubic downscaling), without any distracting artifacts (e.g., sensor noise, image compression, non-ideal PSF, etc). Real LR images, however, rarely obey these restrictions, resulting in poor SR results by SotA (State of the Art) methods. In this paper we introduce "Zero-Shot" SR, which exploits the power of Deep Learning, but does not rely on prior training. We exploit the internal recurrence of information inside a single image, and train a small image-specific CNN at test time, on examples extracted solely from the input image itself. As such, it can adapt itself to different settings per image. This allows to perform SR of real old photos, noisy images, biological data, and other images where the acquisition process is unknown or non-ideal. On such images, our method outperforms SotA CNN-based SR methods, as well as previous unsupervised SR methods. To the best of our knowledge, this is the first unsupervised CNN-based SR method.</span></div>
+			  <button onclick=copyToClipboard(bibtexzssr)>bibtex</button>
+			  <a href="https://github.com/assafshocher/ZSSR"><button>code</button></a>
+  
+</div>
+            </td>
+          </tr> 
+
+</table>
+
+
+
+
+
+
+
+
+<br><br><br><br><br>
+              <p style="font-size:small;">
+				This page design is based on a template by <a href="https://jonbarron.info/">Jon Barron</a>.
+              </p>
+
+
+
+
+
+
+</body>
+
+</html>
