@@ -174,7 +174,50 @@ const copyToClipboard = str => {
 
 
 
-        
+        		  
+		  
+	<tr onmouseout="drop_stop()" onmouseover="drop_start()">
+            <td style="padding:20px;width:45%;vertical-align:middle">
+                <div id='drop_before'><img src="images/drop_after.gif" width="100%"></div>
+                <div id='drop_after'><img src='images/drop_before.gif' width="100%"></div>
+              </div>
+              <script type="text/javascript">
+				var bibtexcc = "@InProceedings{Shocher_2020_arxiv_cc,\nauthor = {Granot, Niv and Feinstein, Ben and Shocher, Assaf and Bagon, Shai and Irani, Michal},\ntitle = {From Discrete to Continuous Convolution Layers},\nbooktitle = arXiv,\nyear = {2020}\n}"
+				function cc_start() {
+                  document.getElementById('drop_after').style.display = 'none';
+                  document.getElementById('drop_before').style.display = 'inline';
+                }
+
+                function cc_stop() {
+                  document.getElementById('drop_after').style.display = 'inline';
+                  document.getElementById('drop_before').style.display = 'none';
+                }
+                cc_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:55%;vertical-align:middle">
+                <papertitle>Drop the GAN: In Defense of Patches Nearest Neighbors as Single Image Generative Models</papertitle>
+
+              <br>
+	      <a href="ben">Niv Granot</a>,
+              <a href="ben">Ben Finestein*</a>,
+	      <strong> Assaf Shocher*</strong>,
+	      <a href="https://scholar.google.com/citations?user=N_maL_AAAAAJ&hl=en">Shai Bagon</a>,
+              <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>.
+              <br>
+              <em>arXiv</em>, 2020  
+              <br>
+
+			  <div class="btn-group">
+			  <a href="https://arxiv.org/pdf/2103.15545.pdf"><button>PDF</button></a>
+			  <div class="tooltip"><button>abstract</button><span class="tooltiptext">Single image generative models perform synthesis and manipulation tasks by capturing the distribution of patches within a single image. The classical (pre Deep Learning) prevailing approaches for these tasks are based on an optimization process that maximizes patch similarity between the input and generated output. Recently, however, Single Image GANs were introduced both as a superior solution for such manipulation tasks, but also for remarkable novel generative tasks. Despite their impressiveness, single image GANs require long training time (usually hours) for each image and each task. They often suffer from artifacts and are prone to optimization issues such as mode collapse. In this paper, we show that all of these tasks can be performed without any training, within several seconds, in a unified, surprisingly simple framework. We revisit and cast the "good-old" patch-based methods into a novel optimization-free framework. We start with an initial coarse guess, and then simply refine the details coarse-to-fine using patch-nearest-neighbor search. This allows generating random novel images better and much faster than GANs. We further demonstrate a wide range of applications, such as image editing and reshuffling, retargeting to different sizes, structural analogies, image collage and a newly introduced task of conditional inpainting. Not only is our method faster (×103-×104 than a GAN), it produces superior results (confirmed by quantitative and qualitative evaluation), less artifacts and more realistic global structure than any of the previous approaches (whether GAN-based or classical patch-based).</span></div>
+			  <button onclick=copyToClipboard(bibtexcc)>bibtex</button>
+  
+</div>
+            </td>
+          </tr> 
+
+
 
 
 
