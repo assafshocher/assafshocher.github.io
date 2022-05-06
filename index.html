@@ -177,8 +177,8 @@ const copyToClipboard = str => {
 		  
 	<tr onmouseout="vgpnn_stop()" onmouseover="vgpnn_start()">
             <td style="padding:20px;width:45%;vertical-align:middle">
-                <div id='vgpnn_before'><img src="images/vgpnn_after.gif" width="100%"></div>
-                <div id='vgpnn_after'><img src='images/vgpnn_before.png' width="100%"></div>
+                <div id='vgpnn_before'><img src="images/vgpnn_after.gif" width="120%"></div>
+                <div id='vgpnn_after'><img src='images/vgpnn_before.png' width="120%"></div>
               </div>
               <script type="text/javascript">
 				var bibtexvgpnn = "@InProceedings{Haim_arXiv_2022,\nauthor = {Haim, Niv and Feinstein, Ben and Granot, Niv and Shocher, Assaf and Bagon, Shai and Dekel, Tali and Irani, Michal},\ntitle = {Diverse Generation from a Single Video Made Possible},\nbooktitle = {arXiv},\nyear = {2022}\n}"
@@ -232,8 +232,8 @@ const copyToClipboard = str => {
 		  
 	<tr onmouseout="drop_stop()" onmouseover="drop_start()">
             <td style="padding:20px;width:45%;vertical-align:middle">
-                <div id='drop_before'><img src="images/drop_after.gif" width="60%"></div>
-                <div id='drop_after'><img src='images/drop_before.png' width="60%"></div>
+                <div id='drop_before'><img src="images/drop_after.gif" width="50%"></div>
+                <div id='drop_after'><img src='images/drop_before.png' width="50%"></div>
               </div>
               <script type="text/javascript">
 				var bibtexdrop = "@InProceedings{Granot_2022_CVPR,\nauthor = {Granot, Niv and Feinstein, Ben and Shocher, Assaf and Bagon, Shai and Irani, Michal},\ntitle = {Drop the GAN: In Defense of Patches Nearest Neighbors as Single Image Generative Models},\nbooktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},\nyear = {2022}\n}"
@@ -263,6 +263,7 @@ const copyToClipboard = str => {
               <br>
 
 			  <div class="btn-group">
+			  <a href="https://www.wisdom.weizmann.ac.il/~vision/gpnn/"><button>project page</button></a>
 			  <a href="https://arxiv.org/pdf/2103.15545.pdf"><button>PDF</button></a>
 			  <div class="tooltip"><button>abstract</button><span class="tooltiptext">Single image generative models perform synthesis and manipulation tasks by capturing the distribution of patches within a single image. The classical (pre Deep Learning) prevailing approaches for these tasks are based on an optimization process that maximizes patch similarity between the input and generated output. Recently, however, Single Image GANs were introduced both as a superior solution for such manipulation tasks, but also for remarkable novel generative tasks. Despite their impressiveness, single image GANs require long training time (usually hours) for each image and each task. They often suffer from artifacts and are prone to optimization issues such as mode collapse. In this paper, we show that all of these tasks can be performed without any training, within several seconds, in a unified, surprisingly simple framework. We revisit and cast the "good-old" patch-based methods into a novel optimization-free framework. We start with an initial coarse guess, and then simply refine the details coarse-to-fine using patch-nearest-neighbor search. This allows generating random novel images better and much faster than GANs. We further demonstrate a wide range of applications, such as image editing and reshuffling, retargeting to different sizes, structural analogies, image collage and a newly introduced task of conditional inpainting. Not only is our method faster (×103-×104 than a GAN), it produces superior results (confirmed by quantitative and qualitative evaluation), less artifacts and more realistic global structure than any of the previous approaches (whether GAN-based or classical patch-based).</span></div>
 			  <button onclick=copyToClipboard(bibtexdrop)>bibtex</button>
