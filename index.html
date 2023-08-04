@@ -77,7 +77,7 @@ const copyToClipboard = str => {
 			  I spent the summer of 2019 at <a href="https://ai.google/research">Google Research</a> where I worked on Generative Models. 
 			    My prizes and honors include the Rothshcild postdoctoral fellowship, the Fulbright postdoctoral fellowship, John F. Kennedy award for outstanding Ph.D. in the Weizmann Institute, and the Blavatnik award for CS Ph.D. graduates.<br><br>
 			  Teaching: <br>
-			  &nbsp&nbsp&nbsp - (Lecturer) Deep Learning for Computer Vision: Fundamentals and Applications <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href='https://dl4cv.github.io/DL4CV_Spring21/index.html'>Spring 2021</a>, <a href='https://dl4cv.github.io/'>Fall 2022</a> <br>
+			  &nbsp&nbsp&nbsp - (Lecturer) Deep Learning for Computer Vision: Fundamentals and Applications <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href='https://dl4cv.github.io/DL4CV_Spring21/index.html'>Spring 2021</a>, <a href='https://dl4cv.github.io/DL4CV_Winter22/index.html'>Fall 2022</a> , <a href='https://dl4cv.github.io/'>Fall 2023</a><br>
 			  &nbsp&nbsp&nbsp - (TA) Introduction to Computer Vision<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a>Fall 2017</a>, <a>Fall 2018</a> <br>
 			  &nbsp&nbsp&nbsp - (TA) Advanced Topics in Deep Learning for Computer Vision<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a>Spring 2017</a>, <a>Spring 2018</a>, <a>Spring 2019</a>, <a>Spring 2020</a>
 			  </p>
@@ -163,7 +163,7 @@ const copyToClipboard = str => {
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
             <tr>-->
             <td style="padding:20px;width:100%;vertical-align:middle">
-              <name><center>Selected Publications    <span style="font-size:12px;">&nbsp;&nbsp;(I selected all of them)</span></center></name>
+              <name><center>Selected Publications    <!--<span style="font-size:12px;">&nbsp;&nbsp;(I selected all of them)</span>--></center></name>
    
             </td>
           </tr>
@@ -175,6 +175,113 @@ const copyToClipboard = str => {
 			
 
 
+
+
+
+
+<tr onmouseout="rosetta_stop()" onmouseover="rosetta_start()">
+            <td style="padding:20px;width:45%;vertical-align:middle">
+                <div id='rosetta_before'><img src="images/rosetta.png" width="100%"></div>
+                <div id='rosetta_after'><img src='images/rosetta.png' width="100%"></div>
+              </div>
+              <script type="text/javascript">
+				var bibtexrosetta = "@article{rosettaneurons,\nauthor    = {Dravid, Amil and Gandelsman, Yossi and Efros, Alexei A. and Shocher, Assaf},\ntitle     = {Rosetta Neurons: Mining the Common Units in a Model Zoo},\njournal   = {arXiv preprint arXiv:2306.09346},\nyear      = {2023}\n}"
+				function rosetta_start() {
+                  document.getElementById('rosetta_after').style.display = 'none';
+                  document.getElementById('rosetta_before').style.display = 'inline';
+                }
+
+                function rosetta_stop() {
+                  document.getElementById('rosetta_after').style.display = 'inline';
+                  document.getElementById('rosetta_before').style.display = 'none';
+                }
+                rosetta_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:55%;vertical-align:middle">
+                <papertitle>Rosetta Neurons: Mining the Common Units in a Model Zoo</papertitle>
+
+              <br>
+	    <a href="https://avdravid.github.io/">Amil Dravid*</a>,
+	    <a href="https://yossigandelsman.github.io/">Yossi Gandelsman*</a>,
+	      <a href="https://people.eecs.berkeley.edu/~efros/">Alexei A. Efros</a>,
+	      <strong> Assaf Shocher</strong>.
+
+              <br>
+              <em>ICCV 2023</em>
+              <br>
+
+			  <div class="btn-group">
+			  <a href="https://yossigandelsman.github.io/rosetta_neurons/"><button>project page</button></a>
+			  <a href="https://arxiv.org/pdf/2306.09346.pdf"><button>PDF</button></a>
+			  <div class="tooltip"><button>abstract</button><span class="tooltiptext">Do different neural networks, trained for various vision tasks, share some common representations? In this paper, we demonstrate the existence of common features we call "Rosetta Neurons" across a range of models with different architectures, different tasks (generative and discriminative), and different types of supervision (class-supervised, text-supervised, self-supervised). We present an algorithm for mining a dictionary of Rosetta Neurons across several popular vision models: Class Supervised-ResNet50, DINO-ResNet50, DINO-ViT, MAE, CLIP-ResNet50, BigGAN, StyleGAN-2, StyleGAN-XL. Our findings suggest that certain visual concepts and structures are inherently embedded in the natural world and can be learned by different models regardless of the specific task or architecture, and without the use of semantic labels. We can visualize shared concepts directly due to generative models included in our analysis. The Rosetta Neurons facilitate model-to-model translation enabling various inversion-based manipulations, including cross-class alignments, shifting, zooming, and more, without the need for specialized training.</span></div>
+			  <button onclick=copyToClipboard(bibtexrosetta)>bibtex</button>
+  
+</div>
+            </td>
+          </tr> 
+
+
+
+
+
+
+  
+
+<tr onmouseout="flexpred_stop()" onmouseover="flexpred_start()">
+  <td style="padding:20px;width:45%;vertical-align:middle">
+      <div id='flexpred_before'><img src="images/flexpred.jpg" width="100%"></div>
+      <div id='flexpred_after'><img src='images/flexpred.jpg' width="100%"></div>
+    </div>
+    <script type="text/javascript">
+var bibtexflexpred = "@article{rosettaneurons,\nauthor    = {Bar, Amir and Bordes, Florian and Shocher, Assaf and Assran, Mahmoud and Vincent, Pascal and Ballas, Nicolas and Darell, Trevor and Globerson, Amir and LeCunn, Yann },\ntitle     = {Predicting masked tokens in stochastic locations improves masked image modeling},\njournal   = {arXiv preprint arXiv:2308.00566},\nyear      = {2023}\n}"
+function flexpred_start() {
+        document.getElementById('flexpred_after').style.display = 'none';
+        document.getElementById('flexpred_before').style.display = 'inline';
+      }
+
+      function flexpred_stop() {
+        document.getElementById('flexpred_after').style.display = 'inline';
+        document.getElementById('flexpred_before').style.display = 'none';
+      }
+      flexpred_stop()
+    </script>
+  </td>
+  <td style="padding:20px;width:55%;vertical-align:middle">
+      <papertitle>Predicting masked tokens in stochastic locations improves
+        masked image modeling</papertitle>
+
+    <br>
+<a href="https://www.amirbar.net/">Amir Bar</a>,
+<a href="https://scholar.google.ca/citations?user=OADfWhUAAAAJ&hl=fr">Florian Bordes</a>,
+<strong> Assaf Shocher</strong>,
+<a href="https://www.midoassran.ca/">Mahmoud Assran</a>,
+<a href="https://ai.meta.com/people/pascal-vincent/">Pascal Vincent</a>,
+<a href="https://scholar.google.com/citations?user=euUV4iUAAAAJ&hl=en">Nicolas Ballas</a>,
+<a href="https://people.eecs.berkeley.edu/~trevor/">Trevor Darrell</a>,
+<a href="https://cs3801.wixsite.com/amirgloberson">Amir Globerson</a>,
+<a href="https://yann.lecun.com/">Yann LeCun</a>.
+
+    <br>
+    <em>Under Review</em>
+    <br>
+
+<div class="btn-group">
+<a href="https://arxiv.org/pdf/2306.09346.pdf"><button>PDF</button></a>
+<div class="tooltip"><button>abstract</button><span class="tooltiptext">Self-supervised learning is a promising paradigm in deep learning that enables learning from unlabeled data by constructing pretext tasks that require learning useful representations. In natural language processing, the dominant pretext task has been masked language modeling (MLM), while in computer vision there exists an equivalent called Masked Image Modeling (MIM). However, MIM is challenging because it requires predicting semantic content in accurate locations. E.g, given an incomplete picture of a dog, we can guess that there is a tail, but we cannot determine its exact location. In this work, we propose FlexPredict, a stochastic model that addresses this challenge by incorporating location uncertainty into the model. Specifically, we condition the model on stochastic masked token positions to guide the model toward learning features that are more robust to location uncertainties. Our approach improves downstream performance on a range of tasks, e.g, compared to MIM baselines, FlexPredict boosts ImageNet linear probing by 1.6% with ViT-B and by 2.5% for semisupervised video segmentation using ViT-L.</span></div>
+<button onclick=copyToClipboard(bibtexflexpred)>bibtex</button>
+
+</div>
+  </td>
+</tr> 
+
+
+
+
+
+
+
+
         		  
 		  
 	<tr onmouseout="vgpnn_stop()" onmouseover="vgpnn_start()">
@@ -183,7 +290,7 @@ const copyToClipboard = str => {
                 <div id='vgpnn_after'><img src='images/vgpnn_before.png' width="100%"></div>
               </div>
               <script type="text/javascript">
-				var bibtexvgpnn = "@InProceedings{Haim_arXiv_2022,\nauthor = {Haim, Niv and Feinstein, Ben and Granot, Niv and Shocher, Assaf and Bagon, Shai and Dekel, Tali and Irani, Michal},\ntitle = {Diverse Generation from a Single Video Made Possible},\nbooktitle = {arXiv},\nyear = {2022}\n}"
+				var bibtexvgpnn = "@InProceedings{haim2022diverse,\nauthor = {Haim, Niv and Feinstein, Ben and Granot, Niv and Shocher, Assaf and Bagon, Shai and Dekel, Tali and Irani, Michal},\ntitle = {Diverse Generation from a Single Video Made Possible},\nbooktitle = {European Conference on Computer Vision},\nyear = {2022}\n}"
 				function vgpnn_start() {
                   document.getElementById('vgpnn_after').style.display = 'none';
                   document.getElementById('vgpnn_before').style.display = 'inline';
@@ -200,15 +307,15 @@ const copyToClipboard = str => {
                 <papertitle>Diverse Generation from a Single Video Made Possible</papertitle>
 
               <br>
-	    <a href="ben">Niv Haim*</a>,
+	    <a href="https://nivha.github.io/">Niv Haim*</a>,
 	    <a href="ben">Ben Finestein*</a>,
-	      <a href="ben">Niv Granot</a>,
+	      <a href="Nivg">Niv Granot</a>,
 	      <strong> Assaf Shocher</strong>,
 	      <a href="https://scholar.google.com/citations?user=N_maL_AAAAAJ&hl=en">Shai Bagon</a>,
-	      <a href="http://people.csail.mit.edu/talidekel/">Tali Dekel</a>
+	      <a href="http://people.csail.mit.edu/talidekel/">Tali Dekel</a>,
               <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>.
               <br>
-              <em>Under Review</em>
+              <em>ECCV 2022</em>
               <br>
 
 			  <div class="btn-group">
@@ -261,7 +368,7 @@ const copyToClipboard = str => {
 	      <a href="https://scholar.google.com/citations?user=N_maL_AAAAAJ&hl=en">Shai Bagon</a>,
               <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>.
               <br>
-              <em>CVPR</em>'2022  <strong>Oral</strong>
+              <em>CVPR</em> 2022  <strong>Oral</strong>
               <br>
 
 			  <div class="btn-group">
@@ -309,7 +416,7 @@ const copyToClipboard = str => {
               <a href="https://scholar.google.co.il/citations?user=f7SCiakAAAAJ&hl=en">Niv Haim*</a>,
               <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>.
               <br>
-              <em>arXiv</em>, 2020  
+              <em>arXiv</em> 2020  
               <br>
 
 			  <div class="btn-group">
@@ -367,7 +474,7 @@ const copyToClipboard = str => {
 			  <a href="https://billf.mit.edu/">William T. Freeman</a>,
 			  <a href="http://people.csail.mit.edu/talidekel/">Tali Dekel</a>.
               <br>
-              <em>CVPR</em>'2020  <strong>Oral</strong>
+              <em>CVPR</em> 2020  <strong>Oral</strong>
               <br>
 
 			  <div class="btn-group">
@@ -413,7 +520,7 @@ const copyToClipboard = str => {
               <strong>Assaf Shocher</strong>,
               <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>,
               <br>
-             <em>NeurIPS</em>'2019  <strong>Oral</strong>
+             <em>NeurIPS</em> 2019  <strong>Oral</strong>
               <br>
 
 			  <div class="btn-group">
@@ -466,7 +573,7 @@ const copyToClipboard = str => {
               <a href="http://web.mit.edu/phillipi/">Phillip Isola</a>,
               <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>,
               <br>
-              <em>ICCV</em>'2019  <strong>Oral</strong>
+              <em>ICCV</em> 2019  <strong>Oral</strong>
               <br>
 
 			  <div class="btn-group">
@@ -517,7 +624,7 @@ const copyToClipboard = str => {
               <strong>Assaf Shocher</strong>,
               <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>,
               <br>
-              <em>CVPR</em>'2019  <strong>Oral</strong> 
+              <em>CVPR</em> 2019  <strong>Oral</strong> 
               <br>
 
 			  <div class="btn-group">
@@ -568,7 +675,7 @@ const copyToClipboard = str => {
               <a href="https://www.cohennadav.com/">Nadav Cohen</a>,
               <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>,
               <br>
-              <em>CVPR</em>'2018
+              <em>CVPR</em> 2018
               <br>
 
 			  <div class="btn-group">
