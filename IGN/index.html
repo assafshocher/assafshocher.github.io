@@ -144,11 +144,11 @@
     <center>
     <span style="font-size:23px"> 
       &nbsp; 
-      [<a href="" class="external-link button is-normal is-rounded is-dark">paper</a>]
+      [<a href="" class="external-link button is-normal is-rounded is-dark">Paper</a>]
       &nbsp;
       [<a href="bibtex.txt">BibTeX</a>]
       &nbsp; 
-      [<a href="">code</a> (soon)]
+      [<a href="">Code</a> (soon)]
     </span>
     <div class="gap-20"></div>
 
@@ -168,7 +168,9 @@
     <div class="gap-20"></div>
     <b><span style="font-size:25px">Sequential application</span></b>
     <br>
-    <p>Yada yada yada.</p>
+    <p>Unlike inference in diffusion models, where a sequence of small steps is taken, IGN generates reasonable results in one step. In some cases (chosen here) where 
+      it is not perfect, reaplying can be used for refinement.
+    </p>
     <center>
       <img  width="100%" class="paper" src="images/mnist.jpg" alt="">
       </center>
@@ -176,7 +178,9 @@
       <br><br>
 
     <b><span style="font-size:25px">Latent space interpolation</span></b><br>
-    <p>Yada yada yada.</p>
+    <p>We demonstrate IGN has a consistent latent space by performing manipulations, similarly as shown for GANs. 
+      We sample several random noises, take linear interpolation 
+      between them and apply $f$.</p>
     <center>
     <img  width="30%" class="paper" src="images/mnist_interp.gif" alt="">
       <img  width="50%" class="paper" src="images/celeba_interp2.gif" alt="">
@@ -185,14 +189,18 @@
 
 
       <b><span style="font-size:25px">Projection onto data manifold</span></b><br>
-      <p>Yada yada yada.</p>
+      <p>We validate the potential for IGN as a ``global projector'' by inputting images from a variety of distributions into the model to produce their 
+        ``natural image'' equivalents (i.e.: project onto IGN's learned manifold). We demonstrate this by denoising noised images $x+n$, colorizing grayscale 
+        images $g(x)$, and translating sketches $s(x)$ to realistic images. Note 
+        that IGN was only trained on natural images and noise, and did not see distributions such as sketches or grayscale images. This behavior naturally emerges 
+        in IGN as a product of its projection objective. </p>
       <center>
         <img  width="100%" class="paper" src="images/proj.jpg" alt="">
         </center>
 
 
 
-<hr>
+<hr><br>
 <center>
   This work was inspired by a Monologue from the sitcom Seinfeld.
 <iframe width="560" height="315" src="https://www.youtube.com/embed/glMHAXhPCFg?si=E82sDq5ZnmeAhVsN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

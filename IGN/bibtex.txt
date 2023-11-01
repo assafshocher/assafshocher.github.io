@@ -1,1 +1,7 @@
-Yada yada yada
+@misc{shocher2023idempotent,
+      title={Idempotent Generative Network}, 
+      author={Assaf Shocher and Amil Dravid and Yossi Gandelsman and Inbar Mosseri and Michael Rubinstein and Alexei A. Efros},
+      year={2023},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
