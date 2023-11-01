@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" class="fontawesome-i2svg-active fontawesome-i2svg-complete">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IGN</title>
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6">
+    </script>
+    <script type="text/javascript">
+      window.MathJax = {
+          tex: {
+              inlineMath: [['$', '$'], ['\\(', '\\)']]
+          },
+          svg: {
+              fontCache: 'global'
+          }
+        };
+    </script>
+    <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.1/es5/tex-svg.js">
+    </script>
+    
+      <script defer="" src="css/fontawesome.all.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      body {
+        font-size:20px;
+        margin:60px auto;
+        width:auto;
+        max-width:900px;
+      }
+
+      hr {
+        border:0;
+        height:1.0px;
+        background-image:linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+      }
+
+      .gap-30 {
+      width:100%;
+      height:30px;
+      }
+
+      .gap-20 {
+      width:100%;
+      height:20px;
+      }
+
+      .gap-10 {
+      width:100%;
+      height:10px;
+      }
+
+      .gap-5 {
+      width:100%;
+      height:5px;
+      }
+      .paper {
+        max-width: 700px;
+      }
+      @media (max-width: 910px) {
+        .paper {
+          max-width: 500px;
+        }
+      }
+      @media (max-width: 610px) {
+        .paper {
+          max-width: 300px;
+        }
+      }
+    </style>
+  </head>
+
+  <div class="container">
+  <body>
+    
+
+    <center><span style="font-size:40px">
+      Idempotent Generative Network
+    </span></center>
+    <div class="gap-20"></div>
+
+    <!---------------------  authors --------------------->
+    <style>
+      /* Enhancements for author presentation */
+      .author-container {
+          display: flex;
+          flex-wrap: wrap; /* Allows wrapping onto next line */
+          justify-content: center; /* Center everything */
+          gap: 10px; /* Spacing between authors */
+      }
+  
+      /* Adjustments for the author's name and superscript */
+      .author-name {
+          font-size: 18px;
+          margin-right: 3px; /* Space before superscript */
+      }
+  
+      .author-sup {
+          font-size: 14px;
+          vertical-align: super;
+      }
+  </style>
+  
+  <!-- authors -->
+  <div class="author-container">
+      <a href="https://assafshocher.github.io"><span class="author-name">Assaf Shocher</span><sup class="author-sup">1,2</sup></a>
+      <a href="https://avdravid.github.io"><span class="author-name">Amil Dravid</span><sup class="author-sup">1</sup></a>
+      <a href="https://yossi.gandelsman.com"><span class="author-name">Yossi Gandelsman</span><sup class="author-sup">1</sup></a>
+      <a href="https://research.google/people/InbarMosseri/"><span class="author-name">Inbar Mosseri</span><sup class="author-sup">2</sup></a>
+      <a href="https://research.google/people/MichaelRubinstein/"><span class="author-name">Michael Rubinstein</span><sup class="author-sup">2</sup></a>
+      <a href="https://people.eecs.berkeley.edu/~efros/"><span class="author-name">Alexei A. Efros</span><sup class="author-sup">1</sup></a>
+  </div>
+  
+
+
+    <!--------------------- affiliations --------------------->
+    <div class="gap-5"></div>
+    <center>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
+        <center><span style="font-size:18px"><sup style="font-size:15px">1</sup>
+          UC Berkeley
+        </span></center>
+      </div>
+
+      <div class="col-md-3">
+        <center><span style="font-size:18px"><sup style="font-size:15px">2</sup>
+          Google Research
+        </span></center>
+      </div>
+
+    </div> </center>
+    <div class="gap-10"></div>
+    <hr>
+
+    <!--------------------- links --------------------->
+    <div class="gap-10"></div>
+
+    <center>
+    <span style="font-size:23px"> 
+      &nbsp; 
+      [<a href="" class="external-link button is-normal is-rounded is-dark">paper</a>]
+      &nbsp;
+      [<a href="bibtex.txt">BibTeX</a>]
+      &nbsp; 
+      [<a href="">code</a> (soon)]
+    </span>
+    <div class="gap-20"></div>
+
+    </center>
+<center><img width="100%" src="images/IGN_teaser2.jpg"></center>
+<p></p>
+  </i></p>
+    <!--------------------- abstract --------------------->
+    <p> 
+      We propose a new approach for generative modeling based on training a neural network to be idempotent. An idempotent operator is one that can be applied sequentially without changing the result beyond the initial application, namely $f(f(z))=f(z)$. The proposed model $f$ is trained to map a source distribution (e.g, Gaussian noise) to a target distribution (e.g. realistic images) using the following objectives: 
+      (1) Instances from the target distribution should map to themselves, namely $f(x)=x$. We define the target manifold as the set of all instances that $f$ maps to themselves.
+      (2) Instances that form the source distribution should map onto the defined target manifold. This is achieved by optimizing the idempotence term, $f(f(z))=f(z)$ which encourages the range of $f(z)$ to be on the target manifold. Under ideal assumptions such a process provably converges to the target distribution. This strategy results in a model capable of generating an output in one step, maintaining a consistent latent space, while also allowing sequential applications for refinement. Additionally, we find that by processing inputs from both target and source distributions, the model adeptly projects corrupted or modified data back to the target manifold. This work is a first step towards a ``global projector'' that enables projecting any input into a target data distribution.
+    </p>
+    <hr>
+    <!--------------------- content --------------------->
+
+    <div class="gap-20"></div>
+    <b><span style="font-size:25px">Sequential application</span></b>
+    <br>
+    <p>Yada yada yada.</p>
+    <center>
+      <img  width="100%" class="paper" src="images/mnist.jpg" alt="">
+      </center>
+
+      <br><br>
+
+    <b><span style="font-size:25px">Latent space interpolation</span></b><br>
+    <p>Yada yada yada.</p>
+    <center>
+    <img  width="30%" class="paper" src="images/mnist_interp.gif" alt="">
+      <img  width="50%" class="paper" src="images/celeba_interp2.gif" alt="">
+      </center>
+      <br><br>
+
+
+      <b><span style="font-size:25px">Projection onto data manifold</span></b><br>
+      <p>Yada yada yada.</p>
+      <center>
+        <img  width="100%" class="paper" src="images/proj.jpg" alt="">
+        </center>
+
+
+
+<hr>
+<center>
+  This work was inspired by a Monologue from the sitcom Seinfeld.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/glMHAXhPCFg?si=E82sDq5ZnmeAhVsN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</center>
+
+    <hr>
+    <b><span style="font-size:25px">Acknowledgements</span></b>
+  <div class="gap-20"></div>
+    <p>The authors would like to thank Karttikeya Mangalam, Yannis Siglidis, Konpat Preechakul, Niv Haim, Niv Granot and Ben Feinstein for the helpful discussions. Assaf Shocher gratefully acknowledges financial support for this publication by the Fulbright U.S. Postdoctoral Program, which is sponsored by the U.S. Department of State. Its contents are solely the responsibility of the author and do not necessarily represent the official views of the Fulbright Program or the Government of the United States. Amil Dravid is funded by the US Department of Energy Computational Science Graduate Fellowship. Yossi Gandelsman is funded by the Berkeley Fellowship and the Google Fellowship.  Additional funding came from DARPA MCS and ONR MURI.</p>
+  </body>
+  </div>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+
+</html>
