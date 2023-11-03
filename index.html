@@ -178,6 +178,58 @@ const copyToClipboard = str => {
 
 
 
+<tr onmouseout="ign_stop()" onmouseover="ign_start()">
+            <td style="padding:20px;width:45%;vertical-align:middle">
+                <div id='ign_before'><img src="IGN/images/IGN_teaser2.jpeg" width="100%"></div>
+                <div id='ign_after'><img src='IGN/images/IGN_teaser2.jpeg' width="100%"></div>
+              </div>
+              <script type="text/javascript">
+				var bibtexign = ""
+				function ign_start() {
+                  document.getElementById('ign_after').style.display = 'none';
+                  document.getElementById('ign_before').style.display = 'inline';
+                }
+
+                function rosetta_stop() {
+                  document.getElementById('ign_after').style.display = 'inline';
+                  document.getElementById('ign_before').style.display = 'none';
+                }
+                rosetta_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:55%;vertical-align:middle">
+                <papertitle>Idempotent Generative Network</papertitle>
+
+              <br>
+	    <strong> Assaf Shocher</strong>
+	    <a href="https://avdravid.github.io/">Amil Dravid*</a>,
+	    <a href="https://yossigandelsman.github.io/">Yossi Gandelsman*</a>,
+	    <a href="https://research.google/people/InbarMosseri/">Inbar Mosseri</a>,
+	    <a href="https://research.google/people/MichaelRubinstein/">Michael Rubinstein</a>,
+	      <a href="https://people.eecs.berkeley.edu/~efros/">Alexei A. Efros</a>.
+
+              <br>
+              <em>Under review</em>
+              <br>
+
+			  <div class="btn-group">
+			  <a href="https://assafshocher.github.io/IGN/"><button>project page</button></a>
+			  <a href="https://arxiv.org/pdf/2311.01462.pdf"><button>PDF</button></a>
+			  <div class="tooltip"><button>abstract</button><span class="tooltiptext">We propose a new approach for generative modeling based on training a neural network to be idempotent. An idempotent operator is one that can be applied sequentially without changing the result beyond the initial application, namely $f(f(z))=f(z)$. The proposed model $f$ is trained to map a source distribution (e.g, Gaussian noise) to a target distribution (e.g. realistic images) using the following objectives: 
+(1) Instances from the target distribution should map to themselves, namely $f(x)=x$. We define the target manifold as the set of all instances that $f$ maps to themselves.
+(2) Instances that form the source distribution should map onto the defined target manifold. This is achieved by optimizing the idempotence term, $f(f(z))=f(z)$ which encourages the range of $f(z)$ to be on the target manifold. Under ideal assumptions such a process provably converges to the target distribution. This strategy results in a model capable of generating an output in one step, maintaining a consistent latent space, while also allowing sequential applications for refinement. Additionally, we find that by processing inputs from both target and source distributions, the model adeptly projects corrupted or modified data back to the target manifold. This work is a first step towards a ``global projector'' that enables projecting any input into a target data distribution.</span></div>
+			  <button onclick=copyToClipboard(bibtexign)>bibtex</button>
+  
+</div>
+            </td>
+          </tr> 
+
+		
+
+
+		
+
+
 
 <tr onmouseout="rosetta_stop()" onmouseover="rosetta_start()">
             <td style="padding:20px;width:45%;vertical-align:middle">
