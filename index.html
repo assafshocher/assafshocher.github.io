@@ -231,6 +231,65 @@ const copyToClipboard = str => {
 
 
 
+<tr onmouseout="conceptor_stop()" onmouseover="conceptor_start()">
+            <td style="padding:20px;width:45%;vertical-align:middle">
+                <div id='conceptor_before'><img src="images/conceptor.jpg" width="100%"></div>
+                <div id='conceptor_after'><img src='images/conceptor.jpg' width="100%"></div>
+              </div>
+              <script type="text/javascript">
+				var bibtexrosetta = "@article{chefer2023hidden,
+        title={The Hidden Language of Diffusion Models},
+        author={Chefer, Hila and Lang, Oran and Geva, Mor and Polosukhin, Volodymyr and Shocher, Assaf and Irani, Michal and Mosseri, Inbar and Wolf, Lior},
+        journal={arXiv preprint arXiv:2306.00966},
+        year={2023}
+}"
+				function conceptor_start() {
+                  document.getElementById('conceptor_after').style.display = 'none';
+                  document.getElementById('conceptor_before').style.display = 'inline';
+                }
+
+                function rosetta_stop() {
+                  document.getElementById('conceptor_after').style.display = 'inline';
+                  document.getElementById('conceptor_before').style.display = 'none';
+                }
+                rosetta_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:55%;vertical-align:middle">
+                <papertitle>The Hidden Language of Diffusion Models</papertitle>
+
+              <br>
+	    <a href="https://hila-chefer.github.io/" target="_blank">Hila Chefer</a>,
+	    <a href="https://scholar.google.com/citations?user=gypv57sAAAAJ" target="_blank">Oran Lang</a>,
+	    <a href="https://mega002.github.io/" target="_blank">Mor Geva</a>,
+		    <a href="https://www.linkedin.com/in/volodymyr-polosukhin-b685511b9/" target="_blank">Volodymyr Polosukhin</a>
+	    <strong> Assaf Shocher</strong>,
+		    <a href="http://www.weizmann.ac.il/math/irani/" target="_blank">Michal Irani</a>,
+		    <a href="https://scholar.google.com/citations?user=ifCcZ5IAAAAJ&amp;hl=en" target="_blank">Inbar Mosseri</a>,
+		    <a href="http://www.cs.tau.ac.il/~wolf/" target="_blank">Lior Wolf</a>,
+		    
+		
+
+              <br>
+              <em>ICLR 2024</em>
+              <br>
+
+			  <div class="btn-group">
+			  <a href="https://hila-chefer.github.io/Conceptor/"><button>project page</button></a>
+			  <a href="https://arxiv.org/pdf/2306.00966.pdf"><button>PDF</button></a>
+			  <div class="tooltip"><button>abstract</button><span class="tooltiptext">Text-to-image diffusion models have demonstrated an unparalleled ability to generate high-quality, diverse images from a textual prompt. However, the internal representations learned by these models remain an enigma. In this work, we present Conceptor, a novel method to interpret the internal representation of a textual concept by a diffusion model. This interpretation is obtained by decomposing the concept into a small set of human-interpretable textual elements. Applied over the state-of-the-art Stable Diffusion model, Conceptor reveals non-trivial structures in the representations of concepts. For example, we find surprising visual connections between concepts, that transcend their textual semantics. We additionally discover concepts that rely on mixtures of exemplars, biases, renowned artistic styles, or a simultaneous fusion of multiple meanings of the concept. Through a large battery of experiments, we demonstrate Conceptor's ability to provide meaningful, robust, and faithful decompositions for a wide variety of abstract, concrete, and complex textual concepts, while allowing to naturally connect each decomposition element to its corresponding visual impact on the generated images.</span></div>
+			  <button onclick=copyToClipboard(bibtexrosetta)>bibtex</button>
+  
+</div>
+            </td>
+          </tr> 
+
+
+
+
+
+
+
 <tr onmouseout="rosetta_stop()" onmouseover="rosetta_start()">
             <td style="padding:20px;width:45%;vertical-align:middle">
                 <div id='rosetta_before'><img src="images/rosetta.png" width="100%"></div>
@@ -274,8 +333,7 @@ const copyToClipboard = str => {
           </tr> 
 
 
-
-
+		
 
 
   
