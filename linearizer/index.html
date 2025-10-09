@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linearizer: Who Said Neural Networks Aren't Linear?</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            background-image: radial-gradient(circle at top, #ffffff, #f8fafc);
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #020617;
+                color: #cbd5e1;
+                background-image: radial-gradient(circle at top, #1e293b, #020617);
+            }
+            .paper-card {
+                background-color: #0f172a80;
+                border-color: #334155;
+                backdrop-filter: blur(8px);
+            }
+            .bibtex-block {
+                background-color: #020617;
+                border-color: #334155;
+            }
+        }
+        .katex { font-size: 1.1em !important; }
+
+        /* Animation for initial header */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+        
+        /* Styles for the sticky navigation bar */
+        #sticky-nav {
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+        #sticky-nav.scrolled {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav id="sticky-nav" class="fixed top-0 left-0 right-0 z-50 bg-white/70 dark:bg-slate-900/70 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <span class="font-semibold text-slate-800 dark:text-slate-200 text-lg tracking-tight">Who Said Neural Networks Aren't Linear?</span>
+                <div class="flex items-center gap-2">
+                    <a href="public/linearizer.pdf" class="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-slate-800 text-white dark:bg-slate-200 dark:text-slate-900 rounded-md font-semibold shadow-sm hover:bg-slate-700 dark:hover:bg-slate-300 transition-transform duration-200 hover:-translate-y-0.5">
+                        <i data-lucide="file-text" class="w-4 h-4"></i> Paper
+                    </a>
+                    <a href="https://github.com/assafshocher/Linearizer" class="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white rounded-md font-semibold shadow-sm hover:bg-slate-300 dark:hover:bg-slate-600 transition-transform duration-200 hover:-translate-y-0.5">
+                        <i data-lucide="github" class="w-4 h-4"></i> Code
+                    </a>
+                    <a href="#cite" class="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white rounded-md font-semibold shadow-sm hover:bg-slate-300 dark:hover:bg-slate-600 transition-transform duration-200 hover:-translate-y-0.5">
+                        <i data-lucide="quote" class="w-4 h-4"></i> Cite
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+        
+        <header class="text-center space-y-4">
+            
+            <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-fuchsia-500 animate-fade-in-up" style="animation-delay: 100ms;">
+                Who Said Neural Networks Aren't Linear?
+            </h1>
+            
+            <div class="authors text-lg pt-2 animate-fade-in-up" style="animation-delay: 300ms;">
+                <a href="https://scholar.google.com/citations?user=d0BVaqEAAAAJ" class="font-medium text-sky-600 dark:text-sky-400 hover:underline">Nimrod Berman</a><sup>1*</sup>,
+                <a href="https://research.nvidia.com/person/assaf-hallak" class="font-medium text-sky-600 dark:text-sky-400 hover:underline">Assaf Hallak</a><sup>2*</sup>,
+                <a href="https://assafshocher.github.io/" class="font-medium text-sky-600 dark:text-sky-400 hover:underline">Assaf Shocher</a><sup>3*</sup>
+            </div>
+
+            <div class="affiliations text-md text-slate-500 dark:text-slate-400 animate-fade-in-up" style="animation-delay: 400ms;">
+                <sup>1</sup>Ben-Gurion University, <sup>2</sup>NVIDIA, <sup>3</sup>Technion
+            </div>
+            <p class="text-sm text-slate-500 dark:text-slate-400 animate-fade-in-up" style="animation-delay: 400ms;"><sup>*</sup>Equal contribution</p>
+
+            <div class="flex items-center justify-center flex-wrap gap-4 pt-6 animate-fade-in-up" style="animation-delay: 500ms;">
+                <a href="public/linearizer.pdf" class="inline-flex items-center gap-2 px-4 py-2 bg-slate-800 text-white dark:bg-slate-200 dark:text-slate-900 rounded-lg font-semibold shadow-md hover:bg-slate-700 dark:hover:bg-slate-300 transition-transform duration-200 hover:-translate-y-0.5">
+                    <i data-lucide="file-text" class="w-4 h-4"></i>
+                    Paper
+                </a>
+                <a href="https://github.com/assafshocher/Linearizer" class="inline-flex items-center gap-2 px-4 py-2 bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white rounded-lg font-semibold shadow-md hover:bg-slate-300 dark:hover:bg-slate-600 transition-transform duration-200 hover:-translate-y-0.5">
+                    <i data-lucide="github" class="w-4 h-4"></i>
+                    Code
+                </a>
+                <a href="#cite" class="inline-flex items-center gap-2 px-4 py-2 bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white rounded-lg font-semibold shadow-md hover:bg-slate-300 dark:hover:bg-slate-600 transition-transform duration-200 hover:-translate-y-0.5">
+                    <i data-lucide="quote" class="w-4 h-4"></i>
+                    Cite
+                </a>
+            </div>
+        </header>
+
+
+
+        <section id="abstract" class="mt-12 md:mt-16">
+            <h3 class="text-2xl font-bold mb-4">Abstract</h3>
+            <p class="text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+                Neural networks are famously nonlinear. However, linearity is defined relative to a pair of vector spaces, $f:\mathcal{X}\rightarrow\mathcal{Y}.$ Is it possible to identify a pair of non-standard vector spaces for which a conventionally nonlinear function is, in fact, linear? This paper introduces a method that makes such vector spaces explicit by construction. We find that if we sandwich a linear operator $A$ between two invertible neural networks, such that
+                $f(x)=g_{y}^{-1}(A g_{x}(x))$,
+                the corresponding vector spaces are induced by newly defined operations. This framework makes the entire arsenal of linear algebra applicable to nonlinear mappings. We demonstrate this by collapsing diffusion model sampling into a single step, enforcing global idempotency for projective generative models, and enabling modular style transfer.
+            </p>
+        </section>
+
+                <section class="mt-16 md:mt-20">
+             <div class="paper-card rounded-xl border border-slate-200 shadow-lg overflow-hidden p-4">
+                <img src="assets/fig1.png" alt="Linearizer architecture diagram" class="rounded-lg w-full">
+                <p class="text-center text-sm mt-2 text-slate-600 dark:text-slate-400">
+                    <b>Figure 1 from the paper.</b> The Linearizer architecture $f(x)=g_{y}^{-1}(Ag_{x}(x))$ and the induced vector space operations.
+                </p>
+            </div>
+        </section>
+        
+        <section class="mt-12 md:mt-16">
+            <h3 class="text-2xl font-bold mb-6">Key Results</h3>
+            <div class="space-y-8">
+                <div>
+                    <h4 class="text-xl font-semibold mb-3">One-Step Flow Matching & Inversion</h4>
+                    <div class="paper-card rounded-xl border border-slate-200 shadow-lg overflow-hidden p-4">
+                        <img src="assets/interpolation.png" alt="Interpolation between MNIST digits and CelebA faces" class="rounded-lg w-full">
+                        <p class="text-center text-sm mt-3 text-slate-600 dark:text-slate-400">
+                            The linearity of our model allows for exact inversion using the pseudoinverse, enabling latent space interpolation between real images with a single forward pass.
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold mb-3">Globally Projective Generative Model</h4>
+                    <div class="paper-card rounded-xl border border-slate-200 shadow-lg overflow-hidden p-4">
+                        <img src="assets/ign_fig.png" alt="Projection results of the Linear IGN model" class="rounded-lg w-full">
+                         <p class="text-center text-sm mt-3 text-slate-600 dark:text-slate-400">
+                            By enforcing idempotency ($A^2=A$) on the inner matrix, the entire network becomes a global projector by construction. Top: inputs. Bottom: their projections.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cite" class="mt-12 md:mt-16">
+            <h3 class="text-2xl font-bold mb-4">Citation</h3>
+            <div class="bibtex-block relative bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-6">
+                <pre id="bibtex-content" class="whitespace-pre-wrap text-sm text-slate-800 dark:text-slate-200 overflow-x-auto">@misc{berman2025linearizer,
+  title        = {Who Said Neural Networks Aren't Linear?},
+  author       = {Nimrod Berman and Assaf Hallak and Assaf Shocher},
+  year         = {2025},
+  note         = {Preprint, under review},
+  howpublished = {GitHub: assafshocher/Linearizer},
+  url          = {https://github.com/assafshocher/Linearizer}
+}</pre>
+                <button id="copy-button" class="absolute top-4 right-4 inline-flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-600 transition-transform duration-200 hover:-translate-y-0.5" onclick="copyBibtex()">
+                    <i data-lucide="copy" class="w-4 h-4"></i>
+                    Copy
+                </button>
+            </div>
+        </section>
+
+        <section class="mt-12 md:mt-16">
+            <h3 class="text-2xl font-bold mb-4">Acknowledgements</h3>
+            <p class="text-slate-700 dark:text-slate-300 leading-relaxed">
+                We thank Amil Dravid and Yoad Tewel for insightful discussions. A.S. is supported by the Chaya Career Advancement Chair.
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-8 text-sm text-slate-500 dark:text-slate-400">
+        <p>&copy; 2025 Nimrod Berman, Assaf Hallak, & Assaf Shocher</p>
+    </footer>
+
+    <script>
+        // Render Lucide icons
+        lucide.createIcons();
+
+        // BibTeX copy function
+        function copyBibtex() {
+            const bibtexText = document.getElementById('bibtex-content').textContent;
+            const copyButton = document.getElementById('copy-button');
+            
+            navigator.clipboard.writeText(bibtexText).then(() => {
+                const originalContent = copyButton.innerHTML;
+                copyButton.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i> Copied!`;
+                lucide.createIcons();
+                
+                setTimeout(() => {
+                    copyButton.innerHTML = originalContent;
+                    lucide.createIcons();
+                }, 2000);
+            }).catch(err => console.error('Failed to copy BibTeX: ', err));
+        }
+
+        // KaTeX auto-rendering configuration
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                throwOnError : false
+            });
+            
+            // Logic for the sticky navigation bar
+            const stickyNav = document.getElementById('sticky-nav');
+            if (stickyNav) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 250) { // Show nav after scrolling 250px
+                        stickyNav.classList.add('scrolled');
+                    } else {
+                        stickyNav.classList.remove('scrolled');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
