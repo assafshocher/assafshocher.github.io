@@ -1,816 +1,270 @@
-<!DOCTYPE HTML>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assaf Shocher</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-  <title>Assaf Shocher's homepage</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 
-  <meta name="author" content="Assaf Shocher">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <link rel="stylesheet" type="text/css" href="stylesheet.css">
-  <link rel="icon" type="image/png" href="images/me.png">
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            background-image: radial-gradient(circle at top, #ffffff, #f8fafc);
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #020617;
+                color: #cbd5e1;
+                background-image: radial-gradient(circle at top, #1e293b, #020617);
+            }
+        }
+                
+        .profile-blob {
+    border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+}
+        .abstract-box {
+            max-height: 0;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, padding 0.3s ease-in-out;
+            overflow: hidden;
+        }
+        .abstract-box.show {
+            max-height: 500px; /* Adjust if abstracts are longer */
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #sticky-nav {
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+        #sticky-nav.scrolled {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .publication-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .publication-item.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .tooltip { position: relative; }
+        .tooltip .tooltip-text {
+            visibility: hidden; opacity: 0; transition: opacity 0.2s;
+            position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%);
+            background-color: #1e293b; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 12px; white-space: nowrap;
+        }
+        .tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+        .publication-image-container {
+            position: relative;
+            z-index: 5; /* Base z-index */
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .publication-image-container:hover {
+            transform: scale(2.2);
+            z-index: 10; /* Bring to front only when hovering the image itself */
+        }
+    </style>
 </head>
-<style>
-.tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black;
-}
+<body class="antialiased">
 
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 600px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -300px;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
+    <nav id="sticky-nav" class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <span class="font-bold text-slate-800 dark:text-slate-200 text-xl tracking-tight">Assaf Shocher</span>
+                <div class="flex items-center gap-2">
+                    <a href="mailto:assafshocher@gmail.com" class="p-2 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors tooltip"><i data-lucide="mail" class="w-5 h-5 text-slate-600 dark:text-slate-300"></i><span class="tooltip-text">Email</span></a>
+                    <a href="https://scholar.google.co.il/citations?user=ndRmNK8AAAAJ" target="_blank" rel="noopener noreferrer" class="p-2 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors tooltip"><i data-lucide="graduation-cap" class="w-5 h-5 text-slate-600 dark:text-slate-300"></i><span class="tooltip-text">Google Scholar</span></a>
+                    <a href="https://github.com/assafshocher" target="_blank" rel="noopener noreferrer" class="p-2 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors tooltip"><i data-lucide="github" class="w-5 h-5 text-slate-600 dark:text-slate-300"></i><span class="tooltip-text">GitHub</span></a>
+                    <a href="https://twitter.com/AssafShocher" target="_blank" rel="noopener noreferrer" class="p-2 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors tooltip"><i data-lucide="twitter" class="w-5 h-5 text-slate-600 dark:text-slate-300"></i><span class="tooltip-text">Twitter</span></a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-.tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+        
+      <header class="grid md:grid-cols-3 gap-8 md:gap-12 items-center">
+        <div class="md:col-span-2">
+            <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-fuchsia-500 animate-fade-in-up" style="animation-delay: 100ms;">Assaf Shocher</h1>
+            <div class="mt-6 text-lg leading-relaxed text-slate-700 dark:text-slate-300 space-y-4 animate-fade-in-up" style="animation-delay: 200ms;">
+                <p>
+                    I am an Assistant Professor at the <a href="https://www.technion.ac.il/en/" target="_blank" rel="noopener noreferrer" class="font-medium text-sky-600 dark:text-sky-400 hover:underline">Technion</a> in the <a href="https://dds.technion.ac.il/" target="_blank" rel="noopener noreferrer" class="font-medium text-sky-600 dark:text-sky-400 hover:underline">Faculty of Data and Decision Sciences</a>, and a proud **Chaya Fellow**. Previously, I was a Research Scientist at <a href="https://www.nvidia.com/en-eu/research/" target="_blank" rel="noopener noreferrer" class="font-medium text-sky-600 dark:text-sky-400 hover:underline">NVIDIA</a>, a Postdoc at UC Berkeley with <a href="http://people.eecs.berkeley.edu/~efros/" target="_blank" rel="noopener noreferrer" class="font-medium text-sky-600 dark:text-sky-400 hover:underline">Alyosha Efros</a>, and a Visiting Scholar at <a href="https://deepmind.google/" target="_blank" rel="noopener noreferrer" class="font-medium text-sky-600 dark:text-sky-400 hover:underline">Google DeepMind</a>. I received my PhD from the Weizmann Institute of Science, advised by <a href="https://www.weizmann.ac.il/math/irani/home" target="_blank" rel="noopener noreferrer" class="font-medium text-sky-600 dark:text-sky-400 hover:underline">Michal Irani</a>.
+                </p>
+                <p>
+                    My research in Artificial Intelligence focuses on Deep Neural Networks for computer vision. My work is guided by two core principles: a pursuit of **elegant, foundational ideas** that offer fundamentally new perspectives, and a focus on **dynamic and adaptive learning** for real-world scenarios like unannotated data streams and distribution shifts. This approach often leads to an emphasis on unsupervised, self-supervised, and generative models, such as the <a href="https://sites.google.com/view/deepinternallearning" target="_blank" rel="noopener noreferrer" class="font-medium text-sky-600 dark:text-sky-400 hover:underline">Deep Internal Learning</a> framework I co-developed, which leverages the rich internal statistics of a single image.
+                </p>
+            </div>
+            <div class="mt-8 flex items-center gap-2 animate-fade-in-up" style="animation-delay: 300ms;">
+                <a href="mailto:assafshocher@gmail.com" class="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white rounded-md font-semibold shadow-sm hover:bg-slate-300 dark:hover:bg-slate-600 transition-transform duration-200 hover:-translate-y-0.5"><i data-lucide="mail" class="w-4 h-4"></i> Email</a>
+                <a href="https://scholar.google.co.il/citations?user=ndRmNK8AAAAJ" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white rounded-md font-semibold shadow-sm hover:bg-slate-300 dark:hover:bg-slate-600 transition-transform duration-200 hover:-translate-y-0.5"><i data-lucide="graduation-cap" class="w-4 h-4"></i> Scholar</a>
+                <a href="https://github.com/assafshocher" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white rounded-md font-semibold shadow-sm hover:bg-slate-300 dark:hover:bg-slate-600 transition-transform duration-200 hover:-translate-y-0.5"><i data-lucide="github" class="w-4 h-4"></i> GitHub</a>
+                <a href="https://twitter.com/AssafShocher" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white rounded-md font-semibold shadow-sm hover:bg-slate-300 dark:hover:bg-slate-600 transition-transform duration-200 hover:-translate-y-0.5"><i data-lucide="twitter" class="w-4 h-4"></i> Twitter</a>
+            </div>
+        </div>
+        <div class="relative w-56 h-64 justify-self-center group profile-blob overflow-hidden shadow-lg animate-fade-in-up" style="animation-delay: 400ms;">
+            <img src="images/me_before.png" alt="Assaf Shocher" class="absolute inset-0 w-full h-full object-cover">
+            <img src="images/me_after.png" alt="Assaf Shocher (alt)" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        </div>
+    </header>
 
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
-}
-</style>
-<script>
-const copyToClipboard = str => {
-  const el = document.createElement('textarea');
-  el.value = str;
-  document.body.appendChild(el);
-  el.select();
-  document.execCommand('copy');
-  document.body.removeChild(el);
-  alert("The following bibtextex has been copied to clipboard:\n\n" + el.value);
-};
-</script>
-<body>
-  <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-    <tr style="padding:0px">
-      <td style="padding:0px">
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <tr style="padding:0px">
-            <td style="padding:2.5%;width:63%;vertical-align:middle">
-              <p style="text-align:center">
-                <name>Assaf Shocher</name>
-              </p>
-		    <p>
-  I am an Assistant Professor at the <a href="https://www.technion.ac.il/en/">Technion</a>, in the <a href="https://dds.technion.ac.il/">Faculty of Data and Decision Sciences</a>.  
-  Prior to that, I was a Research Scientist at <a href="https://www.nvidia.com/en-eu/research/">NVIDIA</a>, a Postdoctoral Fellow at UC Berkeley working with <a href="http://people.eecs.berkeley.edu/~efros/">Alyosha Efros</a>, and a Visiting Scholar at <a href="https://deepmind.google/">Google DeepMind</a>.  
-  I received my PhD from the Weizmann Institute of Science, where I was advised by <a href="https://www.weizmann.ac.il/math/irani/home">Michal Irani</a>.
-  <br><br>
-  My research focuses on fundamental deep learning for computer vision. I enjoy pursuing bold, elegant ideas.
-  In the past, together with Prof. Irani, I introduced the <a href="https://sites.google.com/view/deepinternallearning">Deep Internal Learning</a> framework, which combines deep neural networks with internal image statistics.  
-  <br><br>
-  My awards and honors include the Rothschild and Fulbright Postdoctoral Fellowships, the John F. Kennedy Prize for Outstanding PhD at the Weizmann Institute, and the Blavatnik Award for CS PhD Graduates.
-</p> <br>
-              <p style="text-align:center"> 
-                <a href="mailto:assafshocher@gmail.com">Email</a> &nbsp/&nbsp
-<!--                 <a href="data/cv.pdf">CV</a> &nbsp/&nbsp -->
-                <a href="https://scholar.google.co.il/citations?user=ndRmNK8AAAAJ">Google Scholar</a> &nbsp/&nbsp
-				<a href="https://github.com/assafshocher">GitHub</a> &nbsp/&nbsp
-				<a href="https://linkedin.com/in/assaf-shocher-271424b7">LinkedIn</a> &nbsp/&nbsp
-                <a href="https://twitter.com/AssafShocher">Twitter</a>
-				
-              </p>
-			  
-			  
-            </td>
-            <td onmouseout="me_stop()" onmouseover="me_start()" style="padding:2.5%;width:40%;max-width:40%">
-				<div id='me'><img src="images/me.png" width="100%"></div>
-                <div id='me_after'><img src='images/me_after.png' width="100%"></div>
-              </div>
-              <script type="text/javascript">
-				function me_start() {
-                  document.getElementById('me').style.display = 'none';
-                  document.getElementById('me_after').style.display = 'inline';
-                }
+        <section id="publications" class="mt-20 md:mt-24">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-slate-800 dark:text-slate-100">Selected Publications</h2>
+            <div id="publications-list" class="mt-12">
+                </div>
+        </section>
 
-                function me_stop() {
-                  document.getElementById('me').style.display = 'inline';
-                  document.getElementById('me_after').style.display = 'none';
-                }
-                me_stop()
-              </script>
-			  
-			
-			
-			
-			
-            </td>
-          </tr>
-        </tbody></table>
-		
-		
-		<table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr><!--
-            <td style="padding:20px;width:100%;vertical-align:middle">
-              <name><center>Talks</center></name>
-			  <center>* Videos for oral presentations of published papers can be found in the publications secttion below</center>
-   
-            </td>
-          </tr>
-        </tbody></table>
-		
-		  <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+    </main>
 
-			
-		<tr>
-		<td style="padding:20px;width:100%;vertical-align:middle">
-			08/28/2020<br> <a>ECCV'2020 Workshop on Deep Internal Learning</a href="https://sites.google.com/view/deepinternallearning">; Joint talk with <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>:<br>
-			<papertitle>Deep Internal Learning: Deep Leraning with Zero Examples <a href="https://youtu.be/tjxII31RegQ?t=2395">&nbsp[video]</a></papertitle>
+    <footer class="text-center py-10 text-sm text-slate-500 dark:text-slate-400">
+        <p>Design inspired by the <a href="https://jonbarron.info/" target="_blank" rel="noopener noreferrer" class="hover:underline">Jon Barron</a> template.</p>
+    </footer>
 
-		<tr>
-		<td style="padding:20px;width:100%;vertical-align:middle">
-			03/18/2019<br> <a href="https://2019.imvc.co.il/">IMVC'2019</a> <br>
-			<papertitle>Deep Internal Learning<a href="https://youtu.be/Ly9qNOwtirc">&nbsp[video]</a></papertitle>
-			
-		  
-		  
-	
-		  <tr>
-		  		<td style="padding:20px;width:100%;vertical-align:middle">
-			10/11/2018<br> <a href="https://sites.google.com/view/vision-day-2018">Israel Computer Vision Day 2018</a> <br>
-			<papertitle>Internal Distribution Matching for Natural Image Retargeting<a href="https://www.youtube.com/watch?v=zC8Y4Mhb7Fk">&nbsp[video]</a></papertitle>	
-			
-		  
-		  
-		  </table>
-		  
-		  
-		  <br><br><Br><br>
-		
-		
-		
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>-->
-            <td style="padding:20px;width:100%;vertical-align:middle">
-              <name><center>Selected Publications    <!--<span style="font-size:12px;">&nbsp;&nbsp;(I selected all of them)</span>--></center></name>
-   
-            </td>
-          </tr>
-        </tbody></table>
-		
-		
-        <table align="left", style="width:150%;border:0px;border-spacing:0px;border-collapse:separate;margin-left:auto;margin-right:auto"><tbody>
+    <script>
+        // --- DATA ---
+        const publications = [
+            { id: 'linearizer', title: 'Who Said Neural Networks Aren\'t Linear?', authors: ['Nimrod Berman*', 'Assaf Hallak*', '<strong>Assaf Shocher*</strong>'], venue: 'Preprint 2025', image_before: 'images/linearizer_before.png', image_after: 'images/linearizer_after.png', links: { page: 'https://assafshocher.github.io/Linearizer/', pdf: 'https://arxiv.org/pdf/2405.05266', code: 'https://github.com/assafshocher/Linearizer' }, abstract: `Neural networks are famously nonlinear. However, linearity is defined relative to a pair of vector spaces, $f:\\mathcal{X}\\rightarrow\\mathcal{Y}.$ Is it possible to identify a pair of non-standard vector spaces for which a conventionally nonlinear function is, in fact, linear? This paper introduces a method that makes such vector spaces explicit by construction. We find that if we sandwich a linear operator A between two invertible neural networks, $f(x)=g_{y}^{-1}(Ag_{x}(x))$, then the corresponding vector spaces X and Y are induced by newly defined addition and scaling actions. This framework makes the entire arsenal of linear algebra, including SVD, pseudo-inverse, and more, applicable to nonlinear mappings. We demonstrate this by collapsing diffusion model sampling into a single step, enforcing global idempotency, and demonstrating modular style transfer.`, bibtex: `@misc{berman2025linearizer, title={Who Said Neural Networks Aren't Linear?}, author={Berman, Nimrod and Hallak, Assaf and Shocher, Assaf}, year={2025}, eprint={2405.05266}, archivePrefix={arXiv}}` },
+            { id: 'ittt', title: 'IT³: Idempotent Test-Time Training', authors: ['Nikita Durasov*', '<strong>Assaf Shocher*</strong>', 'Doruk Oner', 'Gal Chechik', 'Alexei A. Efros', 'Pascal Fua'], venue: 'ICML 2025', image_before: 'images/ittt_before.jpg', image_after: 'images/ittt_after.jpg', links: { page: 'https://www.norange.io/projects/ittt/', code: 'https://github.com/assafshocher/IT3' }, abstract: `Deep learning models often struggle when deployed in real-world settings due to distribution shifts between training and test data. We present Idempotent Test-Time Training ($IT^{3}$), a novel approach that enables on-the-fly adaptation to distribution shifts using only the current test instance, without any auxiliary task design. Our key insight is that enforcing idempotence—where repeated applications of a function yield the same result—can effectively replace domain-specific auxiliary tasks used in previous TTT methods. We theoretically connect idempotence to prediction confidence and demonstrate that minimizing the distance between successive applications of our model during inference leads to improved out-of-distribution performance. Our results suggest that idempotence provides a universal principle for test-time adaptation that generalizes across domains and architectures.`, bibtex: `@inproceedings{durasov2025it3, title={{IT³: Idempotent Test-Time Training}}, author={Durasov, Nikita and Shocher, Assaf and Oner, Doruk and Chechik, Gal and Efros, Alexei A. and Fua, Pascal}, booktitle={International Conference on Machine Learning}, year={2025}}` },
+            { id: 'kernelfusion', title: 'KernelFusion: Assumption-Free Blind Super-Resolution via Patch Diffusion', authors: ['Oliver Heinimann*', '<strong>Assaf Shocher*</strong>', 'Tal Zimbalist', 'Michal Irani'], venue: 'Preprint 2025', image_before: 'images/kernelfusion_before.png', image_after: 'images/kernelfusion_after.png', links: { pdf: 'https://arxiv.org/pdf/2503.21907v1' }, abstract: `Traditional super-resolution (SR) methods assume an "ideal" downscaling SR-kernel (e.g., bicubic). Such methods fail once the LR images are generated differently. Current blind-SR methods are still fundamentally restricted to rather simplistic downscaling SR-kernels. In "KernelFusion" we introduce a zero-shot diffusion-based method that makes no assumptions about the kernel. Our method recovers the unique image-specific SR-kernel directly from the LR input image, while simultaneously recovering its corresponding HR image. KernelFusion exploits the principle that the correct SR-kernel is the one that maximizes patch similarity across different scales of the LR image. By breaking free from predefined kernel assumptions, KernelFusion pushes Blind-SR into a new assumption-free paradigm, handling downscaling kernels previously thought impossible.`, bibtex: `@article{heinimann2025kernelfusion, title={KernelFusion: Assumption-Free Blind Super-Resolution via Patch Diffusion}, author={Heinimann, Oliver and Shocher, Assaf and Zimbalist, Tal and Irani, Michal}, journal={arXiv preprint arXiv:2503.21907}, year={2025}}` },
+            { id: 'rlrcdot', title: 'RL-RC-DOT: A Block-level RL agent for Task-Aware Video Compression', authors: ['Uri Gadot', '<strong>Assaf Shocher</strong>', 'Shie Mannor', 'Gal Chechik', 'Assaf Hallak'], venue: 'CVPR 2025', image_before: 'images/rl-rc-dot_before.png', image_after: 'images/rl-rc-dot_after.png', links: { pdf: 'https://openaccess.thecvf.com/content/CVPR2025/papers/Gadot_RL-RC-DoT_A_Block-level_RL_agent_for_Task-Aware_Video_Compression_CVPR_2025_paper.pdf' }, abstract: `Video encoders optimize compression for human perception. In many modern applications, videos serve as input for AI systems performing tasks like object recognition. It is therefore useful to optimize the encoder for a downstream task. A major challenge is how to combine such optimization with existing standard video encoders. Here, we address this challenge by controlling the Quantization Parameters (QPs) at the macro-block level to optimize the downstream task. This granular control allows us to prioritize encoding for task-relevant regions. We formulate this as a Reinforcement Learning (RL) task, where the agent learns to balance long-term implications of choosing QPs on both task performance and bit-rate constraints.`, bibtex: `@inproceedings{gadot2025rlrcdot, title={{RL-RC-DOT: A Block-level RL agent for Task-Aware Video Compression}}, author={Gadot, Uri and Shocher, Assaf and Mannor, Shie and Chechik, Gal and Hallak, Assaf}, booktitle={CVPR}, year={2025}}` },
+            { id: 'ign', title: 'Idempotent Generative Network', authors: ['<strong>Assaf Shocher</strong>', 'Amil Dravid', 'Yossi Gandelsman', 'Inbar Mosseri', 'Michael Rubinstein', 'Alexei A. Efros'], venue: 'ICLR 2024', image_before: 'images/ign_before.jpg', image_after: 'images/ign_after.jpg', links: { page: 'https://assafshocher.github.io/IGN/', pdf: 'https://arxiv.org/pdf/2311.01462.pdf' }, abstract: `We propose a new approach for generative modeling based on training a neural network to be idempotent. An idempotent operator is one that can be applied sequentially without changing the result beyond the initial application, namely $f(f(z))=f(z)$. The proposed model $f$ is trained to map a source distribution (e.g, Gaussian noise) to a target distribution (e.g. realistic images) using the following objectives: (1) Instances from the target distribution should map to themselves, namely $f(x)=x$. (2) Instances from the source distribution should map onto the defined target manifold. This is achieved by optimizing the idempotence term, $f(f(z))=f(z)$. This strategy results in a model capable of generating an output in one step, maintaining a consistent latent space, while also allowing sequential applications for refinement. This work is a first step towards a "global projector" that enables projecting any input into a target data distribution.`, bibtex: `@inproceedings{shocher2024ign, title={Idempotent Generative Network}, author={Shocher, Assaf and Dravid, Amil and Gandelsman, Yossi and Mosseri, Inbar and Rubinstein, Michael and Efros, Alexei A}, booktitle={ICLR}, year={2024}}` },
+            { id: 'conceptor', title: 'The Hidden Language of Diffusion Models', authors: ['Hila Chefer', 'Oran Lang', 'Mor Geva', 'Volodymyr Polosukhin', '<strong>Assaf Shocher</strong>', 'Michal Irani', 'Inbar Mosseri', 'Lior Wolf'], venue: 'ICLR 2024', image_before: 'images/conceptor.jpg', image_after: 'images/conceptor.jpg', links: { page: 'https://hila-chefer.github.io/Conceptor/', pdf: 'https://arxiv.org/pdf/2306.00966.pdf' }, abstract: `Text-to-image diffusion models have demonstrated an unparalleled ability to generate high-quality, diverse images from a textual prompt. However, the internal representations learned by these models remain an enigma. In this work, we present Conceptor, a novel method to interpret the internal representation of a textual concept by a diffusion model. This interpretation is obtained by decomposing the concept into a small set of human-interpretable textual elements. Applied over the state-of-the-art Stable Diffusion model, Conceptor reveals non-trivial structures in the representations of concepts, such as surprising visual connections between concepts, biases, renowned artistic styles, or a simultaneous fusion of multiple meanings of the concept.`, bibtex: `@article{chefer2023hidden, title={The Hidden Language of Diffusion Models}, author={Chefer, Hila and Lang, Oran and Geva, Mor and Polosukhin, Volodymyr and Shocher, Assaf and Irani, Michal and Mosseri, Inbar and Wolf, Lior}, journal={arXiv preprint arXiv:2306.00966}, year={2023}}`},
+            { id: 'imagefusion', title: 'Improving correlation based super-resolution microscopy images through image fusion by self-supervised deep learning', authors: ['Lior M. Beck', '<strong>Assaf Shocher</strong>', 'Uri Rossman', 'Ariel Halfon', 'Michal Irani', 'Dan Oron'], venue: 'Optics Express 2024', image_before: 'images/imagefusion_before.png', image_after: 'images/imagefusion_after.png', links: { pdf: 'https://doi.org/10.1364/OE.521577' }, abstract: `Super-resolution imaging is a powerful tool in modern biological research, allowing for the optical observation of subcellular structures with great detail. In this paper, we present a deep learning approach for image fusion of intensity and super-resolution optical fluctuation imaging (SOFI) microscopy images. We construct a network that can successfully combine the advantages of these two imaging methods, producing a fused image with a resolution comparable to that of SOFI and an SNR comparable to that of the intensity image. We also demonstrate the effectiveness of our approach experimentally. Our network is designed as a self-supervised network and shows the ability to train on a single pair of images and to generalize to other image pairs without the need for additional training. Our approach offers a flexible and efficient way to combine the strengths of correlation based imaging techniques along with traditional intensity based microscopy.`, bibtex: `@article{beck2024improving, title={Improving correlation based super-resolution microscopy images through image fusion by self-supervised deep learning}, author={Beck, Lior M and Shocher, Assaf and Rossman, Uri and Halfon, Ariel and Irani, Michal and Oron, Dan}, journal={Optics Express}, volume={32}, number={16}, pages={28195--28205}, year={2024}}` },
+            { id: 'rosetta', title: 'Rosetta Neurons: Mining the Common Units in a Model Zoo', authors: ['Amil Dravid*', 'Yossi Gandelsman*', 'Alexei A. Efros', '<strong>Assaf Shocher</strong>'], venue: 'ICCV 2023', image_before: 'images/rosetta.png', image_after: 'images/rosetta.png', links: { page: 'https://yossigandelsman.github.io/rosetta_neurons/', pdf: 'https://arxiv.org/pdf/2306.09346.pdf' }, abstract: `Do different neural networks, trained for various vision tasks, share some common representations? In this paper, we demonstrate the existence of common features we call "Rosetta Neurons" across a range of models with different architectures, different tasks (generative and discriminative), and different types of supervision. Our findings suggest that certain visual concepts and structures are inherently embedded in the natural world and can be learned by different models regardless of the specific task or architecture. The Rosetta Neurons facilitate model-to-model translation enabling various inversion-based manipulations, including cross-class alignments, shifting, zooming, and more, without the need for specialized training.`, bibtex: `@article{dravid2023rosetta, author={Dravid, Amil and Gandelsman, Yossi and Efros, Alexei A. and Shocher, Assaf}, title={Rosetta Neurons: Mining the Common Units in a Model Zoo}, journal={arXiv preprint arXiv:2306.09346}, year={2023}}` },
+            { id: 'flexpred', title: 'Predicting masked tokens in stochastic locations improves masked image modeling', authors: ['Amir Bar', 'Florian Bordes', '<strong>Assaf Shocher</strong>', 'Mahmoud Assran', 'Pascal Vincent', 'Nicolas Ballas', 'Trevor Darrell', 'Amir Globerson', 'Yann LeCun'], venue: 'Under Review', image_before: 'images/flexpred.jpg', image_after: 'images/flexpred.jpg', links: { pdf: 'https://arxiv.org/pdf/2308.00566.pdf' }, abstract: 'In natural language processing, the dominant pretext task has been masked language modeling (MLM), while in computer vision there exists an equivalent called Masked Image Modeling (MIM). However, MIM is challenging because it requires predicting semantic content in accurate locations. In this work, we propose FlexPredict, a stochastic model that addresses this challenge by incorporating location uncertainty into the model. Specifically, we condition the model on stochastic masked token positions to guide the model toward learning features that are more robust to location uncertainties. Our approach improves downstream performance on a range of tasks.', bibtex: `@article{bar2023flexpredict, author={Bar, Amir and Bordes, Florian and Shocher, Assaf and Assran, Mahmoud and Vincent, Pascal and Ballas, Nicolas and Darrell, Trevor and Globerson, Amir and LeCun, Yann}, title={Predicting masked tokens in stochastic locations improves masked image modeling}, journal={arXiv preprint arXiv:2308.00566}, year={2023}}`},
+            { id: 'vgpnn', title: 'Diverse Generation from a Single Video Made Possible', authors: ['Niv Haim*', 'Ben Feinstein*', 'Niv Granot', '<strong>Assaf Shocher</strong>', 'Shai Bagon', 'Tali Dekel', 'Michal Irani'], venue: 'ECCV 2022', image_before: 'images/vgpnn_before.png', image_after: 'images/vgpnn_after.gif', links: { page: 'https://nivha.github.io/vgpnn/', pdf: 'https://arxiv.org/pdf/2109.08591.pdf' }, abstract: `Single video GANs require unreasonable amount of time to train, rendering them almost impractical. In this paper we question the necessity of a GAN for generation from a single video, and introduce a non-parametric baseline for a variety of generation and manipulation tasks. We revive classical space-time patches-nearest-neighbors approaches and adapt them to a scalable unconditional generative model, without any learning. This simple baseline surprisingly outperforms single-video GANs in visual quality and realism, and is disproportionately faster (runtime reduced from several days to seconds). These observations show that the classical approaches, if adapted correctly, significantly outperform heavy deep learning machinery for these tasks.`, bibtex: `@InProceedings{haim2022diverse, author={Haim, Niv and Feinstein, Ben and Granot, Niv and Shocher, Assaf and Bagon, Shai and Dekel, Tali and Irani, Michal}, title={Diverse Generation from a Single Video Made Possible}, booktitle={ECCV}, year={2022}}` },
+            { id: 'dropthegan', title: 'Drop the GAN: In Defense of Patches Nearest Neighbors as Single Image Generative Models', authors: ['Niv Granot', 'Ben Feinstein', '<strong>Assaf Shocher</strong>', 'Shai Bagon', 'Michal Irani'], venue: 'CVPR 2022 (Oral)', image_before: 'images/drop_before.png', image_after: 'images/drop_after.gif', links: { page: 'https://www.wisdom.weizmann.ac.il/~vision/gpnn/', pdf: 'https://arxiv.org/pdf/2103.15545.pdf' }, abstract: 'Single image generative models perform synthesis and manipulation tasks by capturing the distribution of patches within a single image. The classical prevailing approaches are based on an optimization process that maximizes patch similarity. Recently, Single Image GANs were introduced as a superior solution. In this paper, we show that all of these tasks can be performed without any training, within several seconds, in a unified, surprisingly simple framework. We revisit and cast the "good-old" patch-based methods into a novel optimization-free framework. Not only is our method faster (×10³-×10⁴ than a GAN), it produces superior results, less artifacts and more realistic global structure than any of the previous approaches.', bibtex: `@InProceedings{Granot_2022_CVPR, author={Granot, Niv and Feinstein, Ben and Shocher, Assaf and Bagon, Shai and Irani, Michal}, title={Drop the GAN: In Defense of Patches Nearest Neighbors as Single Image Generative Models}, booktitle={CVPR}, year={2022}}`},
+            { id: 'contconv', title: 'From Discrete to Continuous Convolution Layers', authors: ['<strong>Assaf Shocher*</strong>', 'Ben Feinstein*', 'Niv Haim*', 'Michal Irani'], venue: 'arXiv 2020', image_before: 'images/cc_before.gif', image_after: 'images/cc_after.gif', links: { pdf: 'https://arxiv.org/pdf/2006.11120.pdf' }, abstract: 'A basic operation in Convolutional Neural Networks (CNNs) is spatial resizing of feature maps. This is done either by strided convolution (downscaling) or transposed convolution (upscaling). Such operations are limited to a fixed filter moving at predetermined integer steps. We propose a generalization of the common Conv-layer, from a discrete layer to a Continuous Convolution (CC) Layer. CC Layers naturally extend Conv-layers by representing the filter as a learned continuous function over sub-pixel coordinates. This allows learnable and principled resizing of feature maps, to any size, dynamically and consistently across scales. Once trained, the CC layer can be used to output any scale/size chosen at inference time.', bibtex: `@InProceedings{Shocher_2020_arxiv_cc, author={Shocher, Assaf and Feinstein, Ben and Haim, Niv and Irani, Michal}, title={From Discrete to Continuous Convolution Layers}, booktitle={arXiv}, year={2020}}`},
+            { id: 'semanticpyramid', title: 'Semantic Pyramid for Image Generation', authors: ['<strong>Assaf Shocher*</strong>', 'Yossi Gandelsman*', 'Inbar Mosseri', 'Michal Yarom', 'Michal Irani', 'William T. Freeman', 'Tali Dekel'], venue: 'CVPR 2020 (Oral)', image_before: 'images/semanticpyramid_before.gif', image_after: 'images/semanticpyramid_after.gif', links: { page: 'https://semantic-pyramid.github.io/', pdf: 'https://openaccess.thecvf.com/content_CVPR_2020/papers/Shocher_Semantic_Pyramid_for_Image_Generation_CVPR_2020_paper.pdf', video: 'https://www.youtube.com/watch?v=IXtqiJ7Nufo' }, abstract: 'We present a novel GAN-based model that utilizes the space of deep features learned by a pre-trained classification model. Inspired by classical image pyramid representations, we construct our model as a Semantic Generation Pyramid - a hierarchical framework which leverages the continuum of semantic information encapsulated in such deep features. Given a set of features extracted from a reference image, our model generates diverse image samples, each with matching features at each semantic level of the classification model. We demonstrate that our model results in a versatile and flexible framework that can be used in various classic and novel image generation tasks.', bibtex: `@InProceedings{Shocher_2020_CVPR_Semantic, author={Shocher, Assaf and Gandelsman, Yossi and Mosseri, Inbar and Yarom, Michal and Irani, Michal and Freeman, William T. and Dekel, Tali}, title={Semantic Pyramid for Image Generation}, booktitle={CVPR}, year={2020}}`},
+            { id: 'kernelgan', title: 'Blind Super-Resolution Kernel Estimation using an Internal-GAN', authors: ['Sefi Bell-Kligler', '<strong>Assaf Shocher</strong>', 'Michal Irani'], venue: 'NeurIPS 2019 (Oral)', image_before: 'images/kernelgan_before_.gif', image_after: 'images/kernelgan_after_.gif', links: { page: 'http://www.wisdom.weizmann.ac.il/~vision/kernelgan/', pdf: 'http://papers.nips.cc/paper/8321-blind-super-resolution-kernel-estimation-using-an-internal-gan.pdf', video: 'https://slideslive.com/38923045/blind-superresolution-kernel-estimation-using-an-internalgan', code: 'https://github.com/sefibk/KernelGAN' }, abstract: 'Super-resolution (SR) methods typically assume that the low-resolution (LR) image was downscaled from the unknown high-resolution (HR) image by a fixed \'ideal\' downscaling kernel. In this paper we introduce "KernelGAN", an image-specific Internal-GAN, which trains solely on the LR test image at test time, and learns its internal distribution of patches. Its Generator is trained to produce a downscaled version of the LR test image, such that its Discriminator cannot distinguish between the patch distribution of the downscaled image, and the patch distribution of the original LR image. The Generator, once trained, constitutes the downscaling operation with the correct image-specific SR-kernel.', bibtex: `@incollection{NIPS2019_kernelgan, title={Blind Super-Resolution Kernel Estimation using an Internal-GAN}, author={Bell-Kligler, Sefi and Shocher, Assaf and Irani, Michal}, booktitle={NeurIPS}, year={2019}}`},
+            { id: 'ingan', title: 'InGAN: Capturing and Retargeting the "DNA" of a Natural Image', authors: ['<strong>Assaf Shocher</strong>', 'Shai Bagon', 'Phillip Isola', 'Michal Irani'], venue: 'ICCV 2019 (Oral)', image_before: 'images/ingan_before.gif', image_after: 'images/ingan.gif', links: { page: 'http://www.wisdom.weizmann.ac.il/~vision/ingan/', pdf: 'http://www.wisdom.weizmann.ac.il/~vision/ingan/resources/ingan.pdf', video: 'https://youtu.be/OvZVxqUmE3g?t=2429', code: 'https://github.com/assafshocher/InGAN' }, abstract: 'Generative Adversarial Networks (GANs) typically learn a distribution of images in a large image dataset. In this paper we propose an "Internal GAN" (InGAN) - an image-specific GAN - which trains on a single input image and learns its internal distribution of patches. It is then able to synthesize a plethora of new natural images of significantly different sizes, shapes and aspect-ratios - all with the same internal patch-distribution (same "DNA") as the input image. InGAN is fully unsupervised, requiring no additional data other than the input image itself.', bibtex: `@InProceedings{Shocher_2019_ICCV_InGAN, author={Shocher, Assaf and Bagon, Shai and Isola, Phillip and Irani, Michal}, title={InGAN: Capturing and Retargeting the "DNA" of a Natural Image}, booktitle={ICCV}, year={2019}}`},
+            { id: 'doubledip', title: 'Double-DIP: Unsupervised Image Decomposition via Coupled Deep-Image-Priors', authors: ['Yossi Gandelsman', '<strong>Assaf Shocher</strong>', 'Michal Irani'], venue: 'CVPR 2019 (Oral)', image_before: 'images/doubledip_before.png', image_after: 'images/doubledip_after.png', links: { page: 'http://www.wisdom.weizmann.ac.il/~vision/DoubleDIP/index.html', pdf: 'http://www.wisdom.weizmann.ac.il/~vision/DoubleDIP/resources/DoubleDIP.pdf', video: 'https://youtu.be/IyPQqqGPHws?t=1429', code: 'https://github.com/yossigandelsman/DoubleDIP' }, abstract: 'Many seemingly unrelated computer vision tasks can be viewed as a special case of image decomposition into separate layers. In this paper we propose a unified framework for unsupervised layer decomposition of a single image, based on coupled "Deep-image-Prior" (DIP) networks. We show that coupling multiple such DIPs provides a powerful tool for decomposing images into their basic components, for a wide variety of applications. This capability stems from the fact that the internal statistics of a mixture of layers is more complex than the statistics of each of its individual components. We show the power of this approach for Image-Dehazing, Fg/Bg Segmentation, Watermark-Removal, and more, in a totally unsupervised way.', bibtex: `@InProceedings{Gandelsman_2019_CVPR, author={Gandelsman, Yossi and Shocher, Assaf and Irani, Michal}, title={Double-DIP: Unsupervised Image Decomposition via Coupled Deep-Image-Priors}, booktitle={CVPR}, year={2019}}`},
+            { id: 'zssr', title: '“Zero-Shot” Super-Resolution using Deep Internal Learning', authors: ['<strong>Assaf Shocher</strong>', 'Nadav Cohen', 'Michal Irani'], venue: 'CVPR 2018', image_before: 'images/zssr_before.gif', image_after: 'images/zssr_after.gif', links: { page: 'http://www.wisdom.weizmann.ac.il/~vision/zssr/', pdf: 'http://www.weizmann.ac.il/math/irani/sites/math.irani/files/uploads/zssr_cameraready.pdf', code: 'https://github.com/assafshocher/ZSSR' }, abstract: 'Deep Learning has led to a dramatic leap in SuperResolution (SR) performance. However, being supervised, these methods are restricted to specific training data. Real LR images, however, rarely obey these restrictions, resulting in poor SR results. In this paper we introduce "Zero-Shot" SR, which exploits the power of Deep Learning, but does not rely on prior training. We exploit the internal recurrence of information inside a single image, and train a small image-specific CNN at test time, on examples extracted solely from the input image itself. As such, it can adapt itself to different settings per image. This allows to perform SR of real old photos, noisy images, biological data, and other images where the acquisition process is unknown or non-ideal.', bibtex: `@InProceedings{Shocher_2018_CVPR_ZSSR, author={Shocher, Assaf and Cohen, Nadav and Irani, Michal}, title={“Zero-Shot” Super-Resolution Using Deep Internal Learning}, booktitle={CVPR}, year={2018}}`}
+        ];
 
-			
+        // --- SCRIPT TO BUILD AND MANAGE THE PAGE ---
+        const ICONS = { page: 'home', pdf: 'file-text', code: 'code', video: 'video' };
+        
+        function generatePublications() {
+            const pubList = document.getElementById('publications-list');
+            if (!pubList) return;
 
+            let staggeredDelay = 0;
+            publications.forEach((p, index) => {
+                const linksHTML = Object.entries(p.links).map(([name, url]) => 
+                    `<a href="${url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white rounded-md font-semibold shadow-sm hover:bg-slate-300 dark:hover:bg-slate-600 transition-transform duration-200 hover:-translate-y-0.5"><i data-lucide="${ICONS[name] || 'link'}" class="w-4 h-4"></i> ${name}</a>`
+                ).join('');
 
+                const borderClass = index < publications.length - 1 ? 'border-b border-slate-200 dark:border-slate-800' : '';
 
+                const pubHTML = `
+                    <article class="publication-item group grid md:grid-cols-3 gap-6 md:gap-8 items-center py-12 ${borderClass}" style="transition-delay: ${staggeredDelay}ms;">
+                        <div class="publication-image-container relative w-full aspect-[4/3] rounded-lg overflow-hidden shadow-lg bg-white dark:bg-slate-900">
+                            <img src="${p.image_before}" alt="Publication image for ${p.title}" class="absolute inset-0 w-full h-full object-contain">
+                            <img src="${p.image_after}" alt="Publication image for ${p.title} (hover)" class="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                        </div>
+                        <div class="md:col-span-2">
+                            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100">${p.title}</h3>
+                            <p class="mt-1 text-slate-600 dark:text-slate-400">${p.authors.join(', ')}</p>
+                            <p class="mt-1 text-sm font-medium text-slate-500 dark:text-slate-400"><em>${p.venue}</em></p>
+                            <div class="mt-4 flex items-center flex-wrap gap-3">
+                                ${linksHTML}
+                                <button onclick="toggleAbstract('${p.id}')" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white rounded-md font-semibold shadow-sm hover:bg-slate-300 dark:hover:bg-slate-600 transition-transform duration-200 hover:-translate-y-0.5"><i data-lucide="pilcrow" class="w-4 h-4"></i> abstract</button>
+                                <button onclick="copyToClipboard(this, '${p.bibtex.replace(/'/g, "\\'").replace(/\n/g, '\\n')}')" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white rounded-md font-semibold shadow-sm hover:bg-slate-300 dark:hover:bg-slate-600 transition-transform duration-200 hover:-translate-y-0.5"><i data-lucide="quote" class="w-4 h-4"></i> bibtex</button>
+                            </div>
+                            <div id="abstract-${p.id}" class="abstract-box mt-4 bg-slate-100 dark:bg-slate-800/50 rounded-lg text-slate-600 dark:text-slate-300 text-sm leading-6">
+                                <p class="p-4">${p.abstract}</p>
+                            </div>
+                        </div>
+                    </article>
+                `;
+                pubList.innerHTML += pubHTML;
+                staggeredDelay += 100;
+            });
+        }
+        
+        function toggleAbstract(id) {
+            const el = document.getElementById('abstract-' + id);
+            el.classList.toggle('show');
+        }
 
+        function copyToClipboard(button, str) {
+            const el = document.createElement('textarea');
+            el.value = str;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            
+            const originalHTML = button.innerHTML;
+            button.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i> Copied!`;
+            lucide.createIcons();
+            setTimeout(() => {
+                button.innerHTML = originalHTML;
+                lucide.createIcons();
+            }, 2000);
+        }
 
-<tr onmouseout="ign_stop()" onmouseover="ign_start()">
-            <td style="padding:20px;width:45%;vertical-align:middle">
-                <div id='ign_before'><img src="images/ign_after.jpg" width="110%"></div>
-                <div id='ign_after'><img src='images/ign_before.jpg' width="110%"></div>
-              </div>
-              <script type="text/javascript">
-				var bibtexign = ""
-				function ign_start() {
-                  document.getElementById('ign_after').style.display = 'none';
-                  document.getElementById('ign_before').style.display = 'inline';
-                }
+        document.addEventListener("DOMContentLoaded", function() {
+            generatePublications();
+            
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                throwOnError : false
+            });
 
-                function ign_stop() {
-                  document.getElementById('ign_after').style.display = 'inline';
-                  document.getElementById('ign_before').style.display = 'none';
-                }
-                ign_stop()
-              </script>
-            </td>
-            <td style="padding:20px;width:55%;vertical-align:middle">
-                <papertitle>Idempotent Generative Network</papertitle>
+            lucide.createIcons();
 
-              <br>
-	    <strong> Assaf Shocher</strong>, 
-	    <a href="https://avdravid.github.io/">Amil Dravid</a>, 
-	    <a href="https://yossigandelsman.github.io/">Yossi Gandelsman</a>, 
-	    <a href="https://research.google/people/InbarMosseri/">Inbar Mosseri</a>, 
-	    <a href="https://research.google/people/MichaelRubinstein/">Michael Rubinstein</a>, 
-	      <a href="https://people.eecs.berkeley.edu/~efros/">Alexei A. Efros</a>.
+            const stickyNav = document.getElementById('sticky-nav');
+            if (stickyNav) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        stickyNav.classList.add('scrolled');
+                    } else {
+                        stickyNav.classList.remove('scrolled');
+                    }
+                });
+            }
 
-              <br>
-              <em>ICLR 2024</em>
-              <br>
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
 
-			  <div class="btn-group">
-			  <a href="https://assafshocher.github.io/IGN/"><button>project page</button></a>
-			  <a href="https://arxiv.org/pdf/2311.01462.pdf"><button>PDF</button></a>
-			  <div class="tooltip"><button>abstract</button><span class="tooltiptext">We propose a new approach for generative modeling based on training a neural network to be idempotent. An idempotent operator is one that can be applied sequentially without changing the result beyond the initial application, namely $f(f(z))=f(z)$. The proposed model $f$ is trained to map a source distribution (e.g, Gaussian noise) to a target distribution (e.g. realistic images) using the following objectives: 
-(1) Instances from the target distribution should map to themselves, namely $f(x)=x$. We define the target manifold as the set of all instances that $f$ maps to themselves.
-(2) Instances that form the source distribution should map onto the defined target manifold. This is achieved by optimizing the idempotence term, $f(f(z))=f(z)$ which encourages the range of $f(z)$ to be on the target manifold. Under ideal assumptions such a process provably converges to the target distribution. This strategy results in a model capable of generating an output in one step, maintaining a consistent latent space, while also allowing sequential applications for refinement. Additionally, we find that by processing inputs from both target and source distributions, the model adeptly projects corrupted or modified data back to the target manifold. This work is a first step towards a ``global projector'' that enables projecting any input into a target data distribution.</span></div>
-			  <button onclick=copyToClipboard(bibtexign)>bibtex</button>
-  
-</div>
-            </td>
-          </tr> 
-
-		
-
-
-		
-
-
-
-<tr onmouseout="conceptor_stop()" onmouseover="conceptor_start()">
-            <td style="padding:20px;width:45%;vertical-align:middle">
-                <div id='conceptor_before'><img src="images/conceptor.jpg" width="100%"></div>
-                <div id='conceptor_after'><img src='images/conceptor.jpg' width="100%"></div>
-              </div>
-              <script type="text/javascript">
-				var bibtexconceptor = "@article{chefer2023hidden, title={The Hidden Language of Diffusion Models}, author={Chefer, Hila and Lang, Oran and Geva, Mor and Polosukhin, Volodymyr and Shocher, Assaf and Irani, Michal and Mosseri, Inbar and Wolf, Lior}, journal={arXiv preprint arXiv:2306.00966}, year={2023}}"
-				function conceptor_start() {
-                  document.getElementById('conceptor_after').style.display = 'none';
-                  document.getElementById('conceptor_before').style.display = 'inline';
-                }
-
-                function conceptor_stop() {
-                  document.getElementById('conceptor_after').style.display = 'inline';
-                  document.getElementById('conceptor_before').style.display = 'none';
-                }
-                conceptor_stop()
-              </script>
-            </td>
-            <td style="padding:20px;width:55%;vertical-align:middle">
-                <papertitle>The Hidden Language of Diffusion Models</papertitle>
-
-              <br>
-	    <a href="https://hila-chefer.github.io/" target="_blank">Hila Chefer</a>,
-	    <a href="https://scholar.google.com/citations?user=gypv57sAAAAJ" target="_blank">Oran Lang</a>,
-	    <a href="https://mega002.github.io/" target="_blank">Mor Geva</a>,
-		    <a href="https://www.linkedin.com/in/volodymyr-polosukhin-b685511b9/" target="_blank">Volodymyr Polosukhin</a>
-	    <strong> Assaf Shocher</strong>,
-		    <a href="http://www.weizmann.ac.il/math/irani/" target="_blank">Michal Irani</a>,
-		    <a href="https://scholar.google.com/citations?user=ifCcZ5IAAAAJ&amp;hl=en" target="_blank">Inbar Mosseri</a>,
-		    <a href="http://www.cs.tau.ac.il/~wolf/" target="_blank">Lior Wolf</a>,
-		    
-		
-
-              <br>
-              <em>ICLR 2024</em>
-              <br>
-
-			  <div class="btn-group">
-			  <a href="https://hila-chefer.github.io/Conceptor/"><button>project page</button></a>
-			  <a href="https://arxiv.org/pdf/2306.00966.pdf"><button>PDF</button></a>
-			  <div class="tooltip"><button>abstract</button><span class="tooltiptext">Text-to-image diffusion models have demonstrated an unparalleled ability to generate high-quality, diverse images from a textual prompt. However, the internal representations learned by these models remain an enigma. In this work, we present Conceptor, a novel method to interpret the internal representation of a textual concept by a diffusion model. This interpretation is obtained by decomposing the concept into a small set of human-interpretable textual elements. Applied over the state-of-the-art Stable Diffusion model, Conceptor reveals non-trivial structures in the representations of concepts. For example, we find surprising visual connections between concepts, that transcend their textual semantics. We additionally discover concepts that rely on mixtures of exemplars, biases, renowned artistic styles, or a simultaneous fusion of multiple meanings of the concept. Through a large battery of experiments, we demonstrate Conceptor's ability to provide meaningful, robust, and faithful decompositions for a wide variety of abstract, concrete, and complex textual concepts, while allowing to naturally connect each decomposition element to its corresponding visual impact on the generated images.</span></div>
-			  <button onclick=copyToClipboard(bibtexconceptor)>bibtex</button>
-  
-</div>
-            </td>
-          </tr> 
-
-
-
-
-
-
-
-<tr onmouseout="rosetta_stop()" onmouseover="rosetta_start()">
-            <td style="padding:20px;width:45%;vertical-align:middle">
-                <div id='rosetta_before'><img src="images/rosetta.png" width="100%"></div>
-                <div id='rosetta_after'><img src='images/rosetta.png' width="100%"></div>
-              </div>
-              <script type="text/javascript">
-				var bibtexrosetta = "@article{rosettaneurons,\nauthor    = {Dravid, Amil and Gandelsman, Yossi and Efros, Alexei A. and Shocher, Assaf},\ntitle     = {Rosetta Neurons: Mining the Common Units in a Model Zoo},\njournal   = {arXiv preprint arXiv:2306.09346},\nyear      = {2023}\n}"
-				function rosetta_start() {
-                  document.getElementById('rosetta_after').style.display = 'none';
-                  document.getElementById('rosetta_before').style.display = 'inline';
-                }
-
-                function rosetta_stop() {
-                  document.getElementById('rosetta_after').style.display = 'inline';
-                  document.getElementById('rosetta_before').style.display = 'none';
-                }
-                rosetta_stop()
-              </script>
-            </td>
-            <td style="padding:20px;width:55%;vertical-align:middle">
-                <papertitle>Rosetta Neurons: Mining the Common Units in a Model Zoo</papertitle>
-
-              <br>
-	    <a href="https://avdravid.github.io/">Amil Dravid*</a>,
-	    <a href="https://yossigandelsman.github.io/">Yossi Gandelsman*</a>,
-	      <a href="https://people.eecs.berkeley.edu/~efros/">Alexei A. Efros</a>,
-	      <strong> Assaf Shocher</strong>.
-
-              <br>
-              <em>ICCV 2023</em>
-              <br>
-
-			  <div class="btn-group">
-			  <a href="https://yossigandelsman.github.io/rosetta_neurons/"><button>project page</button></a>
-			  <a href="https://arxiv.org/pdf/2306.09346.pdf"><button>PDF</button></a>
-			  <div class="tooltip"><button>abstract</button><span class="tooltiptext">Do different neural networks, trained for various vision tasks, share some common representations? In this paper, we demonstrate the existence of common features we call "Rosetta Neurons" across a range of models with different architectures, different tasks (generative and discriminative), and different types of supervision (class-supervised, text-supervised, self-supervised). We present an algorithm for mining a dictionary of Rosetta Neurons across several popular vision models: Class Supervised-ResNet50, DINO-ResNet50, DINO-ViT, MAE, CLIP-ResNet50, BigGAN, StyleGAN-2, StyleGAN-XL. Our findings suggest that certain visual concepts and structures are inherently embedded in the natural world and can be learned by different models regardless of the specific task or architecture, and without the use of semantic labels. We can visualize shared concepts directly due to generative models included in our analysis. The Rosetta Neurons facilitate model-to-model translation enabling various inversion-based manipulations, including cross-class alignments, shifting, zooming, and more, without the need for specialized training.</span></div>
-			  <button onclick=copyToClipboard(bibtexrosetta)>bibtex</button>
-  
-</div>
-            </td>
-          </tr> 
-
-
-		
-
-
-  
-
-<tr onmouseout="flexpred_stop()" onmouseover="flexpred_start()">
-  <td style="padding:20px;width:45%;vertical-align:middle">
-      <div id='flexpred_before'><img src="images/flexpred.jpg" width="100%"></div>
-      <div id='flexpred_after'><img src='images/flexpred.jpg' width="100%"></div>
-    </div>
-    <script type="text/javascript">
-var bibtexflexpred = "@article{rosettaneurons,\nauthor    = {Bar, Amir and Bordes, Florian and Shocher, Assaf and Assran, Mahmoud and Vincent, Pascal and Ballas, Nicolas and Darell, Trevor and Globerson, Amir and LeCunn, Yann },\ntitle     = {Predicting masked tokens in stochastic locations improves masked image modeling},\njournal   = {arXiv preprint arXiv:2308.00566},\nyear      = {2023}\n}"
-function flexpred_start() {
-        document.getElementById('flexpred_after').style.display = 'none';
-        document.getElementById('flexpred_before').style.display = 'inline';
-      }
-
-      function flexpred_stop() {
-        document.getElementById('flexpred_after').style.display = 'inline';
-        document.getElementById('flexpred_before').style.display = 'none';
-      }
-      flexpred_stop()
+            document.querySelectorAll('.publication-item').forEach(item => {
+                observer.observe(item);
+            });
+        });
     </script>
-  </td>
-  <td style="padding:20px;width:55%;vertical-align:middle">
-      <papertitle>Predicting masked tokens in stochastic locations improves
-        masked image modeling</papertitle>
-
-    <br>
-<a href="https://www.amirbar.net/">Amir Bar</a>,
-<a href="https://scholar.google.ca/citations?user=OADfWhUAAAAJ&hl=fr">Florian Bordes</a>,
-<strong> Assaf Shocher</strong>,
-<a href="https://www.midoassran.ca/">Mahmoud Assran</a>,
-<a href="https://ai.meta.com/people/pascal-vincent/">Pascal Vincent</a>,
-<a href="https://scholar.google.com/citations?user=euUV4iUAAAAJ&hl=en">Nicolas Ballas</a>,
-<a href="https://people.eecs.berkeley.edu/~trevor/">Trevor Darrell</a>,
-<a href="https://cs3801.wixsite.com/amirgloberson">Amir Globerson</a>,
-<a href="https://yann.lecun.com/">Yann LeCun</a>.
-
-    <br>
-    <em>Under Review</em>
-    <br>
-
-<div class="btn-group">
-<a href="https://arxiv.org/pdf/2306.09346.pdf"><button>PDF</button></a>
-<div class="tooltip"><button>abstract</button><span class="tooltiptext">Self-supervised learning is a promising paradigm in deep learning that enables learning from unlabeled data by constructing pretext tasks that require learning useful representations. In natural language processing, the dominant pretext task has been masked language modeling (MLM), while in computer vision there exists an equivalent called Masked Image Modeling (MIM). However, MIM is challenging because it requires predicting semantic content in accurate locations. E.g, given an incomplete picture of a dog, we can guess that there is a tail, but we cannot determine its exact location. In this work, we propose FlexPredict, a stochastic model that addresses this challenge by incorporating location uncertainty into the model. Specifically, we condition the model on stochastic masked token positions to guide the model toward learning features that are more robust to location uncertainties. Our approach improves downstream performance on a range of tasks, e.g, compared to MIM baselines, FlexPredict boosts ImageNet linear probing by 1.6% with ViT-B and by 2.5% for semisupervised video segmentation using ViT-L.</span></div>
-<button onclick=copyToClipboard(bibtexflexpred)>bibtex</button>
-
-</div>
-  </td>
-</tr> 
-
-
-
-
-
-
-
-
-        		  
-		  
-	<tr onmouseout="vgpnn_stop()" onmouseover="vgpnn_start()">
-            <td style="padding:20px;width:45%;vertical-align:middle">
-                <div id='vgpnn_before'><img src="images/vgpnn_after.gif" width="100%"></div>
-                <div id='vgpnn_after'><img src='images/vgpnn_before.png' width="100%"></div>
-              </div>
-              <script type="text/javascript">
-				var bibtexvgpnn = "@InProceedings{haim2022diverse,\nauthor = {Haim, Niv and Feinstein, Ben and Granot, Niv and Shocher, Assaf and Bagon, Shai and Dekel, Tali and Irani, Michal},\ntitle = {Diverse Generation from a Single Video Made Possible},\nbooktitle = {European Conference on Computer Vision},\nyear = {2022}\n}"
-				function vgpnn_start() {
-                  document.getElementById('vgpnn_after').style.display = 'none';
-                  document.getElementById('vgpnn_before').style.display = 'inline';
-                }
-
-                function vgpnn_stop() {
-                  document.getElementById('vgpnn_after').style.display = 'inline';
-                  document.getElementById('vgpnn_before').style.display = 'none';
-                }
-                vgpnn_stop()
-              </script>
-            </td>
-            <td style="padding:20px;width:55%;vertical-align:middle">
-                <papertitle>Diverse Generation from a Single Video Made Possible</papertitle>
-
-              <br>
-	    <a href="https://nivha.github.io/">Niv Haim*</a>,
-	    <a href="ben">Ben Finestein*</a>,
-	      <a href="Nivg">Niv Granot</a>,
-	      <strong> Assaf Shocher</strong>,
-	      <a href="https://scholar.google.com/citations?user=N_maL_AAAAAJ&hl=en">Shai Bagon</a>,
-	      <a href="http://people.csail.mit.edu/talidekel/">Tali Dekel</a>,
-              <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>.
-              <br>
-              <em>ECCV 2022</em>
-              <br>
-
-			  <div class="btn-group">
-			  <a href="https://nivha.github.io/vgpnn/"><button>project page</button></a>
-			  <a href="https://arxiv.org/pdf/2109.08591.pdf"><button>PDF</button></a>
-			  <div class="tooltip"><button>abstract</button><span class="tooltiptext">GANs are able to perform generation and manipulation tasks, trained on a single video. However, these single video GANs require unreasonable amount of time to train on a single video, rendering them almost impractical. In this paper we question the necessity of a GAN for generation from a single video, and introduce a non-parametric baseline for a variety of generation and manipulation tasks. We revive classical space-time patches-nearest-neighbors approaches and adapt them to a scalable unconditional generative model, without any learning. This simple baseline surprisingly outperforms single-video GANs in visual quality and realism (confirmed by quantitative and qualitative evaluations), and is disproportionately faster (runtime reduced from several days to seconds). Other than diverse video generation, we demonstrate other applications using the same framework, including video analogies and spatio-temporal retargeting. Our proposed approach is easily scaled to Full-HD videos. These observations show that the classical approaches, if adapted correctly, significantly outperform heavy deep learning machinery for these tasks. This sets a new baseline for single-video generation and manipulation tasks, and no less important -- makes diverse generation from a single video practically possible for the first time.</span></div>
-			  <button onclick=copyToClipboard(bibtexvgpnn)>bibtex</button>
-  
-</div>
-            </td>
-          </tr> 
-
-
-		
-		
-		
-		
-		
-		
-
-
-        		  
-		  
-	<tr onmouseout="drop_stop()" onmouseover="drop_start()">
-            <td style="padding:20px;width:45%;vertical-align:middle">
-                <div id='drop_before'><img src="images/drop_after.gif" width="50%"></div>
-                <div id='drop_after'><img src='images/drop_before.png' width="50%"></div>
-              </div>
-              <script type="text/javascript">
-				var bibtexdrop = "@InProceedings{Granot_2022_CVPR,\nauthor = {Granot, Niv and Feinstein, Ben and Shocher, Assaf and Bagon, Shai and Irani, Michal},\ntitle = {Drop the GAN: In Defense of Patches Nearest Neighbors as Single Image Generative Models},\nbooktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},\nyear = {2022}\n}"
-				function drop_start() {
-                  document.getElementById('drop_after').style.display = 'none';
-                  document.getElementById('drop_before').style.display = 'inline';
-                }
-
-                function drop_stop() {
-                  document.getElementById('drop_after').style.display = 'inline';
-                  document.getElementById('drop_before').style.display = 'none';
-                }
-                drop_stop()
-              </script>
-            </td>
-            <td style="padding:20px;width:55%;vertical-align:middle">
-                <papertitle>Drop the GAN: In Defense of Patches Nearest Neighbors as Single Image Generative Models</papertitle>
-
-              <br>
-	      <a href="ben">Niv Granot</a>,
-              <a href="ben">Ben Finestein</a>,
-	      <strong> Assaf Shocher</strong>,
-	      <a href="https://scholar.google.com/citations?user=N_maL_AAAAAJ&hl=en">Shai Bagon</a>,
-              <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>.
-              <br>
-              <em>CVPR</em> 2022  <strong>Oral</strong>
-              <br>
-
-			  <div class="btn-group">
-			  <a href="https://www.wisdom.weizmann.ac.il/~vision/gpnn/"><button>project page</button></a>
-			  <a href="https://arxiv.org/pdf/2103.15545.pdf"><button>PDF</button></a>
-			  <div class="tooltip"><button>abstract</button><span class="tooltiptext">Single image generative models perform synthesis and manipulation tasks by capturing the distribution of patches within a single image. The classical (pre Deep Learning) prevailing approaches for these tasks are based on an optimization process that maximizes patch similarity between the input and generated output. Recently, however, Single Image GANs were introduced both as a superior solution for such manipulation tasks, but also for remarkable novel generative tasks. Despite their impressiveness, single image GANs require long training time (usually hours) for each image and each task. They often suffer from artifacts and are prone to optimization issues such as mode collapse. In this paper, we show that all of these tasks can be performed without any training, within several seconds, in a unified, surprisingly simple framework. We revisit and cast the "good-old" patch-based methods into a novel optimization-free framework. We start with an initial coarse guess, and then simply refine the details coarse-to-fine using patch-nearest-neighbor search. This allows generating random novel images better and much faster than GANs. We further demonstrate a wide range of applications, such as image editing and reshuffling, retargeting to different sizes, structural analogies, image collage and a newly introduced task of conditional inpainting. Not only is our method faster (×103-×104 than a GAN), it produces superior results (confirmed by quantitative and qualitative evaluation), less artifacts and more realistic global structure than any of the previous approaches (whether GAN-based or classical patch-based).</span></div>
-			  <button onclick=copyToClipboard(bibtexdrop)>bibtex</button>
-  
-</div>
-            </td>
-          </tr> 
-
-
-
-
-
-	  
-		  
-		  
-	<tr onmouseout="cc_stop()" onmouseover="cc_start()">
-            <td style="padding:20px;width:45%;vertical-align:middle">
-                <div id='cc_before'><img src="images/cc_after.gif" width="100%"></div>
-                <div id='cc_after'><img src='images/cc_before.gif' width="100%"></div>
-              </div>
-              <script type="text/javascript">
-				var bibtexcc = "@InProceedings{Shocher_2020_arxiv_cc,\nauthor = {Shocher, Assaf and Feinstein, Ben and Haim, Niv and Irani, Michal},\ntitle = {From Discrete to Continuous Convolution Layers},\nbooktitle = arXiv,\nyear = {2020}\n}"
-				function cc_start() {
-                  document.getElementById('cc_after').style.display = 'none';
-                  document.getElementById('cc_before').style.display = 'inline';
-                }
-
-                function cc_stop() {
-                  document.getElementById('cc_after').style.display = 'inline';
-                  document.getElementById('cc_before').style.display = 'none';
-                }
-                cc_stop()
-              </script>
-            </td>
-            <td style="padding:20px;width:55%;vertical-align:middle">
-                <papertitle>From Discrete to Continuous Convolution Layers</papertitle>
-
-              <br>
-              <strong>Assaf Shocher*</strong>,
-              <a href="ben">Ben Finestein*</a>,
-              <a href="https://scholar.google.co.il/citations?user=f7SCiakAAAAJ&hl=en">Niv Haim*</a>,
-              <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>.
-              <br>
-              <em>arXiv</em> 2020  
-              <br>
-
-			  <div class="btn-group">
-			  <a href="https://arxiv.org/pdf/2006.11120.pdf"><button>PDF</button></a>
-			  <div class="tooltip"><button>abstract</button><span class="tooltiptext">A basic operation in Convolutional Neural Networks (CNNs) is spatial resizing of feature maps. This is done either by strided convolution (donwscaling) or transposed convolution (upscaling). Such operations are limited to a fixed filter moving at predetermined integer steps (strides). Spatial sizes of consecutive layers are related by integer scale factors, predetermined at architectural design, and remain fixed throughout training and inference time. We propose a generalization of the common Conv-layer, from a discrete layer to a Continuous Convolution (CC) Layer. CC Layers naturally extend Conv-layers by representing the filter as a learned continuous function over sub-pixel coordinates. This allows learnable and principled resizing of feature maps, to any size, dynamically and consistently across scales. Once trained, the CC layer can be used to output any scale/size chosen at inference time. The scale can be non-integer and differ between the axes. CC gives rise to new freedoms for architectural design, such as dynamic layer shapes at inference time, or gradual architectures where the size changes by a small factor at each layer. This gives rise to many desired CNN properties, new architectural design capabilities, and useful applications. We further show that current Conv-layers suffer from inherent misalignments, which are ameliorated by CC layers.</span></div>
-			  <button onclick=copyToClipboard(bibtexcc)>bibtex</button>
-  
-</div>
-            </td>
-          </tr> 
-
-
-
-
-
-
-
-
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		 		  
-	<tr onmouseout="semanticpyramid_stop()" onmouseover="semanticpyramid_start()">
-            <td style="padding:20px;width:45%;vertical-align:middle">
-                <div id='semanticpyramid_before'><img src="images/semanticpyramid_after.gif" width="100%"></div>
-                <div id='semanticpyramid_after'><img src='images/semanticpyramid_before.gif' width="100%"></div>
-              </div>
-              <script type="text/javascript">
-			  var bibtexsemanticpyramid = "@InProceedings{Shocher_2020_CVPR,\nauthor = {Shocher, Assaf and Gandelsman, Yossi and Mosseri, Inbar and Yarom, Michal and Irani, Michal and Freeman, William T. and Dekel, Tali},\ntitle = {Semantic Pyramid for Image Generation},\nbooktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},\nmonth = {June},\nyear = {2020}\n}"
-			  function semanticpyramid_start() {
-                  document.getElementById('semanticpyramid_after').style.display = 'none';
-                  document.getElementById('semanticpyramid_before').style.display = 'inline';
-                }
-
-                function semanticpyramid_stop() {
-                  document.getElementById('semanticpyramid_after').style.display = 'inline';
-                  document.getElementById('semanticpyramid_before').style.display = 'none';
-                }
-                semanticpyramid_stop()
-              </script>
-            </td>
-            <td style="padding:20px;width:55%;vertical-align:middle">
-                <papertitle> Semantic Pyramid for Image Generation</papertitle>
-
-              <br>
-              <strong>Assaf Shocher*</strong>,
-              <a href="https://scholar.google.co.il/citations?user=71L4yYMAAAAJ&hl=en">Yossi Gandelsman*</a>,
-              <a href="https://research.google/people/InbarMosseri/">Inbar Mosseri</a>,
-			  <a href="https://www.linkedin.com/in/michal-yarom-767bb281/?originalSubdomain=il">Michal Yarom</a>,
-			  <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>,
-			  <a href="https://billf.mit.edu/">William T. Freeman</a>,
-			  <a href="http://people.csail.mit.edu/talidekel/">Tali Dekel</a>.
-              <br>
-              <em>CVPR</em> 2020  <strong>Oral</strong>
-              <br>
-
-			  <div class="btn-group">
-			  <a href="https://semantic-pyramid.github.io/"><button>project page</button></a>
-			  <a href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Shocher_Semantic_Pyramid_for_Image_Generation_CVPR_2020_paper.pdf"><button>PDF</button></a>
-			  <a href="https://www.youtube.com/watch?v=IXtqiJ7Nufo&feature=emb_logo"><button>video</button></a>
-			  <div class="tooltip"><button>abstract</button><span class="tooltiptext">We present a novel GAN-based model that utilizes the space of deep features learned by a pre-trained classification model. Inspired by classical image pyramid representations, we construct our model as a Semantic Generation Pyramid - a hierarchical framework which leverages the continuum of semantic information encapsulated in such deep features; this ranges from low level information contained in fine features to high level, semantic information contained in deeper features. More specifically, given a set of features extracted from a reference image, our model generates diverse image samples, each with matching features at each semantic level of the classification model. We demonstrate that our model results in a versatile and flexible framework that can be used in various classic and novel image generation tasks. These include: generating images with a controllable extent of semantic similarity to a reference image, and different manipulation tasks such as semantically-controlled inpainting and compositing; all achieved with the same model, with no further training.</span></div>
-			  <button onclick=copyToClipboard(bibtexsemanticpyramid)>bibtex</button>
-  
-</div>
-            </td>
-          </tr> 
-
-
-
-
-
-		  
-		<tr onmouseout="kernelgan_stop()" onmouseover="kernelgan_start()">
-            <td style="padding:20px;width:45%;vertical-align:middle">
-                <div id='kernelgan_before'><img src="images/kernelgan_after_.gif" width="100%"></div>
-                <div id='kernelgan_after'><img src='images/kernelgan_before_.gif' width="100%"></div>
-              </div>
-              <script type="text/javascript">
-			  var bibtexkernelgan = "@incollection{NIPS2019_8321,\ntitle = {Blind Super-Resolution Kernel Estimation using an Internal-GAN},\nauthor = {Bell-Kligler, Sefi and Shocher, Assaf and Irani, Michal},\nbooktitle = {Advances in Neural Information Processing Systems 32},\neditor = {H. Wallach and H. Larochelle and A. Beygelzimer and F. d\textquotesingle Alch\'{e}-Buc and E. Fox and R. Garnett},\npages = {284--293},\nyear = {2019},\npublisher = {Curran Associates, Inc.},\nurl = {http://papers.nips.cc/paper/8321-blind-super-resolution-kernel-estimation-using-an-internal-gan.pdf}\n}"			
-			  function kernelgan_start() {
-                  document.getElementById('kernelgan_after').style.display = 'none';
-                  document.getElementById('kernelgan_before').style.display = 'inline';
-                }
-
-                function kernelgan_stop() {
-                  document.getElementById('kernelgan_after').style.display = 'inline';
-                  document.getElementById('kernelgan_before').style.display = 'none';
-                }
-                kernelgan_stop()
-              </script>
-            </td>
-            <td style="padding:20px;width:55%;vertical-align:middle">
-                <papertitle>Blind Super-Resolution Kernel Estimation using an Internal-GAN</papertitle>
-
-              <br>
-			  <a href="sefi">Sefi Bell-Kligler</a>,
-              <strong>Assaf Shocher</strong>,
-              <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>,
-              <br>
-             <em>NeurIPS</em> 2019  <strong>Oral</strong>
-              <br>
-
-			  <div class="btn-group">
-			  <a href="http://www.wisdom.weizmann.ac.il/~vision/kernelgan/"><button>project page</button></a>
-			  <a href=http://papers.nips.cc/paper/8321-blind-super-resolution-kernel-estimation-using-an-internal-gan.pdf"><button>PDF</button></a>
-			  <a href="https://slideslive.com/38923045/blind-superresolution-kernel-estimation-using-an-internalgan?ref=speaker-22501-latest"><button>video</button></a>
-			  <div class="tooltip"><button>abstract</button><span class="tooltiptext">Super-resolution (SR) methods typically assume that the low-resolution (LR) image was downscaled from the unknown high-resolution (HR) image by a fixed 'ideal' downscaling kernel (e.g. Bicubic downscaling). However, this is rarely the case in real LR images, in contrast to synthetically generated SR datasets. When the assumed downscaling kernel deviates from the true one, the performance of SR methods significantly deteriorates. This gave rise to Blind-SR - namely, SR when the downscaling kernel ("SR-kernel") is unknown. It was further shown that the true SR-kernel is the one that maximizes the recurrence of patches across scales of the LR image. In this paper we show how this powerful cross-scale recurrence property can be realized using Deep Internal Learning. We introduce "KernelGAN", an image-specific Internal-GAN, which trains solely on the LR test image at test time, and learns its internal distribution of patches. Its Generator is trained to produce a downscaled version of the LR test image, such that its Discriminator cannot distinguish between the patch distribution of the downscaled image, and the patch distribution of the original LR image. The Generator, once trained, constitutes the downscaling operation with the correct image-specific SR-kernel. KernelGAN is fully unsupervised, requires no training data other than the input image itself, and leads to state-of-the-art results in Blind-SR when plugged into existing SR algorithms.</span></div>
-			  <button onclick=copyToClipboard(bibtexkernelgan)>bibtex</button>
-			  <a href="https://github.com/sefibk/KernelGAN"><button>code</button></a>
-  
-</div>
-            </td>
-          </tr> 
-		  
- 
-
-
-
-
-
-
-
-
-
-          <tr onmouseout="ingan_stop()" onmouseover="ingan_start()">
-            <td style="padding:20px;width:45%;vertical-align:middle">
-                <div id='ingan_before'><img src="images/ingan.gif" width="100%"></div>
-                <div id='ingan_after'><img src='images/ingan_before.gif' width="100%"></div>
-              </div>
-              <script type="text/javascript">
-			  var bibtexingan = "@InProceedings{Shocher_2019_ICCV,\nauthor = {Shocher, Assaf and Bagon, Shai and Isola, Phillip and Irani, Michal},\ntitle = {InGAN: Capturing and Retargeting the \"DNA\" of a Natural Image},\nbooktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},\nmonth = {October},\nyear = {2019}\n}"
-				function ingan_start() {
-                  document.getElementById('ingan_after').style.display = 'none';
-                  document.getElementById('ingan_before').style.display = 'inline';
-                }
-
-                function ingan_stop() {
-                  document.getElementById('ingan_after').style.display = 'inline';
-                  document.getElementById('ingan_before').style.display = 'none';
-                }
-                ingan_stop()
-              </script>
-            </td>
-            <td style="padding:20px;width:55%;vertical-align:middle">
-                <papertitle>InGAN: Capturing and Remapping the "DNA" of a Natural Image</papertitle>
-
-              <br>
-              <strong>Assaf Shocher</strong>,
-              <a href="https://scholar.google.com/citations?user=N_maL_AAAAAJ&hl=en">Shai Bagon</a>,
-              <a href="http://web.mit.edu/phillipi/">Phillip Isola</a>,
-              <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>,
-              <br>
-              <em>ICCV</em> 2019  <strong>Oral</strong>
-              <br>
-
-			  <div class="btn-group">
-			  <a href="http://www.wisdom.weizmann.ac.il/~vision/ingan/"><button>project page</button></a>
-			  <a href="http://www.wisdom.weizmann.ac.il/~vision/ingan/resources/ingan.pdf"><button>PDF</button></a>
-			  <a href="https://youtu.be/OvZVxqUmE3g?t=2429"><button>video</button></a>
-			  <div class="tooltip"><button>abstract</button><span class="tooltiptext">Generative Adversarial Networks (GANs) typically learn a distribution of images in a large image dataset, and are then able to generate new images from this distribution. However, each natural image has its own internal statistics, captured by its unique distribution of patches. In this paper we propose an "Internal GAN" (InGAN) - an image-specific GAN - which trains on a single input image and learns its internal distribution of patches. It is then able to synthesize a plethora of new natural images of significantly different sizes, shapes and aspect-ratios - all with the same internal patch-distribution (same "DNA") as the input image. In particular, despite large changes in global size/shape of the image, all elements inside the image maintain their local size/shape. InGAN is fully unsupervised, requiring no additional data other than the input image itself. Once trained on the input image, it can remap the input to any size or shape in a single feedforward pass, while preserving the same internal patch distribution. InGAN provides a unified framework for a variety of tasks, bridging the gap between textures and natural images.</span></div>
-			  <button onclick=copyToClipboard(bibtexingan)>bibtex</button>
-			  <a href=https://github.com/assafshocher/InGAN"><button>code</button></a>
-  
-</div>
-            </td>
-          </tr> 
-		  
-		  
-
-
-
-
-		  
-		  
-
-
-          <tr onmouseout="doubledip_stop()" onmouseover="doubledip_start()">
-            <td style="padding:20px;width:45%;vertical-align:middle">
-                <div id='doubledip_before'><img src="images/doubledip_after.png" width="100%"></div>
-                <div id='doubledip_after'><img src='images/doubledip_before.png' width="100%"></div>
-              </div>
-              <script type="text/javascript">
-			  var bibtexdoubledip = "@InProceedings{Gandelsman_2019_CVPR,\nauthor = {Gandelsman, Yosef and Shocher, Assaf and Irani, Michal},\ntitle = {Double-DIP: Unsupervised Image Decomposition via Coupled Deep-Image-Priors},\nbooktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},\nmonth = {June},\nyear = {2019}\n}"
-				function doubledip_start() {
-                  document.getElementById('doubledip_after').style.display = 'none';
-                  document.getElementById('doubledip_before').style.display = 'inline';
-                }
-
-                function doubledip_stop() {
-                  document.getElementById('doubledip_after').style.display = 'inline';
-                  document.getElementById('doubledip_before').style.display = 'none';
-                }
-                doubledip_stop()
-              </script>
-            </td>
-            <td style="padding:20px;width:55%;vertical-align:middle">
-                <papertitle>Double-DIP: Unsupervised Image Decomposition via Coupled Deep-Image-Priors</papertitle>
-
-              <br>
-			  <a href="https://scholar.google.co.il/citations?user=71L4yYMAAAAJ&hl=en">Yossi Gandelsman</a>,
-              <strong>Assaf Shocher</strong>,
-              <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>,
-              <br>
-              <em>CVPR</em> 2019  <strong>Oral</strong> 
-              <br>
-
-			  <div class="btn-group">
-			  <a href="http://www.wisdom.weizmann.ac.il/~vision/DoubleDIP/index.html"><button>project page</button></a>
-			  <a href="http://www.wisdom.weizmann.ac.il/~vision/DoubleDIP/resources/DoubleDIP.pdf"><button>PDF</button></a>
-			  <a href="https://youtu.be/IyPQqqGPHws?t=1429"><button>video</button></a>
-			  <div class="tooltip"><button>abstract</button><span class="tooltiptext">Many seemingly unrelated computer vision tasks can be viewed as a special case of image decomposition into separate layers. For example, image segmentation (separation into foreground and background layers); transparent layer separation (into reflection and transmission layers); Image dehazing (separation into a clear image and a haze map), and more. In this paper we propose a unified framework for unsupervised layer decomposition of a single image, based on coupled "Deep-image-Prior" (DIP) networks. It was shown [Ulyanov et al] that the structure of a single DIP generator network is sufficient to capture the low-level statistics of a single image. We show that coupling multiple such DIPs provides a powerful tool for decomposing images into their basic components, for a wide variety of applications. This capability stems from the fact that the internal statistics of a mixture of layers is more complex than the statistics of each of its individual components. We show the power of this approach for Image-Dehazing, Fg/Bg Segmentation, Watermark-Removal, Transparency Separation in images and video, and more. These capabilities are achieved in a totally unsupervised way, with no training examples other than the input image/video itself.</span></div>
-			  <button onclick=copyToClipboard(bibtexdoubledip)>bibtex</button>
-			  <a href="https://github.com/yossigandelsman/DoubleDIP"><button>code</button></a>
-  
-</div>
-            </td>
-          </tr> 
-
-
-
-
-
-
-
-
-
-
- <tr onmouseout="zssr_stop()" onmouseover="zssr_start()">
-            <td style="padding:20px;width:45%;vertical-align:middle">
-                <div id='zssr_before'><img src="images/zssr_after.gif" width="100%"></div>
-                <div id='zssr_after'><img src='images/zssr_before.gif' width="100%"></div>
-              </div>
-              <script type="text/javascript">
-			  var bibtexzssr = "@InProceedings{Shocher_2018_CVPR,\nauthor = {Shocher, Assaf and Cohen, Nadav and Irani, Michal},\ntitle = {“Zero-Shot” Super-Resolution Using Deep Internal Learning},\nbooktitle = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},\nmonth = {June},\nyear = {2018}\n}"
-				function zssr_start() {
-                  document.getElementById('zssr_after').style.display = 'none';
-                  document.getElementById('zssr_before').style.display = 'inline';
-                }
-
-                function zssr_stop() {
-                  document.getElementById('zssr_after').style.display = 'inline';
-                  document.getElementById('zssr_before').style.display = 'none';
-                }
-                zssr_stop()
-              </script>
-            </td>
-            <td style="padding:20px;width:55%;vertical-align:middle">
-                <papertitle>Zero Shot Super-Resolution using Deep Internal Learning</papertitle>
-
-              <br>
-              <strong>Assaf Shocher</strong>,
-              <a href="https://www.cohennadav.com/">Nadav Cohen</a>,
-              <a href="https://www.weizmann.ac.il/math/irani/">Michal Irani</a>,
-              <br>
-              <em>CVPR</em> 2018
-              <br>
-
-			  <div class="btn-group">
-			  <a href="http://www.wisdom.weizmann.ac.il/~vision/zssr/"><button>project page</button></a>
-			  <a href="http://www.weizmann.ac.il/math/irani/sites/math.irani/files/uploads/zssr_cameraready.pdf"><button>PDF</button></a>
-			  <div class="tooltip"><button>abstract</button><span class="tooltiptext">Deep Learning has led to a dramatic leap in SuperResolution (SR) performance in the past few years. However, being supervised, these SR methods are restricted to specific training data, where the acquisition of the lowresolution (LR) images from their high-resolution (HR) counterparts is predetermined (e.g., bicubic downscaling), without any distracting artifacts (e.g., sensor noise, image compression, non-ideal PSF, etc). Real LR images, however, rarely obey these restrictions, resulting in poor SR results by SotA (State of the Art) methods. In this paper we introduce "Zero-Shot" SR, which exploits the power of Deep Learning, but does not rely on prior training. We exploit the internal recurrence of information inside a single image, and train a small image-specific CNN at test time, on examples extracted solely from the input image itself. As such, it can adapt itself to different settings per image. This allows to perform SR of real old photos, noisy images, biological data, and other images where the acquisition process is unknown or non-ideal. On such images, our method outperforms SotA CNN-based SR methods, as well as previous unsupervised SR methods. To the best of our knowledge, this is the first unsupervised CNN-based SR method.</span></div>
-			  <button onclick=copyToClipboard(bibtexzssr)>bibtex</button>
-			  <a href="https://github.com/assafshocher/ZSSR"><button>code</button></a>
-  
-</div>
-            </td>
-          </tr> 
-
-</table>
-
-
-
-
-
-
-
-
-<br><br><br><br><br>
-              <p style="font-size:small;">
-				This page design is based on a template by <a href="https://jonbarron.info/">Jon Barron</a>.
-              </p>
-
-
-
-
-
-
 </body>
-
 </html>
