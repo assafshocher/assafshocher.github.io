@@ -19,9 +19,9 @@
     --slot:#182452; --slotb:#3b4c9b;
   }
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent; user-select:none;}
-  html,body{margin:0;height:100%;overflow:hidden;background:var(--bg1);
+  html,body{margin:0;height:100%;overflow:hidden;background:var(--bg1);overscroll-behavior:none;
     font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ui);}
-  canvas{position:fixed;inset:0;display:block;}
+  canvas{position:fixed;inset:0;display:block;touch-action:none;}
   .hidden{display:none !important;}
 
   /* ---------- top bar ---------- */
@@ -138,6 +138,46 @@
     font-size:15px;max-width:520px;line-height:1.5;background:#ffffff10;border-radius:14px;
     padding:14px 18px;max-height:32vh;overflow-y:auto;}
   .help b{color:var(--gold);}
+
+  /* ---------- compact layout: phones & short screens (body.compact, set by JS) ---------- */
+  body.compact #topbar{gap:4px;padding:5px 6px;}
+  body.compact #hearts{font-size:15px;letter-spacing:0;white-space:nowrap;flex:0 0 auto;}
+  body.compact #coins{font-size:15px;flex:0 0 auto;}
+  body.compact #coins .c{width:15px;height:15px;}
+  /* the chip yields (and ellipsises) before any control can be pushed off-screen */
+  body.compact #lvl{font-size:12px;padding:2px 6px;white-space:nowrap;direction:ltr;
+    min-width:0;overflow:hidden;text-overflow:ellipsis;}
+  body.compact #topbar button{font-size:12px;padding:3px 6px;border-radius:8px;flex:0 0 auto;}
+  body.compact #invwrap{gap:5px;padding:26px 6px 6px;overflow-x:visible;}
+  body.compact #inv{flex-wrap:wrap;justify-content:center;gap:5px;max-width:100%;}
+  body.compact .slot{width:44px;height:58px;border-radius:10px;}
+  body.compact .slot .bar{width:30px;margin-bottom:17px;}
+  body.compact .slot .lb{font-size:14px;}
+  body.compact .slot.km .lb,body.compact .slot.kj .lb{font-size:20px;}
+  body.compact #trashBtn,body.compact #fifoBtn{width:40px;height:58px;font-size:20px;border-radius:10px;}
+  body.compact #invtitle{font-size:12px;}
+  #fireBtn.docked{position:relative;left:auto;bottom:auto;flex:0 0 auto;
+    width:54px;height:54px;font-size:22px;align-self:flex-end;margin-bottom:2px;}
+  /* keep the docked slot reserved while unusable, so showing/hiding it can't re-wrap
+     the bar and shift the ground mid-play */
+  #fireBtn.docked.hidden{display:block !important;visibility:hidden;}
+  /* right-anchored so the buttons never sit on the player standing by the gate */
+  body.compact #buildui{gap:6px;left:auto;right:12px;transform:none;}
+  body.compact #buildui button{font-size:14px;padding:6px 12px;border-radius:11px;white-space:nowrap;}
+  body.compact #toast{font-size:18px;padding:8px 16px;max-width:88vw;top:12%;}
+  body.compact #bigmsg{font-size:40px;}
+  /* menus must scroll on short screens instead of clipping */
+  body.compact .overlay{justify-content:flex-start;overflow-y:auto;gap:12px;padding:18px 14px 28px;}
+  body.compact .overlay h1{font-size:36px;}
+  body.compact .overlay h2{font-size:20px;}
+  body.compact .overlay .sub{font-size:14px;line-height:1.45;}
+  body.compact .bigbtn{padding:11px 24px;font-size:19px;min-width:140px;border-radius:14px;}
+  body.compact .diffbtn{padding:8px 14px;font-size:15px;}
+  body.compact .help{font-size:12.5px;gap:5px 9px;padding:10px 12px;line-height:1.35;}
+  body.compact #numpad .pad{grid-template-columns:repeat(3,64px);gap:8px;}
+  body.compact #numpad .pad button{height:56px;font-size:24px;}
+  body.compact #jkshow{font-size:36px;min-height:44px;}
+  body.compact #langbtn2{padding:5px 10px;font-size:13px;}
 </style>
 </head>
 <body>
@@ -226,7 +266,7 @@ const I18N = {
           ['🛸','החללית הגנבת חוטפת בלוק מהמלאי!']],
     best:'שיא — {n}: {b}', best1:'שיא — {n}: 1',
     lvl:'שלב {n}', target:'המטרה: {n}', inv:'בלוקים במלאי: {c}/{m}', invFullMark:' — מלא!',
-    undo:'↩ בטל', back:'🚪 חזרה לתפיסה',
+    undo:'↩ בטל', back:'🚪 חזרה לתפיסה', backShort:'🚪 חזרה',
     buildHint:'לחצו על בלוק במלאי כדי להניח אותו — ועל בלוק במגדל כדי להחזיר!',
     over:'מעל המטרה! הוסיפו בלוק שלילי או החזירו בלוק מהמגדל',
     notEven:'&#x200E;÷2 רק על מספר זוגי!',
@@ -265,7 +305,7 @@ const I18N = {
           ['🛸','The thief UFO steals a block from your inventory!']],
     best:'Best — {n}: {b}', best1:'Best — {n}: 1',
     lvl:'Level {n}', target:'Target: {n}', inv:'Blocks: {c}/{m}', invFullMark:' — FULL!',
-    undo:'↩ Undo', back:'🚪 Back to catching',
+    undo:'↩ Undo', back:'🚪 Back to catching', backShort:'🚪 Back',
     buildHint:'Tap a block to place it — tap a tower block to take it back!',
     over:'Over the target! Add a negative or take a block back',
     notEven:'÷2 only works on even numbers!',
@@ -323,6 +363,9 @@ const S = {
   dropAnim:null, shake:0, msgT:0,
 };
 let W=0, H=0, groundY=0, zeroY=0, doorX=0, catchW=0, BW=72;
+/* On narrow screens the world is wider than the viewport and a camera pans between the
+   catch zone and the build zone. On desktop worldW===W and camX===0, so nothing changes. */
+let worldW=0, camX=0, camT=0, MOB=false, PAN=false, uiH=118;
 let idSeq=1;
 const $=id=>document.getElementById(id);
 const T=()=>I18N[S.lang];
@@ -381,6 +424,20 @@ function bestOf(name){ return +(load('bt_best_'+name)||0); }
 function levelBlockMax(){
   const c=S.cfg; return Math.min(c.bCap, c.b0[1]+Math.floor((S.level-1)*c.b0[1]*.25));
 }
+// right edge that flying enemies travel to: the catch zone when it owns its own screen
+function zoneR(){ return PAN?catchW:worldW; }
+// short "back" label on compact screens so the button can't sit on top of the player
+function setBuildBtnText(){
+  const t=T();
+  $('undoBtn').textContent=t.undo;
+  $('backBtn').textContent=MOB?t.backShort:t.back;
+}
+function setLvlText(){
+  // compact screens show only the target (the number that matters mid-play); the
+  // element is pinned LTR so "🎯 23" can't be reordered by the RTL layout
+  $('lvl').textContent = MOB ? ('🎯 '+S.target)
+    : fmt(T().lvl,{n:S.level})+' · '+fmt(T().target,{n:S.target});
+}
 function computeScale(){
   // reserve a "basement" below zero one max-negative deep, so negative sums stay on-screen
   S.negFloor=S.cfg?S.cfg.negV[1]:0;
@@ -393,7 +450,7 @@ function newTarget(){
   S.target=ri(Math.round(lo),Math.round(hi));
   computeScale();
   S.pile=[]; S.jokerUsed=false; S.selMod=-1; S.hist=[]; S.dropAnim=null;
-  $('lvl').textContent=fmt(T().lvl,{n:S.level})+' · '+fmt(T().target,{n:S.target});
+  setLvlText();
 }
 
 /* ============================== SPAWNING ============================== */
@@ -457,7 +514,7 @@ function maybeSpawnShip(){
   if(Math.random()<.004){
     S.shipAlive=true;
     const fromLeft=Math.random()<.5;
-    S.fallers.push({kind:'ship',id:idSeq++,x:fromLeft?-70:W+70,
+    S.fallers.push({kind:'ship',id:idSeq++,x:fromLeft?-70:zoneR()+70,
       y:rnd(80,Math.max(220,groundY-180)),
       vx:(fromLeft?1:-1)*rnd(170,230),w:56,h:40,t:0,fireT:rnd(.5,1)});
   }
@@ -470,6 +527,13 @@ function addToInv(item,fromX,fromY){
     while(invCount()>=S.cfg.inv){
       const i=S.inv.findIndex(x=>x.kind==='b'||x.kind==='n'||x.kind==='j');
       evictSlot(i); S.inv.splice(i,1); toast(T().evicted,1100);
+    }
+  } else if(item.kind==='m'){
+    // chips are exempt from the block cap, so cap them on their own — otherwise unused
+    // ones pile up forever and the wrapping compact bar eats the play area
+    while(S.inv.filter(x=>x.kind==='m').length>=3){
+      const i=S.inv.findIndex(x=>x.kind==='m');
+      evictSlot(i); S.inv.splice(i,1);
     }
   }
   S.inv.push(item); renderInv();
@@ -581,19 +645,26 @@ function returnPileBlock(idx){
   SND.place(); renderInv();
 }
 function pileHitTest(mx,my){
-  const axisX=W-56, colX=axisX-BW-14, pileX=colX-BW-30;
+  const axisX=worldW-56, colX=axisX-BW-14, pileX=colX-BW-30;
   let top=zeroY; const rects=[];
   for(let i=0;i<S.pile.length;i++){
     const p=S.pile[i];
     if(p.v>0){ const yT=top-p.h; rects.push({i,x:pileX,y:yT,w:BW,h:p.h}); top=yT; }
     else { rects.push({i,x:pileX-4,y:top,w:BW+8,h:p.h}); top+=p.h; }
   }
+  // exact hit first — inflating thin blocks would overlap their neighbour and return
+  // the wrong one; only if nothing is hit do we grab the nearest block within 8px
   for(let k=rects.length-1;k>=0;k--){
     const r=rects[k];
-    if(mx>=r.x&&mx<=r.x+r.w&&my>=r.y&&my<=r.y+Math.max(r.h,14)){
-      returnPileBlock(r.i); return true;
-    }
+    if(mx>=r.x&&mx<=r.x+r.w&&my>=r.y&&my<=r.y+r.h){ returnPileBlock(r.i); return true; }
   }
+  let best=-1,bd=8;
+  for(const r of rects){
+    if(mx<r.x||mx>r.x+r.w) continue;
+    const d=my<r.y?r.y-my:(my>r.y+r.h?my-(r.y+r.h):0);
+    if(d<bd){ bd=d; best=r.i; }
+  }
+  if(best>=0){ returnPileBlock(best); return true; }
   return false;
 }
 function undo(){
@@ -627,13 +698,13 @@ function win(){
   if((S.mode!=='build'&&S.mode!=='catch')||pileSum()!==S.target) return;
   S.mode='celebrate'; SND.win();
   bigmsg(T().win,2000); addCoin(7,true);
-  pop(W-56-BW-14-BW/2-30, zeroY-S.target*S.ppu-30,'+7');
+  pop(worldW-56-BW-14-BW/2-30, zeroY-S.target*S.ppu-30,'+7');
   confetti();
   const nm=S.player||'guest';
   if(S.coins>bestOf(nm)) store('bt_best_'+nm,S.coins);
   setTimeout(()=>{ if(S.mode!=='celebrate')return;
     newTarget(); S.mode='catch'; S.px=Math.min(S.px,doorX-80);
-    $('buildui').classList.add('hidden'); renderInv();
+    $('buildui').classList.add('hidden'); renderInv(); renderAmmo();
   },2300);
 }
 function gameOver(){
@@ -695,6 +766,7 @@ function renderInv(){
     const d=document.createElement('div'); d.className='slot'; inv.appendChild(d);
   }
   updateInvTitle();
+  syncCompactHeight();   // the compact bar wraps as items pile up — keep the ground above it
 }
 function updateInvTitle(){
   if(!S.cfg) return;
@@ -722,7 +794,9 @@ function burst(x,y,color,n){
 }
 function confetti(){
   const cols=['#ffd34d','#41d98d','#6ee7ff','#ff5d73','#c4b5fd'];
-  for(let i=0;i<80;i++) S.parts.push({x:rnd(0,W),y:rnd(-80,0),vx:rnd(-60,60),vy:rnd(60,200),
+  // spawn across the visible world window, not the raw screen width, or a panned
+  // camera leaves the whole celebration off-screen
+  for(let i=0;i<80;i++) S.parts.push({x:rnd(camX,camX+W),y:rnd(-80,0),vx:rnd(-60,60),vy:rnd(60,200),
     g:60,r:rnd(3,6),c:cols[ri(0,4)],life:rnd(1.5,2.6),conf:true});
 }
 
@@ -735,9 +809,13 @@ function update(dt){
   if(S.keys.ArrowRight||S.keys.d) dir+=1;
   if(S.touchX!=null){ const d=S.touchX-S.px; dir=Math.abs(d)>8?Math.sign(d):0; }
   S.pvx=dir*340;
-  S.px=Math.max(40,Math.min(W-60,S.px+S.pvx*dt));
+  S.px=Math.max(40,Math.min(worldW-60,S.px+S.pvx*dt));
   if(S.mode==='catch'&&S.px>doorX+18) enterBuild();
   if(S.mode==='build'&&S.px<doorX-18) exitBuild();
+  // camera glides between the two zones (no-op unless panning)
+  camT=(PAN&&(S.mode==='build'||S.mode==='celebrate'))?worldW-W:0;
+  camX+=(camT-camX)*Math.min(1,dt*7);
+  if(Math.abs(camT-camX)<.6) camX=camT;
 
   if(S.mode==='catch'){
     S.spawnT-=dt*1000;
@@ -757,7 +835,7 @@ function update(dt){
           if(idx!=null&&idx>=0){ F.stole=S.inv[idx]; S.inv.splice(idx,1); renderInv();
             SND.steal(); toast(T().stolen,1400); }
         }
-        if(F.x>W+80){ S.thiefAlive=false; S.fallers.splice(i,1); }
+        if(F.x>zoneR()+80){ S.thiefAlive=false; S.fallers.splice(i,1); }
         continue;
       }
       if(F.kind==='ship'){
@@ -766,7 +844,7 @@ function update(dt){
           S.fallers.push({kind:'laser',id:idSeq++,x:F.x+F.w/2-4,y:F.y+F.h-6,w:8,h:26,vy:430});
           F.fireT=rnd(.7,1.4); SND.laser();
         }
-        if((F.vx>0&&F.x>W+80)||(F.vx<0&&F.x<-80)){ S.shipAlive=false; S.fallers.splice(i,1); }
+        if((F.vx>0&&F.x>zoneR()+80)||(F.vx<0&&F.x<-80)){ S.shipAlive=false; S.fallers.splice(i,1); }
         continue;
       }
       if(F.vx) F.x+=F.vx*dt;
@@ -836,6 +914,7 @@ function fire(){
 function renderAmmo(){
   $('ammoN').textContent=S.ammo;
   $('fireBtn').classList.toggle('hidden',!(S.ammo>0&&S.mode==='catch'&&!S.paused));
+  syncCompactHeight();
 }
 
 /* ============================== INPUT ============================== */
@@ -868,10 +947,10 @@ addEventListener('keyup',e=>{
 });
 const cv=$('game');
 cv.addEventListener('pointerdown',e=>{
-  if(S.mode==='build'&&pileHitTest(e.clientX,e.clientY)) return;
-  if(S.mode==='catch'||S.mode==='build') S.touchX=e.clientX;
+  if(S.mode==='build'&&pileHitTest(e.clientX+camX,e.clientY)) return;
+  if(S.mode==='catch'||S.mode==='build') S.touchX=e.clientX+camX;
 });
-cv.addEventListener('pointermove',e=>{ if(S.touchX!=null) S.touchX=e.clientX; });
+cv.addEventListener('pointermove',e=>{ if(S.touchX!=null) S.touchX=e.clientX+camX; });
 addEventListener('pointerup',()=>{ S.touchX=null; });
 addEventListener('blur',()=>{ if(S.mode==='catch'&&!S.paused) togglePause(); });
 
@@ -953,14 +1032,14 @@ function drawScene(){
   // sky
   const g=ctx.createLinearGradient(0,0,0,H);
   g.addColorStop(0,'#0b1035'); g.addColorStop(.7,'#1b2a6b'); g.addColorStop(1,'#2b3f8f');
-  ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  ctx.fillStyle=g; ctx.fillRect(0,0,worldW,H);
   const t=performance.now()/1000;
   for(const s of stars){ ctx.globalAlpha=.4+.5*Math.abs(Math.sin(t+s.tw));
-    ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(s.x*W,s.y*H,s.r,0,7); ctx.fill(); }
+    ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(s.x*worldW,s.y*H,s.r,0,7); ctx.fill(); }
   ctx.globalAlpha=1;
   // ground
-  ctx.fillStyle='#101a44'; ctx.fillRect(0,groundY,W,H-groundY);
-  ctx.fillStyle='#2b3f8f'; ctx.fillRect(0,groundY,W,4);
+  ctx.fillStyle='#101a44'; ctx.fillRect(0,groundY,worldW,H-groundY);
+  ctx.fillStyle='#2b3f8f'; ctx.fillRect(0,groundY,worldW,4);
   // door / gate
   const glow=.5+.4*Math.sin(t*3);
   ctx.save();
@@ -975,7 +1054,7 @@ function drawScene(){
   ctx.restore();
 }
 function drawBuildZone(){
-  const axisX=W-56, colX=axisX-BW-14, pileX=colX-BW-30;
+  const axisX=worldW-56, colX=axisX-BW-14, pileX=colX-BW-30;
   ctx.save(); ctx.direction='ltr';
   // below-zero basement band
   if(S.negFloor>0){
@@ -1104,7 +1183,7 @@ function drawFX(){
   ctx.globalAlpha=1;
   // caught items flying to the inventory bar
   for(const f of S.flyers){ const e=1-Math.pow(1-Math.min(1,f.t),2);
-    const tx=W/2, ty=H-50, x=f.x+(tx-f.x)*e, y=f.y+(ty-f.y)*e;
+    const tx=camX+W/2, ty=H-50, x=f.x+(tx-f.x)*e, y=f.y+(ty-f.y)*e;
     ctx.globalAlpha=1-e*.5; ctx.font='900 20px system-ui'; ctx.textAlign='center';
     ctx.fillStyle='#fff';
     const lb=f.kind==='m'?MODLB[f.v]:f.kind==='j'?'🃏':(f.v>0?'+':'')+f.v;
@@ -1114,6 +1193,7 @@ function drawFX(){
 function render(){
   ctx.save();
   if(S.shake>0) ctx.translate(rnd(-S.shake,S.shake),rnd(-S.shake,S.shake));
+  ctx.translate(-camX,0);
   drawScene();
   drawBuildZone();
   drawFallers();
@@ -1141,14 +1221,14 @@ function applyLang(){
   $('m_help').innerHTML=t.help.map(([a,b])=>`<b>${a}</b><span>${b}</span>`).join('');
   $('langBtn').textContent=S.lang==='he'?'EN':'עב';
   $('langbtn2').textContent=S.lang==='he'?'English':'עברית';
-  $('undoBtn').textContent=t.undo; $('backBtn').textContent=t.back;
+  setBuildBtnText();
   updateInvTitle();
   $('muteBtn').textContent=S.muted?'🔇':'🔊';
   $('fifoBtn').textContent=S.fifo?'🔁':'🛑';
   const bests=['easy','medium','hard'].map(n=>{const b=bestOf(n);
     return fmt(b===1?t.best1:t.best,{n:t[n],b});});
   $('m_best').textContent=bests.join('  ·  ');
-  if(S.mode!=='menu'&&S.cfg) $('lvl').textContent=fmt(t.lvl,{n:S.level})+' · '+fmt(t.target,{n:S.target});
+  if(S.mode!=='menu'&&S.cfg) setLvlText();
 }
 function setDiff(d){
   chosenDiff=d;
@@ -1203,21 +1283,65 @@ document.querySelectorAll('#numpad .pad button').forEach(b=>
 $('np_cancel').addEventListener('click',()=>{$('numpad').classList.add('hidden');npFor=-1;});
 
 /* ============================== RESIZE & LOOP ============================== */
-function resize(){
-  W=cv.width=innerWidth; H=cv.height=innerHeight;
-  groundY=H-118; catchW=Math.round(W*.58); doorX=catchW;
+function measureUI(){
+  if(!MOB) return 118;
+  const el=$('invwrap');
+  const h=el.classList.contains('hidden')?96:Math.round(el.getBoundingClientRect().height);
+  return Math.max(96,Math.min(Math.round(H*.45),h+6));   // never let the bar eat the play area
+}
+/* On compact screens the zap button rides inside the inventory strip instead of
+   floating over the play area (where it used to sit on top of the player). */
+function dockFireBtn(){
+  const fb=$('fireBtn'), wrap=$('invwrap');
+  if(MOB){ if(fb.parentNode!==wrap){ wrap.appendChild(fb); fb.classList.add('docked'); } }
+  else if(fb.parentNode!==document.body){ document.body.appendChild(fb); fb.classList.remove('docked'); }
+}
+function placeInvTitle(){
+  $('invtitle').style.bottom = MOB?(uiH-22)+'px':'';
+  $('buildui').style.bottom  = MOB?(uiH+8)+'px':'';   // keep the build buttons clear of the bar
+}
+function syncCompactHeight(){
+  if(!MOB){ placeInvTitle(); return; }
+  dockFireBtn();
+  const h=measureUI();
+  if(h!==uiH){ uiH=h; layout(false); } else placeInvTitle();
+}
+function layout(snapCam){
+  groundY=H-uiH;
+  // one screen to catch in, one panel to build in. The gate sits well inside the right
+  // edge: the touch follower has an 8px dead zone, so a gate at the very edge could not
+  // be walked through with a finger at all.
+  if(PAN){ catchW=W-70; worldW=catchW+330; }
+  else { catchW=Math.round(W*.58); worldW=W; }
+  doorX=catchW;
   BW=Math.max(54,Math.min(84,Math.round(W*.055)));
   if(S.cfg&&S.target){
     computeScale();
     S.pile.forEach(p=>p.h=Math.abs(p.v)*S.ppu);
     S.fallers.forEach(f=>{ if(f.kind==='b'||f.kind==='n') f.h=Math.max(Math.abs(f.v)*S.ppu,12); });
+    setLvlText();
   }
-  S.px=Math.max(40,Math.min(W-60,S.px||catchW*.4));
+  setBuildBtnText();
+  S.px=Math.max(40,Math.min(worldW-60,S.px||catchW*.4));
   if(S.mode==='build') S.px=Math.max(S.px,doorX+40);
   else if(S.mode==='catch') S.px=Math.min(S.px,doorX-60);
-  initStars();
+  camT=(PAN&&(S.mode==='build'||S.mode==='celebrate'))?worldW-W:0;
+  // a real resize snaps; a bar-height change mid-play must not cancel an in-flight pan
+  if(snapCam!==false) camX=camT;
+  else camX=Math.max(0,Math.min(Math.max(0,worldW-W),camX));
+  initStars(); placeInvTitle();
+}
+function resize(){
+  // some browsers report 0 mid-orientation-change; keep the last good size instead of NaN geometry
+  W=cv.width=innerWidth||W||360; H=cv.height=innerHeight||H||640;
+  MOB=W<760||H<560; PAN=W<700;
+  document.body.classList.toggle('compact',MOB);
+  dockFireBtn();
+  uiH=measureUI();
+  layout();
 }
 addEventListener('resize',resize);
+addEventListener('orientationchange',()=>setTimeout(resize,120));
 resize();
 
 function loop(ts){
@@ -1235,7 +1359,7 @@ window.__dbg={
   S, DIFF,
   start:(diff='medium')=>startGame(diff,diff),
   setTarget:n=>{S.target=n;computeScale();S.pile=[];S.hist=[];
-    S.jokerUsed=false;$('lvl').textContent=fmt(T().lvl,{n:S.level})+' · '+fmt(T().target,{n});},
+    S.jokerUsed=false;setLvlText();},
   give:(v,kind)=>{addToInv({id:idSeq++,kind:kind||(v<0?'n':'b'),v},W/2,H/2);},
   giveMod:m=>{addToInv({id:idSeq++,kind:'m',v:m},W/2,H/2);},
   giveJoker:()=>{addToInv({id:idSeq++,kind:'j'},W/2,H/2);},
