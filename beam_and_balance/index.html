@@ -71,8 +71,8 @@
     .stage-status{position:absolute;left:13px;top:12px;z-index:2;display:flex;align-items:center;gap:7px;max-width:60%;background:#fffdf6e8;backdrop-filter:blur(7px);border:1px solid #d6e4df;border-radius:12px;padding:8px 11px;font-size:11px;font-weight:780;box-shadow:0 4px 14px #44665f15;pointer-events:none}
     .status-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 3px #159f9820}.status-dot.moving{background:var(--gold);animation:pulse .65s infinite alternate}.status-dot.beaming{background:var(--coral);box-shadow:0 0 8px var(--coral)}
     @keyframes pulse{to{transform:scale(1.4)}}
-    .piece-controls{position:absolute;right:13px;bottom:13px;display:flex;gap:6px;z-index:2;background:#fffdf6e8;padding:6px;border:1px solid #d5e1dd;border-radius:15px;box-shadow:0 7px 20px #33574f24;backdrop-filter:blur(6px)}
-    .piece-controls.hidden{display:none}.piece-controls .btn{padding:8px 10px;background:#fff;font-size:13px}.piece-controls .delete{color:#b8413e;background:#fff0ee}.piece-controls .color{background:linear-gradient(100deg,#ffc4c0,#c7f0d0,#bfdcff)}.tune-readout{display:none;align-items:center;justify-content:center;min-width:58px;padding:6px 7px;border-radius:9px;background:#e5f4f1;color:#126f6a;font-size:11px;font-weight:900;white-space:nowrap}.piece-controls .tune{display:none;color:#126f6a;background:#e5f4f1}
+    .piece-controls{position:absolute;right:13px;bottom:13px;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px;z-index:2;max-width:calc(100% - 26px);background:#fffdf6e8;padding:6px;border:1px solid #d5e1dd;border-radius:15px;box-shadow:0 7px 20px #33574f24;backdrop-filter:blur(6px)}
+    .piece-controls.hidden{display:none}.piece-controls .btn{padding:8px 10px;background:#fff;font-size:13px}.piece-controls .delete{color:#b8413e;background:#fff0ee}.piece-controls .color{background:linear-gradient(100deg,#ffc4c0,#c7f0d0,#bfdcff)}.tune-readout,.angle-readout{display:none;align-items:center;justify-content:center;min-width:58px;padding:6px 7px;border-radius:9px;background:#e5f4f1;color:#126f6a;font-size:11px;font-weight:900;white-space:nowrap}.angle-readout{min-width:54px;background:#e8f1f8;color:#315d73}.piece-controls .tune{display:none;color:#126f6a;background:#e5f4f1}
     .pieces-badge{position:absolute;right:13px;top:12px;z-index:2;background:#193a48db;color:white;border-radius:11px;padding:7px 10px;font-size:10px;font-weight:800;pointer-events:none}
     .toast{position:absolute;z-index:5;left:50%;bottom:20px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#173945ef;color:white;border-radius:13px;padding:10px 15px;font-size:12px;font-weight:800;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
     .win-card{position:absolute;z-index:6;inset:50% auto auto 50%;transform:translate(-50%,-47%) scale(.92);width:min(390px,86%);opacity:0;visibility:hidden;pointer-events:none;text-align:center;background:#fffdf6;border:3px solid #f0c24b;border-radius:25px;padding:23px;box-shadow:0 25px 80px #244b4760;transition:.3s}.win-card.show{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
@@ -134,6 +134,7 @@
         <canvas id="game" tabindex="0" aria-label="Physics and optics puzzle board"></canvas>
         <div class="piece-controls hidden" id="pieceControls">
           <button class="btn" id="turnLeft" aria-label="Rotate left" title="Rotate left">↶</button>
+          <span class="angle-readout" id="angleValue">0.0°</span>
           <button class="btn" id="turnRight" aria-label="Rotate right" title="Rotate right">↷</button>
           <button class="btn color" id="colorBtn" aria-label="Change filter color" title="Change color">RGB</button>
           <button class="btn tune" id="tuneDown" aria-label="Decrease selected property" title="Decrease">−</button>
@@ -158,7 +159,7 @@
         <div class="how" data-i18n-html="howBalance"><strong>2 · Balance</strong>Press Test. Blocks tip, weights pull, and springs bounce until still.</div>
         <div class="how" data-i18n-html="howBeam"><strong>3 · Beam</strong>Lasers fire only after the construction settles.</div>
       </div>
-      <div class="legend"><span data-i18n-html="legendPrism">△ <b>Prism:</b> splits white light into a full rainbow; only RGB bands light targets.</span><span data-i18n-html="legendGlass">▱ <b>Glass:</b> refracts a beam. Select it to tune its index n = c/c′.</span><span data-i18n-html="legendSplitter">╱ <b>Splitter:</b> makes a reflected and a transmitted beam.</span><span data-i18n-html="legendFilter">RGB <b>Filter:</b> passes only its selected color.</span><span data-i18n-html="legendBlocks">▰ <b>Blocks:</b> bricks, pillars, and beams build different structures.</span><span data-i18n-html="legendSpring">〰 <b>Spring:</b> links wooden blocks. Select its coil to tune stiffness K.</span></div>
+      <div class="legend"><span data-i18n-html="legendPrism">△ <b>Prism:</b> splits white light into a full rainbow; only RGB bands light targets.</span><span data-i18n-html="legendGlass">▱ <b>Glass:</b> refracts a beam. Select it to tune its index n = c/c′.</span><span data-i18n-html="legendSplitter">╱ <b>Splitter:</b> makes a reflected and a transmitted beam.</span><span data-i18n-html="legendFilter">RGB <b>Filter:</b> passes only its selected color.</span><span data-i18n-html="legendBlocks">▰ <b>Blocks:</b> bricks, pillars, and beams build different structures.</span><span data-i18n-html="legendSpring">〰 <b>Spring:</b> links wooden blocks. Select its coil to tune stiffness K.</span><span data-i18n-html="legendMount">⌁ <b>Snap clamp:</b> mirrors, prisms, splitters, and filters clamp to touching wooden pieces and move with them. Glass remains loose.</span></div>
       <div class="modal-actions"><button class="btn primary" id="closeHelp" data-i18n="letsBuild">Let’s build!</button></div>
     </div>
   </div>
@@ -189,7 +190,7 @@
       reset:document.getElementById("resetBtn"),test:document.getElementById("testBtn"),status:document.getElementById("statusText"),
       dot:document.getElementById("statusDot"),count:document.getElementById("pieceCount"),par:document.getElementById("parCount"),
       controls:document.getElementById("pieceControls"),left:document.getElementById("turnLeft"),right:document.getElementById("turnRight"),
-      color:document.getElementById("colorBtn"),tuneDown:document.getElementById("tuneDown"),tuneValue:document.getElementById("tuneValue"),tuneUp:document.getElementById("tuneUp"),copy:document.getElementById("copyBtn"),del:document.getElementById("deleteBtn"),
+      color:document.getElementById("colorBtn"),angleValue:document.getElementById("angleValue"),tuneDown:document.getElementById("tuneDown"),tuneValue:document.getElementById("tuneValue"),tuneUp:document.getElementById("tuneUp"),copy:document.getElementById("copyBtn"),del:document.getElementById("deleteBtn"),
       toast:document.getElementById("toast"),win:document.getElementById("winCard"),stars:document.getElementById("stars"),
       winText:document.getElementById("winText"),continue:document.getElementById("continueBtn"),keep:document.getElementById("keepBuilding"),
       help:document.getElementById("helpModal"),closeHelp:document.getElementById("closeHelp"),profileModal:document.getElementById("profileModal"),profileSelect:document.getElementById("profileSelect"),profileName:document.getElementById("profileName"),profilePassword:document.getElementById("profilePassword"),profileStatus:document.getElementById("profileStatus"),saveProfile:document.getElementById("saveProfileBtn"),loadProfile:document.getElementById("loadProfileBtn"),exportProfile:document.getElementById("exportProfileBtn"),importProfile:document.getElementById("importProfileInput"),closeProfile:document.getElementById("closeProfile")
@@ -266,8 +267,8 @@
       en:{howToPlay:"How to play",brandName:"Beam & Balance",tagline:"BUILD • BALANCE • BEAM",hint:"Hint",mechanics:"Mechanics",optics:"Optics",toolBlock:"Brick",toolTall:"Tall block",toolBeam:"Long beam",toolWeight:"Anvil",toolSpring:"Link spring",toolMirror:"Mirror",toolPrism:"Prism",toolGlass:"Glass slab",toolGlassBlock:"Glass block",toolSplitter:"Beam splitter",toolFilter:"Color filter",trayTip:"<b>Build from the floor.</b> Drag a corner or the round handle to rotate. Mouse-wheel rotation starts off to prevent accidents.",pieces:"pieces",par:"par",brilliant:"Brilliant!",keepBuilding:"Keep building",helpTitle:"Welcome to the workshop",helpIntro:"Build a stable machine, let gravity settle it, then guide every color to its matching target.",howBuild:"<strong>1 · Build</strong>Choose a tool. Drag it into place and pull a corner to rotate it.",howBalance:"<strong>2 · Balance</strong>Press Test. Blocks tip, weights pull, and springs bounce until still.",howBeam:"<strong>3 · Beam</strong>Lasers fire only after the construction settles.",legendPrism:"△ <b>Prism:</b> splits white light into a full rainbow; only RGB bands light targets.",legendGlass:"▱ <b>Glass:</b> refracts a beam. Select it to tune its index n = c/c′ from 0.50 to 2.20.",legendSplitter:"╱ <b>Splitter:</b> makes a reflected and a transmitted beam.",legendFilter:"RGB <b>Filter:</b> passes only its selected color.",legendBlocks:"▰ <b>Blocks:</b> bricks, pillars, and beams build different structures.",legendSpring:"〰 <b>Spring:</b> links wooden blocks. Its coil changes with stiffness K, up to 1000.",letsBuild:"Let’s build!",profileTitle:"Player profiles",profileIntro:"Save every construction, solved level, and setting under a player name on this device.",savedPlayers:"Saved players",playerName:"Player name",namePlaceholder:"For example: Maya",password:"Password",passwordPlaceholder:"A simple password is fine",loadPlayer:"Load player",saveGame:"Save current game",profileNote:"Passwords provide simple family-friendly privacy and are stored only as a hash. Players live in this browser; export JSON to move one to another phone or computer.",exportJson:"↓ Export JSON",importJson:"↑ Import JSON",close:"Close",guest:"Guest",choosePlayer:"Choose a saved player…",locked:"Locked for this challenge",saveFailed:"This browser could not save the profile.",chooseName:"Choose a player name first.",wrongPassword:"That password is not correct.",addPassword:"Add a password for this player.",savedProfile:"Saved {name} — all {count} levels are included.",gameSaved:"Game saved for {name}",chooseSaved:"Choose a saved player first.",invalidPlayer:"That player file is not valid.",welcomeBack:"Welcome back, {name}",chooseExport:"Choose or save a player before exporting.",passwordExport:"Enter that player's password to export.",exported:"Exported {name}. Keep the JSON file somewhere safe.",legacyPassword:"This older file needs a new password. Enter one, then import again.",imported:"Imported {name}. Enter its password to load it.",invalidJson:"That JSON file is not a Beam & Balance player.",currentPlayer:"Current player: {name}",createPlayer:"Save under a name to create a player.",levelReset:"This level was reset",challengeKit:"Challenge kit · {count} tools available",openWorkshop:"Open workshop · all tools available",toolLocked:"That tool is locked for this challenge",springLocked:"Springs are locked for this challenge",springFirst:"Spring tool · click the first wooden block",springHelp:"Springs can connect bricks, tall blocks, and beams",chooseWood:"Choose a wooden block",springSecond:"Now click a different wooden block",differentBlock:"Choose a different block",springLinked:"Spring linked · build from the floor",filterColor:"Filter: {color}",refractiveIndex:"Refractive index n = c/c′ = {value}",springStiffness:"Spring stiffness K = {value}",buildRestored:"Build restored · adjust and test again",buildRotate:"Build mode · drag corners to rotate",addPiece:"Add a piece first!",settling:"Gravity is settling your machine…",lasersOn:"Lasers on · keep experimenting",checking:"Checking every target…",targetsDark:"{count} target(s) still dark · edit and try again",usedPieces:"{count} piece(s) used · par {par}",openSandbox:"Open sandbox →",nextPuzzle:"Next puzzle →",solved:"Puzzle solved!",wheelTitle:"Mouse-wheel rotation is {state}",wheelLabel:"Wheel {state}",wheelToast:"Mouse-wheel rotation {state}",on:"on",off:"off",testIt:"Test it!",edit:"Edit",hintGlow:"Hint: useful areas are glowing",buildFull:"Build mode · drag, turn, and add pieces",color_red:"RED",color_green:"GREEN",color_blue:"BLUE",color_white:"WHITE",switchLanguage:"Switch to Hebrew",playerProfiles:"Player profiles",resetLevel:"Reset level",previousLevel:"Previous level",nextLevel:"Next level",rotateLeft:"Rotate left",rotateRight:"Rotate right",changeColor:"Change filter color",decrease:"Decrease",increase:"Increase",duplicate:"Duplicate",delete:"Delete",gameBoard:"Physics and optics puzzle board"},
       he:{howToPlay:"איך משחקים",brandName:"אור ואיזון",tagline:"בונים • מאזנים • מאירים",hint:"רמז",mechanics:"מכניקה",optics:"אופטיקה",toolBlock:"לבנה",toolTall:"בלוק גבוה",toolBeam:"קורה ארוכה",toolWeight:"סדן",toolSpring:"קפיץ מקשר",toolMirror:"מראה",toolPrism:"מנסרה",toolGlass:"לוח זכוכית",toolGlassBlock:"גוש זכוכית",toolSplitter:"מפצל קרן",toolFilter:"מסנן צבע",trayTip:"<b>בונים מהרצפה.</b> גררו פינה או את הידית העגולה כדי לסובב. סיבוב בגלגלת העכבר כבוי בהתחלה כדי למנוע טעויות.",pieces:"חלקים",par:"יעד",brilliant:"מבריק!",keepBuilding:"להמשיך לבנות",helpTitle:"ברוכים הבאים לסדנה",helpIntro:"בנו מכונה יציבה, תנו לכבידה לייצב אותה ואז הובילו כל צבע אל המטרה המתאימה.",howBuild:"<strong>1 · בונים</strong>בחרו כלי, גררו אותו למקום ומשכו פינה כדי לסובב.",howBalance:"<strong>2 · מאזנים</strong>לחצו בדיקה. בלוקים נוטים, משקולות מושכות וקפיצים נעים עד שהכול נרגע.",howBeam:"<strong>3 · מאירים</strong>הלייזרים נדלקים רק אחרי שהמבנה מתייצב.",legendPrism:"△ <b>מנסרה:</b> מפצלת אור לבן לקשת מלאה; רק פסי RGB מדליקים מטרות.",legendGlass:"▱ <b>חומר שקוף:</b> שובר קרן. בחרו בו כדי לכוון n = c/c′ בין 0.50 ל־2.20.",legendSplitter:"╱ <b>מפצל:</b> יוצר קרן מוחזרת וקרן עוברת.",legendFilter:"RGB <b>מסנן:</b> מעביר רק את הצבע שנבחר.",legendBlocks:"▰ <b>בלוקים:</b> לבנים, עמודים וקורות יוצרים מבנים שונים.",legendSpring:"〰 <b>קפיץ:</b> מחבר בלוקי עץ. צורת הסליל משתנה עם K, עד 1000.",letsBuild:"בואו נבנה!",profileTitle:"פרופילים של שחקנים",profileIntro:"שמרו כל מבנה, שלב פתור והגדרה בשם שחקן במכשיר הזה.",savedPlayers:"שחקנים שמורים",playerName:"שם השחקן",namePlaceholder:"למשל: מאיה",password:"סיסמה",passwordPlaceholder:"סיסמה פשוטה מספיקה",loadPlayer:"טעינת שחקן",saveGame:"שמירת המשחק",profileNote:"הסיסמה מספקת פרטיות משפחתית פשוטה ונשמרת רק כטביעת־גיבוב. השחקנים נשמרים בדפדפן הזה; ייצאו JSON כדי להעביר למכשיר אחר.",exportJson:"↓ ייצוא JSON",importJson:"↑ ייבוא JSON",close:"סגירה",guest:"אורח",choosePlayer:"בחירת שחקן שמור…",locked:"נעול באתגר הזה",saveFailed:"הדפדפן לא הצליח לשמור את הפרופיל.",chooseName:"בחרו קודם שם שחקן.",wrongPassword:"הסיסמה אינה נכונה.",addPassword:"הוסיפו סיסמה לשחקן הזה.",savedProfile:"{name} נשמר — כל {count} השלבים כלולים.",gameSaved:"המשחק נשמר עבור {name}",chooseSaved:"בחרו קודם שחקן שמור.",invalidPlayer:"קובץ השחקן אינו תקין.",welcomeBack:"ברוכים השבים, {name}",chooseExport:"בחרו או שמרו שחקן לפני הייצוא.",passwordExport:"הזינו את סיסמת השחקן כדי לייצא.",exported:"{name} יוצא. שמרו את קובץ ה־JSON במקום בטוח.",legacyPassword:"הקובץ הישן זקוק לסיסמה חדשה. הזינו אחת וייבאו שוב.",imported:"{name} יובא. הזינו את הסיסמה שלו כדי לטעון.",invalidJson:"זה אינו קובץ שחקן תקין של אור ואיזון.",currentPlayer:"השחקן הנוכחי: {name}",createPlayer:"שמרו בשם כדי ליצור שחקן.",levelReset:"השלב אופס",challengeKit:"ערכת אתגר · {count} כלים זמינים",openWorkshop:"סדנה פתוחה · כל הכלים זמינים",toolLocked:"הכלי הזה נעול באתגר",springLocked:"הקפיצים נעולים באתגר",springFirst:"כלי הקפיץ · לחצו על בלוק העץ הראשון",springHelp:"קפיצים מחברים לבנים, בלוקים גבוהים וקורות",chooseWood:"בחרו בלוק עץ",springSecond:"עכשיו לחצו על בלוק עץ אחר",differentBlock:"בחרו בלוק אחר",springLinked:"הקפיץ חובר · בנו מהרצפה",filterColor:"מסנן: {color}",refractiveIndex:"מקדם שבירה n = c/c′ = {value}",springStiffness:"קשיחות הקפיץ K = {value}",buildRestored:"המבנה שוחזר · תקנו ובדקו שוב",buildRotate:"מצב בנייה · גררו פינות כדי לסובב",addPiece:"הוסיפו קודם חלק!",settling:"הכבידה מייצבת את המכונה…",lasersOn:"הלייזרים דולקים · המשיכו להתנסות",checking:"בודקים את כל המטרות…",targetsDark:"עוד {count} מטרות כבויות · ערכו ונסו שוב",usedPieces:"נעשה שימוש ב־{count} חלקים · יעד {par}",openSandbox:"לסדנה החופשית ←",nextPuzzle:"לחידה הבאה ←",solved:"החידה נפתרה!",wheelTitle:"סיבוב בגלגלת העכבר: {state}",wheelLabel:"גלגלת {state}",wheelToast:"סיבוב בגלגלת {state}",on:"פעיל",off:"כבוי",testIt:"בדיקה!",edit:"עריכה",hintGlow:"רמז: אזורים שימושיים זוהרים",buildFull:"מצב בנייה · גררו, סובבו והוסיפו חלקים",color_red:"אדום",color_green:"ירוק",color_blue:"כחול",color_white:"לבן",switchLanguage:"Switch to English",playerProfiles:"פרופילים של שחקנים",resetLevel:"איפוס שלב",previousLevel:"השלב הקודם",nextLevel:"השלב הבא",rotateLeft:"סיבוב שמאלה",rotateRight:"סיבוב ימינה",changeColor:"שינוי צבע המסנן",decrease:"הפחתה",increase:"הגדלה",duplicate:"שכפול",delete:"מחיקה",gameBoard:"לוח חידות פיזיקה ואופטיקה"}
     };
-    I18N.en.noneLeft="No more of this tool left";I18N.he.noneLeft="לא נשארו עוד חלקים מהכלי הזה";
-    const BODY_KINDS=["block","tall","beam","weight","mirror","prism","glass","glassBlock","splitter","filter"],SPRING_K_VALUES=[5,15,34,75,150,300,600,1000],PROFILE_KEY="prism-workshop-profiles-v1";
+    I18N.en.noneLeft="No more of this tool left";I18N.he.noneLeft="לא נשארו עוד חלקים מהכלי הזה";I18N.en.legendMount="⌁ <b>Snap clamp:</b> mirrors, prisms, splitters, and filters clamp to touching wooden pieces and move with them. Glass remains loose.";I18N.he.legendMount="⌁ <b>תפס נצמד:</b> מראות, מנסרות, מפצלים ומסננים ננעלים לחלק עץ שנוגע בהם ונעים איתו. זכוכית נשארת חופשית.";I18N.en.opticAngle="Optical angle";I18N.he.opticAngle="זווית הרכיב האופטי";
+    const BODY_KINDS=["block","tall","beam","weight","mirror","prism","glass","glassBlock","splitter","filter"],OPTICAL_KINDS=["mirror","prism","glass","glassBlock","splitter","filter"],MOUNTABLE_KINDS=["mirror","prism","splitter","filter"],SPRING_K_VALUES=[5,15,34,75,150,300,600,1000],PROFILE_KEY="prism-workshop-profiles-v1";
     let levelIndex=0,level=levels[0],bodies=[],springs=[],fixed=[],rays=[],targetHits=[],selected=null,selectedSpring=null,mode="build";
     let drag=null,linkMode=false,springDraft=null,springPointer=null,testSnapshot=null,wheelRotateEnabled=false,lastTime=0,simTime=0,stillTime=0,idCounter=1,toastTimer=0,hintStage=0,particles=[],audio=null,levelLoaded=false,currentProfile=null;
     let sessionBuilds=Array(levels.length).fill(null),profiles={},profileUnlocked=false,language="en";
@@ -292,6 +293,14 @@
       rot:(a,t)=>({x:a.x*Math.cos(t)-a.y*Math.sin(t),y:a.x*Math.sin(t)+a.y*Math.cos(t)})
     };
     function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+    function isOptical(b){return !!b&&OPTICAL_KINDS.includes(b.kind)}
+    function isMountable(b){return !!b&&MOUNTABLE_KINDS.includes(b.kind)}
+    function isWoodSupport(b){return !!b&&["block","tall","beam"].includes(b.kind)}
+    function snapOpticalAngle(a){return Math.round(a*360/TAU*2)/2*TAU/360}
+    function signedDegrees(a){let d=(a*360/TAU)%360;if(d>180)d-=360;if(d<=-180)d+=360;return Math.abs(d)<.05?0:d}
+    function rotationNudge(direction){rotateSelected(direction*(isOptical(selected)?Math.PI/180:Math.PI/24))}
+    function wheelRotation(direction){rotateSelected(direction*(isOptical(selected)?Math.PI/180:.08))}
+    function keyboardRotation(direction){rotateSelected(direction*(isOptical(selected)?Math.PI/180:Math.PI/36))}
     function makeBody(kind,x,y,extra){
       const spec={
         block:{w:120,h:42,m:2},tall:{w:48,h:132,m:2.8},beam:{w:190,h:28,m:2.6},weight:{w:82,h:50,m:9},
@@ -419,11 +428,33 @@
       const b=makeBody(kind,clamp(spawn.x,80,920),clamp(spawn.y,85,565));
       if(kind==="mirror"||kind==="splitter")b.a=-.28;
       if(kind==="glass"||kind==="glassBlock")b.a=-.45;
+      if(isOptical(b))b.a=snapOpticalAngle(b.a);
       bodies.push(b);selectBody(b);beep(340,.045,.035);computeRays(true);updateUI();draw();return b;
     }
     function isSpringBlock(b){return b&&["block","tall","beam"].includes(b.kind)}
     function worldToLocal(b,p){return V.rot({x:p.x-b.x,y:p.y-b.y},-b.a)}
     function localToWorld(b,p){const q=V.rot(p,b.a);return{x:b.x+q.x,y:b.y+q.y}}
+    function closestPointOnBody(p,b){
+      const q=worldToLocal(b,p),hx=b.w/2,hy=b.h/2;let x=clamp(q.x,-hx,hx),y=clamp(q.y,-hy,hy);
+      if(Math.abs(q.x)<hx&&Math.abs(q.y)<hy){const dx=hx-Math.abs(q.x),dy=hy-Math.abs(q.y);if(dx<dy)x=(q.x<0?-1:1)*hx;else y=(q.y<0?-1:1)*hy}
+      return localToWorld(b,{x,y})
+    }
+    function clampCandidate(optic){
+      if(!isMountable(optic))return null;let best=null;
+      bodies.forEach(support=>{
+        if(support===optic||!isWoodSupport(support))return;
+        let gap=sat(optic,support)?0:Infinity;
+        if(gap){corners(optic).forEach(p=>{gap=Math.min(gap,V.len(V.sub(p,closestPointOnBody(p,support))))});corners(support).forEach(p=>{gap=Math.min(gap,V.len(V.sub(p,closestPointOnBody(p,optic))))})}
+        if(gap<=20&&(!best||gap<best.gap))best={support,gap,point:closestPointOnBody({x:optic.x,y:optic.y},support)};
+      });
+      return best
+    }
+    function mountSupport(b){return b&&b.mount?bodies.find(x=>x.id===b.mount.supportId):null}
+    function applyClamp(b){
+      const support=mountSupport(b);if(!support){b.mount=null;return false}
+      const p=localToWorld(support,b.mount.anchorLocal),r={x:p.x-support.x,y:p.y-support.y},v=V.add({x:support.vx,y:support.vy},crossSV(support.av,r));
+      b.x=p.x;b.y=p.y;b.a=support.a+b.mount.relativeAngle;b.vx=v.x;b.vy=v.y;b.av=support.av;return true
+    }
     function springBody(id){return bodies.find(b=>b.id===id)}
     function springEnds(s){const A=springBody(s.aId),B=springBody(s.bId);return A&&B?{A,B,a:localToWorld(A,s.la),b:localToWorld(B,s.lb)}:null}
     function cancelSpringLink(){linkMode=false;springDraft=null;springPointer=null;document.querySelector('[data-kind="spring"]').classList.remove("active")}
@@ -449,7 +480,7 @@
       else return;updateUI();computeRays(true);draw();
     }
     function duplicateSelected(){if(!selected)return;const data={a:selected.a,filterColor:selected.filterColor,ior:selected.ior};addPiece(selected.kind,{x:selected.x+25,y:selected.y-30});Object.assign(selected,data);computeRays(true);draw()}
-    function rotateSelected(d){if(!selected||mode!=="build")return;selected.a+=d;computeRays(true);draw()}
+    function rotateSelected(d){if(!selected||mode!=="build")return;selected.a+=d;if(isOptical(selected))selected.a=snapOpticalAngle(selected.a);computeRays(true);updateUI();draw()}
     function cycleFilter(){if(!selected||selected.kind!=="filter")return;const cs=["red","green","blue"],i=cs.indexOf(selected.filterColor);selected.filterColor=cs[(i+1)%3];toast(tr("filterColor",{color:colorLabel(selected.filterColor)}));computeRays(true);draw()}
     function adjustTune(direction){
       if(mode!=="build")return;
@@ -461,11 +492,11 @@
     function restoreTestSnapshot(){
       if(!testSnapshot)return false;const byId=new Map(testSnapshot.map(s=>[s.id,s]));bodies.forEach(b=>{const s=byId.get(b.id);if(s){b.x=s.x;b.y=s.y;b.a=s.a;b.vx=s.vx;b.vy=s.vy;b.av=s.av}else{b.vx=b.vy=b.av=0}});testSnapshot=null;return true
     }
-    function editMode(){const restored=restoreTestSnapshot();mode="build";rays=[];targetHits=[];particles=[];simTime=stillTime=0;cancelSpringLink();bodies.forEach(b=>{b.vx=b.vy=b.av=0});ui.win.classList.remove("show");ui.win.setAttribute("aria-hidden","true");setStatus(tr(restored?"buildRestored":"buildRotate"),"build");computeRays(true);updateUI();draw()}
+    function editMode(){const restored=restoreTestSnapshot();mode="build";rays=[];targetHits=[];particles=[];simTime=stillTime=0;cancelSpringLink();bodies.forEach(b=>{b.vx=b.vy=b.av=0;b.mount=null});ui.win.classList.remove("show");ui.win.setAttribute("aria-hidden","true");setStatus(tr(restored?"buildRestored":"buildRotate"),"build");computeRays(true);updateUI();draw()}
     function startTest(){
       if(mode!=="build"){editMode();return}
       if(!bodies.length){toast(tr("addPiece"));return}
-      cancelSpringLink();captureTestSnapshot();mode="sim";rays=[];targetHits=[];simTime=stillTime=0;selectBody(null);bodies.forEach(b=>{b.vx=b.vy=b.av=0});
+      cancelSpringLink();captureTestSnapshot();mode="sim";rays=[];targetHits=[];simTime=stillTime=0;bodies.forEach(b=>{b.vx=b.vy=b.av=0;b.mount=null});bodies.forEach(b=>{const candidate=clampCandidate(b);if(candidate)b.mount={supportId:candidate.support.id,anchorLocal:worldToLocal(candidate.support,{x:b.x,y:b.y}),relativeAngle:b.a-candidate.support.a}});selectBody(null);
       setStatus(tr("settling"),"sim");beep(190,.08,.045);updateUI();
     }
     function fireLasers(){
@@ -486,10 +517,11 @@
     function updateWheelToggle(){const state=tr(wheelRotateEnabled?"on":"off");ui.wheel.classList.toggle("on",wheelRotateEnabled);ui.wheel.setAttribute("aria-pressed",String(wheelRotateEnabled));ui.wheel.title=tr("wheelTitle",{state});ui.wheel.innerHTML="◉ <span class=\"wide\">"+tr("wheelLabel",{state})+"</span>"}
     function toggleWheelRotation(){wheelRotateEnabled=!wheelRotateEnabled;try{localStorage.setItem("prism-workshop-wheel",wheelRotateEnabled?"on":"off")}catch(e){}updateWheelToggle();toast(tr("wheelToast",{state:tr(wheelRotateEnabled?"on":"off")}))}
     function updateUI(){
-      const total=bodies.length+springs.length,hasSelection=!!(selected||selectedSpring),bodySelection=!!selected,tunableGlass=selected&&["glass","glassBlock"].includes(selected.kind),tunable=!!(tunableGlass||selectedSpring);
+      const total=bodies.length+springs.length,hasSelection=!!(selected||selectedSpring),bodySelection=!!selected,opticalSelection=isOptical(selected),tunableGlass=selected&&["glass","glassBlock"].includes(selected.kind),tunable=!!(tunableGlass||selectedSpring);
       ui.count.textContent=total;ui.test.innerHTML=mode==="build"?"▶ <span class=\"wide\">"+tr("testIt")+"</span>":"■ <span class=\"wide\">"+tr("edit")+"</span>";
       ui.test.classList.toggle("primary",mode==="build");ui.controls.classList.toggle("hidden",!hasSelection||mode!=="build");
       ui.left.style.display=bodySelection?"block":"none";ui.right.style.display=bodySelection?"block":"none";ui.copy.style.display=bodySelection?"block":"none";ui.color.style.display=selected&&selected.kind==="filter"?"block":"none";
+      ui.angleValue.style.display=opticalSelection?"flex":"none";if(opticalSelection){ui.angleValue.textContent=signedDegrees(selected.a).toFixed(1)+"°";ui.angleValue.title=tr("opticAngle")}
       ui.tuneDown.style.display=tunable?"block":"none";ui.tuneUp.style.display=tunable?"block":"none";ui.tuneValue.style.display=tunable?"flex":"none";if(tunable){ui.tuneValue.textContent=tunableGlass?"n "+selected.ior.toFixed(2):"K "+Math.round(selectedSpring.k);ui.tuneValue.title=tunableGlass?"Refractive index n = c/c′":"Spring stiffness K"}
       ui.prev.disabled=false;ui.next.disabled=false;
       updateWheelToggle();updateToolAvailability();
@@ -536,19 +568,21 @@
       return true;
     }
     function physicsStep(dt){
-      const sub=3,h=dt/sub,all=()=>bodies.concat(fixed);
+      const sub=3,h=dt/sub;
       for(let s=0;s<sub;s++){
+        bodies.filter(b=>b.mount).forEach(applyClamp);
         springs.forEach(link=>{
           const e=springEnds(link);if(!e)return;const ra={x:e.a.x-e.A.x,y:e.a.y-e.A.y},rb={x:e.b.x-e.B.x,y:e.b.y-e.B.y},delta=V.sub(e.b,e.a),dist=V.len(delta)||1,n=V.mul(delta,1/dist);
           const va=V.add({x:e.A.vx,y:e.A.vy},crossSV(e.A.av,ra)),vb=V.add({x:e.B.vx,y:e.B.vy},crossSV(e.B.av,rb)),stretch=dist-link.rest,radial=V.dot(V.sub(vb,va),n),force=clamp(link.k*stretch+link.damp*radial,-12000,12000),f=V.mul(n,force);
           e.A.vx+=f.x*e.A.im*h;e.A.vy+=f.y*e.A.im*h;e.A.av+=V.cross(ra,f)*e.A.ii*h;e.B.vx-=f.x*e.B.im*h;e.B.vy-=f.y*e.B.im*h;e.B.av-=V.cross(rb,f)*e.B.ii*h;
         });
         bodies.forEach(b=>{
+          if(b.mount)return;
           let ax=0,ay=980;
           b.vx+=ax*h;b.vy+=ay*h;b.vx*=.998;b.vy*=.998;b.av*=.995;b.x+=b.vx*h;b.y+=b.vy*h;b.a+=b.av*h;
         });
-        const list=all();for(let k=0;k<6;k++){for(let i=0;i<list.length;i++)for(let j=i+1;j<list.length;j++){const A=list[i],B=list[j];if((A.static&&B.static)||(!A.im&&!A.ii&&!B.im&&!B.ii))continue;resolve(A,B)}}
-        bodies.forEach(b=>{if(b.y>H+180||b.x<-180||b.x>W+180){b.x=clamp(b.x,100,900);b.y=120;b.vx=b.vy=b.av=0}})
+        const list=bodies.filter(b=>!b.mount).concat(fixed);for(let k=0;k<6;k++){for(let i=0;i<list.length;i++)for(let j=i+1;j<list.length;j++){const A=list[i],B=list[j];if((A.static&&B.static)||(!A.im&&!A.ii&&!B.im&&!B.ii))continue;resolve(A,B)}}
+        bodies.filter(b=>!b.mount).forEach(b=>{if(b.y>H+180||b.x<-180||b.x>W+180){b.x=clamp(b.x,100,900);b.y=120;b.vx=b.vy=b.av=0}});bodies.filter(b=>b.mount).forEach(applyClamp)
       }
     }
     function segmentHit(o,d,a,b){
@@ -642,7 +676,16 @@
       springs.forEach(s=>{const e=springEnds(s);if(e)drawCoil(e.a,e.b,s===selectedSpring,false,s.k)});
       if(linkMode&&springDraft&&springPointer){const A=springBody(springDraft.aId);if(A)drawCoil(localToWorld(A,springDraft.la),springPointer,false,true,34)}
     }
+    function drawSnapClamp(b,front){
+      if(!isMountable(b))return;const candidate=mode==="build"?clampCandidate(b):null,support=candidate?candidate.support:mountSupport(b);if(!support)return;
+      const base=candidate?candidate.point:closestPointOnBody({x:b.x,y:b.y},support),tip={x:b.x,y:b.y},angle=Math.atan2(tip.y-base.y,tip.x-base.x),active=b===selected&&mode==="build",metal=active?"#159f98":"#486873";
+      ctx.save();ctx.lineCap="round";ctx.lineJoin="round";
+      if(!front){ctx.strokeStyle="#fffdf6e8";ctx.lineWidth=10;ctx.beginPath();ctx.moveTo(base.x,base.y);ctx.lineTo(tip.x,tip.y);ctx.stroke();ctx.strokeStyle=metal;ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(base.x,base.y);ctx.lineTo(tip.x,tip.y);ctx.stroke();if(mode==="build"){ctx.strokeStyle="#159f9899";ctx.lineWidth=2;ctx.setLineDash([4,4]);ctx.beginPath();ctx.arc(base.x,base.y,13,0,TAU);ctx.stroke();ctx.setLineDash([])}}
+      else{ctx.translate(base.x,base.y);ctx.rotate(angle);ctx.fillStyle="#fffdf6";ctx.strokeStyle=metal;ctx.lineWidth=3;roundRect(-7,-12,14,24,4);ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(-11,-10);ctx.lineTo(-11,10);ctx.moveTo(11,-10);ctx.lineTo(11,10);ctx.stroke();ctx.restore();ctx.save();ctx.fillStyle="#fffdf6";ctx.strokeStyle=metal;ctx.lineWidth=3;ctx.beginPath();ctx.arc(tip.x,tip.y,9,0,TAU);ctx.fill();ctx.stroke();ctx.fillStyle=metal;ctx.beginPath();ctx.arc(tip.x,tip.y,3.5,0,TAU);ctx.fill()}
+      ctx.restore()
+    }
     function drawBody(b){
+      if(isMountable(b))drawSnapClamp(b,false);
       ctx.save();ctx.translate(b.x,b.y);ctx.rotate(b.a);
       if(b.kind==="block"||b.kind==="tall"||b.kind==="beam"){
         const g=ctx.createLinearGradient(0,-b.h/2,0,b.h/2);g.addColorStop(0,"#f4c66f");g.addColorStop(1,"#d99a38");roundRect(-b.w/2,-b.h/2,b.w,b.h,6);ctx.fillStyle=g;ctx.fill();ctx.strokeStyle="#8e5b23";ctx.lineWidth=3;ctx.stroke();ctx.strokeStyle="#f8d993";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-b.w/2+10,-b.h/2+7);ctx.lineTo(b.w/2-12,-b.h/2+7);ctx.stroke()
@@ -660,6 +703,7 @@
         const pts=[{x:0,y:-b.h/2},{x:-b.w/2,y:b.h/2},{x:b.w/2,y:b.h/2}];ctx.beginPath();ctx.moveTo(pts[0].x,pts[0].y);ctx.lineTo(pts[1].x,pts[1].y);ctx.lineTo(pts[2].x,pts[2].y);ctx.closePath();const g=ctx.createLinearGradient(-b.w/2,-b.h/2,b.w/2,b.h/2);g.addColorStop(0,"#e9ffffaa");g.addColorStop(.5,"#87dce588");g.addColorStop(1,"#e5bdff88");ctx.fillStyle=g;ctx.fill();ctx.strokeStyle="#438e9f";ctx.lineWidth=3;ctx.stroke()
       }
       ctx.restore();
+      if(isMountable(b))drawSnapClamp(b,true);
       if(b===selected&&mode==="build"){ctx.save();ctx.translate(b.x,b.y);ctx.rotate(b.a);ctx.strokeStyle="#159f98";ctx.lineWidth=3;ctx.setLineDash([8,5]);ctx.strokeRect(-b.w/2-8,-b.h/2-8,b.w+16,b.h+16);ctx.setLineDash([]);ctx.fillStyle="#fff";ctx.strokeStyle="#159f98";ctx.lineWidth=2;[[-b.w/2,-b.h/2],[b.w/2,-b.h/2],[b.w/2,b.h/2],[-b.w/2,b.h/2]].forEach(p=>{ctx.beginPath();ctx.arc(p[0],p[1],7,0,TAU);ctx.fill();ctx.stroke()});ctx.beginPath();ctx.moveTo(0,-b.h/2-7);ctx.lineTo(0,-b.h/2-25);ctx.stroke();ctx.beginPath();ctx.arc(0,-b.h/2-30,10,0,TAU);ctx.fill();ctx.stroke();ctx.beginPath();ctx.arc(0,-b.h/2-30,5,-2.4,1.2);ctx.stroke();ctx.beginPath();ctx.moveTo(5,-b.h/2-27);ctx.lineTo(8,-b.h/2-33);ctx.lineTo(2,-b.h/2-32);ctx.fillStyle="#159f98";ctx.fill();ctx.restore()}
     }
     function drawSource(s){
@@ -697,35 +741,35 @@
     });
     canvas.addEventListener("pointermove",e=>{
       const p=canvasPoint(e);if(linkMode){springPointer=p;draw()}if(!drag||!selected||drag.id!==e.pointerId)return;
-      if(drag.type==="rotate"){selected.a=drag.startAngle+Math.atan2(p.y-selected.y,p.x-selected.x)-drag.startPointer}
+      if(drag.type==="rotate"){selected.a=drag.startAngle+Math.atan2(p.y-selected.y,p.x-selected.x)-drag.startPointer;if(isOptical(selected))selected.a=snapOpticalAngle(selected.a);ui.angleValue.textContent=signedDegrees(selected.a).toFixed(1)+"°"}
       else{selected.x=clamp(p.x-drag.dx,30,W-30);selected.y=clamp(p.y-drag.dy,25,GROUND-8)}
       selected.vx=selected.vy=selected.av=0;computeRays(true);draw()
     });
     canvas.addEventListener("pointerup",e=>{if(drag&&drag.id===e.pointerId)drag=null});
     canvas.addEventListener("pointercancel",()=>drag=null);
-    canvas.addEventListener("wheel",e=>{if(wheelRotateEnabled&&selected&&mode==="build"){e.preventDefault();rotateSelected(e.deltaY>0?.08:-.08)}},{passive:false});
+    canvas.addEventListener("wheel",e=>{if(wheelRotateEnabled&&selected&&mode==="build"){e.preventDefault();wheelRotation(e.deltaY>0?1:-1)}},{passive:false});
     canvas.addEventListener("dblclick",()=>cycleFilter());
     document.querySelectorAll(".tool").forEach(b=>b.addEventListener("click",()=>{if(b.disabled||!toolAllowed(b.dataset.kind)){toast(toolAllowed(b.dataset.kind)&&toolRemaining(b.dataset.kind)<=0?tr("noneLeft"):tr("toolLocked"));return}if(b.dataset.kind==="spring")beginSpringLink();else{cancelSpringLink();addPiece(b.dataset.kind)}}));
-    ui.left.onclick=()=>rotateSelected(-Math.PI/24);ui.right.onclick=()=>rotateSelected(Math.PI/24);ui.tuneDown.onclick=()=>adjustTune(-1);ui.tuneUp.onclick=()=>adjustTune(1);ui.del.onclick=removeSelected;ui.copy.onclick=duplicateSelected;ui.color.onclick=cycleFilter;
+    ui.left.onclick=()=>rotationNudge(-1);ui.right.onclick=()=>rotationNudge(1);ui.tuneDown.onclick=()=>adjustTune(-1);ui.tuneUp.onclick=()=>adjustTune(1);ui.del.onclick=removeSelected;ui.copy.onclick=duplicateSelected;ui.color.onclick=cycleFilter;
     ui.test.onclick=startTest;ui.reset.onclick=resetCurrentLevel;ui.prev.onclick=()=>loadLevel(levelIndex-1);ui.next.onclick=()=>loadLevel(levelIndex+1);ui.hint.onclick=hint;ui.wheel.onclick=toggleWheelRotation;ui.lang.onclick=()=>setLanguage(language==="en"?"he":"en");
     ui.continue.onclick=()=>loadLevel(levelIndex+1);ui.keep.onclick=editMode;ui.closeHelp.onclick=()=>ui.help.classList.remove("show");ui.help.addEventListener("click",e=>{if(e.target===ui.help)ui.help.classList.remove("show")});
     ui.profile.onclick=openProfiles;ui.closeProfile.onclick=()=>ui.profileModal.classList.remove("show");ui.profileModal.addEventListener("click",e=>{if(e.target===ui.profileModal)ui.profileModal.classList.remove("show")});
     ui.profileSelect.addEventListener("change",()=>{const p=profiles[ui.profileSelect.value];if(p){ui.profileName.value=p.name;ui.profilePassword.value="";profileMessage(tr("passwordExport"))}});
     ui.saveProfile.onclick=()=>saveNamedProfile(false);ui.loadProfile.onclick=()=>loadNamedProfile(ui.profileSelect.value||ui.profileName.value);ui.exportProfile.onclick=exportProfileFile;ui.importProfile.addEventListener("change",()=>{const file=ui.importProfile.files&&ui.importProfile.files[0];if(file)return importProfileFile(file)});
     document.querySelector(".mark").addEventListener("click",()=>ui.help.classList.add("show"));
-    document.addEventListener("keydown",e=>{if(e.key==="q"||e.key==="Q")rotateSelected(-Math.PI/36);if(e.key==="e"||e.key==="E")rotateSelected(Math.PI/36);if((e.key==="Delete"||e.key==="Backspace")&&(selected||selectedSpring)){e.preventDefault();removeSelected()}if(e.key===" "){e.preventDefault();startTest()}if(e.key==="Escape"){cancelSpringLink();selectBody(null);ui.help.classList.remove("show");ui.profileModal.classList.remove("show");setStatus(tr("buildRotate"),"build");draw()}});
+    document.addEventListener("keydown",e=>{if(e.key==="q"||e.key==="Q")keyboardRotation(-1);if(e.key==="e"||e.key==="E")keyboardRotation(1);if((e.key==="Delete"||e.key==="Backspace")&&(selected||selectedSpring)){e.preventDefault();removeSelected()}if(e.key===" "){e.preventDefault();startTest()}if(e.key==="Escape"){cancelSpringLink();selectBody(null);ui.help.classList.remove("show");ui.profileModal.classList.remove("show");setStatus(tr("buildRotate"),"build");draw()}});
     function getAudio(){if(!audio)try{audio=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}return audio}
     function beep(freq,dur,vol){const a=getAudio();if(!a)return;const o=a.createOscillator(),g=a.createGain();o.type="sine";o.frequency.value=freq;g.gain.setValueAtTime(vol||.03,a.currentTime);g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+dur);o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+dur)}
     function laserSound(){[260,390,520].forEach((f,i)=>setTimeout(()=>beep(f,.12,.025),i*35))}
     function chime(){[523,659,784,1047].forEach((f,i)=>setTimeout(()=>beep(f,.25,.045),i*110))}
     function selfTests(){
-      const r=reflect({x:1,y:0},V.norm({x:1,y:-1})),A=makeBody("block",0,0),B=makeBody("block",80,0),S=sat(A,B);
+      const r=reflect({x:1,y:0},V.norm({x:1,y:-1})),A=makeBody("block",0,0),B=makeBody("block",80,0),M=makeBody("mirror",0,0),G=makeBody("glass",0,0),S=sat(A,B);
       const split=SPECTRUM.map(q=>rotateDir({x:1,y:0},q.a)),soft=springVisual(5),stiff=springVisual(1000);
-      return{reflection:Math.abs(r.y-1)<.001,collision:!!S&&S.overlap>0,prism:split.length===7&&split[0].y<split[6].y,rainbow:SPECTRUM.every(q=>COLORS[q.c]),springVisual:stiff.wire>soft.wire&&stiff.turns<soft.turns,materials:.5<1&&2.2>1,languages:LEVEL_HE.length===levels.length&&I18N.he.toolPrism==="מנסרה",inventory:levels.slice(4,-1).every(l=>l.allowed&&l.limits&&l.allowed.every(k=>l.limits[k]>0)),levels:levels.length,tools:11};
+      return{reflection:Math.abs(r.y-1)<.001,collision:!!S&&S.overlap>0,prism:split.length===7&&split[0].y<split[6].y,rainbow:SPECTRUM.every(q=>COLORS[q.c]),clampRules:isMountable(M)&&!isMountable(G)&&!isMountable(A),fineAngle:Math.abs(snapOpticalAngle(Math.PI/180)-Math.PI/180)<1e-9,springVisual:stiff.wire>soft.wire&&stiff.turns<soft.turns,materials:.5<1&&2.2>1,languages:LEVEL_HE.length===levels.length&&I18N.he.toolPrism==="מנסרה",inventory:levels.slice(4,-1).every(l=>l.allowed&&l.limits&&l.allowed.every(k=>l.limits[k]>0)),levels:levels.length,tools:11};
     }
     function fit(){const d=Math.min(2,window.devicePixelRatio||1);canvas.width=W*d;canvas.height=H*d;ctx.setTransform(d,0,0,d,0,0);draw()}
     window.addEventListener("resize",fit);
-    window.__prismDebug={get state(){return{level:levelIndex,mode,bodies:bodies.length,springs:springs.length,rays:rays.length,rayColors:[...new Set(rays.map(r=>r.color))],hits:targetHits.slice(),selectedKind:selected?selected.kind:selectedSpring?"linkSpring":null,selectedAngle:selected?selected.a:null,selectedIor:selected?selected.ior:null,selectedSpringK:selectedSpring?selectedSpring.k:null,linkMode,wheelRotateEnabled,language,hasTestSnapshot:!!testSnapshot,currentProfile,profiles:Object.keys(profiles).length,savedBuilds:sessionBuilds.filter(Boolean).length,allowedTools:level.allowed?level.allowed.slice():"all",inventory:Object.fromEntries(Array.from(document.querySelectorAll(".tool"),b=>[b.dataset.kind,b.dataset.remaining])),bodyTransforms:bodies.map(b=>({id:b.id,x:b.x,y:b.y,a:b.a}))}},tests:selfTests(),version:"1.5.0"};
+    window.__prismDebug={get state(){return{level:levelIndex,mode,bodies:bodies.length,springs:springs.length,rays:rays.length,rayColors:[...new Set(rays.map(r=>r.color))],hits:targetHits.slice(),selectedKind:selected?selected.kind:selectedSpring?"linkSpring":null,selectedAngle:selected?selected.a:null,selectedIor:selected?selected.ior:null,selectedSpringK:selectedSpring?selectedSpring.k:null,activeClamps:bodies.filter(b=>b.mount).length,linkMode,wheelRotateEnabled,language,hasTestSnapshot:!!testSnapshot,currentProfile,profiles:Object.keys(profiles).length,savedBuilds:sessionBuilds.filter(Boolean).length,allowedTools:level.allowed?level.allowed.slice():"all",inventory:Object.fromEntries(Array.from(document.querySelectorAll(".tool"),b=>[b.dataset.kind,b.dataset.remaining])),bodyTransforms:bodies.map(b=>({id:b.id,x:b.x,y:b.y,a:b.a,mountSupportId:b.mount?b.mount.supportId:null}))}},tests:selfTests(),version:"1.7.0"};
     applyLanguage();refreshProfileList();fit();loadLevel(0);requestAnimationFrame(animate);window.addEventListener("beforeunload",autosaveActiveProfile);
     setTimeout(()=>{try{if(!localStorage.getItem("prism-workshop-welcomed")){ui.help.classList.add("show");localStorage.setItem("prism-workshop-welcomed","1")}}catch(e){}},350);
   })();
