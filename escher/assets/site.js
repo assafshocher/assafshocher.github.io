@@ -17,7 +17,7 @@ copy.addEventListener('click',async()=>{
   copy.querySelector('span').textContent='Copied';document.getElementById('copy-status').textContent='BibTeX copied to clipboard.';setTimeout(()=>copy.querySelector('span').textContent='Copy',2000);
 });
 let renderer=null;
-const selected=['scene-sky','scene-camera','assorted-eye','assorted-chess','assorted-birds','assorted-attic'];
+const selected=['scene-sky','scene-camera','assorted-eye','assorted-chess','assorted-birds','assorted-attic','clock-mobius','clock-poles','clock-square'];
 const transforms=['puppet-p1','puppet-p2','puppet-poles','puppet-mobius','puppet-square','puppet-rimrings'];
 const labels=['Conformal · |p| = 1','Conformal · |p| = 2','Poles','Möbius','Square','Rimrings'];
 function createCard(item,label,compact=false){
