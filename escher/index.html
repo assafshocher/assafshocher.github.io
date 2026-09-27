@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Moore, Escher, Penrose: A Conformal Golden Braid</title>
+  <meta name="description" content="Generating self-referential scenes by braiding a frozen diffusion model with geometric transformations and their generalized inverses. Sophia Danilov and Assaf Shocher, Technion.">
+  <meta property="og:title" content="Moore, Escher, Penrose: A Conformal Golden Braid">
+  <meta property="og:description" content="Let the scene and its distortion develop together. Animated results from Sophia Danilov and Assaf Shocher, Technion.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://assafshocher.github.io/escher/">
+  <meta property="og:image" content="https://assafshocher.github.io/escher/assets/media/teaser-poster.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://assafshocher.github.io/escher/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/site.css">
+  <script type="module" src="assets/site.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#abstract">Skip to the abstract</a>
+<svg class="icon-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+  <symbol id="i-paper" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 4l-4 16"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path d="M9 6H3v7h6V6Zm12 0h-6v7h6V6ZM9 13c0 4-2 5-5 5m17-5c0 4-2 5-5 5"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
+</defs></svg>
+<nav class="site-nav" aria-label="Project navigation">
+  <div class="nav-inner"><a class="nav-title" href="./">Moore, Escher, Penrose</a><div class="tabs"><a href="./" aria-current="page">Overview</a><a href="supplement.html">Supplementary</a></div></div>
+</nav>
+<header class="paper-header">
+  <h1>Moore, Escher, Penrose:<span>A Conformal Golden Braid</span></h1>
+  <div class="authors"><a href="#" class="placeholder" aria-disabled="true" title="Sophia’s homepage will be linked here">Sophia Danilov</a><span aria-hidden="true">&nbsp;&nbsp;</span><a href="https://assafshocher.github.io/">Assaf Shocher</a></div>
+  <p class="affiliation">Technion — Israel Institute of Technology</p>
+  <div class="resource-links">
+    <a class="resource placeholder" href="#" aria-disabled="true" title="Paper link coming soon"><svg class="icon"><use href="#i-paper"/></svg>Paper<span class="soon">soon</span></a>
+    <a class="resource placeholder" href="#" aria-disabled="true" title="Code link coming soon"><svg class="icon"><use href="#i-code"/></svg>Code<span class="soon">soon</span></a>
+    <a class="resource" href="supplement.html"><svg class="icon"><use href="#i-play"/></svg>Animated supplement</a>
+    <a class="resource" href="#citation"><svg class="icon"><use href="#i-quote"/></svg>BibTeX</a>
+  </div>
+</header>
+<main>
+  <section class="teaser wide" aria-label="Animated teaser">
+    <video id="teaser" width="1440" height="714" muted playsinline loop preload="metadata" poster="assets/media/teaser-poster.webp" src="assets/media/teaser.mp4" aria-label="Seven recursive scenes continuously zoom and rotate, including Escher’s completed Print Gallery and a reader holding this paper."></video>
+    <div class="teaser-under"><p>A picture contains the world that contains it.</p><button id="teaser-toggle" type="button">Pause animation</button></div>
+  </section>
+  <section id="abstract" class="text-section">
+    <h2>Abstract</h2>
+    <p class="opening-quote">“I don’t think I have ever done anything as peculiar in my life. Among other things, it shows a young man looking with interest at a print on the wall of an exhibition that features himself. How can this be? Perhaps I am not far removed from Einstein’s curved universe.”</p>
+    <p>So wrote M. C. Escher about his 1956 lithograph <em>Print Gallery</em>. Nearly half a century later, a mathematical analysis related its geometry to an untwisted source image through a conformal power map <span class="math"><var>z</var> ↦ <var>z</var><sup>α</sup>, α ∈ ℂ</span>. Building on this construction, we use a frozen text-to-image diffusion model to generate new self-referential scenes.</p>
+    <p>Prompting alone does not enforce the recursion, while a post-hoc transformation can leave structures poorly connected. Applying the transformation during sampling is also insufficient: the denoiser may “repair” the intended distortion or drift out of the prescribed geometry. We construct a generalized inverse <span class="math"><var>T</var><sup>†</sup></span> of the non-invertible image transformation <var>T</var>, adapted to its recursive constraint. In the idealized formulation, the Penrose identity <span class="math"><var>TT</var><sup>†</sup><var>T</var> = <var>T</var></span> makes <span class="math"><var>TT</var><sup>†</sup></span> an idempotent projection onto geometrically admissible images.</p>
+    <p>Yet denoising only the transformed image remains an out-of-distribution task, even with projection. We therefore braid denoising steps with <var>T</var> and <span class="math"><var>T</var><sup>†</sup></span>: source-space steps develop the untwisted scene, while transformed-space steps refine its appearance and connections in the final geometry. We generate <em>Print Gallery</em>-like compositions and explore further transformations. Rather than distorting a finished image, we let the scene and its distortion develop together.</p>
+  </section>
+  <section class="wide results-section" id="results">
+    <div class="section-heading"><h2>Scenes within scenes</h2><a class="quiet-link" href="supplement.html">Explore all results <span aria-hidden="true">↗</span></a></div>
+    <p class="section-intro">Hover to follow the recursion. Click or tap to open a larger view and read the prompt.</p>
+    <div class="result-grid" id="selected-results" aria-label="Selected animated results"></div>
+    <noscript><p><a href="supplement.html">Open the supplementary gallery.</a> Interactive image previews require JavaScript.</p></noscript>
+  </section>
+  <section class="method-section" id="method">
+    <div class="text-section"><h2>Let the scene and its distortion<br class="desktop-break"> develop together</h2><p>Our sampler moves between an untwisted recursive scene and its transformed representation. The same frozen diffusion model develops the content in one space and refines its connections in the other.</p></div>
+    <figure class="wide method-figure"><a href="assets/method.pdf" aria-label="Open the method figure as a PDF"><img src="assets/method.webp" width="1590" height="603" loading="lazy" alt="Braided sampling: an untwisted repetition warm-up, alternating denoising blocks linked by T and T dagger, and final refinement in the Escher representation."></a><figcaption>Geometric switches act on predicted clean images, followed by fresh noise; ordinary denoising steps run between switches. Each switch uses super-resolution before mapping and resizing. The early blurred preview is illustrative.</figcaption></figure>
+    <ol class="method-steps wide"><li><span class="step-number">01</span><h3>Establish repetition</h3><p>A zero-spin warm-up encourages the source scene to repeat across scales.</p></li><li><span class="step-number">02</span><h3>Braid the representations</h3><p>Alternate denoising with the forward map and its matched generalized inverse.</p></li><li><span class="step-number">03</span><h3>Refine the connections</h3><p>Finish in the transformed space, where the scene meets its smaller copies.</p></li></ol>
+  </section>
+  <section class="wide transformations-section" id="transformations">
+    <h2>One prompt, several geometries</h2>
+    <p class="section-intro">Changing the map changes how the scene repeats.</p>
+    <div id="transformation-results" class="transform-grid" aria-label="Six transformations of the bookshop scene"></div>
+    <p class="prompt">A watercolor of a cozy bookshop window at dusk; a book displayed in the window has a cover illustration of this same bookshop, the same window, and the same book; warm interior glow, rain on glass.</p>
+    <p class="small-note">Rimrings uses a separate forward-only procedure; its unstable inverse is not used.</p>
+  </section>
+  <section class="supplement-callout text-section"><h2>Keep exploring</h2><p>The supplementary gallery brings together 61 images, their full prompts where available, and continuous views into the recursion.</p><a class="resource" href="supplement.html"><svg class="icon"><use href="#i-play"/></svg>Open the animated supplement <span aria-hidden="true">↗</span></a><p class="small-note">Animations visualize the supplied results. Some rebuild repetitions from detailed image regions; they are not additional generated frames.</p></section>
+  <section id="citation" class="text-section citation-section"><div class="section-heading"><h2>BibTeX</h2><button class="copy-button" id="copy-bib" type="button"><svg class="icon"><use href="#i-copy"/></svg><span>Copy</span></button></div><pre><code id="bibtex">@misc{danilov2026moore,
+  title  = {Moore, Escher, Penrose: A Conformal Golden Braid},
+  author = {Danilov, Sophia and Shocher, Assaf},
+  year   = {2026},
+  url    = {https://assafshocher.github.io/escher/}
+}</code></pre><p id="copy-status" role="status" class="sr-only"></p></section>
+</main>
+<footer class="page-footer text-section"><p>Sophia Danilov &amp; Assaf Shocher · Technion</p><p>Escher’s <em>Print Gallery</em> (1956): completed reconstruction and animation from the <a href="https://pub.math.leidenuniv.nl/~smitbde/escherdroste/">Leiden Escher–Droste project</a>. The title echoes Douglas Hofstadter’s <em>Gödel, Escher, Bach</em>.</p><p><a href="https://assafshocher.github.io/">Assaf’s homepage</a><span class="footer-dot">·</span><a href="supplement.html">Supplementary material</a></p></footer>
+</body>
+</html>
