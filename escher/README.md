@@ -29,3 +29,5 @@ The displayed animations are views of the supplied results, not additional gener
 Caveat is bundled under the SIL Open Font License (`assets/fonts/OFL.txt`). The local GitHub and Twitter outline icons in the homepage and Linearizer page are from Lucide 0.468.0; their license is in `/licenses/lucide-icons.txt`. They are embedded as SVGs so changes to the externally loaded Lucide package cannot remove them.
 
 The three Escher+Dali pocket-watch results use Möbius and poles flows at source scale 16, and the square flow at source scale 4. Their still previews are rendered at phase zero with the same display shader as the animations.
+
+For the public presentation, conference and review-status text has been removed from the recursive paper image, and the keynote-hall signage has been edited to “AI Conference”. These are presentation edits to existing results, not new inference runs. The gallery notes disclose the edits, and the hall prompt omits the original venue name. Animations and phase-zero posters were rebuilt from these versions with the existing motion parameters. Original manuscript assets are retained separately.
