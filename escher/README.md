@@ -31,3 +31,5 @@ Caveat is bundled under the SIL Open Font License (`assets/fonts/OFL.txt`). The 
 The three Escher+Dali pocket-watch results use Möbius and poles flows at source scale 16, and the square flow at source scale 4. Their still previews are rendered at phase zero with the same display shader as the animations.
 
 For the public presentation, conference and review-status text has been removed from the recursive paper image, and the keynote-hall signage has been edited to “AI Conference”. These are presentation edits to existing results, not new inference runs. The gallery notes disclose the edits, and the hall prompt omits the original venue name. Animations and phase-zero posters were rebuilt from these versions with the existing motion parameters. Original manuscript assets are retained separately.
+
+The reader image now retains the original title, figure content, and geometry pixel-for-pixel outside narrow header masks. Only blank-paper fill from the presentation edit is used inside those masks. The original “Moore” and recursive alignment are preserved; the texture is stored losslessly. Reader loops, teaser, thumbnail and posters were rebuilt after the correction.

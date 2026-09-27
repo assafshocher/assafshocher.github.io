@@ -28,7 +28,7 @@ function createCard(item,label,compact=false){
   if(compact)figure.append(caption,link);else figure.append(link,caption);return figure;
 }
 try{
-  const response=await fetch('assets/gallery.json?v=public-text-1',{cache:'no-cache'});if(!response.ok)throw Error('Could not load the gallery');
+  const response=await fetch('assets/gallery.json?v=reader-repair-2',{cache:'no-cache'});if(!response.ok)throw Error('Could not load the gallery');
   const data=await response.json(),byId=new Map(data.items.map(item=>[item.id,item]));
   selected.forEach(id=>document.getElementById('selected-results').append(createCard(byId.get(id))));
   transforms.forEach((id,index)=>document.getElementById('transformation-results').append(createCard(byId.get(id),labels[index],true)));
