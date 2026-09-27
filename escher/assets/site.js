@@ -18,7 +18,7 @@ copy.addEventListener('click',async()=>{
 });
 let renderer=null;
 const selected=['scene-sky','scene-camera','assorted-eye','assorted-chess','assorted-birds','assorted-attic'];
-const transforms=['bookshop-p1','bookshop-p2','bookshop-poles','bookshop-mobius','bookshop-square','bookshop-rimrings'];
+const transforms=['puppet-p1','puppet-p2','puppet-poles','puppet-mobius','puppet-square','puppet-rimrings'];
 const labels=['Conformal · |p| = 1','Conformal · |p| = 2','Poles','Möbius','Square','Rimrings'];
 function createCard(item,label,compact=false){
   const figure=document.createElement('figure');figure.className='result-card';
