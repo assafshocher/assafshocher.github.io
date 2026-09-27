@@ -93,6 +93,7 @@
             transform: scale(2.2);
             z-index: 10; /* Bring to front only when hovering the image itself */
         }
+    @media (prefers-reduced-motion: reduce) { [data-hover-video] { display: none; } }
     </style>
 
 
@@ -144,8 +145,33 @@
                 <div class="flex items-center gap-2">
                     <a href="mailto:assafshocher@gmail.com" class="p-2 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors tooltip"><i data-lucide="mail" class="w-5 h-5 text-slate-600 dark:text-slate-300"></i><span class="tooltip-text">Email</span></a>
                     <a href="https://scholar.google.co.il/citations?user=ndRmNK8AAAAJ" target="_blank" rel="noopener noreferrer" class="p-2 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors tooltip"><i data-lucide="graduation-cap" class="w-5 h-5 text-slate-600 dark:text-slate-300"></i><span class="tooltip-text">Google Scholar</span></a>
-                    <a href="https://github.com/assafshocher" target="_blank" rel="noopener noreferrer" class="p-2 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors tooltip"><i data-lucide="github" class="w-5 h-5 text-slate-600 dark:text-slate-300"></i><span class="tooltip-text">GitHub</span></a>
-                    <a href="https://twitter.com/AssafShocher" target="_blank" rel="noopener noreferrer" class="p-2 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors tooltip"><i data-lucide="twitter" class="w-5 h-5 text-slate-600 dark:text-slate-300"></i><span class="tooltip-text">Twitter</span></a>
+                    <a href="https://github.com/assafshocher" target="_blank" rel="noopener noreferrer" class="p-2 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors tooltip"><svg class="w-5 h-5 text-slate-600 dark:text-slate-300" aria-hidden="true" focusable="false" data-brand="github"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+  <path d="M9 18c-4.51 2-5-2-7-2" />
+</svg><span class="tooltip-text">GitHub</span></a>
+                    <a href="https://twitter.com/AssafShocher" target="_blank" rel="noopener noreferrer" class="p-2 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors tooltip"><svg class="w-5 h-5 text-slate-600 dark:text-slate-300" aria-hidden="true" focusable="false" data-brand="twitter"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+</svg><span class="tooltip-text">Twitter</span></a>
                 </div>
             </div>
         </div>
@@ -170,8 +196,33 @@
             <div class="mt-8 flex items-center gap-2 animate-fade-in-up" style="animation-delay: 300ms;">
                 <a href="mailto:assafshocher@gmail.com" class="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white rounded-md font-semibold shadow-sm hover:bg-slate-300 dark:hover:bg-slate-600 transition-transform duration-200 hover:-translate-y-0.5"><i data-lucide="mail" class="w-4 h-4"></i> Email</a>
                 <a href="https://scholar.google.co.il/citations?user=ndRmNK8AAAAJ" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white rounded-md font-semibold shadow-sm hover:bg-slate-300 dark:hover:bg-slate-600 transition-transform duration-200 hover:-translate-y-0.5"><i data-lucide="graduation-cap" class="w-4 h-4"></i> Scholar</a>
-                <a href="https://github.com/assafshocher" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white rounded-md font-semibold shadow-sm hover:bg-slate-300 dark:hover:bg-slate-600 transition-transform duration-200 hover:-translate-y-0.5"><i data-lucide="github" class="w-4 h-4"></i> GitHub</a>
-                <a href="https://twitter.com/AssafShocher" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white rounded-md font-semibold shadow-sm hover:bg-slate-300 dark:hover:bg-slate-600 transition-transform duration-200 hover:-translate-y-0.5"><i data-lucide="twitter" class="w-4 h-4"></i> Twitter</a>
+                <a href="https://github.com/assafshocher" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white rounded-md font-semibold shadow-sm hover:bg-slate-300 dark:hover:bg-slate-600 transition-transform duration-200 hover:-translate-y-0.5"><svg class="w-4 h-4" aria-hidden="true" focusable="false" data-brand="github"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+  <path d="M9 18c-4.51 2-5-2-7-2" />
+</svg> GitHub</a>
+                <a href="https://twitter.com/AssafShocher" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white rounded-md font-semibold shadow-sm hover:bg-slate-300 dark:hover:bg-slate-600 transition-transform duration-200 hover:-translate-y-0.5"><svg class="w-4 h-4" aria-hidden="true" focusable="false" data-brand="twitter"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+</svg> Twitter</a>
             </div>
         </div>
         <div class="relative w-56 h-64 justify-self-center group profile-blob overflow-hidden shadow-lg animate-fade-in-up" style="animation-delay: 400ms;">
@@ -195,6 +246,7 @@
     <script>
         // --- DATA ---
         const publications = [
+            {"id": "escher", "title": "Moore, Escher, Penrose: A Conformal Golden Braid", "authors": ["Sophia Danilov", "<strong>Assaf Shocher</strong>"], "venue": "Preprint 2026", "image_before": "escher/assets/media/reviewer-poster.webp", "image_after": "escher/assets/media/reviewer-poster.webp", "video_after": "escher/assets/media/reviewer.mp4", "links": {"page": "escher/", "supp": "escher/supplement.html"}, "abstract": "We use a frozen text-to-image diffusion model to generate self-referential scenes inspired by M. C. Escher’s Print Gallery. We construct a generalized inverse of the geometric image transformation, adapted to its recursive constraint, and braid denoising steps with the forward map and its generalized inverse. Source-space steps develop the untwisted scene, while transformed-space steps refine its appearance and connections in the final geometry. Rather than distorting a finished image, we let the scene and its distortion develop together.", "bibtex": "@misc{danilov2026moore, title={Moore, Escher, Penrose: A Conformal Golden Braid}, author={Danilov, Sophia and Shocher, Assaf}, year={2026}, url={https://assafshocher.github.io/escher/}}"},
             { id: 'spnn', title: 'Pseudo-Invertible Neural Networks', authors: ['Yamit Ehrlich', 'Nimrod Berman', '<strong>Assaf Shocher</strong>'], venue: 'Preprint 2026', image_before: 'images/spnn_before.jpg', image_after: 'images/spnn_after.jpg', links: { page: 'https://yamitehr.github.io/spnn-project-page/', pdf: 'https://arxiv.org/pdf/2602.06042', code: 'https://yamitehr.github.io/spnn-project-page/' }, abstract: `The Moore-Penrose Pseudo-inverse (PInv) serves as the fundamental solution for linear systems. In this paper, we propose a natural generalization of PInv to the nonlinear regime in general and to neural networks in particular. We introduce Surjective Pseudo-invertible Neural Networks (SPNN), a class of architectures explicitly designed to admit a tractable non-linear PInv. The proposed non-linear PInv and its implementation in SPNN satisfy fundamental geometric properties. One such property is null-space projection or "Back-Projection", x′=x+A†(y−Ax), which moves a sample x to its closest consistent state x′ satisfying Ax=y. We formalize Non-Linear Back-Projection (NLBP), a method that guarantees the same consistency constraint for non-linear mappings f(x)=y via our defined PInv. We leverage SPNNs to expand the scope of zero-shot inverse problems. Diffusion-based null-space projection has revolutionized zero-shot solving for linear inverse problems by exploiting closed-form back-projection. We extend this method to non-linear degradations. Here, "degradation" is broadly generalized to include any non-linear loss of information, spanning from optical distortions to semantic abstractions like classification. This approach enables zero-shot inversion of complex degradations and allows precise semantic control over generative outputs without retraining the diffusion prior.`, bibtex: `@article{ehrlich2026pseudo, title={Pseudo-Invertible Neural Networks}, author={Ehrlich, Yamit and Berman, Nimrod and Shocher, Assaf}, journal={arXiv preprint arXiv:2602.06042}, year={2026}}` },
             { id: 'linearizer', title: 'Who Said Neural Networks Aren\'t Linear?', authors: ['Nimrod Berman*', 'Assaf Hallak*', '<strong>Assaf Shocher*</strong>'], venue: 'Preprint 2025', image_before: 'images/linearizer_before.png', image_after: 'images/linearizer_after.png', links: { page: 'https://assafshocher.github.io/linearizer/', pdf: 'https://arxiv.org/pdf/2510.08570', code: 'https://github.com/assafshocher/Linearizer' }, abstract: `Neural networks are famously nonlinear. However, linearity is defined relative to a pair of vector spaces, $f:\\mathcal{X}\\rightarrow\\mathcal{Y}.$ Is it possible to identify a pair of non-standard vector spaces for which a conventionally nonlinear function is, in fact, linear? This paper introduces a method that makes such vector spaces explicit by construction. We find that if we sandwich a linear operator A between two invertible neural networks, $f(x)=g_{y}^{-1}(Ag_{x}(x))$, then the corresponding vector spaces X and Y are induced by newly defined addition and scaling actions. This framework makes the entire arsenal of linear algebra, including SVD, pseudo-inverse, and more, applicable to nonlinear mappings. We demonstrate this by collapsing diffusion model sampling into a single step, enforcing global idempotency, and demonstrating modular style transfer.`, bibtex: `@misc{berman2025linearizer, title={Who Said Neural Networks Aren't Linear?}, author={Berman, Nimrod and Hallak, Assaf and Shocher, Assaf}, year={2025}, eprint={2405.05266}, archivePrefix={arXiv}}` },
             { id: 'ittt', title: 'IT³: Idempotent Test-Time Training', authors: ['Nikita Durasov*', '<strong>Assaf Shocher*</strong>', 'Doruk Oner', 'Gal Chechik', 'Alexei A. Efros', 'Pascal Fua'], venue: 'ICML 2025', image_before: 'images/ittt_before.jpg', image_after: 'images/ittt_after.jpg', links: { page: 'https://www.norange.io/projects/ittt/', code: 'https://github.com/assafshocher/IT3' }, abstract: `Deep learning models often struggle when deployed in real-world settings due to distribution shifts between training and test data. We present Idempotent Test-Time Training ($IT^{3}$), a novel approach that enables on-the-fly adaptation to distribution shifts using only the current test instance, without any auxiliary task design. Our key insight is that enforcing idempotence—where repeated applications of a function yield the same result—can effectively replace domain-specific auxiliary tasks used in previous TTT methods. We theoretically connect idempotence to prediction confidence and demonstrate that minimizing the distance between successive applications of our model during inference leads to improved out-of-distribution performance. Our results suggest that idempotence provides a universal principle for test-time adaptation that generalizes across domains and architectures.`, bibtex: `@inproceedings{durasov2025it3, title={{IT³: Idempotent Test-Time Training}}, author={Durasov, Nikita and Shocher, Assaf and Oner, Doruk and Chechik, Gal and Efros, Alexei A. and Fua, Pascal}, booktitle={International Conference on Machine Learning}, year={2025}}` },
@@ -216,7 +268,7 @@
         ];
 
         // --- SCRIPT TO BUILD AND MANAGE THE PAGE ---
-        const ICONS = { page: 'home', pdf: 'file-text', code: 'code', video: 'video' };
+        const ICONS = { page: 'home', pdf: 'file-text', code: 'code', video: 'video', supp: 'images' };
         
         function generatePublications() {
             const pubList = document.getElementById('publications-list');
@@ -231,10 +283,10 @@
                 const borderClass = index < publications.length - 1 ? 'border-b border-slate-200 dark:border-slate-800' : '';
 
                 const pubHTML = `
-                    <article class="publication-item group grid md:grid-cols-3 gap-6 md:gap-8 items-center py-12 ${borderClass}" style="transition-delay: ${staggeredDelay}ms;">
+                    <article data-publication="${p.id}" class="publication-item group grid md:grid-cols-3 gap-6 md:gap-8 items-center py-12 ${borderClass}" style="transition-delay: ${staggeredDelay}ms;">
                         <div class="publication-image-container relative w-full aspect-[4/3] rounded-lg overflow-hidden shadow-lg bg-white dark:bg-slate-900">
                             <img src="${p.image_before}" alt="Publication image for ${p.title}" class="absolute inset-0 w-full h-full object-contain">
-                            <img src="${p.image_after}" alt="Publication image for ${p.title} (hover)" class="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            ${p.video_after ? `<a href="${p.links.page}" aria-label="Open ${p.title}" class="absolute inset-0"><video data-hover-video muted loop playsinline preload="none" poster="${p.image_before}" aria-label="Animated preview of a reader holding this paper recursively" class="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100"><source src="${p.video_after}" type="video/mp4"></video></a>` : `<img src="${p.image_after}" alt="Publication image for ${p.title} (hover)" class="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100">`}
                         </div>
                         <div class="md:col-span-2">
                             <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100">${p.title}</h3>
@@ -280,6 +332,19 @@
 
         document.addEventListener("DOMContentLoaded", function() {
             generatePublications();
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+            document.querySelectorAll('[data-hover-video]').forEach(video => {
+                const article = video.closest('.publication-item');
+                const play = () => { if (!reducedMotion.matches) video.play().catch(() => {}); };
+                const reset = () => { video.pause(); if (video.readyState) video.currentTime = 0; };
+                article.addEventListener('mouseenter', play);
+                article.addEventListener('mouseleave', reset);
+                article.addEventListener('focusin', play);
+                article.addEventListener('focusout', event => { if (!article.contains(event.relatedTarget)) reset(); });
+                document.addEventListener('visibilitychange', () => { if (document.hidden) reset(); });
+                reducedMotion.addEventListener('change', () => { if (reducedMotion.matches) reset(); });
+                new IntersectionObserver(([entry]) => { if (!entry.isIntersecting) reset(); }).observe(article);
+            });
             
             renderMathInElement(document.body, {
                 delimiters: [
