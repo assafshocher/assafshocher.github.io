@@ -1,0 +1,506 @@
+[
+  {
+    "id": "escher",
+    "title": "Moore, Escher, Penrose: A Conformal Golden Braid",
+    "authors": [
+      "Sophia Feldman",
+      "<strong>Assaf Shocher</strong>"
+    ],
+    "venue": "Preprint 2026",
+    "image_before": "escher/assets/media/reviewer-poster.webp?v=reader-repair-2",
+    "image_after": "escher/assets/media/reviewer-poster.webp?v=reader-repair-2",
+    "video_after": "escher/assets/media/reviewer.mp4?v=reader-repair-2",
+    "links": {
+      "page": "https://assafshocher.github.io/escher/",
+      "supp": "https://assafshocher.github.io/escher/supplement.html"
+    },
+    "abstract": "“I don’t think I have ever done anything as peculiar in my life. Among other things, it shows a young man looking with interest at a print on the wall of an exhibition that features himself. How can this be? Perhaps I am not far removed from Einstein’s curved universe.” So wrote M. C. Escher about his 1956 lithograph Print Gallery. Nearly half a century later, a mathematical analysis related its geometry to an untwisted source image through a conformal power map $z \\mapsto z^{\\alpha},\\; \\alpha \\in \\mathbb{C}$. Building on this construction, we use a frozen text-to-image diffusion model to generate new self-referential scenes. Prompting alone does not enforce the recursion, while a post-hoc transformation can leave structures poorly connected. Applying the transformation during sampling is also insufficient: the denoiser may “repair” the intended distortion or drift out of the prescribed geometry. We construct a generalized inverse $T^{\\dagger}$ of the non-invertible image transformation $T$, adapted to its recursive constraint. In the idealized formulation, the Penrose identity $TT^{\\dagger}T = T$ makes $TT^{\\dagger}$ an idempotent projection onto geometrically admissible images. Yet denoising only the transformed image remains an out-of-distribution task, even with projection. We therefore braid denoising steps with $T$ and $T^{\\dagger}$: source-space steps develop the untwisted scene, while transformed-space steps refine its appearance and connections in the final geometry. We generate Print Gallery-like compositions and explore further transformations. Rather than distorting a finished image, we let the scene and its distortion develop together.",
+    "bibtex": "@misc{feldman2026moore, title={Moore, Escher, Penrose: A Conformal Golden Braid}, author={Feldman, Sophia and Shocher, Assaf}, year={2026}, url={https://assafshocher.github.io/escher/}}",
+    "image": "assets/escher.webp",
+    "image_hover": "assets/escher-hover.webp",
+    "video_hover": "assets/escher-hover.mp4",
+    "abstract_source": "https://assafshocher.github.io/escher/#abstract",
+    "image_width": 480,
+    "image_height": 480,
+    "preview_width": 480,
+    "preview_height": 480
+  },
+  {
+    "id": "spnn",
+    "title": "Pseudo-Invertible Neural Networks",
+    "authors": [
+      "Yamit Ehrlich",
+      "Nimrod Berman",
+      "<strong>Assaf Shocher</strong>"
+    ],
+    "venue": "NeurIPS 2026",
+    "image_before": "images/spnn_before.jpg",
+    "image_after": "images/spnn_after.jpg",
+    "links": {
+      "page": "https://yamitehr.github.io/spnn-project-page/",
+      "pdf": "https://arxiv.org/pdf/2602.06042",
+      "code": "https://yamitehr.github.io/spnn-project-page/"
+    },
+    "abstract": "The Moore-Penrose Pseudo-inverse (PInv) serves as the fundamental solution for linear systems. In this paper, we propose a natural generalization of PInv to the nonlinear regime in general and to neural networks in particular. We introduce Surjective Pseudo-invertible Neural Networks (SPNN), a class of architectures explicitly designed to admit a tractable non-linear PInv. The proposed non-linear PInv and its implementation in SPNN satisfy fundamental geometric properties. One such property is null-space projection or \"Back-Projection\", x′=x+A†(y−Ax), which moves a sample x to its closest consistent state x′ satisfying Ax=y. We formalize Non-Linear Back-Projection (NLBP), a method that guarantees the same consistency constraint for non-linear mappings f(x)=y via our defined PInv. We leverage SPNNs to expand the scope of zero-shot inverse problems. Diffusion-based null-space projection has revolutionized zero-shot solving for linear inverse problems by exploiting closed-form back-projection. We extend this method to non-linear degradations. Here, \"degradation\" is broadly generalized to include any non-linear loss of information, spanning from optical distortions to semantic abstractions like classification. This approach enables zero-shot inversion of complex degradations and allows precise semantic control over generative outputs without retraining the diffusion prior.",
+    "bibtex": "@inproceedings{ehrlich2026pseudo, title={Pseudo-Invertible Neural Networks}, author={Ehrlich, Yamit and Berman, Nimrod and Shocher, Assaf}, booktitle={Advances in Neural Information Processing Systems}, year={2026}}",
+    "image": "assets/spnn.jpg",
+    "image_hover": "assets/spnn-hover.jpg",
+    "image_width": 2314,
+    "image_height": 1815,
+    "preview_width": 2314,
+    "preview_height": 1815
+  },
+  {
+    "id": "linearizer",
+    "title": "Who Said Neural Networks Aren't Linear?",
+    "authors": [
+      "Nimrod Berman*",
+      "Assaf Hallak*",
+      "<strong>Assaf Shocher*</strong>"
+    ],
+    "venue": "ICML 2026",
+    "image_before": "images/linearizer_before.png",
+    "image_after": "images/linearizer_after.png",
+    "links": {
+      "page": "https://assafshocher.github.io/linearizer/",
+      "pdf": "https://arxiv.org/pdf/2510.08570",
+      "code": "https://github.com/assafshocher/Linearizer"
+    },
+    "abstract": "Neural networks are famously nonlinear. However, linearity is defined relative to a pair of vector spaces, $f:\\mathcal{X}\\rightarrow\\mathcal{Y}.$ Is it possible to identify a pair of non-standard vector spaces for which a conventionally nonlinear function is, in fact, linear? This paper introduces a method that makes such vector spaces explicit by construction. We find that if we sandwich a linear operator A between two invertible neural networks, $f(x)=g_{y}^{-1}(Ag_{x}(x))$, then the corresponding vector spaces X and Y are induced by newly defined addition and scaling actions. This framework makes the entire arsenal of linear algebra, including SVD, pseudo-inverse, and more, applicable to nonlinear mappings. We demonstrate this by collapsing diffusion model sampling into a single step, enforcing global idempotency, and demonstrating modular style transfer.",
+    "bibtex": "@inproceedings{berman2026linearizer, title={Who Said Neural Networks Aren't Linear?}, author={Berman, Nimrod and Hallak, Assaf and Shocher, Assaf}, booktitle={International Conference on Machine Learning}, year={2026}}",
+    "image": "assets/linearizer.png",
+    "image_hover": "assets/linearizer-hover.png",
+    "image_width": 3781,
+    "image_height": 1164,
+    "preview_width": 3781,
+    "preview_height": 1164
+  },
+  {
+    "id": "ittt",
+    "title": "IT³: Idempotent Test-Time Training",
+    "authors": [
+      "Nikita Durasov*",
+      "<strong>Assaf Shocher*</strong>",
+      "Doruk Oner",
+      "Gal Chechik",
+      "Alexei A. Efros",
+      "Pascal Fua"
+    ],
+    "venue": "ICML 2025",
+    "image_before": "images/ittt_before.jpg",
+    "image_after": "images/ittt_after.jpg",
+    "links": {
+      "page": "https://www.norange.io/projects/ittt/",
+      "code": "https://github.com/assafshocher/IT3"
+    },
+    "abstract": "Deep learning models often struggle when deployed in real-world settings due to distribution shifts between training and test data. We present Idempotent Test-Time Training ($IT^{3}$), a novel approach that enables on-the-fly adaptation to distribution shifts using only the current test instance, without any auxiliary task design. Our key insight is that enforcing idempotence—where repeated applications of a function yield the same result—can effectively replace domain-specific auxiliary tasks used in previous TTT methods. We theoretically connect idempotence to prediction confidence and demonstrate that minimizing the distance between successive applications of our model during inference leads to improved out-of-distribution performance. Our results suggest that idempotence provides a universal principle for test-time adaptation that generalizes across domains and architectures.",
+    "bibtex": "@inproceedings{durasov2025it3, title={{IT³: Idempotent Test-Time Training}}, author={Durasov, Nikita and Shocher, Assaf and Oner, Doruk and Chechik, Gal and Efros, Alexei A. and Fua, Pascal}, booktitle={International Conference on Machine Learning}, year={2025}}",
+    "image": "assets/ittt.jpg",
+    "image_hover": "assets/ittt-hover.jpg",
+    "image_width": 4102,
+    "image_height": 1278,
+    "preview_width": 4102,
+    "preview_height": 1278
+  },
+  {
+    "id": "kernelfusion",
+    "title": "KernelFusion: Assumption-Free Blind Super-Resolution via Patch Diffusion",
+    "authors": [
+      "Oliver Heinimann*",
+      "Tal Zimbalist*",
+      "<strong>Assaf Shocher</strong>",
+      "Michal Irani"
+    ],
+    "venue": "ICLR 2025",
+    "image_before": "images/kernelfusion_before.png",
+    "image_after": "images/kernelfusion_after.png",
+    "links": {
+      "pdf": "https://arxiv.org/pdf/2503.21907v1"
+    },
+    "abstract": "Traditional super-resolution (SR) methods assume an \"ideal\" downscaling SR-kernel (e.g., bicubic). Such methods fail once the LR images are generated differently. Current blind-SR methods are still fundamentally restricted to rather simplistic downscaling SR-kernels. In \"KernelFusion\" we introduce a zero-shot diffusion-based method that makes no assumptions about the kernel. Our method recovers the unique image-specific SR-kernel directly from the LR input image, while simultaneously recovering its corresponding HR image. KernelFusion exploits the principle that the correct SR-kernel is the one that maximizes patch similarity across different scales of the LR image. By breaking free from predefined kernel assumptions, KernelFusion pushes Blind-SR into a new assumption-free paradigm, handling downscaling kernels previously thought impossible.",
+    "bibtex": "@inproceedings{heinimann2025kernelfusion, title={KernelFusion: Assumption-Free Blind Super-Resolution via Patch Diffusion}, author={Heinimann, Oliver and Shocher, Assaf and Zimbalist, Tal and Irani, Michal}, booktitle={International Conference on Learning Representations}, year={2025}}",
+    "image": "assets/kernelfusion.png",
+    "image_hover": "assets/kernelfusion-hover.png",
+    "year": 2025,
+    "image_width": 2261,
+    "image_height": 1518,
+    "preview_width": 2261,
+    "preview_height": 1518
+  },
+  {
+    "id": "rlrcdot",
+    "title": "RL-RC-DOT: A Block-level RL agent for Task-Aware Video Compression",
+    "authors": [
+      "Uri Gadot",
+      "<strong>Assaf Shocher</strong>",
+      "Shie Mannor",
+      "Gal Chechik",
+      "Assaf Hallak"
+    ],
+    "venue": "CVPR 2025",
+    "image_before": "images/rl-rc-dot_before.png",
+    "image_after": "images/rl-rc-dot_after.png",
+    "links": {
+      "pdf": "https://openaccess.thecvf.com/content/CVPR2025/papers/Gadot_RL-RC-DoT_A_Block-level_RL_agent_for_Task-Aware_Video_Compression_CVPR_2025_paper.pdf"
+    },
+    "abstract": "Video encoders optimize compression for human perception. In many modern applications, videos serve as input for AI systems performing tasks like object recognition. It is therefore useful to optimize the encoder for a downstream task. A major challenge is how to combine such optimization with existing standard video encoders. Here, we address this challenge by controlling the Quantization Parameters (QPs) at the macro-block level to optimize the downstream task. This granular control allows us to prioritize encoding for task-relevant regions. We formulate this as a Reinforcement Learning (RL) task, where the agent learns to balance long-term implications of choosing QPs on both task performance and bit-rate constraints.",
+    "bibtex": "@inproceedings{gadot2025rlrcdot, title={{RL-RC-DOT: A Block-level RL agent for Task-Aware Video Compression}}, author={Gadot, Uri and Shocher, Assaf and Mannor, Shie and Chechik, Gal and Hallak, Assaf}, booktitle={CVPR}, year={2025}}",
+    "image": "assets/rlrcdot.png",
+    "image_hover": "assets/rlrcdot-hover.png",
+    "image_width": 2434,
+    "image_height": 1000,
+    "preview_width": 2434,
+    "preview_height": 1000
+  },
+  {
+    "id": "ign",
+    "title": "Idempotent Generative Network",
+    "authors": [
+      "<strong>Assaf Shocher</strong>",
+      "Amil Dravid",
+      "Yossi Gandelsman",
+      "Inbar Mosseri",
+      "Michael Rubinstein",
+      "Alexei A. Efros"
+    ],
+    "venue": "ICLR 2024",
+    "image_before": "images/ign_before.jpg",
+    "image_after": "images/ign_after.jpg",
+    "links": {
+      "page": "https://assafshocher.github.io/IGN/",
+      "pdf": "https://arxiv.org/pdf/2311.01462.pdf"
+    },
+    "abstract": "We propose a new approach for generative modeling based on training a neural network to be idempotent. An idempotent operator is one that can be applied sequentially without changing the result beyond the initial application, namely $f(f(z))=f(z)$. The proposed model $f$ is trained to map a source distribution (e.g, Gaussian noise) to a target distribution (e.g. realistic images) using the following objectives: (1) Instances from the target distribution should map to themselves, namely $f(x)=x$. (2) Instances from the source distribution should map onto the defined target manifold. This is achieved by optimizing the idempotence term, $f(f(z))=f(z)$. This strategy results in a model capable of generating an output in one step, maintaining a consistent latent space, while also allowing sequential applications for refinement. This work is a first step towards a \"global projector\" that enables projecting any input into a target data distribution.",
+    "bibtex": "@inproceedings{shocher2024ign, title={Idempotent Generative Network}, author={Shocher, Assaf and Dravid, Amil and Gandelsman, Yossi and Mosseri, Inbar and Rubinstein, Michael and Efros, Alexei A}, booktitle={ICLR}, year={2024}}",
+    "image": "assets/ign.jpg",
+    "image_hover": "assets/ign-hover.jpg",
+    "image_width": 5385,
+    "image_height": 1980,
+    "preview_width": 5385,
+    "preview_height": 2012
+  },
+  {
+    "id": "conceptor",
+    "title": "The Hidden Language of Diffusion Models",
+    "authors": [
+      "Hila Chefer",
+      "Oran Lang",
+      "Mor Geva",
+      "Volodymyr Polosukhin",
+      "<strong>Assaf Shocher</strong>",
+      "Michal Irani",
+      "Inbar Mosseri",
+      "Lior Wolf"
+    ],
+    "venue": "ICLR 2024",
+    "image_before": "images/conceptor.jpg",
+    "image_after": "images/conceptor.jpg",
+    "links": {
+      "page": "https://hila-chefer.github.io/Conceptor/",
+      "pdf": "https://arxiv.org/pdf/2306.00966.pdf"
+    },
+    "abstract": "Text-to-image diffusion models have demonstrated an unparalleled ability to generate high-quality, diverse images from a textual prompt. However, the internal representations learned by these models remain an enigma. In this work, we present Conceptor, a novel method to interpret the internal representation of a textual concept by a diffusion model. This interpretation is obtained by decomposing the concept into a small set of human-interpretable textual elements. Applied over the state-of-the-art Stable Diffusion model, Conceptor reveals non-trivial structures in the representations of concepts, such as surprising visual connections between concepts, biases, renowned artistic styles, or a simultaneous fusion of multiple meanings of the concept.",
+    "bibtex": "@article{chefer2023hidden, title={The Hidden Language of Diffusion Models}, author={Chefer, Hila and Lang, Oran and Geva, Mor and Polosukhin, Volodymyr and Shocher, Assaf and Irani, Michal and Mosseri, Inbar and Wolf, Lior}, journal={arXiv preprint arXiv:2306.00966}, year={2023}}",
+    "image": "assets/conceptor.jpg",
+    "image_hover": "assets/conceptor-hover.jpg",
+    "image_width": 1226,
+    "image_height": 384,
+    "preview_width": 1226,
+    "preview_height": 384
+  },
+  {
+    "id": "imagefusion",
+    "title": "Improving correlation based super-resolution microscopy images through image fusion by self-supervised deep learning",
+    "authors": [
+      "Lior M. Beck",
+      "<strong>Assaf Shocher</strong>",
+      "Uri Rossman",
+      "Ariel Halfon",
+      "Michal Irani",
+      "Dan Oron"
+    ],
+    "venue": "Optics Express 2024",
+    "image_before": "images/imagefusion_before.png",
+    "image_after": "images/imagefusion_after.png",
+    "links": {
+      "pdf": "https://doi.org/10.1364/OE.521577"
+    },
+    "abstract": "Super-resolution imaging is a powerful tool in modern biological research, allowing for the optical observation of subcellular structures with great detail. In this paper, we present a deep learning approach for image fusion of intensity and super-resolution optical fluctuation imaging (SOFI) microscopy images. We construct a network that can successfully combine the advantages of these two imaging methods, producing a fused image with a resolution comparable to that of SOFI and an SNR comparable to that of the intensity image. We also demonstrate the effectiveness of our approach experimentally. Our network is designed as a self-supervised network and shows the ability to train on a single pair of images and to generalize to other image pairs without the need for additional training. Our approach offers a flexible and efficient way to combine the strengths of correlation based imaging techniques along with traditional intensity based microscopy.",
+    "bibtex": "@article{beck2024improving, title={Improving correlation based super-resolution microscopy images through image fusion by self-supervised deep learning}, author={Beck, Lior M and Shocher, Assaf and Rossman, Uri and Halfon, Ariel and Irani, Michal and Oron, Dan}, journal={Optics Express}, volume={32}, number={16}, pages={28195--28205}, year={2024}}",
+    "image": "assets/imagefusion.png",
+    "image_hover": "assets/imagefusion-hover.png",
+    "image_width": 2250,
+    "image_height": 996,
+    "preview_width": 2250,
+    "preview_height": 996
+  },
+  {
+    "id": "flexpred",
+    "title": "Stochastic Positional Embeddings Improve Masked Image Modeling",
+    "authors": [
+      "Amir Bar",
+      "Florian Bordes",
+      "<strong>Assaf Shocher</strong>",
+      "Mahmoud Assran",
+      "Pascal Vincent",
+      "Nicolas Ballas",
+      "Trevor Darrell",
+      "Amir Globerson",
+      "Yann LeCun"
+    ],
+    "venue": "ICML 2024",
+    "image_before": "images/flexpred.jpg",
+    "image_after": "images/flexpred.jpg",
+    "links": {
+      "page": "https://proceedings.mlr.press/v235/bar24a.html",
+      "pdf": "https://raw.githubusercontent.com/mlresearch/v235/main/assets/bar24a/bar24a.pdf",
+      "code": "https://github.com/amirbar/StoP"
+    },
+    "abstract": "Masked Image Modeling (MIM) is a promising self-supervised learning approach that enables learning from unlabeled images. Despite its recent success, learning good representations through MIM remains challenging because it requires predicting the right semantic content in accurate locations. For example, given an incomplete picture of a dog, we can guess that there is a tail, but we cannot determine its exact location. In this work, we propose to incorporate location uncertainty into MIM by using stochastic positional embeddings (StoP). Specifically, we condition the model on stochastic masked token positions drawn from a Gaussian distribution. StoP reduces overfitting to location features and guides the model toward learning features that are more robust to location uncertainties. Quantitatively, StoP improves downstream MIM performance on a variety of downstream tasks, including +1.7% on ImageNet linear probing using ViT-B, and +2.5% for ViT-H using 1% of the data.",
+    "bibtex": "@inproceedings{bar2024stochastic, title={Stochastic Positional Embeddings Improve Masked Image Modeling}, author={Bar, Amir and Bordes, Florian and Shocher, Assaf and Assran, Mahmoud and Vincent, Pascal and Ballas, Nicolas and Darrell, Trevor and Globerson, Amir and LeCun, Yann}, booktitle={Proceedings of the 41st International Conference on Machine Learning}, pages={2944--2958}, volume={235}, series={Proceedings of Machine Learning Research}, publisher={PMLR}, year={2024}, url={https://proceedings.mlr.press/v235/bar24a.html}}",
+    "image": "assets/flexpred.jpg",
+    "image_hover": "assets/flexpred-hover.jpg",
+    "year": 2024,
+    "summary": "Modeling location uncertainties via stochastic positional embeddings (StoP) improves masked image modeling.",
+    "image_width": 994,
+    "image_height": 506,
+    "preview_width": 994,
+    "preview_height": 506
+  },
+  {
+    "id": "rosetta",
+    "title": "Rosetta Neurons: Mining the Common Units in a Model Zoo",
+    "authors": [
+      "Amil Dravid*",
+      "Yossi Gandelsman*",
+      "Alexei A. Efros",
+      "<strong>Assaf Shocher</strong>"
+    ],
+    "venue": "ICCV 2023",
+    "image_before": "images/rosetta.png",
+    "image_after": "images/rosetta.png",
+    "links": {
+      "page": "https://yossigandelsman.github.io/rosetta_neurons/",
+      "pdf": "https://arxiv.org/pdf/2306.09346.pdf"
+    },
+    "abstract": "Do different neural networks, trained for various vision tasks, share some common representations? In this paper, we demonstrate the existence of common features we call \"Rosetta Neurons\" across a range of models with different architectures, different tasks (generative and discriminative), and different types of supervision. Our findings suggest that certain visual concepts and structures are inherently embedded in the natural world and can be learned by different models regardless of the specific task or architecture. The Rosetta Neurons facilitate model-to-model translation enabling various inversion-based manipulations, including cross-class alignments, shifting, zooming, and more, without the need for specialized training.",
+    "bibtex": "@article{dravid2023rosetta, author={Dravid, Amil and Gandelsman, Yossi and Efros, Alexei A. and Shocher, Assaf}, title={Rosetta Neurons: Mining the Common Units in a Model Zoo}, journal={arXiv preprint arXiv:2306.09346}, year={2023}}",
+    "image": "assets/rosetta.png",
+    "image_hover": "assets/rosetta-hover.png",
+    "image_width": 5146,
+    "image_height": 2056,
+    "preview_width": 5146,
+    "preview_height": 2056
+  },
+  {
+    "id": "vgpnn",
+    "title": "Diverse Generation from a Single Video Made Possible",
+    "authors": [
+      "Niv Haim*",
+      "Ben Feinstein*",
+      "Niv Granot",
+      "<strong>Assaf Shocher</strong>",
+      "Shai Bagon",
+      "Tali Dekel",
+      "Michal Irani"
+    ],
+    "venue": "ECCV 2022",
+    "image_before": "images/vgpnn_before.png",
+    "image_after": "images/vgpnn_after.gif",
+    "links": {
+      "page": "https://nivha.github.io/vgpnn/",
+      "pdf": "https://arxiv.org/pdf/2109.08591.pdf"
+    },
+    "abstract": "Single video GANs require unreasonable amount of time to train, rendering them almost impractical. In this paper we question the necessity of a GAN for generation from a single video, and introduce a non-parametric baseline for a variety of generation and manipulation tasks. We revive classical space-time patches-nearest-neighbors approaches and adapt them to a scalable unconditional generative model, without any learning. This simple baseline surprisingly outperforms single-video GANs in visual quality and realism, and is disproportionately faster (runtime reduced from several days to seconds). These observations show that the classical approaches, if adapted correctly, significantly outperform heavy deep learning machinery for these tasks.",
+    "bibtex": "@InProceedings{haim2022diverse, author={Haim, Niv and Feinstein, Ben and Granot, Niv and Shocher, Assaf and Bagon, Shai and Dekel, Tali and Irani, Michal}, title={Diverse Generation from a Single Video Made Possible}, booktitle={ECCV}, year={2022}}",
+    "image": "assets/vgpnn.png",
+    "image_hover": "assets/vgpnn-hover.gif",
+    "image_width": 1280,
+    "image_height": 625,
+    "preview_width": 585,
+    "preview_height": 226
+  },
+  {
+    "id": "dropthegan",
+    "title": "Drop the GAN: In Defense of Patches Nearest Neighbors as Single Image Generative Models",
+    "authors": [
+      "Niv Granot",
+      "Ben Feinstein",
+      "<strong>Assaf Shocher</strong>",
+      "Shai Bagon",
+      "Michal Irani"
+    ],
+    "venue": "CVPR 2022 (Oral)",
+    "image_before": "images/drop_before.png",
+    "image_after": "images/drop_after.gif",
+    "links": {
+      "page": "https://www.wisdom.weizmann.ac.il/~vision/gpnn/",
+      "pdf": "https://arxiv.org/pdf/2103.15545.pdf"
+    },
+    "abstract": "Single image generative models perform synthesis and manipulation tasks by capturing the distribution of patches within a single image. The classical prevailing approaches are based on an optimization process that maximizes patch similarity. Recently, Single Image GANs were introduced as a superior solution. In this paper, we show that all of these tasks can be performed without any training, within several seconds, in a unified, surprisingly simple framework. We revisit and cast the \"good-old\" patch-based methods into a novel optimization-free framework. Not only is our method faster (×10³-×10⁴ than a GAN), it produces superior results, less artifacts and more realistic global structure than any of the previous approaches.",
+    "bibtex": "@InProceedings{Granot_2022_CVPR, author={Granot, Niv and Feinstein, Ben and Shocher, Assaf and Bagon, Shai and Irani, Michal}, title={Drop the GAN: In Defense of Patches Nearest Neighbors as Single Image Generative Models}, booktitle={CVPR}, year={2022}}",
+    "image": "assets/dropthegan.png",
+    "image_hover": "assets/dropthegan-hover.gif",
+    "image_width": 276,
+    "image_height": 276,
+    "preview_width": 203,
+    "preview_height": 203
+  },
+  {
+    "id": "contconv",
+    "title": "From Discrete to Continuous Convolution Layers",
+    "authors": [
+      "<strong>Assaf Shocher*</strong>",
+      "Ben Feinstein*",
+      "Niv Haim*",
+      "Michal Irani"
+    ],
+    "venue": "arXiv 2020",
+    "image_before": "images/cc_before.gif",
+    "image_after": "images/cc_after.gif",
+    "links": {
+      "pdf": "https://arxiv.org/pdf/2006.11120.pdf"
+    },
+    "abstract": "A basic operation in Convolutional Neural Networks (CNNs) is spatial resizing of feature maps. This is done either by strided convolution (downscaling) or transposed convolution (upscaling). Such operations are limited to a fixed filter moving at predetermined integer steps. We propose a generalization of the common Conv-layer, from a discrete layer to a Continuous Convolution (CC) Layer. CC Layers naturally extend Conv-layers by representing the filter as a learned continuous function over sub-pixel coordinates. This allows learnable and principled resizing of feature maps, to any size, dynamically and consistently across scales. Once trained, the CC layer can be used to output any scale/size chosen at inference time.",
+    "bibtex": "@InProceedings{Shocher_2020_arxiv_cc, author={Shocher, Assaf and Feinstein, Ben and Haim, Niv and Irani, Michal}, title={From Discrete to Continuous Convolution Layers}, booktitle={arXiv}, year={2020}}",
+    "image": "assets/contconv.gif",
+    "image_hover": "assets/contconv-hover.gif",
+    "image_width": 580,
+    "image_height": 280,
+    "preview_width": 580,
+    "preview_height": 280
+  },
+  {
+    "id": "semanticpyramid",
+    "title": "Semantic Pyramid for Image Generation",
+    "authors": [
+      "<strong>Assaf Shocher*</strong>",
+      "Yossi Gandelsman*",
+      "Inbar Mosseri",
+      "Michal Yarom",
+      "Michal Irani",
+      "William T. Freeman",
+      "Tali Dekel"
+    ],
+    "venue": "CVPR 2020 (Oral)",
+    "image_before": "images/semanticpyramid_before.gif",
+    "image_after": "images/semanticpyramid_after.gif",
+    "links": {
+      "page": "https://semantic-pyramid.github.io/",
+      "pdf": "https://openaccess.thecvf.com/content_CVPR_2020/papers/Shocher_Semantic_Pyramid_for_Image_Generation_CVPR_2020_paper.pdf",
+      "video": "https://www.youtube.com/watch?v=IXtqiJ7Nufo"
+    },
+    "abstract": "We present a novel GAN-based model that utilizes the space of deep features learned by a pre-trained classification model. Inspired by classical image pyramid representations, we construct our model as a Semantic Generation Pyramid - a hierarchical framework which leverages the continuum of semantic information encapsulated in such deep features. Given a set of features extracted from a reference image, our model generates diverse image samples, each with matching features at each semantic level of the classification model. We demonstrate that our model results in a versatile and flexible framework that can be used in various classic and novel image generation tasks.",
+    "bibtex": "@InProceedings{Shocher_2020_CVPR_Semantic, author={Shocher, Assaf and Gandelsman, Yossi and Mosseri, Inbar and Yarom, Michal and Irani, Michal and Freeman, William T. and Dekel, Tali}, title={Semantic Pyramid for Image Generation}, booktitle={CVPR}, year={2020}}",
+    "image": "assets/semanticpyramid.gif",
+    "image_hover": "assets/semanticpyramid-hover.gif",
+    "image_width": 633,
+    "image_height": 424,
+    "preview_width": 633,
+    "preview_height": 424
+  },
+  {
+    "id": "kernelgan",
+    "title": "Blind Super-Resolution Kernel Estimation using an Internal-GAN",
+    "authors": [
+      "Sefi Bell-Kligler",
+      "<strong>Assaf Shocher</strong>",
+      "Michal Irani"
+    ],
+    "venue": "NeurIPS 2019 (Oral)",
+    "image_before": "images/kernelgan_before_.gif",
+    "image_after": "images/kernelgan_after_.gif",
+    "links": {
+      "page": "http://www.wisdom.weizmann.ac.il/~vision/kernelgan/",
+      "pdf": "http://papers.nips.cc/paper/8321-blind-super-resolution-kernel-estimation-using-an-internal-gan.pdf",
+      "video": "https://slideslive.com/38923045/blind-superresolution-kernel-estimation-using-an-internalgan",
+      "code": "https://github.com/sefibk/KernelGAN"
+    },
+    "abstract": "Super-resolution (SR) methods typically assume that the low-resolution (LR) image was downscaled from the unknown high-resolution (HR) image by a fixed 'ideal' downscaling kernel. In this paper we introduce \"KernelGAN\", an image-specific Internal-GAN, which trains solely on the LR test image at test time, and learns its internal distribution of patches. Its Generator is trained to produce a downscaled version of the LR test image, such that its Discriminator cannot distinguish between the patch distribution of the downscaled image, and the patch distribution of the original LR image. The Generator, once trained, constitutes the downscaling operation with the correct image-specific SR-kernel.",
+    "bibtex": "@incollection{NIPS2019_kernelgan, title={Blind Super-Resolution Kernel Estimation using an Internal-GAN}, author={Bell-Kligler, Sefi and Shocher, Assaf and Irani, Michal}, booktitle={NeurIPS}, year={2019}}",
+    "image": "assets/kernelgan.gif",
+    "image_hover": "assets/kernelgan-hover.gif",
+    "image_width": 725,
+    "image_height": 210,
+    "preview_width": 725,
+    "preview_height": 210
+  },
+  {
+    "id": "ingan",
+    "title": "InGAN: Capturing and Retargeting the \"DNA\" of a Natural Image",
+    "authors": [
+      "<strong>Assaf Shocher</strong>",
+      "Shai Bagon",
+      "Phillip Isola",
+      "Michal Irani"
+    ],
+    "venue": "ICCV 2019 (Oral)",
+    "image_before": "images/ingan_before.gif",
+    "image_after": "images/ingan.gif",
+    "links": {
+      "page": "http://www.wisdom.weizmann.ac.il/~vision/ingan/",
+      "pdf": "http://www.wisdom.weizmann.ac.il/~vision/ingan/resources/ingan.pdf",
+      "video": "https://youtu.be/OvZVxqUmE3g?t=2429",
+      "code": "https://github.com/assafshocher/InGAN"
+    },
+    "abstract": "Generative Adversarial Networks (GANs) typically learn a distribution of images in a large image dataset. In this paper we propose an \"Internal GAN\" (InGAN) - an image-specific GAN - which trains on a single input image and learns its internal distribution of patches. It is then able to synthesize a plethora of new natural images of significantly different sizes, shapes and aspect-ratios - all with the same internal patch-distribution (same \"DNA\") as the input image. InGAN is fully unsupervised, requiring no additional data other than the input image itself.",
+    "bibtex": "@InProceedings{Shocher_2019_ICCV_InGAN, author={Shocher, Assaf and Bagon, Shai and Isola, Phillip and Irani, Michal}, title={InGAN: Capturing and Retargeting the \"DNA\" of a Natural Image}, booktitle={ICCV}, year={2019}}",
+    "image": "assets/ingan.gif",
+    "image_hover": "assets/ingan-hover.gif",
+    "image_width": 473,
+    "image_height": 389,
+    "preview_width": 473,
+    "preview_height": 389
+  },
+  {
+    "id": "doubledip",
+    "title": "Double-DIP: Unsupervised Image Decomposition via Coupled Deep-Image-Priors",
+    "authors": [
+      "Yossi Gandelsman",
+      "<strong>Assaf Shocher</strong>",
+      "Michal Irani"
+    ],
+    "venue": "CVPR 2019 (Oral)",
+    "image_before": "images/doubledip_before.png",
+    "image_after": "images/doubledip_after.png",
+    "links": {
+      "page": "http://www.wisdom.weizmann.ac.il/~vision/DoubleDIP/index.html",
+      "pdf": "http://www.wisdom.weizmann.ac.il/~vision/DoubleDIP/resources/DoubleDIP.pdf",
+      "video": "https://youtu.be/IyPQqqGPHws?t=1429",
+      "code": "https://github.com/yossigandelsman/DoubleDIP"
+    },
+    "abstract": "Many seemingly unrelated computer vision tasks can be viewed as a special case of image decomposition into separate layers. In this paper we propose a unified framework for unsupervised layer decomposition of a single image, based on coupled \"Deep-image-Prior\" (DIP) networks. We show that coupling multiple such DIPs provides a powerful tool for decomposing images into their basic components, for a wide variety of applications. This capability stems from the fact that the internal statistics of a mixture of layers is more complex than the statistics of each of its individual components. We show the power of this approach for Image-Dehazing, Fg/Bg Segmentation, Watermark-Removal, and more, in a totally unsupervised way.",
+    "bibtex": "@InProceedings{Gandelsman_2019_CVPR, author={Gandelsman, Yossi and Shocher, Assaf and Irani, Michal}, title={Double-DIP: Unsupervised Image Decomposition via Coupled Deep-Image-Priors}, booktitle={CVPR}, year={2019}}",
+    "image": "assets/doubledip.png",
+    "image_hover": "assets/doubledip-hover.png",
+    "image_width": 603,
+    "image_height": 262,
+    "preview_width": 604,
+    "preview_height": 262
+  },
+  {
+    "id": "zssr",
+    "title": "“Zero-Shot” Super-Resolution using Deep Internal Learning",
+    "authors": [
+      "<strong>Assaf Shocher</strong>",
+      "Nadav Cohen",
+      "Michal Irani"
+    ],
+    "venue": "CVPR 2018",
+    "image_before": "images/zssr_before.gif",
+    "image_after": "images/zssr_after.gif",
+    "links": {
+      "page": "http://www.wisdom.weizmann.ac.il/~vision/zssr/",
+      "pdf": "http://www.weizmann.ac.il/math/irani/sites/math.irani/files/uploads/zssr_cameraready.pdf",
+      "code": "https://github.com/assafshocher/ZSSR"
+    },
+    "abstract": "Deep Learning has led to a dramatic leap in SuperResolution (SR) performance. However, being supervised, these methods are restricted to specific training data. Real LR images, however, rarely obey these restrictions, resulting in poor SR results. In this paper we introduce \"Zero-Shot\" SR, which exploits the power of Deep Learning, but does not rely on prior training. We exploit the internal recurrence of information inside a single image, and train a small image-specific CNN at test time, on examples extracted solely from the input image itself. As such, it can adapt itself to different settings per image. This allows to perform SR of real old photos, noisy images, biological data, and other images where the acquisition process is unknown or non-ideal.",
+    "bibtex": "@InProceedings{Shocher_2018_CVPR_ZSSR, author={Shocher, Assaf and Cohen, Nadav and Irani, Michal}, title={“Zero-Shot” Super-Resolution Using Deep Internal Learning}, booktitle={CVPR}, year={2018}}",
+    "image": "assets/zssr.gif",
+    "image_hover": "assets/zssr-hover.gif",
+    "image_width": 834,
+    "image_height": 342,
+    "preview_width": 834,
+    "preview_height": 342
+  }
+]

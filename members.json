@@ -1,0 +1,154 @@
+[
+  {
+    "name": "Asaf Fliesher",
+    "degree": "M.Sc.",
+    "photo": null,
+    "url": null
+  },
+  {
+    "name": "Nevo-Jonathan Sznajder",
+    "degree": "M.Sc.",
+    "photo": null,
+    "url": "https://www.linkedin.com/in/nevo-sznajder-916622279/"
+  },
+  {
+    "name": "Amit Arad",
+    "degree": "M.Sc.",
+    "photo": "assets/members/amit-arad.png",
+    "url": "https://www.linkedin.com/in/amitarad36/",
+    "photo_shape": "circle",
+    "photo_width": 800,
+    "photo_height": 800,
+    "photo_crop": [
+      180,
+      65,
+      450
+    ]
+  },
+  {
+    "name": "Dor Shaul",
+    "degree": "M.Sc.",
+    "photo": "assets/members/dor-shaul.png",
+    "url": "https://www.linkedin.com/in/dor-shaul-888a37207/",
+    "photo_shape": "circle",
+    "photo_width": 800,
+    "photo_height": 800,
+    "photo_crop": [
+      170,
+      5,
+      460
+    ]
+  },
+  {
+    "name": "François Oren Chikli",
+    "degree": "M.Sc.",
+    "photo": "assets/members/francois-oren-chikli.png",
+    "url": "https://www.linkedin.com/in/fran%C3%A7ois-oren-chikli-128327b2/",
+    "photo_shape": "circle",
+    "photo_width": 450,
+    "photo_height": 450,
+    "photo_crop": [
+      15,
+      0,
+      420
+    ]
+  },
+  {
+    "name": "Raz Haim",
+    "degree": "M.Sc.",
+    "photo": "assets/members/raz-haim.png",
+    "url": "https://www.linkedin.com/in/razhaim/",
+    "photo_shape": "circle",
+    "photo_width": 432,
+    "photo_height": 706,
+    "photo_crop": [
+      -109,
+      0,
+      650
+    ],
+    "photo_backdrop": true
+  },
+  {
+    "name": "Ron Libman",
+    "degree": "M.Sc.",
+    "photo": "assets/members/ron-libman.png",
+    "url": "https://www.linkedin.com/in/ron-libman-8826ab1b9/",
+    "photo_shape": "circle",
+    "photo_width": 800,
+    "photo_height": 800,
+    "photo_crop": [
+      130,
+      80,
+      620
+    ]
+  },
+  {
+    "name": "Shahar Merom",
+    "degree": "M.Sc.",
+    "photo": "assets/members/shahar-merom.png",
+    "url": "https://www.linkedin.com/in/shahar-merom-305890242/",
+    "photo_shape": "circle",
+    "photo_width": 2048,
+    "photo_height": 1536,
+    "photo_crop": [
+      650,
+      350,
+      900
+    ]
+  },
+  {
+    "name": "Sophia Feldman",
+    "degree": "M.Sc.",
+    "photo": "assets/members/sophia-feldman.png",
+    "url": "https://www.linkedin.com/in/sophie-d-a0b32514a",
+    "photo_shape": "circle",
+    "photo_width": 1389,
+    "photo_height": 1142,
+    "photo_crop": [
+      175,
+      0,
+      980
+    ]
+  },
+  {
+    "name": "Tal Gorbunov",
+    "degree": "M.Sc.",
+    "photo": "assets/members/tal-gorbunov.png",
+    "url": "https://www.linkedin.com/in/tal-gorbunov/",
+    "photo_shape": "circle",
+    "photo_width": 1500,
+    "photo_height": 2000,
+    "photo_crop": [
+      450,
+      530,
+      650
+    ]
+  },
+  {
+    "name": "Tom Shur",
+    "degree": "M.Sc.",
+    "photo": null,
+    "url": null
+  },
+  {
+    "name": "Yamit Ehrlich",
+    "degree": "M.Sc.",
+    "photo": "assets/members/yamit-ehrlich.png",
+    "url": "https://www.linkedin.com/in/yamit-ehrlich-563255133/",
+    "photo_shape": "circle",
+    "photo_width": 192,
+    "photo_height": 192,
+    "photo_crop": [
+      0,
+      0,
+      192
+    ]
+  },
+  {
+    "name": "Assaf Shocher",
+    "role": "Principal Investigator",
+    "photo": "assets/assaf.png",
+    "photo_shape": "circle",
+    "url": "../about/index.html"
+  }
+]
