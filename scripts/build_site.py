@@ -1,5 +1,5 @@
 from pathlib import Path
-from html import escape as e
+from html import escape as e, unescape
 import argparse, hashlib, json, re
 
 parser=argparse.ArgumentParser(description='Build the static homepage from the publication and member data.')
@@ -9,6 +9,7 @@ site_url='https://assafshocher.github.io/'
 style_version=hashlib.sha256((root/'style.css').read_bytes()).hexdigest()[:10]
 script_version=hashlib.sha256((root/'site.js').read_bytes()).hexdigest()[:10]
 pubs=json.loads((root/'publications.json').read_text())
+author_links=json.loads((root/'author-links.json').read_text())
 mail='mailto:assafshocher@gmail.com'
 scholar='https://scholar.google.co.il/citations?user=ndRmNK8AAAAJ'
 github='https://github.com/assafshocher'
@@ -59,10 +60,21 @@ def shell(page,title,body,math=False):
  dest.parent.mkdir(exist_ok=True)
  dest.write_text(html)
 
+def author_link(author, prefix):
+ display=unescape(re.sub(r'<[^>]*>', '', author))
+ name=display.rstrip('*')
+ label=e(display)
+ if name=='Assaf Shocher':
+  url=prefix+'about/index.html'
+  label=f'<strong>{label}</strong>'
+ else:
+  url=author_links[name]
+ return f'<a href="{e(url)}">{label}</a>'
+
 def pub_rows(prefix):
  result=[]
  for p in pubs:
-  id=p['id']; title=e(p['title']); authors=', '.join(p['authors'])
+  id=p['id']; title=e(p['title']); authors=', '.join(author_link(author,prefix) for author in p['authors'])
   match=re.search(r'20\d\d',p['venue']); year=str(p.get('year',match.group() if match else 'undated'))
   venue=e(p['venue'] if match or year=='undated' else p['venue']+' · '+year)
   url=e(p['links'].get('page',p['links'].get('pdf','')))
@@ -88,7 +100,7 @@ def publication_list(prefix='./',heading='Selected publications'):
 about_bio='''I am an Assistant Professor at the <a href="https://www.technion.ac.il/en/">Technion</a> in the <a href="https://dds.technion.ac.il/">Faculty of Data and Decision Sciences</a>. Previously, I was a Postdoctoral Research Scientist at NVIDIA, a postdoctoral researcher at UC Berkeley with <a href="https://people.eecs.berkeley.edu/~efros/">Alyosha Efros</a>, and a Visiting Scholar at Google DeepMind. I received my PhD from the Weizmann Institute of Science, advised by <a href="https://www.weizmann.ac.il/math/irani/home">Michal Irani</a>, and hold bachelor’s degrees in Physics and Electrical Engineering from <a href="https://www.bgu.ac.il/en/">Ben-Gurion University</a>.'''
 intro=about_bio+' More details in <a href="./about/index.html">About</a>.'
 research_intro='''<p class="intro-paragraph research-principles">My research focuses on computer vision and deep learning. I aim to bridge theory and practical application in machine learning. While admiring engineering advances, I am drawn to the scientific investigation of foundational principles. Fascinated by elegant ideas and mathematical observations, I start each project from first principles to develop methods that offer fundamentally new perspectives on problems. In particular, I study algebraic properties of neural networks, including analogues of inverses and projections, to make them easier to analyze, compose, and control, with applications to inverse problems and adaptive learning.</p>'''
-home=f'''<section class="home-intro" aria-labelledby="home-title"><div class="intro-copy"><h1 id="home-title">Assaf <span>Shocher</span></h1><div class="intro-text"><p class="intro-paragraph">{intro}</p></div></div><div class="portrait-shell"><button class="photo-button" type="button" aria-label="Toggle alternate portrait of Assaf Shocher" aria-pressed="false"><img src="./assets/assaf.png" alt="Assaf Shocher" width="220" height="260"><img class="photo-surprise" src="./assets/assaf-hover.png" alt="" width="220" height="260"></button></div><div class="home-research">{research_intro}</div>{socials()}</section>'''+publication_list()
+home=f'''<section class="home-intro" aria-labelledby="home-title"><div class="intro-copy"><h1 id="home-title"><span>Assaf Shocher</span></h1><div class="intro-text"><p class="intro-paragraph">{intro}</p></div></div><div class="portrait-shell"><button class="photo-button" type="button" aria-label="Toggle alternate portrait of Assaf Shocher" aria-pressed="false"><img src="./assets/assaf.png" alt="Assaf Shocher" width="220" height="260"><img class="photo-surprise" src="./assets/assaf-hover.png" alt="" width="220" height="260"></button></div><div class="home-research">{research_intro}</div>{socials()}</section>'''+publication_list()
 shell('home','Assaf Shocher',home,math=True)
 (root/'publications').mkdir(exist_ok=True)
 (root/'publications'/'index.html').write_text('<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="canonical" href="https://assafshocher.github.io/#publications"><meta http-equiv="refresh" content="0;url=../index.html#publications"><title>Publications</title></head><body><a href="../index.html#publications">Publications are on the homepage.</a></body></html>')

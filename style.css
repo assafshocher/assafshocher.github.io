@@ -30,7 +30,7 @@ svg{display:block}
 .home-research{grid-column:1/-1}
 .home-intro .social-links{grid-column:1/-1;margin-top:0}
 .home-intro h1{font-size:52px;font-weight:650;letter-spacing:-1.8px;line-height:1.15;margin:0 0 23px}
-.home-intro h1 span{background:linear-gradient(115deg,#337ba6 12%,#746ac4 95%);background-clip:text;-webkit-background-clip:text;color:transparent}
+.home-intro h1 span{background:linear-gradient(110deg,#365d7b 0%,#456d96 48%,#686bb0 100%);background-clip:text;-webkit-background-clip:text;color:transparent}
 .intro-paragraph{font-size:16px;line-height:1.85}
 .intro-text p+p{margin-top:15px}
 .research-principles strong{font-weight:600}
@@ -70,6 +70,8 @@ svg{display:block}
 .pub-title{font-size:17px;line-height:1.45;letter-spacing:-.25px;font-weight:600}
 .pub-title a{color:var(--ink)}
 .pub-authors{font-size:12px;line-height:1.65;color:var(--muted);margin-top:4px}
+.pub-authors a{color:#526e80}
+.pub-authors a:hover,.pub-authors a:focus-visible{color:var(--accent)}
 .pub-authors strong{font-weight:600;color:#475767}
 .pub-venue{font-size:12px;font-style:italic;line-height:1.65;color:var(--muted);margin-top:3px}
 .pub-links{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}

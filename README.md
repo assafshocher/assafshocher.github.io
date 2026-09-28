@@ -6,6 +6,7 @@ Static website served by GitHub Pages from the `main` branch.
 
 - Edit `members.json` for names, roles, portraits, and profile links.
 - Edit `publications.json` for publication details and media.
+- Edit `author-links.json` for collaborators’ homepages or professional profiles; links are reused across all publications.
 - Edit `scripts/build_site.py` for page text and HTML templates.
 - `style.css` and `site.js` provide the shared design and interactions.
 
