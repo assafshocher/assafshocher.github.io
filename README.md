@@ -9,6 +9,7 @@ Static website served by GitHub Pages from the `main` branch.
 - Edit `author-links.json` for collaborators’ homepages or professional profiles; links are reused across all publications.
 - Edit `scripts/build_site.py` for page text and HTML templates.
 - `style.css` and `site.js` provide the shared design and interactions.
+- The approved AS mark is `assets/as-mark.svg`. Its browser and home-screen exports are `favicon.svg`, `favicon.ico`, and `apple-touch-icon.png`; the page generator preserves these assets.
 
 Run `python3 scripts/build_site.py` after changing the data or templates, and commit the generated HTML along with the source changes. No build step is required on the server.
 

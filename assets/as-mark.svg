@@ -2,7 +2,6 @@
 <title id="title">Woven Penrose AS</title>
 <desc>A solid square copper S stays behind the top of the blue A, emerges through its triangular opening to cover the right leg and crossbar, and passes behind the lower-left leg.</desc>
 <defs><clipPath id="s-in-front"><path d="M 515 405 L 1000 405 L 1000 1000 L 515 1000 Z"/></clipPath></defs>
-<rect width="1000" height="1000" rx="100" fill="#fcfcfa"/>
 <g id="s-behind-a">
 <path data-face="top-wall-0" d="M 760 206 L 271 206 L 299 175 L 788 175 Z" fill="#E1B18A"/>
 <path data-face="top-wall-4" d="M 661 741 L 230 741 L 258 710 L 689 710 Z" fill="#E1B18A"/>
