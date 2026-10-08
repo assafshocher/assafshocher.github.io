@@ -1,0 +1,119 @@
+[
+  {
+    "week": 1,
+    "part": "Depth, width & optimization",
+    "topic": "Depth changes learning dynamics",
+    "question": "What does adding layers change, even when the resulting function is still linear?",
+    "foundations": "Saxe, McClelland & Ganguli, [*Exact Solutions to the Nonlinear Dynamics of Learning in Deep Linear Neural Networks*](https://arxiv.org/abs/1312.6120) (2014). Matrix factorization, singular modes, and gradient flow.",
+    "recent": "**Bordelon & Pehlevan, [*Deep Linear Network Training Dynamics from Random Initialization: Data, Width, Depth, and Hyperparameter Transfer*](https://proceedings.mlr.press/v267/bordelon25a.html) (2025).** Focus on how parameterization and depth change learning dynamics, and what these models explain about scaling and hyperparameter transfer. This session is mathematically demanding; focus on one tractable setting from the paper.",
+    "presenter": "TBD"
+  },
+  {
+    "week": 2,
+    "part": "Depth, width & optimization",
+    "topic": "NTK and feature learning",
+    "question": "When is a neural network effectively a kernel machine, and when does it learn its own representation?",
+    "foundations": "Jacot et al., [*Neural Tangent Kernel*](https://arxiv.org/abs/1806.07572) (2018). Selected ideas from Yang & Hu, [*Feature Learning in Infinite-Width Neural Networks*](https://arxiv.org/abs/2011.14522) (2021).",
+    "recent": "**Haas et al., [*On the Surprising Effectiveness of Large Learning Rates under Standard Width Scaling*](https://arxiv.org/abs/2505.22491) (2025).** A useful contemporary challenge to an oversimplified reading of NTK: under cross-entropy loss, certain large-learning-rate regimes retain feature learning even in an infinite-width limit. The session should make the assumptions behind the different limits explicit.",
+    "presenter": "TBD"
+  },
+  {
+    "week": 3,
+    "part": "Depth, width & optimization",
+    "topic": "The geometry of optimization: why Muon?",
+    "question": "What does “steepest descent” mean when a parameter is a matrix?",
+    "foundations": "SVD, polar decomposition, and steepest descent under different norms. Selected background from [*Shampoo*](https://arxiv.org/abs/1802.09568) (2018).",
+    "recent": "**Liu et al., [*Muon Is Scalable for LLM Training*](https://arxiv.org/abs/2502.16982) (2025)**, with Bernstein & Newhouse, [*Old Optimizer, New Norm: An Anthology*](https://arxiv.org/abs/2409.20325) (2024), as the mathematical companion. The interesting object is the geometry of the update: what changes when we normalize a matrix through its singular directions?",
+    "presenter": "TBD"
+  },
+  {
+    "week": 4,
+    "part": "Computation & memory",
+    "topic": "Hypernetworks: networks that generate networks",
+    "question": "Can adapting a model become a learned forward pass?",
+    "foundations": "Ha, Dai & Le, [*HyperNetworks*](https://arxiv.org/abs/1609.09106) (2016/17). Conditional parameter generation and amortized computation.",
+    "recent": "**Charakorn et al., [*Text-to-LoRA: Instant Transformer Adaption*](https://arxiv.org/abs/2506.06105) (2025)**, followed by [*Doc-to-LoRA: Learning to Instantly Internalize Contexts*](https://arxiv.org/abs/2602.15902) (2026). The progression is especially nice: generate weights from a task description, then generate adapters that internalize a document or context.",
+    "presenter": "TBD"
+  },
+  {
+    "week": 5,
+    "part": "Computation & memory",
+    "topic": "Attention, recurrence, and state-space duality",
+    "question": "When are apparently different sequence models alternative computations of the same structured operator?",
+    "foundations": "Katharopoulos et al., [*Transformers Are RNNs*](https://proceedings.mlr.press/v119/katharopoulos20a.html) (2020). Linear attention, state-space recurrences, and matrix associativity.",
+    "recent": "**Dao & Gu, [*Transformers Are SSMs: Generalized Models and Efficient Algorithms Through Structured State Space Duality*](https://proceedings.mlr.press/v235/dao24a.html) (2024).** Present the structured-matrix connection underlying Mamba-2. The mathematical content is the correspondence between specified forms of attention and state-space computation, including how it enables different parallel and recurrent implementations.",
+    "presenter": "TBD"
+  },
+  {
+    "week": 6,
+    "part": "Computation & memory",
+    "topic": "Learning as a memory mechanism",
+    "question": "What if the recurrent hidden state is itself a model that learns?",
+    "foundations": "Ba et al., [*Using Fast Weights to Attend to the Recent Past*](https://arxiv.org/abs/1610.06258) (2016). Associative memory and fast versus slow weights.",
+    "recent": "**Sun et al., [*Learning to (Learn at Test Time): RNNs with Expressive Hidden States*](https://arxiv.org/abs/2407.04620) (2024)**, with [*Titans: Learning to Memorize at Test Time*](https://arxiv.org/abs/2501.00663) (2024/25) as the follow-up. Focus on how an online learning rule becomes a recurrent update, and what forgetting and error correction contribute.",
+    "presenter": "TBD"
+  },
+  {
+    "week": 7,
+    "part": "Representations",
+    "topic": "Oscillatory representations and synchronization",
+    "question": "Could relationships between entities be represented through synchronized dynamics?",
+    "foundations": "The Kuramoto model, coupled oscillators, synchronization, and Hopfield-style dynamical networks.",
+    "recent": "**Miyato, Löwe, Geiger & Welling, [*Artificial Kuramoto Oscillatory Neurons*](https://arxiv.org/abs/2410.13821) (2024; ICLR 2025).** A particularly good fit for the course: it uses interacting oscillatory neurons to explore binding and representation. The presentation can connect a classical dynamical system to modern object discovery and reasoning experiments.",
+    "presenter": "TBD"
+  },
+  {
+    "week": 8,
+    "part": "Representations",
+    "topic": "The geometry of self-supervised representations",
+    "question": "What distribution should embeddings have, and how can we encourage it?",
+    "foundations": "Bardes et al., [*VICReg*](https://arxiv.org/abs/2105.04906) (2021/22). Collapse, variance, covariance, and distribution matching.",
+    "recent": "**Balestriero & LeCun, [*LeJEPA: Provable and Scalable Self-Supervised Learning Without the Heuristics*](https://arxiv.org/abs/2511.08544) (2025).** Study the motivation for an isotropic Gaussian embedding distribution and the SIGReg objective. A useful discussion is which downstream assumptions justify the desired representation geometry.",
+    "presenter": "TBD"
+  },
+  {
+    "week": 9,
+    "part": "Representations",
+    "topic": "Do different models learn the same representation?",
+    "question": "What would “the same” actually mean?",
+    "foundations": "Kornblith et al., [*Similarity of Neural Network Representations Revisited*](https://proceedings.mlr.press/v97/kornblith19a.html) (2019): CKA, invariances, and representation comparison.",
+    "recent": "Read Huh et al., [*The Platonic Representation Hypothesis*](https://proceedings.mlr.press/v235/huh24a.html) (2024), then center the discussion on **Gröger et al., [*Revisiting the Platonic Representation Hypothesis: An Aristotelian View*](https://proceedings.mlr.press/v306/groger26a.html) (2026).** The newer paper examines scale-dependent confounds in similarity metrics and finds a more qualified picture, with local neighborhood agreement surviving calibration more convincingly than global agreement.",
+    "presenter": "TBD"
+  },
+  {
+    "week": 10,
+    "part": "Mechanistic interpretability",
+    "topic": "Mechanistic interpretability I: superposition and features",
+    "question": "Are the meaningful units neurons, directions, or a chosen decomposition?",
+    "foundations": "Sparse coding and dictionary learning; Elhage et al., [*Toy Models of Superposition*](https://arxiv.org/abs/2209.10652) (2022).",
+    "recent": "**Templeton et al., [*Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet*](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html) (2024)**, followed by [*Sparse Autoencoders Do Not Find Canonical Units of Analysis*](https://arxiv.org/abs/2502.04878) (2025). The mathematical thread is overcomplete representation, sparsity, and identifiability: an interpretable dictionary need not be a unique decomposition of the network.",
+    "presenter": "TBD"
+  },
+  {
+    "week": 11,
+    "part": "Mechanistic interpretability",
+    "topic": "Mechanistic interpretability II: circuits and causal explanations",
+    "question": "How do we move from identifying features to explaining a computation?",
+    "foundations": "Selected sections of [*A Mathematical Framework for Transformer Circuits*](https://transformer-circuits.pub/2021/framework/index.html) (2021). Residual streams, attention circuits, and interventions.",
+    "recent": "**Ameisen et al., [*Circuit Tracing: Revealing Computational Graphs in Language Models*](https://transformer-circuits.pub/2025/attribution-graphs/methods.html) (2025)**, followed by Arora et al., [*Language Model Circuits Are Sparse in the Neuron Basis*](https://arxiv.org/abs/2601.22594) (2026). Compare feature-based computational graphs with direct analysis in the neuron basis, and examine how interventions validate a proposed circuit.",
+    "presenter": "TBD"
+  },
+  {
+    "week": 12,
+    "part": "Generative modeling",
+    "topic": "Why does diffusion generalize instead of memorizing?",
+    "question": "Where can novelty come from when the empirical training distribution is finite?",
+    "foundations": "Vincent, [*A Connection Between Score Matching and Denoising Autoencoders*](https://doi.org/10.1162/NECO_a_00142) (2011). Denoising as conditional expectation and its connection to the score.",
+    "recent": "**Kamb & Ganguli, [*An Analytic Theory of Creativity in Convolutional Diffusion Models*](https://proceedings.mlr.press/v267/kamb25a.html) (2025).** The paper develops an analytic account of how locality and equivariance can produce recombination and generalization in convolutional diffusion models. Keep the scope of the explanation tied to the models studied.",
+    "presenter": "TBD"
+  },
+  {
+    "week": 13,
+    "part": "Generative modeling",
+    "topic": "From instantaneous velocity to average flow",
+    "question": "What must a generative model learn to traverse an entire time interval in one step?",
+    "foundations": "Lipman et al., [*Flow Matching for Generative Modeling*](https://arxiv.org/abs/2210.02747) (2022/23). Probability paths, conditional vector fields, and ODEs.",
+    "recent": "**Geng et al., [*Mean Flows for One-step Generative Modeling*](https://arxiv.org/abs/2505.13447) (2025)**, with [*Improved Mean Flows: On the Challenges of Fastforward Generative Models*](https://arxiv.org/abs/2512.02012) (2025; revised 2026) as the follow-up. Center the session on the relation between instantaneous and interval-averaged velocity, then explain why that relation creates a nontrivial training problem.",
+    "presenter": "TBD"
+  }
+]
