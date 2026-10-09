@@ -116,7 +116,7 @@ def reading_card(item):
 
 
 overview = """<p>Major ideas. Fundamental questions. The mathematics underneath.</p>
-<p>Deep Deep Learning is a graduate, student-led seminar for studying ideas you have heard about and want to understand properly. The candidate pool connects neural tangent kernels, feature learning, Mamba, in-context learning, test-time training, hypernetworks, world models, model merging, mechanistic interpretability, new generative frameworks, graph neural networks, KANs, and the theory of why training works.</p>
+<p>Deep Deep Learning is a graduate, student-led seminar for studying ideas you have heard about and want to understand properly. The candidate pool connects neural tangent kernels, feature learning, Mamba, in-context learning, test-time training, hypernetworks, world models, online continual learning, model merging, mechanistic interpretability, new generative frameworks, graph neural networks, KANs, and the theory of why training works.</p>
 <p>Each selected topic gets two academic hours. A session builds from the minimum background to one central research paper and selected recent developments. We work through a derivation, examine an experiment, and ask what remains unresolved. Students lead the presentations and discussion.</p>
 <p>Everyone completes one shared pre-reading before each selected meeting. Presenters choose it in consultation with the instructor and announce it one week before class: a tutorial, a short paper or specified sections that take 30–45 minutes. Two guiding questions accompany the reading; each student arrives with one question or point of confusion.</p>
 <p>The reading pool is larger than the course. Students and the instructor choose which topics enter the final schedule; unchosen topics are not assigned. Topic selections and presenter assignments are TBD.</p>"""
@@ -249,7 +249,7 @@ story = [
     Spacer(1, 14),
     P("Instructor: Assaf Shocher. Course contact and office hours: TBD."),
     P("Course description", "Heading2"),
-    P("Major ideas in deep learning, studied through foundational material, a central paper and recent developments. The candidate pool includes NTK, Mamba, in-context learning, test-time training, hypernetworks, world models, model merging, interpretability, new generative frameworks, graph neural networks, KANs, and the theory of why training works."),
+    P("Major ideas in deep learning, studied through foundational material, a central paper and recent developments. The candidate pool includes NTK, Mamba, in-context learning, test-time training, hypernetworks, world models, online continual learning, model merging, interpretability, new generative frameworks, graph neural networks, KANs, and the theory of why training works."),
     P("Topic selection", "Heading2"),
     P(f"The {len(topics)} topics in this syllabus are candidates, not weekly assignments. Students and the instructor choose which topics enter the final {len(weeks)}-week schedule. Unchosen topics are not assigned. Selection, order and presenter assignments: TBD. Each selected topic gets two academic hours."),
     P("Learning objectives", "Heading2"),

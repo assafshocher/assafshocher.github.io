@@ -12,7 +12,7 @@
     },
     {
       "id": 3,
-      "title": "Representations & world models"
+      "title": "Representations, world models & continual learning"
     },
     {
       "id": 4,
@@ -159,6 +159,26 @@
       "part": 3
     },
     {
+      "id": "online-continual-learning",
+      "part": 3,
+      "topic": "Online continual learning: stability, plasticity and replay",
+      "question": "How can a network keep adapting to a changing data stream while retaining useful knowledge?",
+      "foundations": "Chaudhry et al., [On Tiny Episodic Memories in Continual Learning](https://arxiv.org/abs/1902.10486) (2019): experience replay with limited memory. Kirkpatrick et al., [Overcoming Catastrophic Forgetting in Neural Networks](https://arxiv.org/abs/1612.00796) (PNAS 2017): elastic weight consolidation and Fisher-weighted protection. Optional mathematical background: Martens & Grosse, [Optimizing Neural Networks with Kronecker-factored Approximate Curvature](https://proceedings.mlr.press/v37/martens15.html) (ICML 2015), selected sections introducing the Fisher and one K-FAC block.",
+      "main": "Urettini & Carta, [Online Curvature-Aware Replay: Leveraging 2nd Order Information for Online Continual Learning](https://proceedings.mlr.press/v267/urettini25a.html) (ICML 2025). Focus on Sections 3–5: formulate the streaming update, constrain changes to predictions on replay data, and derive the curvature-aware step.",
+      "recent": "Cignoni et al., [CLA: Latent Alignment for Online Continual Self-Supervised Learning](https://proceedings.mlr.press/v330/cignoni26a.html) (CoLLAs 2026): compare representation alignment with labeled prediction constraints. Conceptual companion: Dohare et al., [Loss of Plasticity in Deep Continual Learning](https://www.nature.com/articles/s41586-024-07711-7) (Nature 2024), which distinguishes forgetting old knowledge from losing the ability to learn new tasks; its broader continual-learning experiments are not all single-pass online protocols.",
+      "focus": "Derive the local KL/Fisher constraint and the preconditioned update on a small example. Explain damping, memory representativeness and the difference between forgetting and loss of plasticity. Evaluate accuracy during the stream as well as at its end. Check what information each experiment provides: OCAR hides task boundaries, but its class-incremental replay-Fisher weighting uses the number of new classes per experience.",
+      "scope": "Two academic hours: choose OCAR or the self-supervised alternative below, develop one central derivation, inspect one streaming experiment and make one short comparison. A one-pass incoming stream can allow replay and bounded repeated updates on the current minibatch; it does not imply exactly one gradient step per observation.",
+      "routes": [
+        {
+          "title": "Self-supervised continual representations",
+          "foundations": "Chaudhry et al., [On Tiny Episodic Memories in Continual Learning](https://arxiv.org/abs/1902.10486) (2019), for replay; Chen & He, [Exploring Simple Siamese Representation Learning](https://openaccess.thecvf.com/content/CVPR2021/html/Chen_Exploring_Simple_Siamese_Representation_Learning_CVPR_2021_paper.html) (CVPR 2021), for the SimSiam objective and stop-gradient.",
+          "main": "Cignoni et al., [CLA: Latent Alignment for Online Continual Self-Supervised Learning](https://proceedings.mlr.press/v330/cignoni26a.html) (CoLLAs 2026), Sections 3–5. An unlabeled one-pass stream, hidden task boundaries, bounded replay and a fixed computational budget.",
+          "recent": "Compare with [OCAR](https://proceedings.mlr.press/v267/urettini25a.html) (ICML 2025): protecting predictions versus aligning representations.",
+          "focus": "Derive the self-supervised learning and alignment objective. Compare EMA-teacher and stored-feature targets, explain why alignment applies to replay samples, and inspect the consequences of a fixed computational budget. The reported budgets count processed examples rather than establishing exact equality of FLOPs."
+        }
+      ]
+    },
+    {
       "id": "merging",
       "topic": "Model merging and task arithmetic",
       "question": "Why can adding parameter updates combine capabilities, and when does task interference prevent it?",
@@ -194,9 +214,9 @@
       "scope": "One introductory seminar of two academic hours. Use superposition and sparse features as background, then develop one circuit-tracing case and intervention. Representation alignment is optional discussion material. The session centers on circuit tracing; full sparse-autoencoder and alignment analyses are optional.",
       "comparisons": [
         {
-          "title": "representation alignment: do models learn the same features?",
-          "readings": "Optional background: Kornblith et al., [Similarity of Neural Network Representations Revisited](https://proceedings.mlr.press/v97/kornblith19a.html) (ICML 2019), centered kernel alignment. Huh et al., [Position: The Platonic Representation Hypothesis](https://proceedings.mlr.press/v235/huh24a.html) (ICML 2024). Recent critique: Gröger, Wen & Brbic, [Revisiting the Platonic Representation Hypothesis: An Aristotelian View](https://proceedings.mlr.press/v306/groger26a.html) (ICML 2026), calibration and global versus local similarity. Related caution: Leask et al., [Sparse Autoencoders Do Not Find Canonical Units of Analysis](https://arxiv.org/abs/2502.04878) (2025).",
-          "focus": "If it serves the chosen circuit case, use a short discussion to ask whether features are canonical across extraction methods or shared across models. Similarity of entire representations, matching individual features and establishing causal roles are different claims. A careful derivation of similarity measures and a cross-model alignment study are optional further reading; they are not required parts of this meeting."
+          "title": "the Platonic representation hypothesis and unpaired alignment",
+          "readings": "Background: Kornblith et al., [Similarity of Neural Network Representations Revisited](https://proceedings.mlr.press/v97/kornblith19a.html) (ICML 2019), centered kernel alignment. Foundational hypothesis: Huh et al., [Position: The Platonic Representation Hypothesis](https://proceedings.mlr.press/v235/huh24a.html) (ICML 2024). Recent development: Schnaus, Dagès, Cremers, Wang & Isola, [Shared Geometry As A Rosetta Stone: Cross-Modal Alignment Without Paired Data](https://arxiv.org/abs/2610.09411) (October 2026 preprint); the authors’ [interactive project](https://dominik-schnaus.github.io/unpaired-rosetta/) illustrates how shared geometry permits coarse cross-modal alignment without pairs at the alignment stage. Recent critique: Gröger, Wen & Brbic, [Revisiting the Platonic Representation Hypothesis: An Aristotelian View](https://proceedings.mlr.press/v306/groger26a.html) (ICML 2026). Related caution: Leask et al., [Sparse Autoencoders Do Not Find Canonical Units of Analysis](https://arxiv.org/abs/2502.04878) (2025).",
+          "focus": "Use Rosetta as a practical test of a consequence of the Platonic hypothesis: is shared geometry sufficient to connect independently trained representations without paired examples? Its coarse geometric initialization and alternating assignment / Procrustes updates recover useful broad semantic structure, while finer details remain difficult. Paired samples are still used for evaluation and the CKA analysis of when alignment succeeds. Distinguish useful geometric correspondence from universal convergence, canonical features and causal circuit explanations. This is an optional discussion within the selected interpretability seminar; the full alignment derivation is further reading."
         }
       ]
     },
