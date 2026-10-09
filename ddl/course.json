@@ -24,7 +24,7 @@
     },
     {
       "id": 6,
-      "title": "Symmetry & alternative dynamics"
+      "title": "Graphs, symmetry & neural architectures"
     }
   ],
   "topics": [
@@ -44,7 +44,7 @@
       "question": "How should initialization and updates scale as networks become wider or deeper?",
       "foundations": "Yang & Hu, [Tensor Programs IV: Feature Learning in Infinite-Width Neural Networks](https://proceedings.mlr.press/v139/yang21c.html) (2021), selected sections on parameterization and feature learning. Review the NTK linearized regime as contrasting background; a separate NTK seminar is optional.",
       "main": "Yang et al., [Tensor Programs V: Tuning Large Neural Networks via Zero-Shot Hyperparameter Transfer](https://arxiv.org/abs/2203.03466) (NeurIPS 2021; arXiv 2022).",
-      "recent": "Dey et al., [Don't Be Lazy: CompleteP Enables Compute-Efficient Deep Transformers](https://arxiv.org/abs/2505.01618) (2025).",
+      "recent": "Dey et al., [Don't Be Lazy: CompleteP Enables Compute-Efficient Deep Transformers](https://arxiv.org/abs/2505.01618) (2025). Optional theory: Chen, Yang, Zhao & Gu, [Global Convergence and Rich Feature Learning in L-Layer Infinite-Width Neural Networks under μ Parametrization](https://proceedings.mlr.press/v267/chen25cd.html) (ICML 2025). Read the assumptions and result statement; this infinite-width analysis does not establish unrestricted finite-network SGD convergence.",
       "focus": "Work through activation and update scaling in a small multilayer network, and inspect a learning-rate transfer experiment. Discuss the additional constraints introduced by depth; width transfer alone does not establish depth transfer or effective nonlinear learning.",
       "part": 1
     },
@@ -57,6 +57,26 @@
       "recent": "Kovalev, [Understanding Gradient Orthogonalization for Deep Learning via Non-Euclidean Trust-Region Optimization](https://arxiv.org/abs/2503.12645) (2025).",
       "focus": "Derive the spectral-norm-constrained linearized update using the SVD and explain its polar factor and Newton–Schulz approximation. Examine a scaling experiment and distinguish the geometric argument from implementation choices, weight decay and empirical comparisons with AdamW.",
       "part": 1
+    },
+    {
+      "id": "training-dynamics",
+      "part": 1,
+      "topic": "Why training works: convergence and loss landscapes",
+      "question": "Which assumptions let us prove that training reaches a global minimum, and how close are those proofs to practical networks?",
+      "scope": "One seminar of two academic hours. Choose a convergence proof for a restricted model (shown below), or the edge-of-stability dynamics focus. A survey of all optimization and generalization theory would be too broad for one meeting.",
+      "foundations": "Karimi, Nutini & Schmidt, [Linear Convergence of Gradient and Proximal-Gradient Methods Under the Polyak-Lojasiewicz Condition](https://arxiv.org/abs/1608.04636) (2016), the PL inequality and gradient-flow loss decay. Historical context: Choromanska et al., [The Loss Surfaces of Multilayer Networks](https://proceedings.mlr.press/v38/choromanska15.html) (2015; 2014 preprint), the spin-glass analogy and its assumptions. Optional contrast: Soudry & Hoffer, [Exponentially vanishing sub-optimal local minima in multilayer neural networks](https://arxiv.org/abs/1702.05777) (ICLR 2018), volumes of regions containing minima versus a training trajectory.",
+      "main": "Dana, Pillaud-Vivien & Bach, [Convergence of Shallow ReLU Networks on Weakly Interacting Data](https://papers.nips.cc/paper_files/paper/2025/file/08f805247677d42eac83664ccf9ef3ef-Paper-Conference.pdf) (NeurIPS 2025). Gradient flow in finite shallow ReLU networks, weakly interacting inputs and a particular asymmetric randomized initialization.",
+      "recent": "Petit, Poon & Peyré, [On the global convergence of gradient flow for wide shallow models beyond homogeneous nonlinearities](https://arxiv.org/abs/2605.10775) (2026). The result is conditional: if the studied Wasserstein gradient flow converges, its limit is globally optimal. Watch list: Soudry’s [publication page](https://soudry.github.io/publications/) lists Global Convergence in Deep Networks via the Second Law of Thermodynamics (NeurIPS 2026); a linked manuscript was unavailable when this list was checked, so reading and claims remain TBD.",
+      "focus": "Derive loss decay from a PL inequality, then explain how the main paper maintains a trajectory-wise condition. Inspect its data, initialization, width and gradient-flow assumptions. Separate landscape geometry, reaching a minimum, selecting a solution and generalization. These results make concrete progress; they do not supply a general guarantee for finite deep networks trained with SGD or Adam.",
+      "routes": [
+        {
+          "title": "edge of stability and Central Flows",
+          "foundations": "Quadratic losses, Hessian eigenvalues and the gradient-descent stability threshold 2 / learning rate. Cohen et al., [Gradient Descent on Neural Networks Typically Occurs at the Edge of Stability](https://arxiv.org/abs/2103.00065) (ICLR 2021), short-term loss oscillations and longer-term progress.",
+          "main": "Cohen, Damian, Talwalkar, Kolter & Lee, [Understanding Optimization in Deep Learning with Central Flows](https://proceedings.iclr.cc/paper_files/paper/2025/hash/62bf42cc047db5b290e7d5737c1f6a8d-Abstract-Conference.html) (ICLR 2025). Start with the gradient-descent case and the authors’ [illustrated explanation](https://centralflows.github.io/).",
+          "recent": "Berthier, [The Multiple Timescales of Gradient Descent on the Edge of Stability: A Perturbative Derivation of the Central Flow](https://arxiv.org/abs/2609.01034) (2026), selected introduction and toy example. This formal asymptotic derivation does not provide remainder bounds or a convergence proof.",
+          "focus": "Derive the quadratic stability threshold, examine self-stabilization, and show how averaging oscillations produces a smoother trajectory description. Use one example to compare the discrete iterates and central flow. Explain what this reveals about optimization dynamics without treating it as a general global-convergence theorem."
+        }
+      ]
     },
     {
       "id": "mamba",
@@ -80,21 +100,21 @@
     },
     {
       "id": "ttt",
-      "topic": "Test-time learning: TTT and IT³",
+      "topic": "Test-time training (TTT)",
       "question": "What should a model learn at inference, and which objective makes those updates useful?",
-      "foundations": "Sun, Wang, Liu, Miller, Efros & Hardt, [*Test-Time Training with Self-Supervision for Generalization under Distribution Shifts*](https://proceedings.mlr.press/v119/sun20b.html) (ICML 2020). Shared encoders, self-supervised auxiliary tasks and the gradient-alignment condition under the paper’s smooth/convex assumptions.",
-      "main": "Durasov, Shocher, Oner, Chechik, Efros & Fua, [*IT³: Idempotent Test-Time Training*](https://proceedings.mlr.press/v267/durasov25a.html) (ICML 2025). Learn prediction feedback and use consistency between successive predictions as the test-time objective.",
-      "recent": "IT³ is the recent anchor. Supplementary resources: [arXiv paper](https://arxiv.org/abs/2410.04201) and [official implementation](https://github.com/nikitadurasov/ittt). Compare its idempotence-based consistency objective with the original TTT auxiliary-task design.",
-      "focus": "Explain the original TTT gradient-alignment intuition, derive the IT³ consistency loss, and examine one adaptation experiment or failure case. IT³ requires its own training setup. Keep neural memory as a brief comparison; discuss when consistency is uninformative and how to stop adaptation.",
+      "foundations": "Sun, Wang, Liu, Miller, Efros & Hardt, [Test-Time Training with Self-Supervision for Generalization under Distribution Shifts](https://proceedings.mlr.press/v119/sun20b.html) (ICML 2020), selected introduction and auxiliary-task formulation. Ba et al., [Using Fast Weights to Attend to the Recent Past](https://arxiv.org/abs/1610.06258) (2016), fast versus slow weights and associative memory.",
+      "main": "Sun et al., [Learning to (Learn at Test Time): RNNs with Expressive Hidden States](https://arxiv.org/abs/2407.04620) (2024). A model is the recurrent hidden state, and self-supervised gradient updates are the state transition.",
+      "recent": "Tandon et al., [End-to-End Test-Time Training for Long Context](https://arxiv.org/abs/2512.23675) (2025). Next-token updates compress context into weights, with a meta-learned initialization. Optional adaptation comparison: Durasov, Shocher, Oner, Chechik, Efros & Fua, [IT³: Idempotent Test-Time Training](https://proceedings.mlr.press/v267/durasov25a.html) (ICML 2025); [implementation](https://github.com/nikitadurasov/ittt).",
+      "focus": "Work through a TTT-Linear update and its recurrent computation. Compare layer-local reconstruction with end-to-end next-token adaptation, and distinguish sequence memory from adapting to a shifted test distribution. IT³ is an optional consistency-based adaptation comparison; it requires its own training setup.",
       "part": 2,
-      "scope": "Choose one route for a seminar of two academic hours: adaptation with IT³ (shown below), or learning as neural memory (alternate route). Both routes can be selected independently by different presenters if there is interest.",
+      "scope": "One seminar of two academic hours. Choose learning as neural memory (shown below) or distribution-shift adaptation (alternate focus). IT³ is supplementary reading. Neither focus requires a second week.",
       "routes": [
         {
-          "title": "learning as neural memory",
-          "foundations": "Ba et al., [*Using Fast Weights to Attend to the Recent Past*](https://arxiv.org/abs/1610.06258) (2016). Fast versus slow weights and associative memory; recap the original Sun et al. TTT formulation. Original TTT: Sun et al., [Test-Time Training with Self-Supervision for Generalization under Distribution Shifts](https://proceedings.mlr.press/v119/sun20b.html) (2020), selected introduction.",
-          "main": "Sun et al., [*Learning to (Learn at Test Time): RNNs with Expressive Hidden States*](https://arxiv.org/abs/2407.04620) (2024). A model is the recurrent hidden state, and self-supervised gradient updates are the state transition.",
-          "recent": "Tandon et al., [*End-to-End Test-Time Training for Long Context*](https://arxiv.org/abs/2512.23675) (2025). Next-token updates compress context into weights, with a meta-learned initialization. Brief contrast: [IT³](https://proceedings.mlr.press/v267/durasov25a.html) (2025), adaptation under distribution shift.",
-          "focus": "Work through a TTT-Linear update and its recurrent computation. Compare layer-local reconstruction with end-to-end next-token adaptation; distinguish sequence memory from adapting to a shifted test distribution. This is a complete alternative seminar of two academic hours, rather than a required continuation of the adaptation route."
+          "title": "distribution-shift adaptation",
+          "foundations": "Shared encoders, auxiliary self-supervision and gradient alignment. Read selected setup and theory sections of the original Sun et al. TTT paper; the stated gradient-alignment result uses smoothness and convexity assumptions.",
+          "main": "Sun et al., [Test-Time Training with Self-Supervision for Generalization under Distribution Shifts](https://proceedings.mlr.press/v119/sun20b.html) (ICML 2020).",
+          "recent": "Comparison: Wang et al., [Tent: Fully Test-time Adaptation by Entropy Minimization](https://arxiv.org/abs/2006.10726) (ICLR 2021). Recent optional extension: Durasov et al., [IT³: Idempotent Test-Time Training](https://proceedings.mlr.press/v267/durasov25a.html) (ICML 2025), prediction feedback and consistency between successive predictions.",
+          "focus": "Derive the original TTT gradient-alignment intuition and examine one adaptation experiment or failure case. Compare auxiliary self-supervision with entropy minimization; use IT³ as a short additional example if time permits. Discuss uninformative consistency, model collapse and stopping adaptation."
         }
       ]
     },
@@ -154,9 +174,19 @@
       "question": "Why can adding parameter updates combine capabilities, and when does task interference prevent it?",
       "foundations": "Ilharco et al., [Editing Models with Task Arithmetic](https://arxiv.org/abs/2212.04089) (2023). Review parameter differences relative to a shared pretrained checkpoint and function-space linearization from NTK background.",
       "main": "Ortiz-Jimenez, Favero & Frossard, [Task Arithmetic in the Tangent Space: Improved Editing of Pre-Trained Models](https://arxiv.org/abs/2305.12827) (2023).",
-      "recent": "Hitit, Girrbach & Akata, [A Systematic Study of In-the-Wild Model Merging for Large Language Models](https://arxiv.org/abs/2511.21437) (2025 preprint; TMLR 2026).",
+      "recent": "Hitit, Girrbach & Akata, [A Systematic Study of In-the-Wild Model Merging for Large Language Models](https://arxiv.org/abs/2511.21437) (2025 preprint; TMLR 2026). Alternative direction: Gan & Isola, [Neural Thickets: Diverse Task Experts Are Dense Around Pretrained Weights](https://proceedings.mlr.press/v306/gan26a.html) (ICML 2026), sampling, selecting and ensembling nearby task experts.",
       "focus": "Derive how adding task vectors affects a linearized model and examine the proposed weight-disentanglement mechanism. Compare controlled task combinations with heterogeneous checkpoints, including conflicting objectives and gains relative to the best individual model.",
-      "part": 4
+      "part": 4,
+      "scope": "Choose task arithmetic or Neural Thickets for one seminar of two academic hours. Both examine capabilities near pretrained weights; averaging weights and ensembling predictions have different mechanisms and inference costs.",
+      "routes": [
+        {
+          "title": "Neural Thickets and gradient-free adaptation",
+          "foundations": "Wortsman et al., [Model soups: averaging weights of multiple fine-tuned models improves accuracy without increasing inference time](https://proceedings.mlr.press/v162/wortsman22a.html) (ICML 2022), shared pretrained initialization, weight averaging and prediction ensembles. Recap task vectors from Ilharco et al., [Editing Models with Task Arithmetic](https://arxiv.org/abs/2212.04089) (2023).",
+          "main": "Gan & Isola, [Neural Thickets: Diverse Task Experts Are Dense Around Pretrained Weights](https://proceedings.mlr.press/v306/gan26a.html) (ICML 2026). RandOpt samples Gaussian weight perturbations, evaluates candidates on task data, selects experts and ensembles their predictions. See the authors’ [illustrated project](https://thickets.mit.edu/).",
+          "recent": "Cendra et al., [Can Bayesian Optimization Efficiently Find a Strong Single Expert in Neural Thickets?](https://arxiv.org/abs/2608.10867) (2026). A follow-up on finding one expert with fewer evaluations in the tested low-dimensional search settings.",
+          "focus": "Explain expert density and diversity around a pretrained checkpoint. Work through the probability of finding a useful perturbation after repeated sampling, then compare weight averaging, expert selection and prediction ensembling. Account for task-data evaluations and ensemble inference cost. This is evidence about pretrained neighborhoods, not a proof that random initialization or unrestricted gradient descent succeeds."
+        }
+      ]
     },
     {
       "id": "features",
@@ -229,6 +259,37 @@
       "main": "Miyato, Löwe, Geiger & Welling, [Artificial Kuramoto Oscillatory Neurons](https://arxiv.org/abs/2410.13821) (ICLR 2025; 2024 preprint).",
       "recent": "Iqbal et al., [Spontaneous symmetry breaking and Goldstone modes for deep information propagation](https://arxiv.org/abs/2605.14685) (2026 preprint). A related perspective on symmetry and persistent information propagation, rather than a direct analysis of AKOrN.",
       "focus": "Derive the two-oscillator intuition, trace the generalized neural update, and study one object-discovery or reasoning experiment. Use the Goldstone paper for a brief connection to depth and memory; its physics derivations are optional."
+    },
+    {
+      "id": "kan",
+      "part": 6,
+      "topic": "KANs: learnable functions and scientific discovery",
+      "question": "When does learning the functions on network edges help more than learning ordinary weights?",
+      "scope": "Two academic hours: the original architecture, one scientific example and one controlled comparison. Approximation-rate proofs are optional.",
+      "foundations": "Kolmogorov, [On the Representation of Continuous Functions of Several Variables as Superpositions of Continuous Functions of One Variable and Addition](https://cs.uwaterloo.ca/~y328yu/classics/Kolmogorov57.pdf) (1957), theorem statement only. Review one-dimensional spline bases using the main paper’s architecture section. Separate representation existence from efficient approximation and learnability.",
+      "main": "Liu et al., [KAN: Kolmogorov-Arnold Networks](https://arxiv.org/abs/2404.19756) (ICLR 2025; 2024 preprint), selected sections on learned edge functions, grid refinement and one function-fitting experiment.",
+      "recent": "Liu et al., [KAN 2.0: Kolmogorov-Arnold Networks Meet Science](https://arxiv.org/abs/2408.10205) (2024), one scientific example. Essential comparison: Yu, Yu & Wang, [KAN or MLP: A Fairer Comparison](https://arxiv.org/abs/2407.16674) (2024). Recent optional theory: Kratsios, Kim & Furuya, [Approximation Rates in Besov Norms and Sample-Complexity of Kolmogorov-Arnold Networks with Residual Connections](https://arxiv.org/abs/2504.15110) (2025), assumptions and result statements.",
+      "focus": "Build a small spline-based KAN and explain its compositional bias and possible formula recovery. Compare against an MLP with matched parameters or FLOPs and a spline-equipped MLP. Ask which benefit comes from the function basis and which comes from the architecture; the representation theorem alone does not establish a practical advantage."
+    },
+    {
+      "id": "gnn-expressivity",
+      "part": 6,
+      "topic": "GNNs: message passing and graph transformers",
+      "question": "What graph structure can a neural network distinguish, and what does global attention add?",
+      "scope": "Two academic hours on message-passing expressivity and structural encodings in graph transformers. Over-squashing is a separate alternative focus, rather than another required component.",
+      "foundations": "Sanchez-Lengeling et al., [A Gentle Introduction to Graph Neural Networks](https://distill.pub/2021/gnn-intro/) (Distill 2021), a visual primer. Xu, Hu, Leskovec & Jegelka, [How Powerful are Graph Neural Networks?](https://arxiv.org/abs/1810.00826) (ICLR 2019), multiset aggregation, GIN and the 1-Weisfeiler-Leman expressivity ceiling.",
+      "main": "Stoll, Müller & Morris, [Generalizable Insights for Graph Transformers in Theory and Practice](https://arxiv.org/abs/2511.08028) (NeurIPS 2025), selected theory sections and one structural-encoding ablation.",
+      "recent": "Ma et al., [Plain Transformers Can be Powerful Graph Learners](https://arxiv.org/abs/2504.12588) (TMLR 2026; 2025 preprint). Examine the graph-specific adaptations behind the title. Optional benchmark discussion: Bechler-Speicher et al., [Position: Graph Learning Will Lose Relevance Due To Poor Benchmarks](https://proceedings.mlr.press/v267/bechler-speicher25a.html) (ICML 2025).",
+      "focus": "Work through a pair of graphs that 1-WL-style message passing cannot distinguish. Explain how structural or positional information changes the comparison with a graph transformer. Distinguish theoretical expressivity, measured accuracy and benchmark quality; leave the full higher-order hierarchy for optional reading.",
+      "routes": [
+        {
+          "title": "over-squashing and graph geometry",
+          "foundations": "Kipf & Welling, [Semi-Supervised Classification with Graph Convolutional Networks](https://arxiv.org/abs/1609.02907) (ICLR 2017), neighborhood propagation. Alon & Yahav, [On the Bottleneck of Graph Neural Networks and its Practical Implications](https://arxiv.org/abs/2006.05205) (ICLR 2021), information bottlenecks and over-squashing.",
+          "main": "Wilson, Bechler-Speicher & Veličković, [Cayley Graph Propagation](https://proceedings.mlr.press/v269/wilson25a.html) (2025), an expander-based propagation template.",
+          "recent": "Liang et al., [Mitigating Over-Squashing in Graph Neural Networks by Spectrum-Preserving Sparsification](https://proceedings.mlr.press/v267/liang25a.html) (ICML 2025), a comparison of graph modification and propagation costs.",
+          "focus": "Use a bottleneck graph to distinguish over-squashing from over-smoothing. Explain expander connectivity intuitively, then inspect one propagation experiment and the cost of modifying graph connectivity. A complete group-theory or spectral proof is optional."
+        }
+      ]
     }
   ],
   "weeks": [

@@ -5,7 +5,7 @@ Static graduate seminar website. Served at /ddl/ by the parent GitHub Pages repo
 Pages: index.html, schedule.html, seminar.html. Downloadable syllabus: assets/syllabus.pdf.
 Each selected topic gets two academic hours. Meeting details, dates, course registration fields, assessment weights and presenter assignments remain TBD. No exam.
 
-The reading programme is a candidate pool larger than the course. All candidates have equal status; only selected topics enter the final 13-week schedule. The weekly table currently has TBD for every topic and presenter, with no dates. TTT offers adaptation / IT³ and neural-memory focuses within one candidate. Drifting and IMLE share a one-step-generation candidate with alternative focuses. These do not reserve two weeks each. Flow matching is assumed background from the base course.
+The reading programme is a candidate pool larger than the course. All candidates have equal status; only selected topics enter the final 13-week schedule. The weekly table currently has TBD for every topic and presenter, with no dates. TTT offers neural-memory and distribution-shift adaptation focuses within one candidate; IT³ is supplementary reading. Model merging offers Neural Thickets as an alternate focus. KANs, GNNs and convergence theory are additional candidates, each narrowed to one central question. Drifting and IMLE share a one-step-generation candidate with alternative focuses. These do not reserve two weeks each. Flow matching is assumed background from the base course.
 
 course.json is the canonical source. It contains:
 

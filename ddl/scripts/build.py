@@ -109,7 +109,7 @@ def reading_card(item):
 
 
 overview = """<p>Major ideas. Fundamental questions. The mathematics underneath.</p>
-<p>Deep Deep Learning is a graduate, student-led seminar for studying ideas you have heard about and want to understand properly. The candidate pool connects neural tangent kernels, feature learning, Mamba, in-context learning, test-time training, hypernetworks, world models, model merging, mechanistic interpretability, and new generative frameworks.</p>
+<p>Deep Deep Learning is a graduate, student-led seminar for studying ideas you have heard about and want to understand properly. The candidate pool connects neural tangent kernels, feature learning, Mamba, in-context learning, test-time training, hypernetworks, world models, model merging, mechanistic interpretability, new generative frameworks, graph neural networks, KANs, and the theory of why training works.</p>
 <p>Each selected topic gets two academic hours. A session builds from the minimum background to one central research paper and selected recent developments. We work through a derivation, examine an experiment, and ask what remains unresolved. Students lead the presentations and discussion.</p>
 <p>The reading pool is larger than the course. Students and the instructor choose which topics enter the final schedule; unchosen topics are not assigned. Topic selections and presenter assignments are TBD.</p>"""
 logistics = [
@@ -160,9 +160,9 @@ schedule = f"""
 <section class="section page-heading"><div class="hero-badge">Candidate pool · Two academic hours per selected topic</div><h1>Topics &amp; readings</h1><p class="section-subtitle">Learn the foundations, understand a central paper, examine what came next.</p>
 <p>These {len(topics)} topics are candidates for the seminar. Only the topics students and the instructor choose will enter the final {len(weeks)}-week schedule. Selection, order and presenter assignments are TBD.</p>
 <p>Each selected topic gets two academic hours and one focused question. The main paper is the center; background and recent comparisons are selective reading, not several full-paper presentations. Alternative focuses within a topic are choices for the same session.</p>
-<p>TTT can focus on adaptation with the original Sun et al. paper and IT³, or on learning as neural memory. Drifting and IMLE can share a comparative session on one-step generation, with one main mechanism developed in depth. Neither topic reserves two weeks. Flow matching is assumed background from the base course.</p>
+<p>TTT can focus on learning as neural memory or on distribution-shift adaptation with the original Sun et al. paper. IT³ is supplementary reading. Drifting and IMLE can share a comparative session on one-step generation, with one main mechanism developed in depth. Neither topic reserves two weeks. Flow matching is assumed background from the base course.</p>
 <p class="section-end"><a class="btn btn-secondary" href="assets/syllabus.pdf" download>Download syllabus (PDF)</a></p></section>
-<section class="section schedule-tools"><label for="reading-search">Find a topic, author or paper</label><input id="reading-search" type="search" placeholder="Try Mamba, IT³, drifting or IMLE…" autocomplete="off"><p id="result-count" class="muted" aria-live="polite">{len(topics)} candidate topics · Final selection TBD</p><div class="part-links">{part_links}</div></section>
+<section class="section schedule-tools"><label for="reading-search">Find a topic, author or paper</label><input id="reading-search" type="search" placeholder="Try Mamba, KAN, Neural Thickets or convergence…" autocomplete="off"><p id="result-count" class="muted" aria-live="polite">{len(topics)} candidate topics · Final selection TBD</p><div class="part-links">{part_links}</div></section>
 <section class="section overview-section" id="topic-index"><h2 class="section-title">The topic pool at a glance</h2><div class="schedule-overview topic-overview"><table><thead><tr><th scope="col">Candidate topic</th><th scope="col">Topic family</th></tr></thead><tbody>{index_rows}</tbody></table></div></section>"""
 for part in parts:
     group = [item for item in topics if item["part"] == part["id"]]
@@ -188,7 +188,7 @@ guide = """
 ]) + """
 <p class="section-end">For RL reasoning, allow 25–30 minutes for the policy-gradient foundations and narrow the paper discussion accordingly. No prior RL course is assumed; the selected tutorial is preparation material.</p></section>
 <section class="section"><h2 class="section-title">Choosing a manageable scope</h2><div class="prose">
-<p>TTT does not automatically require two weeks. An adaptation seminar can center on IT³, introduce the original TTT framework, and use neural memory as a short contrast. A seminar on neural memory instead centers on the TTT recurrent update; distribution-shift adaptation becomes context.</p>
+<p>TTT does not automatically require two weeks. A seminar on neural memory centers on the TTT recurrent update. An adaptation seminar instead centers on the original Sun et al. framework, with IT³ as an optional comparison. Choose one focus and use the other as context.</p>
 <p>Drifting and IMLE can be compared in one session through the question of how to train a one-step generator from generated samples. Develop one training mechanism carefully and use the other as a comparison. A detailed derivation of both methods and their theory would need a narrower comparison or a second selected topic.</p>
 <p>For any broad family, choose the paper and question first. The pool supplies options; it does not require every linked direction to be covered in one meeting.</p></div></section>
 <section class="section"><h2 class="section-title">What makes a strong presentation?</h2><div class="prose">
@@ -217,7 +217,7 @@ styles["Heading1"].textColor = colors.HexColor("#163c56")
 def pdf_text(text):
     text = md(text).replace("<strong>", "<b>").replace("</strong>", "</b>").replace("<em>", "<i>").replace("</em>", "</i>")
     text = re.sub(r'<a href="([^"]+)">', r'<a href="\1" color="#16607c">', text)
-    for before, after in [("—", "-"), ("–", "-"), ("’", "'"), ("“", '"'), ("”", '"'), ("μ", "mu"), ("³", "3"), ("→", "to")]:
+    for before, after in [("—", "-"), ("–", "-"), ("’", "'"), ("“", '"'), ("”", '"'), ("μ", "mu"), ("³", "3"), ("→", "to"), ("č", "c"), ("ć", "c")]:
         text = text.replace(before, after)
     return text
 
@@ -234,7 +234,7 @@ story = [
     Spacer(1, 14),
     P("Instructor: Assaf Shocher. Course contact and office hours: TBD."),
     P("Course description", "Heading2"),
-    P("Major ideas in deep learning, studied through foundational material, a central paper and recent developments. The candidate pool includes NTK, Mamba, in-context learning, test-time training, hypernetworks, world models, model merging, interpretability and new generative frameworks."),
+    P("Major ideas in deep learning, studied through foundational material, a central paper and recent developments. The candidate pool includes NTK, Mamba, in-context learning, test-time training, hypernetworks, world models, model merging, interpretability, new generative frameworks, graph neural networks, KANs, and the theory of why training works."),
     P("Topic selection", "Heading2"),
     P(f"The {len(topics)} topics in this syllabus are candidates, not weekly assignments. Students and the instructor choose which topics enter the final {len(weeks)}-week schedule. Unchosen topics are not assigned. Selection, order and presenter assignments: TBD. Each selected topic gets two academic hours."),
     P("Learning objectives", "Heading2"),
@@ -263,7 +263,7 @@ table.setStyle(TableStyle([
 story += [table, Spacer(1, 14), P("Suggested meeting structure", "Heading2"),
           P("Two academic hours per selected topic. Assuming two 45-minute academic hours: 15 minutes foundations, 35 minutes mechanism and derivation, 15 minutes evidence, 25 minutes discussion. Adjust the split to the local academic-hour convention."),
           P("Choosing one focus", "Heading2"),
-          P("TTT can focus on distribution-shift adaptation and IT3, or on learning as neural memory; these are alternative focuses, not two required weeks. Drifting and IMLE can share a comparison session on one-step generation, with one method developed in depth. Selective comparisons keep either topic within one meeting."),
+          P("TTT can focus on learning as neural memory or distribution-shift adaptation with the original Sun et al. paper. IT3 is supplementary reading. These are alternative focuses, not two required weeks. Drifting and IMLE can share a comparison session on one-step generation, with one method developed in depth. Selective comparisons keep either topic within one meeting."),
           PageBreak(), P("Candidate topic pool", "TitleDDL"),
           P("Choose one focused question and one main paper for each selected session. Background and recent readings supply selective preparation and comparisons. An alternative focus is a choice within the same candidate topic.")]
 
