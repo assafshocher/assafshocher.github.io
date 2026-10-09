@@ -27,15 +27,26 @@ input[type=search] {width:100%;max-width:540px;padding:13px 16px;border:1px soli
 .part-links a {text-decoration:none;border:1px solid var(--border);border-radius:30px;padding:6px 12px;font-size:.78rem}
 .schedule-part {padding-top:35px;padding-bottom:20px;scroll-margin-top:80px}
 .week-list {display:grid;gap:20px;margin-top:22px}
-.week-card {background:var(--bg-secondary);border:1px solid var(--border);border-radius:14px;padding:26px;scroll-margin-top:80px}
+.reading-card {background:var(--bg-secondary);border:1px solid var(--border);border-radius:14px;padding:26px;scroll-margin-top:80px}
 .week-top,.week-bottom {display:flex;justify-content:space-between;gap:12px;align-items:center}
 .presenter {font-size:.8rem;color:var(--text-secondary)}
-.week-card h3 {font-size:1.25rem;letter-spacing:-.02em;margin:14px 0 8px}
+.reading-card h3 {font-size:1.25rem;letter-spacing:-.02em;margin:14px 0 8px}
 .question {color:#b5c4d2;font-size:.95rem;margin-bottom:24px}
-.reading-grid {display:grid;grid-template-columns:1fr 1.4fr;gap:30px}
+.reading-grid {display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:24px}
 .reading-grid h4 {font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);margin-bottom:8px}
 .reading-grid p {font-size:.88rem;color:var(--text-secondary);line-height:1.85}
 .reading-grid strong {font-weight:600;color:var(--text-primary)}
+.main-reading {border-left:2px solid var(--teal);padding-left:16px}
+.main-reading p {color:#bdcbd8}
+.presentation-focus {margin-top:24px;color:var(--text-secondary);font-size:.88rem}
+.presentation-focus h4 {font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);margin-bottom:8px}
+.schedule-overview {margin-top:20px;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.schedule-overview table {width:100%;border-collapse:collapse;text-align:left;font-size:.88rem}
+.schedule-overview th,.schedule-overview td {padding:10px 16px;border-bottom:1px solid var(--border)}
+.schedule-overview thead {background:var(--bg-secondary);color:var(--text-secondary)}
+.schedule-overview tbody th {color:var(--teal);font-family:var(--font-mono);font-weight:400}
+.schedule-overview tr:last-child td,.schedule-overview tr:last-child th {border-bottom:0}
+.schedule-overview td a {text-decoration:none}
 .week-bottom {border-top:1px solid var(--border);padding-top:14px;margin-top:24px;font-size:.75rem;color:var(--text-secondary)}
 .week-bottom a {text-decoration:none}
 .guide-list {padding-left:24px;margin-top:24px;max-width:850px;color:var(--text-secondary)}
@@ -45,6 +56,6 @@ input[type=search] {width:100%;max-width:540px;padding:13px 16px;border:1px soli
 footer {padding:38px 24px;text-align:center;border-top:1px solid var(--border);color:var(--text-secondary);font-size:.8rem;margin-top:40px}
 footer p {margin-top:8px}
 [hidden] {display:none!important}
-@media(max-width:900px){.arc{grid-template-columns:repeat(2,1fr)}.arc h3{min-height:0}.nav-links a{padding:8px 10px}}
-@media(max-width:640px){.reading-grid{grid-template-columns:1fr;gap:20px}.week-card{padding:20px}.page-heading h1{font-size:2rem}.hero{padding-top:44px}.hero h1{font-size:2.4rem}.arc{grid-template-columns:1fr}.section{padding-left:20px;padding-right:20px}.nav-brand span{font-size:.95rem}.hero-image{margin-left:-20px;margin-right:-20px}.week-top{align-items:flex-start}.part-links{gap:6px}}
+@media(max-width:900px){.arc{grid-template-columns:repeat(2,1fr)}.arc h3{min-height:0}.nav-links a{padding:8px 10px}.reading-grid{grid-template-columns:1fr;gap:20px}}
+@media(max-width:640px){.reading-card{padding:20px}.page-heading h1{font-size:2rem}.hero{padding-top:44px}.hero h1{font-size:2.4rem}.arc{grid-template-columns:1fr}.section{padding-left:20px;padding-right:20px}.nav-brand span{font-size:.95rem}.hero-image{margin-left:-20px;margin-right:-20px}.week-top{align-items:flex-start}.part-links{gap:6px}.schedule-overview th,.schedule-overview td{padding:8px}.schedule-overview table{font-size:.78rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}

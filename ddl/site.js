@@ -23,13 +23,19 @@ document.addEventListener('keydown', e => {
 const search = document.querySelector('#reading-search');
 if (search) search.addEventListener('input', () => {
   const query = search.value.trim().toLocaleLowerCase();
-  let count = 0;
-  document.querySelectorAll('.week-card').forEach(card => {
+  let scheduled = 0;
+  let optional = 0;
+  document.querySelectorAll('.reading-card').forEach(card => {
     card.hidden = !card.textContent.toLocaleLowerCase().includes(query);
-    if (!card.hidden) count++;
+    if (!card.hidden) {
+      if (card.classList.contains('week-card')) scheduled++;
+      else optional++;
+    }
   });
   document.querySelectorAll('.schedule-part').forEach(part => {
-    part.hidden = ![...part.querySelectorAll('.week-card')].some(card => !card.hidden);
+    part.hidden = ![...part.querySelectorAll('.reading-card')].some(card => !card.hidden);
   });
-  document.querySelector('#result-count').textContent = count ? `${count} seminar${count === 1 ? '' : 's'}` : 'No matching seminars. Try another topic or paper.';
+  document.querySelector('#result-count').textContent = scheduled + optional
+    ? `${scheduled} scheduled seminar${scheduled === 1 ? '' : 's'} · ${optional} optional topic${optional === 1 ? '' : 's'}`
+    : 'No matching topics. Try another topic, author or paper.';
 });
