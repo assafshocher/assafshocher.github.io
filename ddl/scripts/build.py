@@ -83,34 +83,42 @@ def reading_bundle(item):
 
 # Existing links reach the relevant candidate without assigning it to a week.
 legacy_weeks = {
-    "ntk": [1], "mup": [2], "mamba": [3], "icl": [4], "ttt": [5, 6],
-    "hypernetworks": [7], "jepa": [8], "merging": [9], "features": [10],
-    "circuits": [11], "one-step-generative": [12, 13],
+    "ntk": [1], "mup": [2], "mamba": [3], "icl": [4], "ttt": [5, 6, 7],
+    "jepa": [8], "merging": [9], "features": [10, 11],
+    "one-step-generative": [12, 13],
 }
 
 
 def reading_card(item):
     identifier = "topic-" + item["id"]
     legacy = "".join(f'<span class="legacy-anchor" id="week-{week}" aria-hidden="true"></span>' for week in legacy_weeks.get(item["id"], []))
+    legacy += "".join(f'<span class="legacy-anchor" id="{html.escape(alias, quote=True)}" aria-hidden="true"></span>' for alias in item.get("aliases", []))
     scope = f'<div class="session-scope"><h4>Scope for one session</h4><p>{md(item["scope"])}</p></div>' if item.get("scope") else ""
     routes = "".join(
         f'<details class="reading-route"><summary>Alternative focus: {html.escape(route["title"])}</summary>'
         f'<div class="route-content">{reading_bundle(route)}</div></details>'
         for route in item.get("routes", [])
     )
+    comparisons = "".join(
+        f'<details class="reading-route reading-comparison"><summary>Optional comparison: {html.escape(comparison["title"])}</summary>'
+        f'<div class="route-content"><h4>Optional readings</h4><p>{md(comparison["readings"])}</p>'
+        f'<h4>Discussion focus</h4><p>{md(comparison["focus"])}</p></div></details>'
+        for comparison in item.get("comparisons", [])
+    )
     return f"""
     <article class="reading-card topic-card" id="{identifier}">
       {legacy}<div class="topic-top"><span class="topic-label">Candidate topic</span><span class="duration">{html.escape(duration)}</span></div>
       <h3>{html.escape(item['topic'])}</h3>
       <p class="question">{html.escape(item['question'])}</p>
-      {scope}{reading_bundle(item)}{routes}
-      <div class="topic-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#{identifier}" aria-label="Permanent link to {html.escape(item['topic'])}">Link ↗</a></div>
+      {scope}{reading_bundle(item)}{routes}{comparisons}
+      <div class="topic-bottom"><span>Shared pre-reading / selected sections / slides / notes: TBD</span><a href="#{identifier}" aria-label="Permanent link to {html.escape(item['topic'])}">Link ↗</a></div>
     </article>"""
 
 
 overview = """<p>Major ideas. Fundamental questions. The mathematics underneath.</p>
 <p>Deep Deep Learning is a graduate, student-led seminar for studying ideas you have heard about and want to understand properly. The candidate pool connects neural tangent kernels, feature learning, Mamba, in-context learning, test-time training, hypernetworks, world models, model merging, mechanistic interpretability, new generative frameworks, graph neural networks, KANs, and the theory of why training works.</p>
 <p>Each selected topic gets two academic hours. A session builds from the minimum background to one central research paper and selected recent developments. We work through a derivation, examine an experiment, and ask what remains unresolved. Students lead the presentations and discussion.</p>
+<p>Everyone completes one shared pre-reading before each selected meeting. Presenters choose it in consultation with the instructor and announce it one week before class: a tutorial, a short paper or specified sections that take 30–45 minutes. Two guiding questions accompany the reading; each student arrives with one question or point of confusion.</p>
 <p>The reading pool is larger than the course. Students and the instructor choose which topics enter the final schedule; unchosen topics are not assigned. Topic selections and presenter assignments are TBD.</p>"""
 logistics = [
     ("Format", f'{len(weeks)} planned weekly student-led seminars. {html.escape(duration)} per selected topic. No exam.'),
@@ -119,6 +127,7 @@ logistics = [
     ("Where", 'Room and delivery mode: <span class="tbd">TBD</span>.'),
     ("Registration", 'Course number, credits and enrollment: <span class="tbd">TBD</span>.'),
     ("Preparation", 'Working knowledge of deep learning, linear algebra, probability, calculus and optimization. Formal prerequisites: <span class="tbd">TBD</span>.'),
+    ("Shared pre-reading", 'One required reading per selected meeting, chosen by presenters with the instructor and announced one week ahead. Budget 30–45 minutes; specific readings: <span class="tbd">TBD</span>.'),
     ("Assessment", 'Grading components and weights: <span class="tbd">TBD</span>. No exam.'),
 ]
 families = ""
@@ -160,7 +169,8 @@ schedule = f"""
 <section class="section page-heading"><div class="hero-badge">Candidate pool · Two academic hours per selected topic</div><h1>Topics &amp; readings</h1><p class="section-subtitle">Learn the foundations, understand a central paper, examine what came next.</p>
 <p>These {len(topics)} topics are candidates for the seminar. Only the topics students and the instructor choose will enter the final {len(weeks)}-week schedule. Selection, order and presenter assignments are TBD.</p>
 <p>Each selected topic gets two academic hours and one focused question. The main paper is the center; background and recent comparisons are selective reading, not several full-paper presentations. Alternative focuses within a topic are choices for the same session.</p>
-<p>TTT can focus on learning as neural memory or on distribution-shift adaptation with the original Sun et al. paper. IT³ is supplementary reading. Drifting and IMLE can share a comparative session on one-step generation, with one main mechanism developed in depth. Neither topic reserves two weeks. Flow matching is assumed background from the base course.</p>
+<p>All students complete one required shared pre-reading, chosen by the presenters in consultation with the instructor and announced one week before class. Allow 30–45 minutes for a tutorial, a short paper or specified sections. Presenters include two guiding questions; each student brings one question or point of confusion. The main paper is optional for the audience unless selected as the shared pre-reading. Specific pre-readings are TBD.</p>
+<p>TTT centers on learning as neural memory, with hypernetworks as an optional comparison; distribution-shift adaptation with the original Sun et al. paper is an alternative focus, and IT³ is supplementary. Mechanistic interpretability combines feature foundations with one circuit-tracing case; representation alignment is an optional comparison. Drifting and IMLE can share a session on one-step generation, with one main mechanism developed in depth. Neither topic reserves two weeks. Flow matching is assumed background from the base course.</p>
 <p class="section-end"><a class="btn btn-secondary" href="assets/syllabus.pdf" download>Download syllabus (PDF)</a></p></section>
 <section class="section schedule-tools"><label for="reading-search">Find a topic, author or paper</label><input id="reading-search" type="search" placeholder="Try Mamba, KAN, Neural Thickets or convergence…" autocomplete="off"><p id="result-count" class="muted" aria-live="polite">{len(topics)} candidate topics · Final selection TBD</p><div class="part-links">{part_links}</div></section>
 <section class="section overview-section" id="topic-index"><h2 class="section-title">The topic pool at a glance</h2><div class="schedule-overview topic-overview"><table><thead><tr><th scope="col">Candidate topic</th><th scope="col">Topic family</th></tr></thead><tbody>{index_rows}</tbody></table></div></section>"""
@@ -178,8 +188,12 @@ guide = """
 <section class="section"><h2 class="section-title">Before your seminar</h2><ol class="guide-list">
 <li>Choose a candidate from the topic pool and coordinate one focused question with the instructor. Where a topic offers alternative focuses, choose one. Only selected topics enter the schedule; the selection process and presenter assignments are TBD.</li>
 <li>Read the main paper and the relevant foundation material. Identify the minimum background needed for the mechanism. Use selected recent work to extend or question the explanation.</li>
+<li>Choose the shared pre-reading with the instructor and announce it one week before class; follow the policy below.</li>
 <li>Prepare one careful derivation, one decisive experiment and one unresolved question. State the assumptions behind each claim. A companion paper can supply a comparison without becoming a second full presentation.</li>
-<li>Bring slides or notes with complete citations. Instructor meetings, preparation deadlines and material-sharing arrangements are TBD.</li></ol></section>
+<li>Bring slides or notes with complete citations. Announce the pre-reading one week before class; instructor meetings, slide deadlines and other material-sharing arrangements are TBD.</li></ol></section>
+<section class="section"><h2 class="section-title">Shared pre-reading</h2><div class="prose">
+<p>All students complete one required shared pre-reading before each selected meeting. Presenters choose it in consultation with the instructor and announce it one week before class. Budget 30–45 minutes for one tutorial, a short paper or clearly specified sections of a longer paper.</p>
+<p>Presenters include two guiding questions with the reading. Each student arrives with one question or point of confusion. Presenters read the main paper; it is optional for the audience unless selected as the shared pre-reading. Specific pre-readings are TBD.</p></div></section>
 <section class="section"><h2 class="section-title">A suggested structure for two academic hours</h2><p class="section-subtitle">The allocation below assumes two 45-minute academic hours, totaling 90 minutes. Adjust the split to the local academic-hour convention.</p>""" + cards([
     ("15 min · Foundations", "Introduce the older idea and the minimum mathematical background."),
     ("35 min · Mechanism", "Explain the main paper’s mechanism, with one derivation worked through carefully."),
@@ -188,7 +202,8 @@ guide = """
 ]) + """
 <p class="section-end">For RL reasoning, allow 25–30 minutes for the policy-gradient foundations and narrow the paper discussion accordingly. No prior RL course is assumed; the selected tutorial is preparation material.</p></section>
 <section class="section"><h2 class="section-title">Choosing a manageable scope</h2><div class="prose">
-<p>TTT does not automatically require two weeks. A seminar on neural memory centers on the TTT recurrent update. An adaptation seminar instead centers on the original Sun et al. framework, with IT³ as an optional comparison. Choose one focus and use the other as context.</p>
+<p>TTT does not automatically require two weeks. The default neural-memory seminar centers on the TTT recurrent update; hypernetworks provide an optional comparison between learning weights from context and generating them directly. An adaptation seminar instead centers on the original Sun et al. framework, with IT³ as supplementary reading. Choose one focus and develop one mechanism.</p>
+<p>The mechanistic-interpretability seminar uses toy models of superposition and feature extraction as background, then develops one case from Circuit Tracing (2025), including causal interventions and the limits of the evidence. Representation alignment supplies an optional discussion of whether different models learn the same features.</p>
 <p>Drifting and IMLE can be compared in one session through the question of how to train a one-step generator from generated samples. Develop one training mechanism carefully and use the other as a comparison. A detailed derivation of both methods and their theory would need a narrower comparison or a second selected topic.</p>
 <p>For any broad family, choose the paper and question first. The pool supplies options; it does not require every linked direction to be covered in one meeting.</p></div></section>
 <section class="section"><h2 class="section-title">What makes a strong presentation?</h2><div class="prose">
@@ -196,7 +211,7 @@ guide = """
 <p>Use a small example before the full model. Define notation, explain each assumption, and make the experiment readable enough for the audience to critique it.</p>
 <p>Keep conclusions tied to the setting studied. Recent papers are opportunities for careful discussion; their inclusion does not mean their claims or long-term impact are settled.</p></div></section>
 <section class="section"><h2 class="section-title">Participation &amp; assessment</h2>""" + cards([
-    ("For all participants", "Read the selected sections before the meeting, bring questions, and contribute to the discussion."),
+    ("For all participants", "Complete the shared 30–45-minute pre-reading, consider its two guiding questions, and arrive with one question or point of confusion. Specific pre-readings are TBD. Contribute to the discussion."),
     ("Assessment", "No exam. Grading components, weights, attendance requirements and any written submissions: TBD."),
     ("Research practice", "Cite papers, figures, code and other sources. Explain which claims are the authors’ and which are your own analysis. Formal academic-integrity and AI-use policies: TBD."),
     ("Access & communication", "Course forum, accessibility arrangements, contact information and office hours: TBD."),
@@ -242,7 +257,9 @@ story = [
     P("Prerequisites & logistics", "Heading2"),
     P("Working knowledge of deep learning, linear algebra, probability, calculus and optimization. Formal prerequisites, credits, enrollment, meeting time, room and delivery mode: TBD. Dates are not yet assigned. Flow matching is assumed background from the base course."),
     P("Seminar format & assessment", "Heading2"),
-    P("Students lead presentations and discussion. Each session centers on one main paper, with selected foundation and companion material. Prepare one derivation, one decisive experiment and one unresolved question. No exam. Grading components and weights, attendance requirements, written submissions, reading sections and deadlines: TBD."),
+    P("Students lead presentations and discussion. Each session centers on one main paper, with selected foundation and companion material. Presenters read the main paper and prepare one derivation, one decisive experiment and one unresolved question. No exam. Grading components and weights, attendance requirements and written submissions: TBD."),
+    P("Shared pre-reading", "Heading2"),
+    P("All students complete one required pre-reading for each selected meeting. Presenters choose it in consultation with the instructor and announce it one week before class: a tutorial, a short paper or clearly specified sections taking 30-45 minutes. Include two guiding questions; each student arrives with one question or point of confusion. The main paper is optional for the audience unless chosen as the shared pre-reading. Specific pre-readings, slide deadlines and coordination arrangements: TBD."),
     P("Research practice & communication", "Heading2"),
     P("Cite papers, figures, code and other sources; distinguish the authors' claims from your own analysis. Formal academic-integrity and AI-use policies, course forum and accessibility arrangements: TBD."),
     PageBreak(),
@@ -263,9 +280,9 @@ table.setStyle(TableStyle([
 story += [table, Spacer(1, 14), P("Suggested meeting structure", "Heading2"),
           P("Two academic hours per selected topic. Assuming two 45-minute academic hours: 15 minutes foundations, 35 minutes mechanism and derivation, 15 minutes evidence, 25 minutes discussion. Adjust the split to the local academic-hour convention."),
           P("Choosing one focus", "Heading2"),
-          P("TTT can focus on learning as neural memory or distribution-shift adaptation with the original Sun et al. paper. IT3 is supplementary reading. These are alternative focuses, not two required weeks. Drifting and IMLE can share a comparison session on one-step generation, with one method developed in depth. Selective comparisons keep either topic within one meeting."),
+          P("TTT centers on the neural-memory update, with hypernetworks as an optional comparison. Distribution-shift adaptation with the original Sun et al. paper is an alternative focus; IT3 is supplementary. Mechanistic interpretability uses superposition and feature extraction as background for one Circuit Tracing (2025) case, with representation alignment as an optional comparison. Drifting and IMLE can share a session on one-step generation, with one method developed in depth. Selective comparisons keep each topic within one meeting."),
           PageBreak(), P("Candidate topic pool", "TitleDDL"),
-          P("Choose one focused question and one main paper for each selected session. Background and recent readings supply selective preparation and comparisons. An alternative focus is a choice within the same candidate topic.")]
+          P("Choose one focused question and one main paper for each selected session. Background and recent readings supply selective preparation and comparisons. An alternative focus is a choice within the same candidate topic; optional comparisons are discussion material. Shared pre-readings and selected sections for all candidates: TBD.")]
 
 
 def pdf_bundle(item, title, question=None, scope=None):
@@ -290,6 +307,13 @@ for part in parts:
             story.append(KeepTogether(block))
             for route in item.get("routes", []):
                 story.append(KeepTogether(pdf_bundle(route, "Alternative focus: " + route["title"])))
+            for comparison in item.get("comparisons", []):
+                story.append(KeepTogether([
+                    P("Optional comparison: " + comparison["title"], "Heading2"),
+                    P("Optional readings: " + comparison["readings"], "SmallDDL"),
+                    P("Discussion focus: " + comparison["focus"], "SmallDDL"),
+                    Spacer(1, 10),
+                ]))
 story.append(P("Course website: [Deep Deep Learning](https://assafshocher.github.io/ddl/)", "SmallDDL"))
 
 
