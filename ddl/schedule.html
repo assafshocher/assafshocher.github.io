@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Schedule & readings — Deep Deep Learning</title>
-  <meta name="description" content="A graduate, student-led seminar on major ideas in deep learning: foundations, a central paper, and recent developments.">
+  <title>Topics & readings — Deep Deep Learning</title>
+  <meta name="description" content="A graduate, student-led seminar on major ideas in deep learning: foundations, a central paper, and recent developments. Choose topics from the candidate reading pool.">
   <meta name="theme-color" content="#0d1117">
   <link rel="canonical" href="https://assafshocher.github.io/ddl/schedule.html">
   <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
@@ -19,17 +19,18 @@
   <nav aria-label="Main navigation"><div class="nav-inner">
     <a href="index.html" class="nav-brand"><img src="assets/mark.svg" alt="" width="32" height="32"><span>Deep Deep Learning</span></a>
     <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
-    <ul class="nav-links" id="nav-links"><li><a href="index.html" >Home</a></li><li><a href="schedule.html" class="active" aria-current="page">Schedule & readings</a></li><li><a href="seminar.html" >Seminar guide</a></li></ul>
+    <ul class="nav-links" id="nav-links"><li><a href="index.html" >Home</a></li><li><a href="schedule.html" class="active" aria-current="page">Topics & readings</a></li><li><a href="seminar.html" >Seminar guide</a></li></ul>
   </div></nav>
   <main id="main">
-<section class="section page-heading"><div class="hero-badge">13 weeks · Presenter assignments TBD</div><h1>Schedule &amp; readings</h1><p class="section-subtitle">Learn the foundations, understand a central paper, examine what came next.</p>
-<p>This is the working 13-week program. Each reading bundle includes background, a main paper, and recent developments or discussion resources. When the main paper is itself recent, its companion can be a theoretical analysis or practical resource. Selected sections will be assigned; students are not expected to read every linked paper in full.</p>
-<p>TTT has two sessions: adaptation under distribution shift, including the original Sun et al. paper and IT³; and learning as sequence memory. Drifting models and IMLE each have a dedicated generative-modeling session. Diffusion language models, Muon and RL reasoning remain available as optional substitutions. Flow matching is assumed background from the base course.</p>
+<section class="section page-heading"><div class="hero-badge">Candidate pool · Two academic hours per selected topic</div><h1>Topics &amp; readings</h1><p class="section-subtitle">Learn the foundations, understand a central paper, examine what came next.</p>
+<p>These 18 topics are candidates for the seminar. Only the topics students and the instructor choose will enter the final 13-week schedule. Selection, order and presenter assignments are TBD.</p>
+<p>Each selected topic gets two academic hours and one focused question. The main paper is the center; background and recent comparisons are selective reading, not several full-paper presentations. Alternative focuses within a topic are choices for the same session.</p>
+<p>TTT can focus on adaptation with the original Sun et al. paper and IT³, or on learning as neural memory. Drifting and IMLE can share a comparative session on one-step generation, with one main mechanism developed in depth. Neither topic reserves two weeks. Flow matching is assumed background from the base course.</p>
 <p class="section-end"><a class="btn btn-secondary" href="assets/syllabus.pdf" download>Download syllabus (PDF)</a></p></section>
-<section class="section overview-section"><h2 class="section-title">At a glance</h2><div class="schedule-overview"><table><thead><tr><th scope="col">Week</th><th scope="col">Topic</th><th scope="col">Presenter</th></tr></thead><tbody><tr><th scope="row">01</th><td><a href="#week-1">NTK and feature learning</a></td><td class="tbd">TBD</td></tr><tr><th scope="row">02</th><td><a href="#week-2">μP, scaling and hyperparameter transfer</a></td><td class="tbd">TBD</td></tr><tr><th scope="row">03</th><td><a href="#week-3">State-space models and Mamba</a></td><td class="tbd">TBD</td></tr><tr><th scope="row">04</th><td><a href="#week-4">In-context learning as an algorithm</a></td><td class="tbd">TBD</td></tr><tr><th scope="row">05</th><td><a href="#week-5">Test-time training: adaptation and IT³</a></td><td class="tbd">TBD</td></tr><tr><th scope="row">06</th><td><a href="#week-6">Test-time training: learning as neural memory</a></td><td class="tbd">TBD</td></tr><tr><th scope="row">07</th><td><a href="#week-7">Hypernetworks and generated adaptation</a></td><td class="tbd">TBD</td></tr><tr><th scope="row">08</th><td><a href="#week-8">JEPA and predictive world models</a></td><td class="tbd">TBD</td></tr><tr><th scope="row">09</th><td><a href="#week-9">Model merging and task arithmetic</a></td><td class="tbd">TBD</td></tr><tr><th scope="row">10</th><td><a href="#week-10">Mechanistic interpretability: features and superposition</a></td><td class="tbd">TBD</td></tr><tr><th scope="row">11</th><td><a href="#week-11">Mechanistic interpretability: circuits and causal tests</a></td><td class="tbd">TBD</td></tr><tr><th scope="row">12</th><td><a href="#week-12">Drifting models: training-time distribution dynamics</a></td><td class="tbd">TBD</td></tr><tr><th scope="row">13</th><td><a href="#week-13">IMLE and one-step generative models</a></td><td class="tbd">TBD</td></tr></tbody></table></div></section>
-<section class="section schedule-tools"><label for="reading-search">Find a topic, author or paper</label><input id="reading-search" type="search" placeholder="Try Mamba, IT³, drifting or IMLE…" autocomplete="off"><p id="result-count" class="muted" aria-live="polite">13 scheduled seminars · 3 optional topics</p><div class="part-links"><a href="#part-1">Kernels, feature learning &amp; scaling</a><a href="#part-2">Sequence models &amp; learning at test time</a><a href="#part-3">Adaptation, representations &amp; merging</a><a href="#part-4">Mechanistic interpretability</a><a href="#part-5">New generative frameworks</a><a href="#alternatives">Optional topics</a></div></section><section class="section schedule-part" id="part-1"><div class="eyebrow">Part 01</div><h2 class="section-title">Kernels, feature learning &amp; scaling</h2><div class="week-list">
-    <article class="reading-card week-card" id="week-1">
-      <div class="week-top"><span class="week-label">Week 01</span><span class="presenter">Presenter: <span class="tbd">TBD</span></span></div>
+<section class="section schedule-tools"><label for="reading-search">Find a topic, author or paper</label><input id="reading-search" type="search" placeholder="Try Mamba, IT³, drifting or IMLE…" autocomplete="off"><p id="result-count" class="muted" aria-live="polite">18 candidate topics · Final selection TBD</p><div class="part-links"><a href="#part-1">Kernels, feature learning &amp; optimization</a><a href="#part-2">Sequence models &amp; reasoning</a><a href="#part-3">Adaptation, representations &amp; world models</a><a href="#part-4">Editing &amp; interpreting networks</a><a href="#part-5">Generative models</a><a href="#part-6">Symmetry &amp; alternative dynamics</a><a href="#weekly-schedule">Weekly assignments</a></div></section>
+<section class="section overview-section" id="topic-index"><h2 class="section-title">The topic pool at a glance</h2><div class="schedule-overview topic-overview"><table><thead><tr><th scope="col">Candidate topic</th><th scope="col">Topic family</th></tr></thead><tbody><tr class="topic-index-row" data-topic="topic-ntk"><th scope="row"><a href="#topic-ntk">NTK and feature learning</a></th><td>Kernels, feature learning &amp; optimization</td></tr><tr class="topic-index-row" data-topic="topic-mup"><th scope="row"><a href="#topic-mup">μP, scaling and hyperparameter transfer</a></th><td>Kernels, feature learning &amp; optimization</td></tr><tr class="topic-index-row" data-topic="topic-muon"><th scope="row"><a href="#topic-muon">Geometry of optimization: Muon</a></th><td>Kernels, feature learning &amp; optimization</td></tr><tr class="topic-index-row" data-topic="topic-mamba"><th scope="row"><a href="#topic-mamba">State-space models and Mamba</a></th><td>Sequence models &amp; reasoning</td></tr><tr class="topic-index-row" data-topic="topic-icl"><th scope="row"><a href="#topic-icl">In-context learning as an algorithm</a></th><td>Sequence models &amp; reasoning</td></tr><tr class="topic-index-row" data-topic="topic-ttt"><th scope="row"><a href="#topic-ttt">Test-time learning: TTT and IT³</a></th><td>Sequence models &amp; reasoning</td></tr><tr class="topic-index-row" data-topic="topic-rl-reasoning"><th scope="row"><a href="#topic-rl-reasoning">RL for reasoning with verifiable rewards</a></th><td>Sequence models &amp; reasoning</td></tr><tr class="topic-index-row" data-topic="topic-recurrent-depth"><th scope="row"><a href="#topic-recurrent-depth">Recurrent depth and latent reasoning</a></th><td>Sequence models &amp; reasoning</td></tr><tr class="topic-index-row" data-topic="topic-hypernetworks"><th scope="row"><a href="#topic-hypernetworks">Hypernetworks and generated adaptation</a></th><td>Adaptation, representations &amp; world models</td></tr><tr class="topic-index-row" data-topic="topic-jepa"><th scope="row"><a href="#topic-jepa">JEPA and predictive world models</a></th><td>Adaptation, representations &amp; world models</td></tr><tr class="topic-index-row" data-topic="topic-representation-alignment"><th scope="row"><a href="#topic-representation-alignment">Representation alignment and the Platonic hypothesis</a></th><td>Adaptation, representations &amp; world models</td></tr><tr class="topic-index-row" data-topic="topic-merging"><th scope="row"><a href="#topic-merging">Model merging and task arithmetic</a></th><td>Editing &amp; interpreting networks</td></tr><tr class="topic-index-row" data-topic="topic-features"><th scope="row"><a href="#topic-features">Mechanistic interpretability: features and superposition</a></th><td>Editing &amp; interpreting networks</td></tr><tr class="topic-index-row" data-topic="topic-circuits"><th scope="row"><a href="#topic-circuits">Mechanistic interpretability: circuits and causal tests</a></th><td>Editing &amp; interpreting networks</td></tr><tr class="topic-index-row" data-topic="topic-one-step-generative"><th scope="row"><a href="#topic-one-step-generative">One-step generative models: Drifting and IMLE</a></th><td>Generative models</td></tr><tr class="topic-index-row" data-topic="topic-diffusion-lm"><th scope="row"><a href="#topic-diffusion-lm">Diffusion language models</a></th><td>Generative models</td></tr><tr class="topic-index-row" data-topic="topic-canonicalization"><th scope="row"><a href="#topic-canonicalization">Symmetry, equivariance and canonicalization</a></th><td>Symmetry &amp; alternative dynamics</td></tr><tr class="topic-index-row" data-topic="topic-oscillatory-neurons"><th scope="row"><a href="#topic-oscillatory-neurons">Oscillatory neurons and synchronization</a></th><td>Symmetry &amp; alternative dynamics</td></tr></tbody></table></div></section><section class="section schedule-part" id="part-1"><div class="eyebrow">Topic family 01</div><h2 class="section-title">Kernels, feature learning &amp; optimization</h2><div class="topic-list">
+    <article class="reading-card topic-card" id="topic-ntk">
+      <span class="legacy-anchor" id="week-1" aria-hidden="true"></span><div class="topic-top"><span class="topic-label">Candidate topic</span><span class="duration">Two academic hours</span></div>
       <h3>NTK and feature learning</h3>
       <p class="question">When can a neural network be understood as a kernel method, and when do its features change?</p>
       <div class="reading-grid">
@@ -38,166 +39,22 @@
         <div><h4>Recent development &amp; discussion</h4><p>Haas et al., <a href="https://arxiv.org/abs/2505.22491">On the Surprising Effectiveness of Large Learning Rates under Standard Width Scaling</a> (2025).</p></div>
       </div>
       <div class="presentation-focus"><h4>Presentation focus</h4><p>Derive function-space gradient flow and its solution for squared loss, then compare a finite network with its linearization. Use the recent paper to examine why width, parameterization, learning rate and the choice of loss matter for claims about feature learning.</p></div>
-      <div class="week-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#week-1" aria-label="Permanent link to NTK and feature learning">Link ↗</a></div>
+      <div class="topic-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#topic-ntk" aria-label="Permanent link to NTK and feature learning">Link ↗</a></div>
     </article>
-    <article class="reading-card week-card" id="week-2">
-      <div class="week-top"><span class="week-label">Week 02</span><span class="presenter">Presenter: <span class="tbd">TBD</span></span></div>
+    <article class="reading-card topic-card" id="topic-mup">
+      <span class="legacy-anchor" id="week-2" aria-hidden="true"></span><div class="topic-top"><span class="topic-label">Candidate topic</span><span class="duration">Two academic hours</span></div>
       <h3>μP, scaling and hyperparameter transfer</h3>
       <p class="question">How should initialization and updates scale as networks become wider or deeper?</p>
       <div class="reading-grid">
-        <div><h4>Background &amp; foundations</h4><p>Yang &amp; Hu, <a href="https://proceedings.mlr.press/v139/yang21c.html">Tensor Programs IV: Feature Learning in Infinite-Width Neural Networks</a> (2021), selected sections on parameterization and feature learning. The preceding NTK session supplies the contrasting linearized regime.</p></div>
+        <div><h4>Background &amp; foundations</h4><p>Yang &amp; Hu, <a href="https://proceedings.mlr.press/v139/yang21c.html">Tensor Programs IV: Feature Learning in Infinite-Width Neural Networks</a> (2021), selected sections on parameterization and feature learning. Review the NTK linearized regime as contrasting background; a separate NTK seminar is optional.</p></div>
         <div class="main-reading"><h4>Main paper</h4><p>Yang et al., <a href="https://arxiv.org/abs/2203.03466">Tensor Programs V: Tuning Large Neural Networks via Zero-Shot Hyperparameter Transfer</a> (NeurIPS 2021; arXiv 2022).</p></div>
         <div><h4>Recent development &amp; discussion</h4><p>Dey et al., <a href="https://arxiv.org/abs/2505.01618">Don&#x27;t Be Lazy: CompleteP Enables Compute-Efficient Deep Transformers</a> (2025).</p></div>
       </div>
       <div class="presentation-focus"><h4>Presentation focus</h4><p>Work through activation and update scaling in a small multilayer network, and inspect a learning-rate transfer experiment. Discuss the additional constraints introduced by depth; width transfer alone does not establish depth transfer or effective nonlinear learning.</p></div>
-      <div class="week-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#week-2" aria-label="Permanent link to μP, scaling and hyperparameter transfer">Link ↗</a></div>
-    </article></div></section><section class="section schedule-part" id="part-2"><div class="eyebrow">Part 02</div><h2 class="section-title">Sequence models &amp; learning at test time</h2><div class="week-list">
-    <article class="reading-card week-card" id="week-3">
-      <div class="week-top"><span class="week-label">Week 03</span><span class="presenter">Presenter: <span class="tbd">TBD</span></span></div>
-      <h3>State-space models and Mamba</h3>
-      <p class="question">How do recurrence, selectivity and structured matrices produce an efficient sequence model?</p>
-      <div class="reading-grid">
-        <div><h4>Background &amp; foundations</h4><p>Gu, Goel &amp; Ré, <a href="https://arxiv.org/abs/2111.00396">Efficiently Modeling Long Sequences with Structured State Spaces</a> (S4, 2021/22), selected sections on discretization and recurrence. Gu &amp; Dao, <a href="https://arxiv.org/abs/2312.00752">Mamba: Linear-Time Sequence Modeling with Selective State Spaces</a> (2023), selected sections on input-dependent dynamics.</p></div>
-        <div class="main-reading"><h4>Main paper</h4><p>Dao &amp; Gu, <a href="https://proceedings.mlr.press/v235/dao24a.html">Transformers Are SSMs: Generalized Models and Efficient Algorithms Through Structured State Space Duality</a> (Mamba-2, 2024).</p></div>
-        <div><h4>Recent development &amp; discussion</h4><p>Lahoti et al., <a href="https://arxiv.org/abs/2603.15569">Mamba-3: Improved Sequence Modeling Using State Space Principles</a> (2026).</p></div>
-      </div>
-      <div class="presentation-focus"><h4>Presentation focus</h4><p>Unroll an SSM into a structured matrix and explain the restricted attention–SSM duality used by Mamba-2. Examine a state-tracking experiment from Mamba-3 and distinguish algorithmic complexity from measured hardware efficiency.</p></div>
-      <div class="week-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#week-3" aria-label="Permanent link to State-space models and Mamba">Link ↗</a></div>
+      <div class="topic-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#topic-mup" aria-label="Permanent link to μP, scaling and hyperparameter transfer">Link ↗</a></div>
     </article>
-    <article class="reading-card week-card" id="week-4">
-      <div class="week-top"><span class="week-label">Week 04</span><span class="presenter">Presenter: <span class="tbd">TBD</span></span></div>
-      <h3>In-context learning as an algorithm</h3>
-      <p class="question">How can a forward pass perform learning without changing the network&#x27;s parameters?</p>
-      <div class="reading-grid">
-        <div><h4>Background &amp; foundations</h4><p>von Oswald et al., <a href="https://arxiv.org/abs/2212.07677">Transformers Learn In-Context by Gradient Descent</a> (2023), selected sections on the linear-attention construction. Review least squares, ridge regression and Bayesian prediction for linear models.</p></div>
-        <div class="main-reading"><h4>Main paper</h4><p>Akyürek et al., <a href="https://arxiv.org/abs/2211.15661">What Learning Algorithm Is In-Context Learning? Investigations with Linear Models</a> (2023).</p></div>
-        <div><h4>Recent development &amp; discussion</h4><p>Wurgaft et al., <a href="https://arxiv.org/abs/2506.17859">In-Context Learning Strategies Emerge Rationally</a> (2025).</p></div>
-      </div>
-      <div class="presentation-focus"><h4>Presentation focus</h4><p>Work through one regression-learning construction and compare gradient-descent, ridge and Bayesian predictors on a controlled task distribution. Separate existence constructions and observed behavior in trained synthetic-task models from claims about general language models.</p></div>
-      <div class="week-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#week-4" aria-label="Permanent link to In-context learning as an algorithm">Link ↗</a></div>
-    </article>
-    <article class="reading-card week-card" id="week-5">
-      <div class="week-top"><span class="week-label">Week 05</span><span class="presenter">Presenter: <span class="tbd">TBD</span></span></div>
-      <h3>Test-time training: adaptation and IT³</h3>
-      <p class="question">What unlabeled objective makes adaptation improve the task we actually care about?</p>
-      <div class="reading-grid">
-        <div><h4>Background &amp; foundations</h4><p>Sun, Wang, Liu, Miller, Efros &amp; Hardt, <a href="https://proceedings.mlr.press/v119/sun20b.html"><em>Test-Time Training with Self-Supervision for Generalization under Distribution Shifts</em></a> (ICML 2020). Shared encoders, self-supervised auxiliary tasks and the gradient-alignment condition under the paper’s smooth/convex assumptions.</p></div>
-        <div class="main-reading"><h4>Main paper</h4><p>Durasov, Shocher, Oner, Chechik, Efros &amp; Fua, <a href="https://proceedings.mlr.press/v267/durasov25a.html"><em>IT³: Idempotent Test-Time Training</em></a> (ICML 2025). Learn prediction feedback and use consistency between successive predictions as the test-time objective.</p></div>
-        <div><h4>Recent development &amp; discussion</h4><p>IT³ is the recent anchor. Supplementary resources: <a href="https://arxiv.org/abs/2410.04201">arXiv paper</a> and <a href="https://github.com/nikitadurasov/ittt">official implementation</a>. Compare its idempotence-based consistency objective with the original TTT auxiliary-task design.</p></div>
-      </div>
-      <div class="presentation-focus"><h4>Presentation focus</h4><p>Derive the original gradient-alignment argument and IT³ consistency loss, then inspect an adaptation experiment and a failure case. IT³ requires its own training setup; discuss when consistency can be uninformative and how to stop adaptation.</p></div>
-      <div class="week-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#week-5" aria-label="Permanent link to Test-time training: adaptation and IT³">Link ↗</a></div>
-    </article>
-    <article class="reading-card week-card" id="week-6">
-      <div class="week-top"><span class="week-label">Week 06</span><span class="presenter">Presenter: <span class="tbd">TBD</span></span></div>
-      <h3>Test-time training: learning as neural memory</h3>
-      <p class="question">How can parameter updates store context, and how should training prepare a model to learn at inference?</p>
-      <div class="reading-grid">
-        <div><h4>Background &amp; foundations</h4><p>Ba et al., <a href="https://arxiv.org/abs/1610.06258"><em>Using Fast Weights to Attend to the Recent Past</em></a> (2016). Fast versus slow weights and associative memory; recap the original Sun et al. TTT formulation.</p></div>
-        <div class="main-reading"><h4>Main paper</h4><p>Sun et al., <a href="https://arxiv.org/abs/2407.04620"><em>Learning to (Learn at Test Time): RNNs with Expressive Hidden States</em></a> (2024). A model is the recurrent hidden state, and self-supervised gradient updates are the state transition.</p></div>
-        <div><h4>Recent development &amp; discussion</h4><p>Tandon et al., <a href="https://arxiv.org/abs/2512.23675"><em>End-to-End Test-Time Training for Long Context</em></a> (2025). Next-token updates compress context into weights, with a meta-learned initialization.</p></div>
-      </div>
-      <div class="presentation-focus"><h4>Presentation focus</h4><p>Work through a TTT-Linear update and its recurrent computation. Compare layer-local reconstruction with end-to-end next-token adaptation; distinguish sequence memory from adapting to a shifted test distribution.</p></div>
-      <div class="week-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#week-6" aria-label="Permanent link to Test-time training: learning as neural memory">Link ↗</a></div>
-    </article></div></section><section class="section schedule-part" id="part-3"><div class="eyebrow">Part 03</div><h2 class="section-title">Adaptation, representations &amp; merging</h2><div class="week-list">
-    <article class="reading-card week-card" id="week-7">
-      <div class="week-top"><span class="week-label">Week 07</span><span class="presenter">Presenter: <span class="tbd">TBD</span></span></div>
-      <h3>Hypernetworks and generated adaptation</h3>
-      <p class="question">Can a network generate the parameters another network needs for a new task or context?</p>
-      <div class="reading-grid">
-        <div><h4>Background &amp; foundations</h4><p>Ha, Dai &amp; Le, <a href="https://arxiv.org/abs/1609.09106">HyperNetworks</a> (2016/17). Hu et al., <a href="https://arxiv.org/abs/2106.09685">LoRA: Low-Rank Adaptation of Large Language Models</a> (2021/22), selected sections on low-rank parameter updates.</p></div>
-        <div class="main-reading"><h4>Main paper</h4><p>Charakorn et al., <a href="https://arxiv.org/abs/2506.06105">Text-to-LoRA: Instant Transformer Adaption</a> (2025).</p></div>
-        <div><h4>Recent development &amp; discussion</h4><p>Charakorn et al., <a href="https://arxiv.org/abs/2602.15902">Doc-to-LoRA: Learning to Instantly Internalize Contexts</a> (2026).</p></div>
-      </div>
-      <div class="presentation-focus"><h4>Presentation focus</h4><p>Explain the conditioning signal, generated low-rank update and training objective, then examine a held-out-task or document experiment. Compare the cost and information limits of generated adaptation with fine-tuning and keeping the original context available.</p></div>
-      <div class="week-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#week-7" aria-label="Permanent link to Hypernetworks and generated adaptation">Link ↗</a></div>
-    </article>
-    <article class="reading-card week-card" id="week-8">
-      <div class="week-top"><span class="week-label">Week 08</span><span class="presenter">Presenter: <span class="tbd">TBD</span></span></div>
-      <h3>JEPA and predictive world models</h3>
-      <p class="question">When does prediction in representation space support understanding, dynamics and planning?</p>
-      <div class="reading-grid">
-        <div><h4>Background &amp; foundations</h4><p>Assran et al., <a href="https://arxiv.org/abs/2301.08243">Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture</a> (I-JEPA, 2023), selected sections on masking, target representations and collapse prevention.</p></div>
-        <div class="main-reading"><h4>Main paper</h4><p>Assran et al., <a href="https://arxiv.org/abs/2506.09985">V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning</a> (2025).</p></div>
-        <div><h4>Recent development &amp; discussion</h4><p>Maes et al., <a href="https://arxiv.org/abs/2603.19312">LeWorldModel: Stable End-to-End Joint-Embedding Predictive Architecture from Pixels</a> (2026).</p></div>
-      </div>
-      <div class="presentation-focus"><h4>Presentation focus</h4><p>Trace the representation-prediction objective and action-conditioned planning loop, then analyze a planning result and its data requirements. Contrast target-network stabilization with regularizing the latent distribution; representation quality and accurate action-conditioned dynamics are separate questions.</p></div>
-      <div class="week-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#week-8" aria-label="Permanent link to JEPA and predictive world models">Link ↗</a></div>
-    </article>
-    <article class="reading-card week-card" id="week-9">
-      <div class="week-top"><span class="week-label">Week 09</span><span class="presenter">Presenter: <span class="tbd">TBD</span></span></div>
-      <h3>Model merging and task arithmetic</h3>
-      <p class="question">Why can adding parameter updates combine capabilities, and when does task interference prevent it?</p>
-      <div class="reading-grid">
-        <div><h4>Background &amp; foundations</h4><p>Ilharco et al., <a href="https://arxiv.org/abs/2212.04089">Editing Models with Task Arithmetic</a> (2023). Review parameter differences relative to a shared pretrained checkpoint and the NTK session&#x27;s function-space linearization.</p></div>
-        <div class="main-reading"><h4>Main paper</h4><p>Ortiz-Jimenez, Favero &amp; Frossard, <a href="https://arxiv.org/abs/2305.12827">Task Arithmetic in the Tangent Space: Improved Editing of Pre-Trained Models</a> (2023).</p></div>
-        <div><h4>Recent development &amp; discussion</h4><p>Hitit, Girrbach &amp; Akata, <a href="https://arxiv.org/abs/2511.21437">A Systematic Study of In-the-Wild Model Merging for Large Language Models</a> (2025 preprint; TMLR 2026).</p></div>
-      </div>
-      <div class="presentation-focus"><h4>Presentation focus</h4><p>Derive how adding task vectors affects a linearized model and examine the proposed weight-disentanglement mechanism. Compare controlled task combinations with heterogeneous checkpoints, including conflicting objectives and gains relative to the best individual model.</p></div>
-      <div class="week-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#week-9" aria-label="Permanent link to Model merging and task arithmetic">Link ↗</a></div>
-    </article></div></section><section class="section schedule-part" id="part-4"><div class="eyebrow">Part 04</div><h2 class="section-title">Mechanistic interpretability</h2><div class="week-list">
-    <article class="reading-card week-card" id="week-10">
-      <div class="week-top"><span class="week-label">Week 10</span><span class="presenter">Presenter: <span class="tbd">TBD</span></span></div>
-      <h3>Mechanistic interpretability: features and superposition</h3>
-      <p class="question">What is a feature, and can sparse autoencoders recover the units a network computes with?</p>
-      <div class="reading-grid">
-        <div><h4>Background &amp; foundations</h4><p>Elhage et al., <a href="https://transformer-circuits.pub/2022/toy_model/index.html">Toy Models of Superposition</a> (2022), selected sections on sparse features, interference and the two-feature toy model.</p></div>
-        <div class="main-reading"><h4>Main paper</h4><p>Templeton et al., <a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html">Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet</a> (2024).</p></div>
-        <div><h4>Recent development &amp; discussion</h4><p>Leask et al., <a href="https://arxiv.org/abs/2502.04878">Sparse Autoencoders Do Not Find Canonical Units of Analysis</a> (2025).</p></div>
-      </div>
-      <div class="presentation-focus"><h4>Presentation focus</h4><p>Explain the sparse-autoencoder objective and reproduce or analyze a small superposition experiment. Examine feature interventions alongside the stitching and meta-SAE evidence, asking whether interpretability, completeness and atomicity are being measured separately.</p></div>
-      <div class="week-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#week-10" aria-label="Permanent link to Mechanistic interpretability: features and superposition">Link ↗</a></div>
-    </article>
-    <article class="reading-card week-card" id="week-11">
-      <div class="week-top"><span class="week-label">Week 11</span><span class="presenter">Presenter: <span class="tbd">TBD</span></span></div>
-      <h3>Mechanistic interpretability: circuits and causal tests</h3>
-      <p class="question">How can we trace a model&#x27;s computation and test whether the proposed explanation is causal?</p>
-      <div class="reading-grid">
-        <div><h4>Background &amp; foundations</h4><p>Elhage et al., <a href="https://transformer-circuits.pub/2021/framework/index.html">A Mathematical Framework for Transformer Circuits</a> (2021), selected sections on the residual stream and attention&#x27;s QK/OV decomposition. The preceding features session supplies sparse representations.</p></div>
-        <div class="main-reading"><h4>Main paper</h4><p>Ameisen et al., <a href="https://transformer-circuits.pub/2025/attribution-graphs/methods.html">Circuit Tracing: Revealing Computational Graphs in Language Models</a> (2025).</p></div>
-        <div><h4>Recent development &amp; discussion</h4><p>Kamath et al., <a href="https://transformer-circuits.pub/2025/attention-qk/index.html">Tracing Attention Computation Through Feature Interactions</a> (2025).</p></div>
-      </div>
-      <div class="presentation-focus"><h4>Presentation focus</h4><p>Explain how a replacement model produces an attribution graph and work through one circuit case study with an intervention. Identify approximation errors and omitted computations, then examine what the attention extension adds to the explanation.</p></div>
-      <div class="week-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#week-11" aria-label="Permanent link to Mechanistic interpretability: circuits and causal tests">Link ↗</a></div>
-    </article></div></section><section class="section schedule-part" id="part-5"><div class="eyebrow">Part 05</div><h2 class="section-title">New generative frameworks</h2><div class="week-list">
-    <article class="reading-card week-card" id="week-12">
-      <div class="week-top"><span class="week-label">Week 12</span><span class="presenter">Presenter: <span class="tbd">TBD</span></span></div>
-      <h3>Drifting models: training-time distribution dynamics</h3>
-      <p class="question">How can attraction and repulsion during training produce a one-pass generator, and when does zero drift identify the correct distribution?</p>
-      <div class="reading-grid">
-        <div><h4>Background &amp; foundations</h4><p>Yujia Li, Swersky &amp; Zemel, <a href="https://proceedings.mlr.press/v37/li15.html"><em>Generative Moment Matching Networks</em></a> (ICML 2015). Kernel mean embeddings, maximum mean discrepancy and distribution matching from samples.</p></div>
-        <div class="main-reading"><h4>Main paper</h4><p>Deng, He Li, Tianhong Li, Du &amp; He, <a href="https://arxiv.org/abs/2602.04770"><em>Generative Modeling via Drifting</em></a> (2026). Estimate an attraction-repulsion field from real and generated samples and fit frozen drifted targets.</p></div>
-        <div><h4>Recent development &amp; discussion</h4><p>Esteban-Casadevall et al., <a href="https://arxiv.org/abs/2605.10727"><em>Kernel-Gradient Drifting Models</em></a> (2026), including Max Welling. A mathematical companion for kernel-gradient fields, smoothing and distribution identifiability. <a href="https://lambertae.github.io/projects/drifting/">Original drifting project and demonstrations</a>.</p></div>
-      </div>
-      <div class="presentation-focus"><h4>Presentation focus</h4><p>Derive the drift and regression update, including the role of stopping gradients through the target. Examine a 2D example, equilibrium assumptions and one ablation; arbitrary zero drift need not certify distribution equality.</p></div>
-      <div class="week-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#week-12" aria-label="Permanent link to Drifting models: training-time distribution dynamics">Link ↗</a></div>
-    </article>
-    <article class="reading-card week-card" id="week-13">
-      <div class="week-top"><span class="week-label">Week 13</span><span class="presenter">Presenter: <span class="tbd">TBD</span></span></div>
-      <h3>IMLE and one-step generative models</h3>
-      <p class="question">Can data-to-generated nearest-neighbor matching achieve coverage and high fidelity without an iterative sampler?</p>
-      <div class="reading-grid">
-        <div><h4>Background &amp; foundations</h4><p>Ke Li &amp; Jitendra Malik, <a href="https://arxiv.org/abs/1809.09087"><em>Implicit Maximum Likelihood Estimation</em></a> (2018). Implicit distributions, nearest-neighbor assignment, mode coverage and the likelihood connection under stated assumptions.</p></div>
-        <div class="main-reading"><h4>Main paper</h4><p>Chirag Vashist &amp; Ke Li, <a href="https://arxiv.org/abs/2607.19332"><em>ROMS-IMLE: A Minimalist Approach to Competitive Single-Step Generative Modelling</em></a> (2026). Revisit IMLE with intermediate-resolution supervision and robust losses.</p></div>
-        <div><h4>Recent development &amp; discussion</h4><p>ROMS-IMLE is the recent anchor. The authors’ <a href="https://serchirag.github.io/roms-imle/">method page</a> provides additional explanation and experiments.</p></div>
-      </div>
-      <div class="presentation-focus"><h4>Presentation focus</h4><p>Explain the direction of nearest-neighbor matching, latent assignment and alternating regression, then examine sampling cost and the ROMS-IMLE ablations. Keep the maximum-likelihood connection tied to its assumptions.</p></div>
-      <div class="week-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#week-13" aria-label="Permanent link to IMLE and one-step generative models">Link ↗</a></div>
-    </article></div></section><section class="section schedule-part" id="alternatives"><div class="eyebrow">Optional substitutions</div><h2 class="section-title">Additional topics</h2><p class="section-subtitle">Complete reading bundles that can replace a scheduled session after coordinating with the instructor.</p><div class="week-list">
-    <article class="reading-card alternative-card" id="topic-diffusion-lm">
-      <div class="week-top"><span class="week-label">Optional topic</span></div>
-      <h3>Diffusion language models</h3>
-      <p class="question">How can denoising generate discrete text, and what changes when generation need not proceed left to right?</p>
-      <div class="reading-grid">
-        <div><h4>Background &amp; foundations</h4><p>Austin et al., <a href="https://arxiv.org/abs/2107.03006">Structured Denoising Diffusion Models in Discrete State-Spaces</a> (2021), selected sections on transition matrices and absorbing-mask corruption.</p></div>
-        <div class="main-reading"><h4>Main paper</h4><p>Sahoo et al., <a href="https://arxiv.org/abs/2406.07524">Simple and Effective Masked Diffusion Language Models</a> (2024).</p></div>
-        <div><h4>Recent development &amp; discussion</h4><p>Nie et al., <a href="https://arxiv.org/abs/2502.09992">Large Language Diffusion Models</a> (LLaDA, 2025).</p></div>
-      </div>
-      <div class="presentation-focus"><h4>Presentation focus</h4><p>Derive the masked-denoising objective and trace one sampling schedule, then compare refinement, parallelism and likelihood evaluation with autoregressive generation. The topic requires discrete corruption and language-specific evaluation beyond a continuous diffusion refresher.</p></div>
-      <div class="week-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#topic-diffusion-lm" aria-label="Permanent link to Diffusion language models">Link ↗</a></div>
-    </article>
-    <article class="reading-card alternative-card" id="topic-muon">
-      <div class="week-top"><span class="week-label">Optional topic</span></div>
+    <article class="reading-card topic-card" id="topic-muon">
+      <div class="topic-top"><span class="topic-label">Candidate topic</span><span class="duration">Two academic hours</span></div>
       <h3>Geometry of optimization: Muon</h3>
       <p class="question">How does the norm used to measure an update change the direction of steepest descent?</p>
       <div class="reading-grid">
@@ -206,10 +63,51 @@
         <div><h4>Recent development &amp; discussion</h4><p>Kovalev, <a href="https://arxiv.org/abs/2503.12645">Understanding Gradient Orthogonalization for Deep Learning via Non-Euclidean Trust-Region Optimization</a> (2025).</p></div>
       </div>
       <div class="presentation-focus"><h4>Presentation focus</h4><p>Derive the spectral-norm-constrained linearized update using the SVD and explain its polar factor and Newton–Schulz approximation. Examine a scaling experiment and distinguish the geometric argument from implementation choices, weight decay and empirical comparisons with AdamW.</p></div>
-      <div class="week-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#topic-muon" aria-label="Permanent link to Geometry of optimization: Muon">Link ↗</a></div>
+      <div class="topic-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#topic-muon" aria-label="Permanent link to Geometry of optimization: Muon">Link ↗</a></div>
+    </article></div></section><section class="section schedule-part" id="part-2"><div class="eyebrow">Topic family 02</div><h2 class="section-title">Sequence models &amp; reasoning</h2><div class="topic-list">
+    <article class="reading-card topic-card" id="topic-mamba">
+      <span class="legacy-anchor" id="week-3" aria-hidden="true"></span><div class="topic-top"><span class="topic-label">Candidate topic</span><span class="duration">Two academic hours</span></div>
+      <h3>State-space models and Mamba</h3>
+      <p class="question">How do recurrence, selectivity and structured matrices produce an efficient sequence model?</p>
+      <div class="reading-grid">
+        <div><h4>Background &amp; foundations</h4><p>Gu, Goel &amp; Ré, <a href="https://arxiv.org/abs/2111.00396">Efficiently Modeling Long Sequences with Structured State Spaces</a> (S4, 2021/22), selected sections on discretization and recurrence. Gu &amp; Dao, <a href="https://arxiv.org/abs/2312.00752">Mamba: Linear-Time Sequence Modeling with Selective State Spaces</a> (2023), selected sections on input-dependent dynamics.</p></div>
+        <div class="main-reading"><h4>Main paper</h4><p>Dao &amp; Gu, <a href="https://proceedings.mlr.press/v235/dao24a.html">Transformers Are SSMs: Generalized Models and Efficient Algorithms Through Structured State Space Duality</a> (Mamba-2, 2024).</p></div>
+        <div><h4>Recent development &amp; discussion</h4><p>Lahoti et al., <a href="https://arxiv.org/abs/2603.15569">Mamba-3: Improved Sequence Modeling Using State Space Principles</a> (2026).</p></div>
+      </div>
+      <div class="presentation-focus"><h4>Presentation focus</h4><p>Unroll an SSM into a structured matrix and explain the restricted attention–SSM duality used by Mamba-2. Examine a state-tracking experiment from Mamba-3 and distinguish algorithmic complexity from measured hardware efficiency.</p></div>
+      <div class="topic-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#topic-mamba" aria-label="Permanent link to State-space models and Mamba">Link ↗</a></div>
     </article>
-    <article class="reading-card alternative-card" id="topic-rl-reasoning">
-      <div class="week-top"><span class="week-label">Optional topic</span></div>
+    <article class="reading-card topic-card" id="topic-icl">
+      <span class="legacy-anchor" id="week-4" aria-hidden="true"></span><div class="topic-top"><span class="topic-label">Candidate topic</span><span class="duration">Two academic hours</span></div>
+      <h3>In-context learning as an algorithm</h3>
+      <p class="question">How can a forward pass perform learning without changing the network&#x27;s parameters?</p>
+      <div class="reading-grid">
+        <div><h4>Background &amp; foundations</h4><p>von Oswald et al., <a href="https://arxiv.org/abs/2212.07677">Transformers Learn In-Context by Gradient Descent</a> (2023), selected sections on the linear-attention construction. Review least squares, ridge regression and Bayesian prediction for linear models.</p></div>
+        <div class="main-reading"><h4>Main paper</h4><p>Akyürek et al., <a href="https://arxiv.org/abs/2211.15661">What Learning Algorithm Is In-Context Learning? Investigations with Linear Models</a> (2023).</p></div>
+        <div><h4>Recent development &amp; discussion</h4><p>Wurgaft et al., <a href="https://arxiv.org/abs/2506.17859">In-Context Learning Strategies Emerge Rationally</a> (2025).</p></div>
+      </div>
+      <div class="presentation-focus"><h4>Presentation focus</h4><p>Work through one regression-learning construction and compare gradient-descent, ridge and Bayesian predictors on a controlled task distribution. Separate existence constructions and observed behavior in trained synthetic-task models from claims about general language models.</p></div>
+      <div class="topic-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#topic-icl" aria-label="Permanent link to In-context learning as an algorithm">Link ↗</a></div>
+    </article>
+    <article class="reading-card topic-card" id="topic-ttt">
+      <span class="legacy-anchor" id="week-5" aria-hidden="true"></span><span class="legacy-anchor" id="week-6" aria-hidden="true"></span><div class="topic-top"><span class="topic-label">Candidate topic</span><span class="duration">Two academic hours</span></div>
+      <h3>Test-time learning: TTT and IT³</h3>
+      <p class="question">What should a model learn at inference, and which objective makes those updates useful?</p>
+      <div class="session-scope"><h4>Scope for one session</h4><p>Choose one route for a seminar of two academic hours: adaptation with IT³ (shown below), or learning as neural memory (alternate route). Both routes can be selected independently by different presenters if there is interest.</p></div><div class="reading-grid">
+        <div><h4>Background &amp; foundations</h4><p>Sun, Wang, Liu, Miller, Efros &amp; Hardt, <a href="https://proceedings.mlr.press/v119/sun20b.html"><em>Test-Time Training with Self-Supervision for Generalization under Distribution Shifts</em></a> (ICML 2020). Shared encoders, self-supervised auxiliary tasks and the gradient-alignment condition under the paper’s smooth/convex assumptions.</p></div>
+        <div class="main-reading"><h4>Main paper</h4><p>Durasov, Shocher, Oner, Chechik, Efros &amp; Fua, <a href="https://proceedings.mlr.press/v267/durasov25a.html"><em>IT³: Idempotent Test-Time Training</em></a> (ICML 2025). Learn prediction feedback and use consistency between successive predictions as the test-time objective.</p></div>
+        <div><h4>Recent development &amp; discussion</h4><p>IT³ is the recent anchor. Supplementary resources: <a href="https://arxiv.org/abs/2410.04201">arXiv paper</a> and <a href="https://github.com/nikitadurasov/ittt">official implementation</a>. Compare its idempotence-based consistency objective with the original TTT auxiliary-task design.</p></div>
+      </div>
+      <div class="presentation-focus"><h4>Presentation focus</h4><p>Explain the original TTT gradient-alignment intuition, derive the IT³ consistency loss, and examine one adaptation experiment or failure case. IT³ requires its own training setup. Keep neural memory as a brief comparison; discuss when consistency is uninformative and how to stop adaptation.</p></div><details class="reading-route"><summary>Alternative focus: learning as neural memory</summary><div class="route-content"><div class="reading-grid">
+        <div><h4>Background &amp; foundations</h4><p>Ba et al., <a href="https://arxiv.org/abs/1610.06258"><em>Using Fast Weights to Attend to the Recent Past</em></a> (2016). Fast versus slow weights and associative memory; recap the original Sun et al. TTT formulation. Original TTT: Sun et al., <a href="https://proceedings.mlr.press/v119/sun20b.html">Test-Time Training with Self-Supervision for Generalization under Distribution Shifts</a> (2020), selected introduction.</p></div>
+        <div class="main-reading"><h4>Main paper</h4><p>Sun et al., <a href="https://arxiv.org/abs/2407.04620"><em>Learning to (Learn at Test Time): RNNs with Expressive Hidden States</em></a> (2024). A model is the recurrent hidden state, and self-supervised gradient updates are the state transition.</p></div>
+        <div><h4>Recent development &amp; discussion</h4><p>Tandon et al., <a href="https://arxiv.org/abs/2512.23675"><em>End-to-End Test-Time Training for Long Context</em></a> (2025). Next-token updates compress context into weights, with a meta-learned initialization. Brief contrast: <a href="https://proceedings.mlr.press/v267/durasov25a.html">IT³</a> (2025), adaptation under distribution shift.</p></div>
+      </div>
+      <div class="presentation-focus"><h4>Presentation focus</h4><p>Work through a TTT-Linear update and its recurrent computation. Compare layer-local reconstruction with end-to-end next-token adaptation; distinguish sequence memory from adapting to a shifted test distribution. This is a complete alternative seminar of two academic hours, rather than a required continuation of the adaptation route.</p></div></div></details>
+      <div class="topic-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#topic-ttt" aria-label="Permanent link to Test-time learning: TTT and IT³">Link ↗</a></div>
+    </article>
+    <article class="reading-card topic-card" id="topic-rl-reasoning">
+      <div class="topic-top"><span class="topic-label">Candidate topic</span><span class="duration">Two academic hours</span></div>
       <h3>RL for reasoning with verifiable rewards</h3>
       <p class="question">Does reward-based training discover successful reasoning behavior or change which existing behavior is sampled?</p>
       <div class="reading-grid">
@@ -218,8 +116,145 @@
         <div><h4>Recent development &amp; discussion</h4><p>Yue et al., <a href="https://arxiv.org/abs/2504.13837">Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?</a> (2025). Counterpoint: Liu et al., <a href="https://arxiv.org/abs/2505.24864">ProRL: Prolonged Reinforcement Learning Expands Reasoning Boundaries in Large Language Models</a> (2025).</p></div>
       </div>
       <div class="presentation-focus"><h4>Presentation focus</h4><p>Derive the policy-gradient identity before introducing group-relative advantages, clipping and KL regularization. Compare pass@k evidence under the papers&#x27; different training and evaluation settings; finite sampling cannot establish that a base model assigns zero probability to a solution.</p></div>
-      <div class="week-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#topic-rl-reasoning" aria-label="Permanent link to RL for reasoning with verifiable rewards">Link ↗</a></div>
-    </article></div></section></main>
+      <div class="topic-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#topic-rl-reasoning" aria-label="Permanent link to RL for reasoning with verifiable rewards">Link ↗</a></div>
+    </article>
+    <article class="reading-card topic-card" id="topic-recurrent-depth">
+      <div class="topic-top"><span class="topic-label">Candidate topic</span><span class="duration">Two academic hours</span></div>
+      <h3>Recurrent depth and latent reasoning</h3>
+      <p class="question">Can a model gain reasoning ability by repeatedly applying the same layers?</p>
+      <div class="reading-grid">
+        <div><h4>Background &amp; foundations</h4><p>Dehghani et al., <a href="https://arxiv.org/abs/1807.03819">Universal Transformers</a> (ICLR 2019; 2018 preprint). Shared layers, recurrence over depth and adaptive computation.</p></div>
+        <div class="main-reading"><h4>Main paper</h4><p>Geiping et al., <a href="https://arxiv.org/abs/2502.05171">Scaling up Test-Time Compute with Latent Reasoning: A Recurrent Depth Approach</a> (NeurIPS 2025).</p></div>
+        <div><h4>Recent development &amp; discussion</h4><p>Jolicoeur-Martineau, <a href="https://arxiv.org/abs/2510.04871">Less is More: Recursive Reasoning with Tiny Networks</a> (2025). A short comparison with recursive refinement on puzzles.</p></div>
+      </div>
+      <div class="presentation-focus"><h4>Presentation focus</h4><p>Trace one recurrent block, explain how it is trained across iteration counts, and assess performance against inference compute. Use tiny recursive models as a comparison. Distinguish iteration count, parameter count and demonstrated reasoning performance.</p></div>
+      <div class="topic-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#topic-recurrent-depth" aria-label="Permanent link to Recurrent depth and latent reasoning">Link ↗</a></div>
+    </article></div></section><section class="section schedule-part" id="part-3"><div class="eyebrow">Topic family 03</div><h2 class="section-title">Adaptation, representations &amp; world models</h2><div class="topic-list">
+    <article class="reading-card topic-card" id="topic-hypernetworks">
+      <span class="legacy-anchor" id="week-7" aria-hidden="true"></span><div class="topic-top"><span class="topic-label">Candidate topic</span><span class="duration">Two academic hours</span></div>
+      <h3>Hypernetworks and generated adaptation</h3>
+      <p class="question">Can a network generate the parameters another network needs for a new task or context?</p>
+      <div class="reading-grid">
+        <div><h4>Background &amp; foundations</h4><p>Ha, Dai &amp; Le, <a href="https://arxiv.org/abs/1609.09106">HyperNetworks</a> (2016/17). Hu et al., <a href="https://arxiv.org/abs/2106.09685">LoRA: Low-Rank Adaptation of Large Language Models</a> (2021/22), selected sections on low-rank parameter updates.</p></div>
+        <div class="main-reading"><h4>Main paper</h4><p>Charakorn et al., <a href="https://arxiv.org/abs/2506.06105">Text-to-LoRA: Instant Transformer Adaption</a> (2025).</p></div>
+        <div><h4>Recent development &amp; discussion</h4><p>Charakorn et al., <a href="https://arxiv.org/abs/2602.15902">Doc-to-LoRA: Learning to Instantly Internalize Contexts</a> (2026).</p></div>
+      </div>
+      <div class="presentation-focus"><h4>Presentation focus</h4><p>Explain the conditioning signal, generated low-rank update and training objective, then examine a held-out-task or document experiment. Compare the cost and information limits of generated adaptation with fine-tuning and keeping the original context available.</p></div>
+      <div class="topic-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#topic-hypernetworks" aria-label="Permanent link to Hypernetworks and generated adaptation">Link ↗</a></div>
+    </article>
+    <article class="reading-card topic-card" id="topic-jepa">
+      <span class="legacy-anchor" id="week-8" aria-hidden="true"></span><div class="topic-top"><span class="topic-label">Candidate topic</span><span class="duration">Two academic hours</span></div>
+      <h3>JEPA and predictive world models</h3>
+      <p class="question">When does prediction in representation space support understanding, dynamics and planning?</p>
+      <div class="reading-grid">
+        <div><h4>Background &amp; foundations</h4><p>Assran et al., <a href="https://arxiv.org/abs/2301.08243">Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture</a> (I-JEPA, 2023), selected sections on masking, target representations and collapse prevention.</p></div>
+        <div class="main-reading"><h4>Main paper</h4><p>Assran et al., <a href="https://arxiv.org/abs/2506.09985">V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning</a> (2025).</p></div>
+        <div><h4>Recent development &amp; discussion</h4><p>Maes et al., <a href="https://arxiv.org/abs/2603.19312">LeWorldModel: Stable End-to-End Joint-Embedding Predictive Architecture from Pixels</a> (2026).</p></div>
+      </div>
+      <div class="presentation-focus"><h4>Presentation focus</h4><p>Trace the representation-prediction objective and action-conditioned planning loop, then analyze a planning result and its data requirements. Contrast target-network stabilization with regularizing the latent distribution; representation quality and accurate action-conditioned dynamics are separate questions.</p></div>
+      <div class="topic-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#topic-jepa" aria-label="Permanent link to JEPA and predictive world models">Link ↗</a></div>
+    </article>
+    <article class="reading-card topic-card" id="topic-representation-alignment">
+      <div class="topic-top"><span class="topic-label">Candidate topic</span><span class="duration">Two academic hours</span></div>
+      <h3>Representation alignment and the Platonic hypothesis</h3>
+      <p class="question">Do different models learn the same representations, and how would we know?</p>
+      <div class="reading-grid">
+        <div><h4>Background &amp; foundations</h4><p>Kornblith et al., <a href="https://proceedings.mlr.press/v97/kornblith19a.html">Similarity of Neural Network Representations Revisited</a> (ICML 2019). Centered kernel alignment and the invariances of similarity measures.</p></div>
+        <div class="main-reading"><h4>Main paper</h4><p>Huh et al., <a href="https://proceedings.mlr.press/v235/huh24a.html">Position: The Platonic Representation Hypothesis</a> (ICML 2024).</p></div>
+        <div><h4>Recent development &amp; discussion</h4><p>Gröger, Wen &amp; Brbic, <a href="https://proceedings.mlr.press/v306/groger26a.html">Revisiting the Platonic Representation Hypothesis: An Aristotelian View</a> (ICML 2026). Calibration for similarity scores and the distinction between global similarity and local neighborhood agreement.</p></div>
+      </div>
+      <div class="presentation-focus"><h4>Presentation focus</h4><p>Compute one similarity measure on a small example, examine a cross-modal alignment result, and test its interpretation against the recent calibration critique. Treat convergence to a shared reality as a hypothesis whose evidence depends on the measurement.</p></div>
+      <div class="topic-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#topic-representation-alignment" aria-label="Permanent link to Representation alignment and the Platonic hypothesis">Link ↗</a></div>
+    </article></div></section><section class="section schedule-part" id="part-4"><div class="eyebrow">Topic family 04</div><h2 class="section-title">Editing &amp; interpreting networks</h2><div class="topic-list">
+    <article class="reading-card topic-card" id="topic-merging">
+      <span class="legacy-anchor" id="week-9" aria-hidden="true"></span><div class="topic-top"><span class="topic-label">Candidate topic</span><span class="duration">Two academic hours</span></div>
+      <h3>Model merging and task arithmetic</h3>
+      <p class="question">Why can adding parameter updates combine capabilities, and when does task interference prevent it?</p>
+      <div class="reading-grid">
+        <div><h4>Background &amp; foundations</h4><p>Ilharco et al., <a href="https://arxiv.org/abs/2212.04089">Editing Models with Task Arithmetic</a> (2023). Review parameter differences relative to a shared pretrained checkpoint and function-space linearization from NTK background.</p></div>
+        <div class="main-reading"><h4>Main paper</h4><p>Ortiz-Jimenez, Favero &amp; Frossard, <a href="https://arxiv.org/abs/2305.12827">Task Arithmetic in the Tangent Space: Improved Editing of Pre-Trained Models</a> (2023).</p></div>
+        <div><h4>Recent development &amp; discussion</h4><p>Hitit, Girrbach &amp; Akata, <a href="https://arxiv.org/abs/2511.21437">A Systematic Study of In-the-Wild Model Merging for Large Language Models</a> (2025 preprint; TMLR 2026).</p></div>
+      </div>
+      <div class="presentation-focus"><h4>Presentation focus</h4><p>Derive how adding task vectors affects a linearized model and examine the proposed weight-disentanglement mechanism. Compare controlled task combinations with heterogeneous checkpoints, including conflicting objectives and gains relative to the best individual model.</p></div>
+      <div class="topic-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#topic-merging" aria-label="Permanent link to Model merging and task arithmetic">Link ↗</a></div>
+    </article>
+    <article class="reading-card topic-card" id="topic-features">
+      <span class="legacy-anchor" id="week-10" aria-hidden="true"></span><div class="topic-top"><span class="topic-label">Candidate topic</span><span class="duration">Two academic hours</span></div>
+      <h3>Mechanistic interpretability: features and superposition</h3>
+      <p class="question">What is a feature, and can sparse autoencoders recover the units a network computes with?</p>
+      <div class="reading-grid">
+        <div><h4>Background &amp; foundations</h4><p>Elhage et al., <a href="https://transformer-circuits.pub/2022/toy_model/index.html">Toy Models of Superposition</a> (2022), selected sections on sparse features, interference and the two-feature toy model.</p></div>
+        <div class="main-reading"><h4>Main paper</h4><p>Templeton et al., <a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html">Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet</a> (2024).</p></div>
+        <div><h4>Recent development &amp; discussion</h4><p>Leask et al., <a href="https://arxiv.org/abs/2502.04878">Sparse Autoencoders Do Not Find Canonical Units of Analysis</a> (2025).</p></div>
+      </div>
+      <div class="presentation-focus"><h4>Presentation focus</h4><p>Explain the sparse-autoencoder objective and reproduce or analyze a small superposition experiment. Examine feature interventions alongside the stitching and meta-SAE evidence, asking whether interpretability, completeness and atomicity are being measured separately.</p></div>
+      <div class="topic-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#topic-features" aria-label="Permanent link to Mechanistic interpretability: features and superposition">Link ↗</a></div>
+    </article>
+    <article class="reading-card topic-card" id="topic-circuits">
+      <span class="legacy-anchor" id="week-11" aria-hidden="true"></span><div class="topic-top"><span class="topic-label">Candidate topic</span><span class="duration">Two academic hours</span></div>
+      <h3>Mechanistic interpretability: circuits and causal tests</h3>
+      <p class="question">How can we trace a model&#x27;s computation and test whether the proposed explanation is causal?</p>
+      <div class="reading-grid">
+        <div><h4>Background &amp; foundations</h4><p>Elhage et al., <a href="https://transformer-circuits.pub/2021/framework/index.html">A Mathematical Framework for Transformer Circuits</a> (2021), selected sections on the residual stream and attention&#x27;s QK/OV decomposition. Review sparse representations from the features background; a separate features seminar is optional.</p></div>
+        <div class="main-reading"><h4>Main paper</h4><p>Ameisen et al., <a href="https://transformer-circuits.pub/2025/attribution-graphs/methods.html">Circuit Tracing: Revealing Computational Graphs in Language Models</a> (2025).</p></div>
+        <div><h4>Recent development &amp; discussion</h4><p>Kamath et al., <a href="https://transformer-circuits.pub/2025/attention-qk/index.html">Tracing Attention Computation Through Feature Interactions</a> (2025).</p></div>
+      </div>
+      <div class="presentation-focus"><h4>Presentation focus</h4><p>Explain how a replacement model produces an attribution graph and work through one circuit case study with an intervention. Identify approximation errors and omitted computations, then examine what the attention extension adds to the explanation.</p></div>
+      <div class="topic-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#topic-circuits" aria-label="Permanent link to Mechanistic interpretability: circuits and causal tests">Link ↗</a></div>
+    </article></div></section><section class="section schedule-part" id="part-5"><div class="eyebrow">Topic family 05</div><h2 class="section-title">Generative models</h2><div class="topic-list">
+    <article class="reading-card topic-card" id="topic-one-step-generative">
+      <span class="legacy-anchor" id="week-12" aria-hidden="true"></span><span class="legacy-anchor" id="week-13" aria-hidden="true"></span><div class="topic-top"><span class="topic-label">Candidate topic</span><span class="duration">Two academic hours</span></div>
+      <h3>One-step generative models: Drifting and IMLE</h3>
+      <p class="question">How can matching real and generated samples train a generator that produces a sample in one pass?</p>
+      <div class="session-scope"><h4>Scope for one session</h4><p>One comparative seminar of two academic hours. Use Drifting for the central derivation and IMLE / ROMS-IMLE for comparison, or choose the IMLE-first route below. Separate deeper seminars are available if both focuses are selected.</p></div><div class="reading-grid">
+        <div><h4>Background &amp; foundations</h4><p>Yujia Li, Swersky &amp; Zemel, <a href="https://proceedings.mlr.press/v37/li15.html">Generative Moment Matching Networks</a> (ICML 2015), selected kernel/MMD material. Ke Li &amp; Jitendra Malik, <a href="https://arxiv.org/abs/1809.09087">Implicit Maximum Likelihood Estimation</a> (2018), the data-to-generated nearest-neighbor assignment and regression algorithm.</p></div>
+        <div class="main-reading"><h4>Main paper</h4><p>Deng, He Li, Tianhong Li, Du &amp; He, <a href="https://arxiv.org/abs/2602.04770"><em>Generative Modeling via Drifting</em></a> (2026). Estimate an attraction-repulsion field from real and generated samples and fit frozen drifted targets.</p></div>
+        <div><h4>Recent development &amp; discussion</h4><p>Chirag Vashist &amp; Ke Li, <a href="https://arxiv.org/abs/2607.19332">ROMS-IMLE: A Minimalist Approach to Competitive Single-Step Generative Modelling</a> (2026). Compare nearest-neighbor assignment, robust losses and intermediate-resolution supervision with the drifting update. Optional theory: Esteban-Casadevall et al., <a href="https://arxiv.org/abs/2605.10727">Kernel-Gradient Drifting Models</a> (2026), including Max Welling.</p></div>
+      </div>
+      <div class="presentation-focus"><h4>Presentation focus</h4><p>Introduce sample-based distribution matching, derive the drifting field and frozen-target regression, and study one toy experiment. Compare IMLE’s data-to-generated matching and ROMS-IMLE’s practical changes briefly. Choose one main mechanism to derive; keep zero-drift and maximum-likelihood claims tied to their assumptions.</p></div><details class="reading-route"><summary>Alternative focus: IMLE and mode coverage</summary><div class="route-content"><div class="reading-grid">
+        <div><h4>Background &amp; foundations</h4><p>Ke Li &amp; Jitendra Malik, <a href="https://arxiv.org/abs/1809.09087"><em>Implicit Maximum Likelihood Estimation</em></a> (2018). Implicit distributions, nearest-neighbor assignment, mode coverage and the likelihood connection under stated assumptions.</p></div>
+        <div class="main-reading"><h4>Main paper</h4><p>Chirag Vashist &amp; Ke Li, <a href="https://arxiv.org/abs/2607.19332"><em>ROMS-IMLE: A Minimalist Approach to Competitive Single-Step Generative Modelling</em></a> (2026). Revisit IMLE with intermediate-resolution supervision and robust losses.</p></div>
+        <div><h4>Recent development &amp; discussion</h4><p>ROMS-IMLE is the recent anchor. The authors’ <a href="https://serchirag.github.io/roms-imle/">method page</a> provides additional explanation and experiments. Comparison: Deng et al., <a href="https://arxiv.org/abs/2602.04770">Generative Modeling via Drifting</a> (2026), selected algorithm and toy example.</p></div>
+      </div>
+      <div class="presentation-focus"><h4>Presentation focus</h4><p>Explain the direction of nearest-neighbor matching, latent assignment and alternating regression, then examine sampling cost and the ROMS-IMLE ablations. Keep the maximum-likelihood connection tied to its assumptions. Use Drifting as a brief comparison within the same two-academic-hour seminar.</p></div></div></details>
+      <div class="topic-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#topic-one-step-generative" aria-label="Permanent link to One-step generative models: Drifting and IMLE">Link ↗</a></div>
+    </article>
+    <article class="reading-card topic-card" id="topic-diffusion-lm">
+      <div class="topic-top"><span class="topic-label">Candidate topic</span><span class="duration">Two academic hours</span></div>
+      <h3>Diffusion language models</h3>
+      <p class="question">How can denoising generate discrete text, and what changes when generation need not proceed left to right?</p>
+      <div class="reading-grid">
+        <div><h4>Background &amp; foundations</h4><p>Austin et al., <a href="https://arxiv.org/abs/2107.03006">Structured Denoising Diffusion Models in Discrete State-Spaces</a> (2021), selected sections on transition matrices and absorbing-mask corruption.</p></div>
+        <div class="main-reading"><h4>Main paper</h4><p>Sahoo et al., <a href="https://arxiv.org/abs/2406.07524">Simple and Effective Masked Diffusion Language Models</a> (2024).</p></div>
+        <div><h4>Recent development &amp; discussion</h4><p>Nie et al., <a href="https://arxiv.org/abs/2502.09992">Large Language Diffusion Models</a> (LLaDA, 2025).</p></div>
+      </div>
+      <div class="presentation-focus"><h4>Presentation focus</h4><p>Derive the masked-denoising objective and trace one sampling schedule, then compare refinement, parallelism and likelihood evaluation with autoregressive generation. The topic requires discrete corruption and language-specific evaluation beyond a continuous diffusion refresher.</p></div>
+      <div class="topic-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#topic-diffusion-lm" aria-label="Permanent link to Diffusion language models">Link ↗</a></div>
+    </article></div></section><section class="section schedule-part" id="part-6"><div class="eyebrow">Topic family 06</div><h2 class="section-title">Symmetry &amp; alternative dynamics</h2><div class="topic-list">
+    <article class="reading-card topic-card" id="topic-canonicalization">
+      <div class="topic-top"><span class="topic-label">Candidate topic</span><span class="duration">Two academic hours</span></div>
+      <h3>Symmetry, equivariance and canonicalization</h3>
+      <p class="question">Can we enforce symmetry by putting each input into a canonical orientation?</p>
+      <div class="session-scope"><h4>Scope for one session</h4><p>Advanced mathematical candidate. A concrete rotation or permutation example is enough to motivate the main result within two academic hours.</p></div><div class="reading-grid">
+        <div><h4>Background &amp; foundations</h4><p>Cohen &amp; Welling, <a href="https://arxiv.org/abs/1602.07576">Group Equivariant Convolutional Networks</a> (ICML 2016). Group actions, equivariance and weight sharing.</p></div>
+        <div class="main-reading"><h4>Main paper</h4><p>Dym, Lawrence &amp; Siegel, <a href="https://proceedings.mlr.press/v235/dym24a.html">Equivariant Frames and the Impossibility of Continuous Canonicalization</a> (ICML 2024).</p></div>
+        <div><h4>Recent development &amp; discussion</h4><p>Shumaylov et al., <a href="https://arxiv.org/abs/2410.02698">Lie Algebra Canonicalization: Equivariant Neural Operators under arbitrary Lie Groups</a> (ICLR 2025; 2024 preprint). Selected introduction and one application.</p></div>
+      </div>
+      <div class="presentation-focus"><h4>Presentation focus</h4><p>Start with a group-action example, show why a canonical choice can become discontinuous under the stated assumptions, and explain how weighted frames address continuity. Leave general topology proofs and non-compact Lie-group machinery for optional reading.</p></div>
+      <div class="topic-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#topic-canonicalization" aria-label="Permanent link to Symmetry, equivariance and canonicalization">Link ↗</a></div>
+    </article>
+    <article class="reading-card topic-card" id="topic-oscillatory-neurons">
+      <div class="topic-top"><span class="topic-label">Candidate topic</span><span class="duration">Two academic hours</span></div>
+      <h3>Oscillatory neurons and synchronization</h3>
+      <p class="question">Can neural representations bind information through synchronization?</p>
+      <div class="session-scope"><h4>Scope for one session</h4><p>Exploratory candidate connecting neural computation with dynamical systems, including work by Max Welling.</p></div><div class="reading-grid">
+        <div><h4>Background &amp; foundations</h4><p>Strogatz, <a href="https://static.squarespace.com/static/5436e695e4b07f1e91b30155/t/544525a8e4b0b8e2e8230fa3/1413817768995/from-kuramoto-to-crawford.pdf">From Kuramoto to Crawford: exploring the onset of synchronization in populations of coupled oscillators</a> (2000). Sections 2 and 3.1–3.3 on coupled phases and synchronization (author-hosted PDF).</p></div>
+        <div class="main-reading"><h4>Main paper</h4><p>Miyato, Löwe, Geiger &amp; Welling, <a href="https://arxiv.org/abs/2410.13821">Artificial Kuramoto Oscillatory Neurons</a> (ICLR 2025; 2024 preprint).</p></div>
+        <div><h4>Recent development &amp; discussion</h4><p>Iqbal et al., <a href="https://arxiv.org/abs/2605.14685">Spontaneous symmetry breaking and Goldstone modes for deep information propagation</a> (2026 preprint). A related perspective on symmetry and persistent information propagation, rather than a direct analysis of AKOrN.</p></div>
+      </div>
+      <div class="presentation-focus"><h4>Presentation focus</h4><p>Derive the two-oscillator intuition, trace the generalized neural update, and study one object-discovery or reasoning experiment. Use the Goldstone paper for a brief connection to depth and memory; its physics derivations are optional.</p></div>
+      <div class="topic-bottom"><span>Selected sections / slides / notes: TBD</span><a href="#topic-oscillatory-neurons" aria-label="Permanent link to Oscillatory neurons and synchronization">Link ↗</a></div>
+    </article></div></section><section class="section" id="weekly-schedule"><div class="eyebrow">Assignments to follow</div><h2 class="section-title">Weekly schedule</h2><p class="section-subtitle">13 planned meetings. Topic selections and student presenters are TBD; dates have not been assigned.</p><div class="schedule-overview"><table><thead><tr><th scope="col">Week</th><th scope="col">Selected topic</th><th scope="col">Presenter</th></tr></thead><tbody><tr><th scope="row">01</th><td class="tbd">TBD</td><td class="tbd">TBD</td></tr><tr><th scope="row">02</th><td class="tbd">TBD</td><td class="tbd">TBD</td></tr><tr><th scope="row">03</th><td class="tbd">TBD</td><td class="tbd">TBD</td></tr><tr><th scope="row">04</th><td class="tbd">TBD</td><td class="tbd">TBD</td></tr><tr><th scope="row">05</th><td class="tbd">TBD</td><td class="tbd">TBD</td></tr><tr><th scope="row">06</th><td class="tbd">TBD</td><td class="tbd">TBD</td></tr><tr><th scope="row">07</th><td class="tbd">TBD</td><td class="tbd">TBD</td></tr><tr><th scope="row">08</th><td class="tbd">TBD</td><td class="tbd">TBD</td></tr><tr><th scope="row">09</th><td class="tbd">TBD</td><td class="tbd">TBD</td></tr><tr><th scope="row">10</th><td class="tbd">TBD</td><td class="tbd">TBD</td></tr><tr><th scope="row">11</th><td class="tbd">TBD</td><td class="tbd">TBD</td></tr><tr><th scope="row">12</th><td class="tbd">TBD</td><td class="tbd">TBD</td></tr><tr><th scope="row">13</th><td class="tbd">TBD</td><td class="tbd">TBD</td></tr></tbody></table></div></section></main>
   <footer>
     <div>Deep Deep Learning · Graduate research seminar</div>
     <p>Course number, semester, meeting details &amp; assessment weights: TBD</p>

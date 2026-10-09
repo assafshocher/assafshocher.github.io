@@ -21,21 +21,31 @@ document.addEventListener('keydown', e => {
   }
 });
 const search = document.querySelector('#reading-search');
+const routeStates = new Map();
+let previousQuery = '';
 if (search) search.addEventListener('input', () => {
   const query = search.value.trim().toLocaleLowerCase();
-  let scheduled = 0;
-  let optional = 0;
+  if (query && !previousQuery) {
+    document.querySelectorAll('.reading-route').forEach(route => routeStates.set(route, route.open));
+  }
+  let matches = 0;
   document.querySelectorAll('.reading-card').forEach(card => {
     card.hidden = !card.textContent.toLocaleLowerCase().includes(query);
-    if (!card.hidden) {
-      if (card.classList.contains('week-card')) scheduled++;
-      else optional++;
-    }
+    if (!card.hidden) matches++;
+    card.querySelectorAll('.reading-route').forEach(route => {
+      if (query) route.open = routeStates.get(route) || route.textContent.toLocaleLowerCase().includes(query);
+      else if (routeStates.has(route)) route.open = routeStates.get(route);
+    });
   });
   document.querySelectorAll('.schedule-part').forEach(part => {
     part.hidden = ![...part.querySelectorAll('.reading-card')].some(card => !card.hidden);
   });
-  document.querySelector('#result-count').textContent = scheduled + optional
-    ? `${scheduled} scheduled seminar${scheduled === 1 ? '' : 's'} · ${optional} optional topic${optional === 1 ? '' : 's'}`
+  document.querySelectorAll('.topic-index-row').forEach(row => {
+    row.hidden = document.getElementById(row.dataset.topic).hidden;
+  });
+  document.querySelector('#topic-index').hidden = matches === 0;
+  document.querySelector('#result-count').textContent = matches
+    ? `${matches} candidate topic${matches === 1 ? '' : 's'} · Final selection TBD`
     : 'No matching topics. Try another topic, author or paper.';
+  previousQuery = query;
 });

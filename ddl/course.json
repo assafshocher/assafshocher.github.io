@@ -1,27 +1,33 @@
 {
+  "duration": "Two academic hours",
+  "selection": "Candidate topics; final selections and presenter assignments TBD",
   "parts": [
     {
       "id": 1,
-      "title": "Kernels, feature learning & scaling"
+      "title": "Kernels, feature learning & optimization"
     },
     {
       "id": 2,
-      "title": "Sequence models & learning at test time"
+      "title": "Sequence models & reasoning"
     },
     {
       "id": 3,
-      "title": "Adaptation, representations & merging"
+      "title": "Adaptation, representations & world models"
     },
     {
       "id": 4,
-      "title": "Mechanistic interpretability"
+      "title": "Editing & interpreting networks"
     },
     {
       "id": 5,
-      "title": "New generative frameworks"
+      "title": "Generative models"
+    },
+    {
+      "id": 6,
+      "title": "Symmetry & alternative dynamics"
     }
   ],
-  "weeks": [
+  "topics": [
     {
       "id": "ntk",
       "topic": "NTK and feature learning",
@@ -30,21 +36,27 @@
       "main": "Jacot, Gabriel & Hongler, [Neural Tangent Kernel: Convergence and Generalization in Neural Networks](https://arxiv.org/abs/1806.07572) (2018).",
       "recent": "Haas et al., [On the Surprising Effectiveness of Large Learning Rates under Standard Width Scaling](https://arxiv.org/abs/2505.22491) (2025).",
       "focus": "Derive function-space gradient flow and its solution for squared loss, then compare a finite network with its linearization. Use the recent paper to examine why width, parameterization, learning rate and the choice of loss matter for claims about feature learning.",
-      "week": 1,
-      "part": 1,
-      "presenter": "TBD"
+      "part": 1
     },
     {
       "id": "mup",
       "topic": "μP, scaling and hyperparameter transfer",
       "question": "How should initialization and updates scale as networks become wider or deeper?",
-      "foundations": "Yang & Hu, [Tensor Programs IV: Feature Learning in Infinite-Width Neural Networks](https://proceedings.mlr.press/v139/yang21c.html) (2021), selected sections on parameterization and feature learning. The preceding NTK session supplies the contrasting linearized regime.",
+      "foundations": "Yang & Hu, [Tensor Programs IV: Feature Learning in Infinite-Width Neural Networks](https://proceedings.mlr.press/v139/yang21c.html) (2021), selected sections on parameterization and feature learning. Review the NTK linearized regime as contrasting background; a separate NTK seminar is optional.",
       "main": "Yang et al., [Tensor Programs V: Tuning Large Neural Networks via Zero-Shot Hyperparameter Transfer](https://arxiv.org/abs/2203.03466) (NeurIPS 2021; arXiv 2022).",
       "recent": "Dey et al., [Don't Be Lazy: CompleteP Enables Compute-Efficient Deep Transformers](https://arxiv.org/abs/2505.01618) (2025).",
       "focus": "Work through activation and update scaling in a small multilayer network, and inspect a learning-rate transfer experiment. Discuss the additional constraints introduced by depth; width transfer alone does not establish depth transfer or effective nonlinear learning.",
-      "week": 2,
-      "part": 1,
-      "presenter": "TBD"
+      "part": 1
+    },
+    {
+      "id": "muon",
+      "topic": "Geometry of optimization: Muon",
+      "question": "How does the norm used to measure an update change the direction of steepest descent?",
+      "foundations": "Bernstein & Newhouse, [Old Optimizer, New Norm: An Anthology](https://arxiv.org/abs/2409.20325) (2024), selected sections on steepest descent, dual norms and matrix operator norms.",
+      "main": "Liu et al., [Muon Is Scalable for LLM Training](https://arxiv.org/abs/2502.16982) (2025).",
+      "recent": "Kovalev, [Understanding Gradient Orthogonalization for Deep Learning via Non-Euclidean Trust-Region Optimization](https://arxiv.org/abs/2503.12645) (2025).",
+      "focus": "Derive the spectral-norm-constrained linearized update using the SVD and explain its polar factor and Newton–Schulz approximation. Examine a scaling experiment and distinguish the geometric argument from implementation choices, weight decay and empirical comparisons with AdamW.",
+      "part": 1
     },
     {
       "id": "mamba",
@@ -54,9 +66,7 @@
       "main": "Dao & Gu, [Transformers Are SSMs: Generalized Models and Efficient Algorithms Through Structured State Space Duality](https://proceedings.mlr.press/v235/dao24a.html) (Mamba-2, 2024).",
       "recent": "Lahoti et al., [Mamba-3: Improved Sequence Modeling Using State Space Principles](https://arxiv.org/abs/2603.15569) (2026).",
       "focus": "Unroll an SSM into a structured matrix and explain the restricted attention–SSM duality used by Mamba-2. Examine a state-tracking experiment from Mamba-3 and distinguish algorithmic complexity from measured hardware efficiency.",
-      "week": 3,
-      "part": 2,
-      "presenter": "TBD"
+      "part": 2
     },
     {
       "id": "icl",
@@ -66,33 +76,47 @@
       "main": "Akyürek et al., [What Learning Algorithm Is In-Context Learning? Investigations with Linear Models](https://arxiv.org/abs/2211.15661) (2023).",
       "recent": "Wurgaft et al., [In-Context Learning Strategies Emerge Rationally](https://arxiv.org/abs/2506.17859) (2025).",
       "focus": "Work through one regression-learning construction and compare gradient-descent, ridge and Bayesian predictors on a controlled task distribution. Separate existence constructions and observed behavior in trained synthetic-task models from claims about general language models.",
-      "week": 4,
-      "part": 2,
-      "presenter": "TBD"
+      "part": 2
     },
     {
-      "id": "ttt-adaptation",
-      "topic": "Test-time training: adaptation and IT³",
-      "question": "What unlabeled objective makes adaptation improve the task we actually care about?",
+      "id": "ttt",
+      "topic": "Test-time learning: TTT and IT³",
+      "question": "What should a model learn at inference, and which objective makes those updates useful?",
       "foundations": "Sun, Wang, Liu, Miller, Efros & Hardt, [*Test-Time Training with Self-Supervision for Generalization under Distribution Shifts*](https://proceedings.mlr.press/v119/sun20b.html) (ICML 2020). Shared encoders, self-supervised auxiliary tasks and the gradient-alignment condition under the paper’s smooth/convex assumptions.",
       "main": "Durasov, Shocher, Oner, Chechik, Efros & Fua, [*IT³: Idempotent Test-Time Training*](https://proceedings.mlr.press/v267/durasov25a.html) (ICML 2025). Learn prediction feedback and use consistency between successive predictions as the test-time objective.",
       "recent": "IT³ is the recent anchor. Supplementary resources: [arXiv paper](https://arxiv.org/abs/2410.04201) and [official implementation](https://github.com/nikitadurasov/ittt). Compare its idempotence-based consistency objective with the original TTT auxiliary-task design.",
-      "focus": "Derive the original gradient-alignment argument and IT³ consistency loss, then inspect an adaptation experiment and a failure case. IT³ requires its own training setup; discuss when consistency can be uninformative and how to stop adaptation.",
-      "week": 5,
+      "focus": "Explain the original TTT gradient-alignment intuition, derive the IT³ consistency loss, and examine one adaptation experiment or failure case. IT³ requires its own training setup. Keep neural memory as a brief comparison; discuss when consistency is uninformative and how to stop adaptation.",
       "part": 2,
-      "presenter": "TBD"
+      "scope": "Choose one route for a seminar of two academic hours: adaptation with IT³ (shown below), or learning as neural memory (alternate route). Both routes can be selected independently by different presenters if there is interest.",
+      "routes": [
+        {
+          "title": "learning as neural memory",
+          "foundations": "Ba et al., [*Using Fast Weights to Attend to the Recent Past*](https://arxiv.org/abs/1610.06258) (2016). Fast versus slow weights and associative memory; recap the original Sun et al. TTT formulation. Original TTT: Sun et al., [Test-Time Training with Self-Supervision for Generalization under Distribution Shifts](https://proceedings.mlr.press/v119/sun20b.html) (2020), selected introduction.",
+          "main": "Sun et al., [*Learning to (Learn at Test Time): RNNs with Expressive Hidden States*](https://arxiv.org/abs/2407.04620) (2024). A model is the recurrent hidden state, and self-supervised gradient updates are the state transition.",
+          "recent": "Tandon et al., [*End-to-End Test-Time Training for Long Context*](https://arxiv.org/abs/2512.23675) (2025). Next-token updates compress context into weights, with a meta-learned initialization. Brief contrast: [IT³](https://proceedings.mlr.press/v267/durasov25a.html) (2025), adaptation under distribution shift.",
+          "focus": "Work through a TTT-Linear update and its recurrent computation. Compare layer-local reconstruction with end-to-end next-token adaptation; distinguish sequence memory from adapting to a shifted test distribution. This is a complete alternative seminar of two academic hours, rather than a required continuation of the adaptation route."
+        }
+      ]
     },
     {
-      "id": "ttt-memory",
-      "topic": "Test-time training: learning as neural memory",
-      "question": "How can parameter updates store context, and how should training prepare a model to learn at inference?",
-      "foundations": "Ba et al., [*Using Fast Weights to Attend to the Recent Past*](https://arxiv.org/abs/1610.06258) (2016). Fast versus slow weights and associative memory; recap the original Sun et al. TTT formulation.",
-      "main": "Sun et al., [*Learning to (Learn at Test Time): RNNs with Expressive Hidden States*](https://arxiv.org/abs/2407.04620) (2024). A model is the recurrent hidden state, and self-supervised gradient updates are the state transition.",
-      "recent": "Tandon et al., [*End-to-End Test-Time Training for Long Context*](https://arxiv.org/abs/2512.23675) (2025). Next-token updates compress context into weights, with a meta-learned initialization.",
-      "focus": "Work through a TTT-Linear update and its recurrent computation. Compare layer-local reconstruction with end-to-end next-token adaptation; distinguish sequence memory from adapting to a shifted test distribution.",
-      "week": 6,
+      "id": "rl-reasoning",
+      "topic": "RL for reasoning with verifiable rewards",
+      "question": "Does reward-based training discover successful reasoning behavior or change which existing behavior is sampled?",
+      "foundations": "[Spinning Up: Part 3—Introduction to Policy Optimization](https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html), selected sections on the log-derivative policy gradient and baselines. Reserve 25–30 minutes to introduce policies, sampled completions, rewards and group-relative advantages; prior RL coursework is not assumed.",
+      "main": "DeepSeek-AI et al., [DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning](https://arxiv.org/abs/2501.12948) (2025), focusing on R1-Zero and the learning objective.",
+      "recent": "Yue et al., [Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?](https://arxiv.org/abs/2504.13837) (2025). Counterpoint: Liu et al., [ProRL: Prolonged Reinforcement Learning Expands Reasoning Boundaries in Large Language Models](https://arxiv.org/abs/2505.24864) (2025).",
+      "focus": "Derive the policy-gradient identity before introducing group-relative advantages, clipping and KL regularization. Compare pass@k evidence under the papers' different training and evaluation settings; finite sampling cannot establish that a base model assigns zero probability to a solution.",
+      "part": 2
+    },
+    {
+      "id": "recurrent-depth",
       "part": 2,
-      "presenter": "TBD"
+      "topic": "Recurrent depth and latent reasoning",
+      "question": "Can a model gain reasoning ability by repeatedly applying the same layers?",
+      "foundations": "Dehghani et al., [Universal Transformers](https://arxiv.org/abs/1807.03819) (ICLR 2019; 2018 preprint). Shared layers, recurrence over depth and adaptive computation.",
+      "main": "Geiping et al., [Scaling up Test-Time Compute with Latent Reasoning: A Recurrent Depth Approach](https://arxiv.org/abs/2502.05171) (NeurIPS 2025).",
+      "recent": "Jolicoeur-Martineau, [Less is More: Recursive Reasoning with Tiny Networks](https://arxiv.org/abs/2510.04871) (2025). A short comparison with recursive refinement on puzzles.",
+      "focus": "Trace one recurrent block, explain how it is trained across iteration counts, and assess performance against inference compute. Use tiny recursive models as a comparison. Distinguish iteration count, parameter count and demonstrated reasoning performance."
     },
     {
       "id": "hypernetworks",
@@ -102,9 +126,7 @@
       "main": "Charakorn et al., [Text-to-LoRA: Instant Transformer Adaption](https://arxiv.org/abs/2506.06105) (2025).",
       "recent": "Charakorn et al., [Doc-to-LoRA: Learning to Instantly Internalize Contexts](https://arxiv.org/abs/2602.15902) (2026).",
       "focus": "Explain the conditioning signal, generated low-rank update and training objective, then examine a held-out-task or document experiment. Compare the cost and information limits of generated adaptation with fine-tuning and keeping the original context available.",
-      "week": 7,
-      "part": 3,
-      "presenter": "TBD"
+      "part": 3
     },
     {
       "id": "jepa",
@@ -114,21 +136,27 @@
       "main": "Assran et al., [V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning](https://arxiv.org/abs/2506.09985) (2025).",
       "recent": "Maes et al., [LeWorldModel: Stable End-to-End Joint-Embedding Predictive Architecture from Pixels](https://arxiv.org/abs/2603.19312) (2026).",
       "focus": "Trace the representation-prediction objective and action-conditioned planning loop, then analyze a planning result and its data requirements. Contrast target-network stabilization with regularizing the latent distribution; representation quality and accurate action-conditioned dynamics are separate questions.",
-      "week": 8,
+      "part": 3
+    },
+    {
+      "id": "representation-alignment",
       "part": 3,
-      "presenter": "TBD"
+      "topic": "Representation alignment and the Platonic hypothesis",
+      "question": "Do different models learn the same representations, and how would we know?",
+      "foundations": "Kornblith et al., [Similarity of Neural Network Representations Revisited](https://proceedings.mlr.press/v97/kornblith19a.html) (ICML 2019). Centered kernel alignment and the invariances of similarity measures.",
+      "main": "Huh et al., [Position: The Platonic Representation Hypothesis](https://proceedings.mlr.press/v235/huh24a.html) (ICML 2024).",
+      "recent": "Gröger, Wen & Brbic, [Revisiting the Platonic Representation Hypothesis: An Aristotelian View](https://proceedings.mlr.press/v306/groger26a.html) (ICML 2026). Calibration for similarity scores and the distinction between global similarity and local neighborhood agreement.",
+      "focus": "Compute one similarity measure on a small example, examine a cross-modal alignment result, and test its interpretation against the recent calibration critique. Treat convergence to a shared reality as a hypothesis whose evidence depends on the measurement."
     },
     {
       "id": "merging",
       "topic": "Model merging and task arithmetic",
       "question": "Why can adding parameter updates combine capabilities, and when does task interference prevent it?",
-      "foundations": "Ilharco et al., [Editing Models with Task Arithmetic](https://arxiv.org/abs/2212.04089) (2023). Review parameter differences relative to a shared pretrained checkpoint and the NTK session's function-space linearization.",
+      "foundations": "Ilharco et al., [Editing Models with Task Arithmetic](https://arxiv.org/abs/2212.04089) (2023). Review parameter differences relative to a shared pretrained checkpoint and function-space linearization from NTK background.",
       "main": "Ortiz-Jimenez, Favero & Frossard, [Task Arithmetic in the Tangent Space: Improved Editing of Pre-Trained Models](https://arxiv.org/abs/2305.12827) (2023).",
       "recent": "Hitit, Girrbach & Akata, [A Systematic Study of In-the-Wild Model Merging for Large Language Models](https://arxiv.org/abs/2511.21437) (2025 preprint; TMLR 2026).",
       "focus": "Derive how adding task vectors affects a linearized model and examine the proposed weight-disentanglement mechanism. Compare controlled task combinations with heterogeneous checkpoints, including conflicting objectives and gains relative to the best individual model.",
-      "week": 9,
-      "part": 3,
-      "presenter": "TBD"
+      "part": 4
     },
     {
       "id": "features",
@@ -138,48 +166,38 @@
       "main": "Templeton et al., [Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html) (2024).",
       "recent": "Leask et al., [Sparse Autoencoders Do Not Find Canonical Units of Analysis](https://arxiv.org/abs/2502.04878) (2025).",
       "focus": "Explain the sparse-autoencoder objective and reproduce or analyze a small superposition experiment. Examine feature interventions alongside the stitching and meta-SAE evidence, asking whether interpretability, completeness and atomicity are being measured separately.",
-      "week": 10,
-      "part": 4,
-      "presenter": "TBD"
+      "part": 4
     },
     {
       "id": "circuits",
       "topic": "Mechanistic interpretability: circuits and causal tests",
       "question": "How can we trace a model's computation and test whether the proposed explanation is causal?",
-      "foundations": "Elhage et al., [A Mathematical Framework for Transformer Circuits](https://transformer-circuits.pub/2021/framework/index.html) (2021), selected sections on the residual stream and attention's QK/OV decomposition. The preceding features session supplies sparse representations.",
+      "foundations": "Elhage et al., [A Mathematical Framework for Transformer Circuits](https://transformer-circuits.pub/2021/framework/index.html) (2021), selected sections on the residual stream and attention's QK/OV decomposition. Review sparse representations from the features background; a separate features seminar is optional.",
       "main": "Ameisen et al., [Circuit Tracing: Revealing Computational Graphs in Language Models](https://transformer-circuits.pub/2025/attribution-graphs/methods.html) (2025).",
       "recent": "Kamath et al., [Tracing Attention Computation Through Feature Interactions](https://transformer-circuits.pub/2025/attention-qk/index.html) (2025).",
       "focus": "Explain how a replacement model produces an attribution graph and work through one circuit case study with an intervention. Identify approximation errors and omitted computations, then examine what the attention extension adds to the explanation.",
-      "week": 11,
-      "part": 4,
-      "presenter": "TBD"
+      "part": 4
     },
     {
-      "id": "drifting",
-      "topic": "Drifting models: training-time distribution dynamics",
-      "question": "How can attraction and repulsion during training produce a one-pass generator, and when does zero drift identify the correct distribution?",
-      "foundations": "Yujia Li, Swersky & Zemel, [*Generative Moment Matching Networks*](https://proceedings.mlr.press/v37/li15.html) (ICML 2015). Kernel mean embeddings, maximum mean discrepancy and distribution matching from samples.",
+      "id": "one-step-generative",
+      "topic": "One-step generative models: Drifting and IMLE",
+      "question": "How can matching real and generated samples train a generator that produces a sample in one pass?",
+      "foundations": "Yujia Li, Swersky & Zemel, [Generative Moment Matching Networks](https://proceedings.mlr.press/v37/li15.html) (ICML 2015), selected kernel/MMD material. Ke Li & Jitendra Malik, [Implicit Maximum Likelihood Estimation](https://arxiv.org/abs/1809.09087) (2018), the data-to-generated nearest-neighbor assignment and regression algorithm.",
       "main": "Deng, He Li, Tianhong Li, Du & He, [*Generative Modeling via Drifting*](https://arxiv.org/abs/2602.04770) (2026). Estimate an attraction-repulsion field from real and generated samples and fit frozen drifted targets.",
-      "recent": "Esteban-Casadevall et al., [*Kernel-Gradient Drifting Models*](https://arxiv.org/abs/2605.10727) (2026), including Max Welling. A mathematical companion for kernel-gradient fields, smoothing and distribution identifiability. [Original drifting project and demonstrations](https://lambertae.github.io/projects/drifting/).",
-      "focus": "Derive the drift and regression update, including the role of stopping gradients through the target. Examine a 2D example, equilibrium assumptions and one ablation; arbitrary zero drift need not certify distribution equality.",
-      "week": 12,
+      "recent": "Chirag Vashist & Ke Li, [ROMS-IMLE: A Minimalist Approach to Competitive Single-Step Generative Modelling](https://arxiv.org/abs/2607.19332) (2026). Compare nearest-neighbor assignment, robust losses and intermediate-resolution supervision with the drifting update. Optional theory: Esteban-Casadevall et al., [Kernel-Gradient Drifting Models](https://arxiv.org/abs/2605.10727) (2026), including Max Welling.",
+      "focus": "Introduce sample-based distribution matching, derive the drifting field and frozen-target regression, and study one toy experiment. Compare IMLE’s data-to-generated matching and ROMS-IMLE’s practical changes briefly. Choose one main mechanism to derive; keep zero-drift and maximum-likelihood claims tied to their assumptions.",
       "part": 5,
-      "presenter": "TBD"
+      "scope": "One comparative seminar of two academic hours. Use Drifting for the central derivation and IMLE / ROMS-IMLE for comparison, or choose the IMLE-first route below. Separate deeper seminars are available if both focuses are selected.",
+      "routes": [
+        {
+          "title": "IMLE and mode coverage",
+          "foundations": "Ke Li & Jitendra Malik, [*Implicit Maximum Likelihood Estimation*](https://arxiv.org/abs/1809.09087) (2018). Implicit distributions, nearest-neighbor assignment, mode coverage and the likelihood connection under stated assumptions.",
+          "main": "Chirag Vashist & Ke Li, [*ROMS-IMLE: A Minimalist Approach to Competitive Single-Step Generative Modelling*](https://arxiv.org/abs/2607.19332) (2026). Revisit IMLE with intermediate-resolution supervision and robust losses.",
+          "recent": "ROMS-IMLE is the recent anchor. The authors’ [method page](https://serchirag.github.io/roms-imle/) provides additional explanation and experiments. Comparison: Deng et al., [Generative Modeling via Drifting](https://arxiv.org/abs/2602.04770) (2026), selected algorithm and toy example.",
+          "focus": "Explain the direction of nearest-neighbor matching, latent assignment and alternating regression, then examine sampling cost and the ROMS-IMLE ablations. Keep the maximum-likelihood connection tied to its assumptions. Use Drifting as a brief comparison within the same two-academic-hour seminar."
+        }
+      ]
     },
-    {
-      "id": "imle",
-      "topic": "IMLE and one-step generative models",
-      "question": "Can data-to-generated nearest-neighbor matching achieve coverage and high fidelity without an iterative sampler?",
-      "foundations": "Ke Li & Jitendra Malik, [*Implicit Maximum Likelihood Estimation*](https://arxiv.org/abs/1809.09087) (2018). Implicit distributions, nearest-neighbor assignment, mode coverage and the likelihood connection under stated assumptions.",
-      "main": "Chirag Vashist & Ke Li, [*ROMS-IMLE: A Minimalist Approach to Competitive Single-Step Generative Modelling*](https://arxiv.org/abs/2607.19332) (2026). Revisit IMLE with intermediate-resolution supervision and robust losses.",
-      "recent": "ROMS-IMLE is the recent anchor. The authors’ [method page](https://serchirag.github.io/roms-imle/) provides additional explanation and experiments.",
-      "focus": "Explain the direction of nearest-neighbor matching, latent assignment and alternating regression, then examine sampling cost and the ROMS-IMLE ablations. Keep the maximum-likelihood connection tied to its assumptions.",
-      "week": 13,
-      "part": 5,
-      "presenter": "TBD"
-    }
-  ],
-  "alternatives": [
     {
       "id": "diffusion-lm",
       "topic": "Diffusion language models",
@@ -187,25 +205,97 @@
       "foundations": "Austin et al., [Structured Denoising Diffusion Models in Discrete State-Spaces](https://arxiv.org/abs/2107.03006) (2021), selected sections on transition matrices and absorbing-mask corruption.",
       "main": "Sahoo et al., [Simple and Effective Masked Diffusion Language Models](https://arxiv.org/abs/2406.07524) (2024).",
       "recent": "Nie et al., [Large Language Diffusion Models](https://arxiv.org/abs/2502.09992) (LLaDA, 2025).",
-      "focus": "Derive the masked-denoising objective and trace one sampling schedule, then compare refinement, parallelism and likelihood evaluation with autoregressive generation. The topic requires discrete corruption and language-specific evaluation beyond a continuous diffusion refresher."
+      "focus": "Derive the masked-denoising objective and trace one sampling schedule, then compare refinement, parallelism and likelihood evaluation with autoregressive generation. The topic requires discrete corruption and language-specific evaluation beyond a continuous diffusion refresher.",
+      "part": 5
     },
     {
-      "id": "muon",
-      "topic": "Geometry of optimization: Muon",
-      "question": "How does the norm used to measure an update change the direction of steepest descent?",
-      "foundations": "Bernstein & Newhouse, [Old Optimizer, New Norm: An Anthology](https://arxiv.org/abs/2409.20325) (2024), selected sections on steepest descent, dual norms and matrix operator norms.",
-      "main": "Liu et al., [Muon Is Scalable for LLM Training](https://arxiv.org/abs/2502.16982) (2025).",
-      "recent": "Kovalev, [Understanding Gradient Orthogonalization for Deep Learning via Non-Euclidean Trust-Region Optimization](https://arxiv.org/abs/2503.12645) (2025).",
-      "focus": "Derive the spectral-norm-constrained linearized update using the SVD and explain its polar factor and Newton–Schulz approximation. Examine a scaling experiment and distinguish the geometric argument from implementation choices, weight decay and empirical comparisons with AdamW."
+      "id": "canonicalization",
+      "part": 6,
+      "topic": "Symmetry, equivariance and canonicalization",
+      "question": "Can we enforce symmetry by putting each input into a canonical orientation?",
+      "scope": "Advanced mathematical candidate. A concrete rotation or permutation example is enough to motivate the main result within two academic hours.",
+      "foundations": "Cohen & Welling, [Group Equivariant Convolutional Networks](https://arxiv.org/abs/1602.07576) (ICML 2016). Group actions, equivariance and weight sharing.",
+      "main": "Dym, Lawrence & Siegel, [Equivariant Frames and the Impossibility of Continuous Canonicalization](https://proceedings.mlr.press/v235/dym24a.html) (ICML 2024).",
+      "recent": "Shumaylov et al., [Lie Algebra Canonicalization: Equivariant Neural Operators under arbitrary Lie Groups](https://arxiv.org/abs/2410.02698) (ICLR 2025; 2024 preprint). Selected introduction and one application.",
+      "focus": "Start with a group-action example, show why a canonical choice can become discontinuous under the stated assumptions, and explain how weighted frames address continuity. Leave general topology proofs and non-compact Lie-group machinery for optional reading."
     },
     {
-      "id": "rl-reasoning",
-      "topic": "RL for reasoning with verifiable rewards",
-      "question": "Does reward-based training discover successful reasoning behavior or change which existing behavior is sampled?",
-      "foundations": "[Spinning Up: Part 3—Introduction to Policy Optimization](https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html), selected sections on the log-derivative policy gradient and baselines. Reserve 25–30 minutes to introduce policies, sampled completions, rewards and group-relative advantages; prior RL coursework is not assumed.",
-      "main": "DeepSeek-AI et al., [DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning](https://arxiv.org/abs/2501.12948) (2025), focusing on R1-Zero and the learning objective.",
-      "recent": "Yue et al., [Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?](https://arxiv.org/abs/2504.13837) (2025). Counterpoint: Liu et al., [ProRL: Prolonged Reinforcement Learning Expands Reasoning Boundaries in Large Language Models](https://arxiv.org/abs/2505.24864) (2025).",
-      "focus": "Derive the policy-gradient identity before introducing group-relative advantages, clipping and KL regularization. Compare pass@k evidence under the papers' different training and evaluation settings; finite sampling cannot establish that a base model assigns zero probability to a solution."
+      "id": "oscillatory-neurons",
+      "part": 6,
+      "topic": "Oscillatory neurons and synchronization",
+      "question": "Can neural representations bind information through synchronization?",
+      "scope": "Exploratory candidate connecting neural computation with dynamical systems, including work by Max Welling.",
+      "foundations": "Strogatz, [From Kuramoto to Crawford: exploring the onset of synchronization in populations of coupled oscillators](https://static.squarespace.com/static/5436e695e4b07f1e91b30155/t/544525a8e4b0b8e2e8230fa3/1413817768995/from-kuramoto-to-crawford.pdf) (2000). Sections 2 and 3.1–3.3 on coupled phases and synchronization (author-hosted PDF).",
+      "main": "Miyato, Löwe, Geiger & Welling, [Artificial Kuramoto Oscillatory Neurons](https://arxiv.org/abs/2410.13821) (ICLR 2025; 2024 preprint).",
+      "recent": "Iqbal et al., [Spontaneous symmetry breaking and Goldstone modes for deep information propagation](https://arxiv.org/abs/2605.14685) (2026 preprint). A related perspective on symmetry and persistent information propagation, rather than a direct analysis of AKOrN.",
+      "focus": "Derive the two-oscillator intuition, trace the generalized neural update, and study one object-discovery or reasoning experiment. Use the Goldstone paper for a brief connection to depth and memory; its physics derivations are optional."
+    }
+  ],
+  "weeks": [
+    {
+      "week": 1,
+      "topic": "TBD",
+      "presenter": "TBD"
+    },
+    {
+      "week": 2,
+      "topic": "TBD",
+      "presenter": "TBD"
+    },
+    {
+      "week": 3,
+      "topic": "TBD",
+      "presenter": "TBD"
+    },
+    {
+      "week": 4,
+      "topic": "TBD",
+      "presenter": "TBD"
+    },
+    {
+      "week": 5,
+      "topic": "TBD",
+      "presenter": "TBD"
+    },
+    {
+      "week": 6,
+      "topic": "TBD",
+      "presenter": "TBD"
+    },
+    {
+      "week": 7,
+      "topic": "TBD",
+      "presenter": "TBD"
+    },
+    {
+      "week": 8,
+      "topic": "TBD",
+      "presenter": "TBD"
+    },
+    {
+      "week": 9,
+      "topic": "TBD",
+      "presenter": "TBD"
+    },
+    {
+      "week": 10,
+      "topic": "TBD",
+      "presenter": "TBD"
+    },
+    {
+      "week": 11,
+      "topic": "TBD",
+      "presenter": "TBD"
+    },
+    {
+      "week": 12,
+      "topic": "TBD",
+      "presenter": "TBD"
+    },
+    {
+      "week": 13,
+      "topic": "TBD",
+      "presenter": "TBD"
     }
   ]
 }

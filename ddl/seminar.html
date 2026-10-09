@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Seminar guide — Deep Deep Learning</title>
-  <meta name="description" content="A graduate, student-led seminar on major ideas in deep learning: foundations, a central paper, and recent developments.">
+  <meta name="description" content="A graduate, student-led seminar on major ideas in deep learning: foundations, a central paper, and recent developments. Choose topics from the candidate reading pool.">
   <meta name="theme-color" content="#0d1117">
   <link rel="canonical" href="https://assafshocher.github.io/ddl/seminar.html">
   <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
@@ -19,17 +19,21 @@
   <nav aria-label="Main navigation"><div class="nav-inner">
     <a href="index.html" class="nav-brand"><img src="assets/mark.svg" alt="" width="32" height="32"><span>Deep Deep Learning</span></a>
     <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
-    <ul class="nav-links" id="nav-links"><li><a href="index.html" >Home</a></li><li><a href="schedule.html" >Schedule & readings</a></li><li><a href="seminar.html" class="active" aria-current="page">Seminar guide</a></li></ul>
+    <ul class="nav-links" id="nav-links"><li><a href="index.html" >Home</a></li><li><a href="schedule.html" >Topics & readings</a></li><li><a href="seminar.html" class="active" aria-current="page">Seminar guide</a></li></ul>
   </div></nav>
   <main id="main">
-<section class="section page-heading"><div class="hero-badge">Prepare · Explain · Discuss</div><h1>Student-led seminars</h1><p class="section-subtitle">Build an explanation that the room can examine together.</p><p>Each meeting develops one fundamental question through a small family of papers. Start with the older idea, uncover the central paper’s mechanism, and use evidence to assess the explanation.</p></section>
+<section class="section page-heading"><div class="hero-badge">Prepare · Explain · Discuss</div><h1>Student-led seminars</h1><p class="section-subtitle">One focused question, developed over two academic hours.</p><p>Each meeting develops one fundamental question through a central paper and selected background or comparison material. Start with the older idea, uncover the main mechanism, and use evidence to assess the explanation.</p></section>
 <section class="section"><h2 class="section-title">Before your seminar</h2><ol class="guide-list">
-<li>Choose a topic from the working schedule or optional menu and coordinate the selection and scope with the instructor. Presenter assignments and the selection process are TBD.</li>
-<li>Read the main paper and the relevant foundation material. Identify the minimum background needed for the mechanism. Use the recent companion to extend or question the explanation.</li>
-<li>Prepare one careful derivation, one decisive experiment and one unresolved question. State the assumptions behind each claim.</li>
+<li>Choose a candidate from the topic pool and coordinate one focused question with the instructor. Where a topic offers alternative focuses, choose one. Only selected topics enter the schedule; the selection process and presenter assignments are TBD.</li>
+<li>Read the main paper and the relevant foundation material. Identify the minimum background needed for the mechanism. Use selected recent work to extend or question the explanation.</li>
+<li>Prepare one careful derivation, one decisive experiment and one unresolved question. State the assumptions behind each claim. A companion paper can supply a comparison without becoming a second full presentation.</li>
 <li>Bring slides or notes with complete citations. Instructor meetings, preparation deadlines and material-sharing arrangements are TBD.</li></ol></section>
-<section class="section"><h2 class="section-title">A suggested 90-minute structure</h2><p class="section-subtitle">A preparation template. The actual meeting duration is TBD.</p><div class="cards cards-compact"><div class="card card-sm"><h3>15 min · Foundations</h3><p>Introduce the older idea and the minimum mathematical background.</p></div><div class="card card-sm"><h3>35 min · Mechanism</h3><p>Explain the main paper’s mechanism, with one derivation worked through carefully.</p></div><div class="card card-sm"><h3>15 min · Evidence</h3><p>Present one experiment or ablation that tests the explanation.</p></div><div class="card card-sm"><h3>25 min · Discussion</h3><p>Discuss limitations, recent follow-up work, competing explanations and open questions.</p></div></div>
+<section class="section"><h2 class="section-title">A suggested structure for two academic hours</h2><p class="section-subtitle">The allocation below assumes two 45-minute academic hours, totaling 90 minutes. Adjust the split to the local academic-hour convention.</p><div class="cards cards-compact"><div class="card card-sm"><h3>15 min · Foundations</h3><p>Introduce the older idea and the minimum mathematical background.</p></div><div class="card card-sm"><h3>35 min · Mechanism</h3><p>Explain the main paper’s mechanism, with one derivation worked through carefully.</p></div><div class="card card-sm"><h3>15 min · Evidence</h3><p>Present one experiment or ablation that tests the explanation.</p></div><div class="card card-sm"><h3>25 min · Discussion</h3><p>Discuss limitations, selected recent work, competing explanations and open questions.</p></div></div>
 <p class="section-end">For RL reasoning, allow 25–30 minutes for the policy-gradient foundations and narrow the paper discussion accordingly. No prior RL course is assumed; the selected tutorial is preparation material.</p></section>
+<section class="section"><h2 class="section-title">Choosing a manageable scope</h2><div class="prose">
+<p>TTT does not automatically require two weeks. An adaptation seminar can center on IT³, introduce the original TTT framework, and use neural memory as a short contrast. A seminar on neural memory instead centers on the TTT recurrent update; distribution-shift adaptation becomes context.</p>
+<p>Drifting and IMLE can be compared in one session through the question of how to train a one-step generator from generated samples. Develop one training mechanism carefully and use the other as a comparison. A detailed derivation of both methods and their theory would need a narrower comparison or a second selected topic.</p>
+<p>For any broad family, choose the paper and question first. The pool supplies options; it does not require every linked direction to be covered in one meeting.</p></div></section>
 <section class="section"><h2 class="section-title">What makes a strong presentation?</h2><div class="prose">
 <p>Separate exact mathematical connections from connections that depend on assumptions, and distinguish both from empirical interpretations. Explain what a method can implement, what the trained system appears to implement, and how far the evidence supports a broader explanation.</p>
 <p>Use a small example before the full model. Define notation, explain each assumption, and make the experiment readable enough for the audience to critique it.</p>
