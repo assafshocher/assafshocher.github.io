@@ -16,6 +16,7 @@ a:focus-visible,button:focus-visible,input:focus-visible {outline:2px solid var(
 .arc h3 {font-size:1rem;line-height:1.5;min-height:76px;margin:10px 0}
 .arc a>span:last-child {font-size:.8rem;color:var(--text-secondary)}
 .eyebrow,.topic-label {font-family:var(--font-mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+.topic-number {font-weight:600;color:var(--text-primary)}
 .page-heading {padding-top:64px;padding-bottom:24px}
 .page-heading h1 {font-size:2.5rem;letter-spacing:-.04em;margin-bottom:12px}
 .page-heading>p {max-width:850px;color:var(--text-secondary)}
@@ -43,17 +44,14 @@ input[type=search] {width:100%;max-width:540px;padding:13px 16px;border:1px soli
 .presentation-focus h4 {font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);margin-bottom:8px}
 .session-scope {padding:14px 16px;margin-bottom:24px;border-radius:8px;background:rgba(79,209,197,.06);font-size:.86rem;line-height:1.8;color:var(--text-secondary)}
 .session-scope h4 {font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);margin-bottom:6px}
-.reading-route {border-top:1px solid var(--border);margin-top:24px;padding-top:16px;font-size:.88rem}
-.reading-route summary {cursor:pointer;color:var(--accent);line-height:1.6}
-.reading-route summary:focus-visible {outline:2px solid var(--teal);outline-offset:4px}
-.route-content {padding-top:24px}
 .schedule-overview {margin-top:20px;border:1px solid var(--border);border-radius:12px;overflow:hidden}
 .schedule-overview table {width:100%;border-collapse:collapse;text-align:left;font-size:.88rem}
 .schedule-overview th,.schedule-overview td {padding:10px 16px;border-bottom:1px solid var(--border)}
 .schedule-overview thead {background:var(--bg-secondary);color:var(--text-secondary)}
 .schedule-overview tbody th {color:var(--teal);font-family:var(--font-mono);font-weight:400}
-.topic-overview tbody th {font-family:var(--font-sans);font-weight:500;color:var(--text-primary);width:60%}
+.topic-overview tbody th {font-family:var(--font-sans);font-weight:500;color:var(--text-primary);width:55%}
 .topic-overview td {color:var(--text-secondary)}
+.topic-overview .topic-index-number {font-family:var(--font-mono);font-weight:600;color:var(--teal);white-space:nowrap;width:52px}
 .schedule-overview tr:last-child td,.schedule-overview tr:last-child th {border-bottom:0}
 .schedule-overview td a {text-decoration:none}
 .topic-bottom {border-top:1px solid var(--border);padding-top:14px;margin-top:24px;font-size:.75rem;color:var(--text-secondary)}

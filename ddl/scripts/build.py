@@ -17,6 +17,15 @@ topics = course["topics"]
 parts = course["parts"]
 duration = course.get("duration", "Two academic hours")
 part_titles = {part["id"]: part["title"] for part in parts}
+topic_numbers = [item["number"] for item in topics]
+if any(type(number) is not int or number < 1 for number in topic_numbers):
+    raise ValueError("Each candidate needs a positive integer topic number")
+if len(topic_numbers) != len(set(topic_numbers)):
+    raise ValueError("Candidate topic numbers must be unique")
+
+
+def topic_number(item):
+    return f'{item["number"]:02}'
 
 
 def md(text):
@@ -94,24 +103,13 @@ def reading_card(item):
     legacy = "".join(f'<span class="legacy-anchor" id="week-{week}" aria-hidden="true"></span>' for week in legacy_weeks.get(item["id"], []))
     legacy += "".join(f'<span class="legacy-anchor" id="{html.escape(alias, quote=True)}" aria-hidden="true"></span>' for alias in item.get("aliases", []))
     scope = f'<div class="session-scope"><h4>Scope for one session</h4><p>{md(item["scope"])}</p></div>' if item.get("scope") else ""
-    routes = "".join(
-        f'<details class="reading-route"><summary>Alternative focus: {html.escape(route["title"])}</summary>'
-        f'<div class="route-content">{reading_bundle(route)}</div></details>'
-        for route in item.get("routes", [])
-    )
-    comparisons = "".join(
-        f'<details class="reading-route reading-comparison"><summary>Optional comparison: {html.escape(comparison["title"])}</summary>'
-        f'<div class="route-content"><h4>Optional readings</h4><p>{md(comparison["readings"])}</p>'
-        f'<h4>Discussion focus</h4><p>{md(comparison["focus"])}</p></div></details>'
-        for comparison in item.get("comparisons", [])
-    )
     return f"""
-    <article class="reading-card topic-card" id="{identifier}">
-      {legacy}<div class="topic-top"><span class="topic-label">Candidate topic</span><span class="duration">{html.escape(duration)}</span></div>
+    <article class="reading-card topic-card" id="{identifier}" data-topic-number="{item['number']}">
+      {legacy}<div class="topic-top"><span class="topic-label">Candidate topic <span class="topic-number">{topic_number(item)}</span></span><span class="duration">{html.escape(duration)}</span></div>
       <h3>{html.escape(item['topic'])}</h3>
       <p class="question">{html.escape(item['question'])}</p>
-      {scope}{reading_bundle(item)}{routes}{comparisons}
-      <div class="topic-bottom"><span>Shared pre-reading / selected sections / slides / notes: TBD</span><a href="#{identifier}" aria-label="Permanent link to {html.escape(item['topic'])}">Link ↗</a></div>
+      {scope}{reading_bundle(item)}
+      <div class="topic-bottom"><span>Shared pre-reading / selected sections / slides / notes: TBD</span><a href="#{identifier}" aria-label="Permanent link to topic {item['number']}: {html.escape(item['topic'])}">Link ↗</a></div>
     </article>"""
 
 
@@ -157,7 +155,7 @@ home = """
 (ROOT / "index.html").write_text(page("index.html", "Home", home))
 
 index_rows = "".join(
-    f'<tr class="topic-index-row" data-topic="topic-{item["id"]}"><th scope="row"><a href="#topic-{item["id"]}">{html.escape(item["topic"])}</a></th><td>{html.escape(part_titles[item["part"]])}</td></tr>'
+    f'<tr class="topic-index-row" data-topic="topic-{item["id"]}"><td class="topic-index-number">{topic_number(item)}</td><th scope="row"><a href="#topic-{item["id"]}">{html.escape(item["topic"])}</a></th><td>{html.escape(part_titles[item["part"]])}</td></tr>'
     for item in topics
 )
 week_rows = "".join(
@@ -168,12 +166,12 @@ part_links = "".join(f'<a href="#part-{part["id"]}">{html.escape(part["title"])}
 schedule = f"""
 <section class="section page-heading"><div class="hero-badge">Candidate pool · Two academic hours per selected topic</div><h1>Topics &amp; readings</h1><p class="section-subtitle">Learn the foundations, understand a central paper, examine what came next.</p>
 <p>These {len(topics)} topics are candidates for the seminar. Only the topics students and the instructor choose will enter the final {len(weeks)}-week schedule. Selection, order and presenter assignments are TBD.</p>
-<p>Each selected topic gets two academic hours and one focused question. The main paper is the center; background and recent comparisons are selective reading, not several full-paper presentations. Alternative focuses within a topic are choices for the same session.</p>
+<p>Each selected topic gets two academic hours and one focused question, with one reading bundle. The main paper is the center; background and recent developments supply the context and discussion. Topic numbers identify candidates and are independent of the weekly schedule.</p>
 <p>All students complete one required shared pre-reading, chosen by the presenters in consultation with the instructor and announced one week before class. Allow 30–45 minutes for a tutorial, a short paper or specified sections. Presenters include two guiding questions; each student brings one question or point of confusion. The main paper is optional for the audience unless selected as the shared pre-reading. Specific pre-readings are TBD.</p>
-<p>TTT centers on learning as neural memory, with hypernetworks as an optional comparison; distribution-shift adaptation with the original Sun et al. paper is an alternative focus, and IT³ is supplementary. Mechanistic interpretability combines feature foundations with one circuit-tracing case; representation alignment is an optional comparison. Drifting and IMLE can share a session on one-step generation, with one main mechanism developed in depth. Neither topic reserves two weeks. Flow matching is assumed background from the base course.</p>
+<p>The reading bundles connect foundational ideas to recent work. Use the scope and presentation focus to decide which sections to develop carefully in class. Supplementary papers support that question; every linked paper need not become a full presentation. Flow matching is assumed background from the base course.</p>
 <p class="section-end"><a class="btn btn-secondary" href="assets/syllabus.pdf" download>Download syllabus (PDF)</a></p></section>
-<section class="section schedule-tools"><label for="reading-search">Find a topic, author or paper</label><input id="reading-search" type="search" placeholder="Try Mamba, KAN, Neural Thickets or convergence…" autocomplete="off"><p id="result-count" class="muted" aria-live="polite">{len(topics)} candidate topics · Final selection TBD</p><div class="part-links">{part_links}</div></section>
-<section class="section overview-section" id="topic-index"><h2 class="section-title">The topic pool at a glance</h2><div class="schedule-overview topic-overview"><table><thead><tr><th scope="col">Candidate topic</th><th scope="col">Topic family</th></tr></thead><tbody>{index_rows}</tbody></table></div></section>"""
+<section class="section schedule-tools"><label for="reading-search">Find a topic number, author or paper</label><input id="reading-search" type="search" placeholder="Try #7, Mamba, KAN or convergence…" autocomplete="off"><p id="result-count" class="muted" aria-live="polite">{len(topics)} candidate topics · Final selection TBD</p><div class="part-links">{part_links}</div></section>
+<section class="section overview-section" id="topic-index"><h2 class="section-title">The topic pool at a glance</h2><div class="schedule-overview topic-overview"><table><thead><tr><th scope="col">No.</th><th scope="col">Candidate topic</th><th scope="col">Topic family</th></tr></thead><tbody>{index_rows}</tbody></table></div></section>"""
 for part in parts:
     group = [item for item in topics if item["part"] == part["id"]]
     if group:
@@ -186,7 +184,7 @@ schedule += f"""<section class="section" id="weekly-schedule"><div class="eyebro
 guide = """
 <section class="section page-heading"><div class="hero-badge">Prepare · Explain · Discuss</div><h1>Student-led seminars</h1><p class="section-subtitle">One focused question, developed over two academic hours.</p><p>Each meeting develops one fundamental question through a central paper and selected background or comparison material. Start with the older idea, uncover the main mechanism, and use evidence to assess the explanation.</p></section>
 <section class="section"><h2 class="section-title">Before your seminar</h2><ol class="guide-list">
-<li>Choose a candidate from the topic pool and coordinate one focused question with the instructor. Where a topic offers alternative focuses, choose one. Only selected topics enter the schedule; the selection process and presenter assignments are TBD.</li>
+<li>Choose a numbered candidate from the topic pool and coordinate one focused question with the instructor. Only selected topics enter the schedule; the selection process and presenter assignments are TBD.</li>
 <li>Read the main paper and the relevant foundation material. Identify the minimum background needed for the mechanism. Use selected recent work to extend or question the explanation.</li>
 <li>Choose the shared pre-reading with the instructor and announce it one week before class; follow the policy below.</li>
 <li>Prepare one careful derivation, one decisive experiment and one unresolved question. State the assumptions behind each claim. A companion paper can supply a comparison without becoming a second full presentation.</li>
@@ -202,10 +200,9 @@ guide = """
 ]) + """
 <p class="section-end">For RL reasoning, allow 25–30 minutes for the policy-gradient foundations and narrow the paper discussion accordingly. No prior RL course is assumed; the selected tutorial is preparation material.</p></section>
 <section class="section"><h2 class="section-title">Choosing a manageable scope</h2><div class="prose">
-<p>TTT does not automatically require two weeks. The default neural-memory seminar centers on the TTT recurrent update; hypernetworks provide an optional comparison between learning weights from context and generating them directly. An adaptation seminar instead centers on the original Sun et al. framework, with IT³ as supplementary reading. Choose one focus and develop one mechanism.</p>
-<p>The mechanistic-interpretability seminar uses toy models of superposition and feature extraction as background, then develops one case from Circuit Tracing (2025), including causal interventions and the limits of the evidence. Representation alignment supplies an optional discussion of whether different models learn the same features.</p>
-<p>Drifting and IMLE can be compared in one session through the question of how to train a one-step generator from generated samples. Develop one training mechanism carefully and use the other as a comparison. A detailed derivation of both methods and their theory would need a narrower comparison or a second selected topic.</p>
-<p>For any broad family, choose the paper and question first. The pool supplies options; it does not require every linked direction to be covered in one meeting.</p></div></section>
+<p>Every candidate has one reading bundle and a central question. Build the seminar around its main paper, using the foundations to supply the minimum necessary background and the recent work to extend or question the mechanism.</p>
+<p>Develop one derivation and one decisive experiment in detail. A companion paper can support a comparison through selected results or sections. The scope notes identify which claims fit a two-academic-hour meeting.</p>
+<p>Topic numbers identify candidates, not assigned weeks. Select the candidate and its question first, then agree on the sections to present with the instructor.</p></div></section>
 <section class="section"><h2 class="section-title">What makes a strong presentation?</h2><div class="prose">
 <p>Separate exact mathematical connections from connections that depend on assumptions, and distinguish both from empirical interpretations. Explain what a method can implement, what the trained system appears to implement, and how far the evidence supports a broader explanation.</p>
 <p>Use a small example before the full model. Define notation, explain each assumption, and make the experiment readable enough for the audience to critique it.</p>
@@ -279,10 +276,10 @@ table.setStyle(TableStyle([
 ]))
 story += [table, Spacer(1, 14), P("Suggested meeting structure", "Heading2"),
           P("Two academic hours per selected topic. Assuming two 45-minute academic hours: 15 minutes foundations, 35 minutes mechanism and derivation, 15 minutes evidence, 25 minutes discussion. Adjust the split to the local academic-hour convention."),
-          P("Choosing one focus", "Heading2"),
-          P("TTT centers on the neural-memory update, with hypernetworks as an optional comparison. Distribution-shift adaptation with the original Sun et al. paper is an alternative focus; IT3 is supplementary. Mechanistic interpretability uses superposition and feature extraction as background for one Circuit Tracing (2025) case, with representation alignment as an optional comparison. Drifting and IMLE can share a session on one-step generation, with one method developed in depth. Selective comparisons keep each topic within one meeting."),
+          P("Choosing a manageable scope", "Heading2"),
+          P("Each candidate has one reading bundle and a central question. Build around its main paper, using selected foundation and companion sections to explain and assess the mechanism. Develop one derivation and one decisive experiment carefully. Candidate numbers are references for discussion, independent of assigned week numbers."),
           PageBreak(), P("Candidate topic pool", "TitleDDL"),
-          P("Choose one focused question and one main paper for each selected session. Background and recent readings supply selective preparation and comparisons. An alternative focus is a choice within the same candidate topic; optional comparisons are discussion material. Shared pre-readings and selected sections for all candidates: TBD.")]
+          P("Choose a numbered candidate for each selected session. Each reading bundle connects one main paper to its foundations and recent developments. Use selected sections to keep the central question within two academic hours. Topic numbers are independent of the weekly schedule. Shared pre-readings and selected sections for all candidates: TBD.")]
 
 
 def pdf_bundle(item, title, question=None, scope=None):
@@ -301,19 +298,10 @@ for part in parts:
     group = [item for item in topics if item["part"] == part["id"]]
     if group:
         for index, item in enumerate(group):
-            block = pdf_bundle(item, item["topic"], item["question"], item.get("scope"))
+            block = pdf_bundle(item, topic_number(item) + " · " + item["topic"], item["question"], item.get("scope"))
             if index == 0:
                 block.insert(0, P(part["title"], "Heading1"))
             story.append(KeepTogether(block))
-            for route in item.get("routes", []):
-                story.append(KeepTogether(pdf_bundle(route, "Alternative focus: " + route["title"])))
-            for comparison in item.get("comparisons", []):
-                story.append(KeepTogether([
-                    P("Optional comparison: " + comparison["title"], "Heading2"),
-                    P("Optional readings: " + comparison["readings"], "SmallDDL"),
-                    P("Discussion focus: " + comparison["focus"], "SmallDDL"),
-                    Spacer(1, 10),
-                ]))
 story.append(P("Course website: [Deep Deep Learning](https://assafshocher.github.io/ddl/)", "SmallDDL"))
 
 

@@ -21,21 +21,17 @@ document.addEventListener('keydown', e => {
   }
 });
 const search = document.querySelector('#reading-search');
-const routeStates = new Map();
-let previousQuery = '';
 if (search) search.addEventListener('input', () => {
   const query = search.value.trim().toLocaleLowerCase();
-  if (query && !previousQuery) {
-    document.querySelectorAll('.reading-route').forEach(route => routeStates.set(route, route.open));
-  }
+  const numberQuery = query.match(/^(?:#\s*|topic\s*#?\s*)(\d+)$/)
+    || query.match(/^(\d{1,2})$/);
+  const selectedNumber = numberQuery ? Number(numberQuery[1]) : null;
   let matches = 0;
   document.querySelectorAll('.reading-card').forEach(card => {
-    card.hidden = !card.textContent.toLocaleLowerCase().includes(query);
+    card.hidden = selectedNumber === null
+      ? !card.textContent.toLocaleLowerCase().includes(query)
+      : Number(card.dataset.topicNumber) !== selectedNumber;
     if (!card.hidden) matches++;
-    card.querySelectorAll('.reading-route').forEach(route => {
-      if (query) route.open = routeStates.get(route) || route.textContent.toLocaleLowerCase().includes(query);
-      else if (routeStates.has(route)) route.open = routeStates.get(route);
-    });
   });
   document.querySelectorAll('.schedule-part').forEach(part => {
     part.hidden = ![...part.querySelectorAll('.reading-card')].some(card => !card.hidden);
@@ -47,5 +43,4 @@ if (search) search.addEventListener('input', () => {
   document.querySelector('#result-count').textContent = matches
     ? `${matches} candidate topic${matches === 1 ? '' : 's'} · Final selection TBD`
     : 'No matching topics. Try another topic, author or paper.';
-  previousQuery = query;
 });
