@@ -16,16 +16,18 @@ a:focus-visible,button:focus-visible,input:focus-visible {outline:2px solid var(
 .arc h3 {font-size:1rem;line-height:1.5;min-height:76px;margin:10px 0}
 .arc a>span:last-child {font-size:.8rem;color:var(--text-secondary)}
 .eyebrow,.topic-label {font-family:var(--font-mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
-.topic-number {font-weight:600;color:var(--text-primary)}
+.topic-number,.priority-number {font-weight:600;color:var(--text-primary)}
 .page-heading {padding-top:64px;padding-bottom:24px}
 .page-heading h1 {font-size:2.5rem;letter-spacing:-.04em;margin-bottom:12px}
 .page-heading>p {max-width:850px;color:var(--text-secondary)}
-.schedule-tools {padding-top:16px;padding-bottom:20px}
+.schedule-tools {position:relative;padding-top:16px;padding-bottom:20px}
+.filter-anchor {position:absolute;top:0;scroll-margin-top:80px}
 .schedule-tools label {display:block;font-size:.85rem;margin-bottom:8px}
 input[type=search] {width:100%;max-width:540px;padding:13px 16px;border:1px solid var(--border);border-radius:9px;background:var(--bg-secondary);color:var(--text-primary);font:inherit}
 .muted {font-size:.85rem;color:var(--text-secondary);margin-top:8px}
 .part-links {display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
 .part-links a {text-decoration:none;border:1px solid var(--border);border-radius:30px;padding:6px 12px;font-size:.78rem}
+.part-links a[aria-current=true] {border-color:var(--teal);background:rgba(79,209,197,.08);color:var(--teal)}
 .schedule-part {padding-top:35px;padding-bottom:20px;scroll-margin-top:80px}
 .topic-list {display:grid;gap:20px;margin-top:22px}
 .reading-card {position:relative;background:var(--bg-secondary);border:1px solid var(--border);border-radius:14px;padding:26px;scroll-margin-top:80px}
@@ -33,6 +35,10 @@ input[type=search] {width:100%;max-width:540px;padding:13px 16px;border:1px soli
 .topic-top,.topic-bottom {display:flex;justify-content:space-between;gap:12px;align-items:center}
 .duration {font-size:.8rem;color:var(--text-secondary)}
 .reading-card h3 {font-size:1.25rem;letter-spacing:-.02em;margin:14px 0 8px}
+.topic-family {font-size:.76rem;color:var(--text-secondary);margin-bottom:14px}
+.topic-family a {color:inherit;text-decoration:none}
+.topic-family a:hover {color:var(--teal)}
+.recommendation {font-size:.88rem;color:var(--text-secondary);line-height:1.75;margin-bottom:14px}
 .question {color:#b5c4d2;font-size:.95rem;margin-bottom:24px}
 .reading-grid {display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:24px}
 .reading-grid h4 {font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);margin-bottom:8px}
@@ -49,9 +55,11 @@ input[type=search] {width:100%;max-width:540px;padding:13px 16px;border:1px soli
 .schedule-overview th,.schedule-overview td {padding:10px 16px;border-bottom:1px solid var(--border)}
 .schedule-overview thead {background:var(--bg-secondary);color:var(--text-secondary)}
 .schedule-overview tbody th {color:var(--teal);font-family:var(--font-mono);font-weight:400}
-.topic-overview tbody th {font-family:var(--font-sans);font-weight:500;color:var(--text-primary);width:55%}
+.topic-overview tbody th {font-family:var(--font-sans);font-weight:500;color:var(--text-primary)}
 .topic-overview td {color:var(--text-secondary)}
 .topic-overview .topic-index-number {font-family:var(--font-mono);font-weight:600;color:var(--teal);white-space:nowrap;width:52px}
+.topic-overview .topic-priority {font-family:var(--font-mono);color:var(--text-primary);white-space:nowrap;width:70px}
+.index-recommendation {font-family:var(--font-sans);font-weight:400;font-size:.8rem;line-height:1.65;color:var(--text-secondary);margin-top:5px}
 .schedule-overview tr:last-child td,.schedule-overview tr:last-child th {border-bottom:0}
 .schedule-overview td a {text-decoration:none}
 .topic-bottom {border-top:1px solid var(--border);padding-top:14px;margin-top:24px;font-size:.75rem;color:var(--text-secondary)}

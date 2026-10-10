@@ -37,7 +37,9 @@
       "recent": "Haas et al., [On the Surprising Effectiveness of Large Learning Rates under Standard Width Scaling](https://arxiv.org/abs/2505.22491) (2025).",
       "focus": "Derive function-space gradient flow and its solution for squared loss, then compare a finite network with its linearization. Use the recent paper to examine why width, parameterization, learning rate and the choice of loss matter for claims about feature learning.",
       "part": 1,
-      "number": 1
+      "number": 1,
+      "priority": 1,
+      "recommendation": "A foundational framework with a clean function-space derivation and a precise contrast between kernel behavior and feature learning."
     },
     {
       "id": "mup",
@@ -48,7 +50,9 @@
       "recent": "Dey et al., [Don't Be Lazy: CompleteP Enables Compute-Efficient Deep Transformers](https://arxiv.org/abs/2505.01618) (2025). Optional theory: Chen, Yang, Zhao & Gu, [Global Convergence and Rich Feature Learning in L-Layer Infinite-Width Neural Networks under μ Parametrization](https://proceedings.mlr.press/v267/chen25cd.html) (ICML 2025). Read the assumptions and result statement; this infinite-width analysis does not establish unrestricted finite-network SGD convergence.",
       "focus": "Work through activation and update scaling in a small multilayer network, and inspect a learning-rate transfer experiment. Discuss the additional constraints introduced by depth; width transfer alone does not establish depth transfer or effective nonlinear learning.",
       "part": 1,
-      "number": 2
+      "number": 2,
+      "priority": 13,
+      "recommendation": "A practical scaling question with substantial theory: distinguish useful feature-learning parameterizations from merely making a network wider."
     },
     {
       "id": "muon",
@@ -59,7 +63,9 @@
       "recent": "Kovalev, [Understanding Gradient Orthogonalization for Deep Learning via Non-Euclidean Trust-Region Optimization](https://arxiv.org/abs/2503.12645) (2025).",
       "focus": "Derive the spectral-norm-constrained linearized update using the SVD and explain its polar factor and Newton–Schulz approximation. Examine a scaling experiment and distinguish the geometric argument from implementation choices, weight decay and empirical comparisons with AdamW.",
       "part": 1,
-      "number": 3
+      "number": 3,
+      "priority": 17,
+      "recommendation": "An elegant optimization-geometry derivation, with a narrower conceptual scope than the highest-priority learning frameworks."
     },
     {
       "id": "training-dynamics",
@@ -71,7 +77,9 @@
       "main": "Dana, Pillaud-Vivien & Bach, [Convergence of Shallow ReLU Networks on Weakly Interacting Data](https://papers.nips.cc/paper_files/paper/2025/file/08f805247677d42eac83664ccf9ef3ef-Paper-Conference.pdf) (NeurIPS 2025). Gradient flow in finite shallow ReLU networks, weakly interacting inputs and a particular asymmetric randomized initialization.",
       "recent": "Petit, Poon & Peyré, [On the global convergence of gradient flow for wide shallow models beyond homogeneous nonlinearities](https://arxiv.org/abs/2605.10775) (2026). The result is conditional: if the studied Wasserstein gradient flow converges, its limit is globally optimal. Watch list: Soudry’s [publication page](https://soudry.github.io/publications/) lists Global Convergence in Deep Networks via the Second Law of Thermodynamics (NeurIPS 2026); a linked manuscript was unavailable when this list was checked, so reading and claims remain TBD.",
       "focus": "Derive loss decay from a PL inequality, then explain how the main paper maintains a trajectory-wise condition. Inspect its data, initialization, width and gradient-flow assumptions. Separate landscape geometry, reaching a minimum, selecting a solution and generalization. These results make concrete progress; they do not supply a general guarantee for finite deep networks trained with SGD or Adam.",
-      "number": 4
+      "number": 4,
+      "priority": 15,
+      "recommendation": "An important overarching question, but the restricted convergence proofs make this especially dependent on a strong presenter or instructor support."
     },
     {
       "id": "central-flows",
@@ -83,7 +91,9 @@
       "main": "Cohen, Damian, Talwalkar, Kolter & Lee, [Understanding Optimization in Deep Learning with Central Flows](https://proceedings.iclr.cc/paper_files/paper/2025/hash/62bf42cc047db5b290e7d5737c1f6a8d-Abstract-Conference.html) (ICLR 2025). Start with the gradient-descent case and the authors’ [illustrated explanation](https://centralflows.github.io/).",
       "recent": "Berthier, [The Multiple Timescales of Gradient Descent on the Edge of Stability: A Perturbative Derivation of the Central Flow](https://arxiv.org/abs/2609.01034) (2026), selected introduction and toy example. This formal asymptotic derivation does not provide remainder bounds or a convergence proof.",
       "focus": "Derive the quadratic stability threshold, examine self-stabilization, and show how averaging oscillations produces a smoother trajectory description. Use one example to compare the discrete iterates and central flow. Explain what this reveals about optimization dynamics without treating it as a general global-convergence theorem.",
-      "number": 5
+      "number": 5,
+      "priority": 10,
+      "recommendation": "A simple stability calculation leads to a surprising account of practical training dynamics, making this a particularly teachable theory seminar."
     },
     {
       "id": "mamba",
@@ -94,7 +104,9 @@
       "recent": "Lahoti et al., [Mamba-3: Improved Sequence Modeling Using State Space Principles](https://arxiv.org/abs/2603.15569) (2026).",
       "focus": "Unroll an SSM into a structured matrix and explain the restricted attention–SSM duality used by Mamba-2. Examine a state-tracking experiment from Mamba-3 and distinguish algorithmic complexity from measured hardware efficiency.",
       "part": 2,
-      "number": 6
+      "number": 6,
+      "priority": 3,
+      "recommendation": "A substantial sequence-modeling framework with an elegant recurrence-to-matrix connection and a clear line of recent developments."
     },
     {
       "id": "icl",
@@ -105,7 +117,9 @@
       "recent": "Wurgaft et al., [In-Context Learning Strategies Emerge Rationally](https://arxiv.org/abs/2506.17859) (2025).",
       "focus": "Work through one regression-learning construction and compare gradient-descent, ridge and Bayesian predictors on a controlled task distribution. Separate existence constructions and observed behavior in trained synthetic-task models from claims about general language models.",
       "part": 2,
-      "number": 7
+      "number": 7,
+      "priority": 7,
+      "recommendation": "Turns a familiar phenomenon into a precise algorithmic question; controlled linear-model examples make the mathematics unusually accessible."
     },
     {
       "id": "ttt",
@@ -117,7 +131,9 @@
       "focus": "Start with the original 2020 adaptation problem, then work through a TTT-Linear update and its recurrent computation. Examine how end-to-end next-token training compresses context into weights, and explain the training and inference costs. IT³ provides a supplementary consistency-based adaptation example with its own training setup.",
       "part": 2,
       "scope": "Two academic hours: develop a recurrent TTT update, then examine end-to-end long-context training. Original distribution-shift TTT supplies the motivation and history; IT³ is supplementary reading.",
-      "number": 8
+      "number": 8,
+      "priority": 2,
+      "recommendation": "A major change in how we view inference: explicit learning becomes part of the recurrent computation, with a concrete long-context application."
     },
     {
       "id": "rl-reasoning",
@@ -128,7 +144,9 @@
       "recent": "Yue et al., [Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?](https://arxiv.org/abs/2504.13837) (2025). Counterpoint: Liu et al., [ProRL: Prolonged Reinforcement Learning Expands Reasoning Boundaries in Large Language Models](https://arxiv.org/abs/2505.24864) (2025).",
       "focus": "Derive the policy-gradient identity before introducing group-relative advantages, clipping and KL regularization. Compare pass@k evidence under the papers' different training and evaluation settings; finite sampling cannot establish that a base model assigns zero probability to a solution.",
       "part": 2,
-      "number": 9
+      "number": 9,
+      "priority": 14,
+      "recommendation": "The strongest reasoning-focused addition; a compact policy-gradient introduction is needed before evaluating competing empirical claims."
     },
     {
       "id": "recurrent-depth",
@@ -139,7 +157,9 @@
       "main": "Geiping et al., [Scaling up Test-Time Compute with Latent Reasoning: A Recurrent Depth Approach](https://arxiv.org/abs/2502.05171) (NeurIPS 2025).",
       "recent": "Jolicoeur-Martineau, [Less is More: Recursive Reasoning with Tiny Networks](https://arxiv.org/abs/2510.04871) (2025). A short comparison with recursive refinement on puzzles.",
       "focus": "Trace one recurrent block, explain how it is trained across iteration counts, and assess performance against inference compute. Use tiny recursive models as a comparison. Distinguish iteration count, parameter count and demonstrated reasoning performance.",
-      "number": 10
+      "number": 10,
+      "priority": 18,
+      "recommendation": "A useful view of shared computation and iterative refinement, with some overlap in motivation with other inference-time learning topics."
     },
     {
       "id": "jepa",
@@ -150,7 +170,9 @@
       "recent": "Maes et al., [LeWorldModel: Stable End-to-End Joint-Embedding Predictive Architecture from Pixels](https://arxiv.org/abs/2603.19312) (2026).",
       "focus": "Trace the representation-prediction objective and action-conditioned planning loop, then analyze a planning result and its data requirements. Contrast target-network stabilization with regularizing the latent distribution; representation quality and accurate action-conditioned dynamics are separate questions.",
       "part": 3,
-      "number": 11
+      "number": 11,
+      "priority": 6,
+      "recommendation": "Broadens the course through predictive representations, dynamics and planning, with clear questions about what a world model must learn."
     },
     {
       "id": "online-continual-learning",
@@ -162,7 +184,9 @@
       "recent": "Cignoni et al., [CLA: Latent Alignment for Online Continual Self-Supervised Learning](https://proceedings.mlr.press/v330/cignoni26a.html) (CoLLAs 2026): compare representation alignment with labeled prediction constraints. Conceptual companion: Dohare et al., [Loss of Plasticity in Deep Continual Learning](https://www.nature.com/articles/s41586-024-07711-7) (Nature 2024), which distinguishes forgetting old knowledge from losing the ability to learn new tasks; its broader continual-learning experiments are not all single-pass online protocols.",
       "focus": "Derive the local KL/Fisher constraint and the preconditioned update on a small example. Explain damping, memory representativeness and the difference between forgetting and loss of plasticity. Evaluate accuracy during the stream as well as at its end. Check what information each experiment provides: OCAR hides task boundaries, but its class-incremental replay-Fisher weighting uses the number of new classes per experience.",
       "scope": "Two academic hours: derive OCAR’s replay-constrained update, inspect one streaming experiment, and use CLA to connect prediction preservation with self-supervised representation alignment. A one-pass incoming stream can allow replay and bounded repeated updates on the current minibatch; it does not imply exactly one gradient step per observation.",
-      "number": 12
+      "number": 12,
+      "priority": 8,
+      "recommendation": "A major learning problem with a strong replay/Fisher derivation and an important distinction between forgetting and losing plasticity."
     },
     {
       "id": "representation-alignment",
@@ -174,7 +198,9 @@
       "main": "Schnaus, Dagès, Cremers, Wang & Isola, [Shared Geometry As A Rosetta Stone: Cross-Modal Alignment Without Paired Data](https://arxiv.org/abs/2610.09411) (October 2026 preprint); the authors’ [interactive project](https://dominik-schnaus.github.io/unpaired-rosetta/) illustrates coarse cross-modal alignment without pairs at the alignment stage.",
       "recent": "Gröger, Wen & Brbic, [Revisiting the Platonic Representation Hypothesis: An Aristotelian View](https://proceedings.mlr.press/v306/groger26a.html) (ICML 2026). Use the critique to examine which definitions and comparisons support claims about shared representations.",
       "focus": "Treat Rosetta as a practical test of a consequence of the Platonic hypothesis. Explain its coarse geometric initialization and alternating assignment / Procrustes updates, then examine the broad semantic structure it recovers and the finer details it misses. Paired samples are still used for evaluation and the CKA analysis of when alignment succeeds. Distinguish useful geometric correspondence from universal convergence or canonical features.",
-      "number": 13
+      "number": 13,
+      "priority": 11,
+      "recommendation": "A strong hypothesis-driven discussion: shared representations, a constructive alignment algorithm and a critique of how similarity is measured."
     },
     {
       "id": "hypernetworks",
@@ -186,7 +212,9 @@
       "recent": "Liu, Wang, Mao, Gelberg, Maron & Zhang, [SHINE: A Scalable In-Context Hypernetwork for Mapping Context to LoRA in a Single Pass](https://proceedings.mlr.press/v306/liu26ek.html) (ICML 2026), a contemporary application that converts context into adapters. Supporting application reading: Charakorn et al., [Doc-to-LoRA: Learning to Instantly Internalize Contexts](https://proceedings.mlr.press/v306/charakorn26a.html) (ICML 2026), amortized context distillation.",
       "focus": "Derive the hidden-neuron permutation action for a small MLP and construct a simple equivariant weight-processing layer. Explain why arbitrary flattening obscures this structure. Work through one proof sketch connecting canonicalization to universality under a general-position assumption, then inspect a degenerate counterexample. End with a short SHINE example contrasting direct adapter generation with iterative parameter updates. SHINE does not instantiate the DWS construction; keep the MLP expressivity results separate from the empirical claims about LLM adaptation.",
       "scope": "One seminar of two academic hours. The core is permutation symmetry and one weight-space expressivity result. HyperNetworks supplies the generation idea; SHINE supplies one current application. Doc-to-LoRA is supporting reading.",
-      "number": 14
+      "number": 14,
+      "priority": 5,
+      "recommendation": "Treating networks themselves as data opens a different viewpoint; hidden-neuron symmetries supply a substantial mathematical core."
     },
     {
       "id": "merging",
@@ -198,7 +226,9 @@
       "focus": "Use function-space linearization to explain the intuition behind task-vector addition. Then develop expert density and diversity around a pretrained checkpoint, including the probability of finding a useful perturbation after repeated sampling. Compare weight averaging, expert selection and prediction ensembling, accounting for task-data evaluations and inference cost. These neighborhood results do not establish that random initialization or unrestricted gradient descent succeeds.",
       "part": 4,
       "scope": "Two academic hours: introduce task vectors and weight averaging, then center the seminar on Neural Thickets and the difference between combining weights and ensembling predictions.",
-      "number": 15
+      "number": 15,
+      "priority": 16,
+      "recommendation": "Engaging and experimentally accessible; carefully distinguish task-vector addition, weight averaging and random-neighborhood prediction ensembles."
     },
     {
       "id": "features",
@@ -213,7 +243,9 @@
         "topic-circuits"
       ],
       "scope": "Two academic hours: introduce superposition and sparse features, then develop one circuit-tracing case study and causal intervention.",
-      "number": 16
+      "number": 16,
+      "priority": 4,
+      "recommendation": "A distinctive way to study networks scientifically, connecting superposition to a causal circuit experiment rather than only inspecting correlations."
     },
     {
       "id": "one-step-generative",
@@ -225,7 +257,9 @@
       "focus": "Introduce sample-based distribution matching, derive the drifting field and frozen-target regression, and study one toy experiment. Compare IMLE’s data-to-generated matching and ROMS-IMLE’s practical changes, including the direction of nearest-neighbor assignment, robust losses and intermediate-resolution supervision. Keep zero-drift and maximum-likelihood claims tied to their assumptions.",
       "part": 5,
       "scope": "One comparative seminar of two academic hours: derive Drifting as the central sample-matching mechanism, then compare IMLE’s nearest-neighbor assignments and ROMS-IMLE’s practical changes.",
-      "number": 17
+      "number": 17,
+      "priority": 9,
+      "recommendation": "A fresh sample-matching view of generative modeling, especially useful when flow matching was already covered in the base course."
     },
     {
       "id": "diffusion-lm",
@@ -236,7 +270,9 @@
       "recent": "Nie et al., [Large Language Diffusion Models](https://arxiv.org/abs/2502.09992) (LLaDA, 2025).",
       "focus": "Derive the masked-denoising objective and trace one sampling schedule, then compare refinement, parallelism and likelihood evaluation with autoregressive generation. The topic requires discrete corruption and language-specific evaluation beyond a continuous diffusion refresher.",
       "part": 5,
-      "number": 18
+      "number": 18,
+      "priority": 20,
+      "recommendation": "Worthwhile discrete-generation material; its added value depends on how much diffusion and denoising students already studied."
     },
     {
       "id": "canonicalization",
@@ -248,7 +284,9 @@
       "main": "Dym, Lawrence & Siegel, [Equivariant Frames and the Impossibility of Continuous Canonicalization](https://proceedings.mlr.press/v235/dym24a.html) (ICML 2024).",
       "recent": "Shumaylov et al., [Lie Algebra Canonicalization: Equivariant Neural Operators under arbitrary Lie Groups](https://arxiv.org/abs/2410.02698) (ICLR 2025; 2024 preprint). Selected introduction and one application.",
       "focus": "Start with a group-action example, show why a canonical choice can become discontinuous under the stated assumptions, and explain how weighted frames address continuity. Leave general topology proofs and non-compact Lie-group machinery for optional reading.",
-      "number": 19
+      "number": 19,
+      "priority": 19,
+      "recommendation": "Mathematically rich, but the continuity and topology result is a specialist choice with substantial prerequisite demands."
     },
     {
       "id": "oscillatory-neurons",
@@ -260,7 +298,9 @@
       "main": "Miyato, Löwe, Geiger & Welling, [Artificial Kuramoto Oscillatory Neurons](https://arxiv.org/abs/2410.13821) (ICLR 2025; 2024 preprint).",
       "recent": "Iqbal et al., [Spontaneous symmetry breaking and Goldstone modes for deep information propagation](https://arxiv.org/abs/2605.14685) (2026 preprint). A related perspective on symmetry and persistent information propagation, rather than a direct analysis of AKOrN.",
       "focus": "Derive the two-oscillator intuition, trace the generalized neural update, and study one object-discovery or reasoning experiment. Use the Goldstone paper for a brief connection to depth and memory; its physics derivations are optional.",
-      "number": 20
+      "number": 20,
+      "priority": 23,
+      "recommendation": "An attractive exploratory choice connecting dynamics and computation; select it as a deliberate physics-oriented wildcard."
     },
     {
       "id": "kan",
@@ -272,7 +312,9 @@
       "main": "Liu et al., [KAN: Kolmogorov-Arnold Networks](https://arxiv.org/abs/2404.19756) (ICLR 2025; 2024 preprint), selected sections on learned edge functions, grid refinement and one function-fitting experiment.",
       "recent": "Liu et al., [KAN 2.0: Kolmogorov-Arnold Networks Meet Science](https://arxiv.org/abs/2408.10205) (2024), one scientific example. Essential comparison: Yu, Yu & Wang, [KAN or MLP: A Fairer Comparison](https://arxiv.org/abs/2407.16674) (2024). Recent optional theory: Kratsios, Kim & Furuya, [Approximation Rates in Besov Norms and Sample-Complexity of Kolmogorov-Arnold Networks with Residual Connections](https://arxiv.org/abs/2504.15110) (2025), assumptions and result statements.",
       "focus": "Build a small spline-based KAN and explain its compositional bias and possible formula recovery. Compare against an MLP with matched parameters or FLOPs and a spline-equipped MLP. Ask which benefit comes from the function basis and which comes from the architecture; the representation theorem alone does not establish a practical advantage.",
-      "number": 21
+      "number": 21,
+      "priority": 22,
+      "recommendation": "A useful critical architecture-comparison seminar, particularly for scientific-discovery interests, with less priority for the general course core."
     },
     {
       "id": "gnn-expressivity",
@@ -284,7 +326,9 @@
       "main": "Stoll, Müller & Morris, [Generalizable Insights for Graph Transformers in Theory and Practice](https://arxiv.org/abs/2511.08028) (NeurIPS 2025), selected theory sections and one structural-encoding ablation.",
       "recent": "Ma et al., [Plain Transformers Can be Powerful Graph Learners](https://arxiv.org/abs/2504.12588) (TMLR 2026; 2025 preprint). Examine the graph-specific adaptations behind the title. Optional benchmark discussion: Bechler-Speicher et al., [Position: Graph Learning Will Lose Relevance Due To Poor Benchmarks](https://proceedings.mlr.press/v267/bechler-speicher25a.html) (ICML 2025).",
       "focus": "Work through a pair of graphs that 1-WL-style message passing cannot distinguish. Explain how structural or positional information changes the comparison with a graph transformer. Distinguish theoretical expressivity, measured accuracy and benchmark quality; leave the full higher-order hierarchy for optional reading.",
-      "number": 22
+      "number": 22,
+      "priority": 12,
+      "recommendation": "Adds graph and mathematical diversity; one graph counterexample makes the expressivity question concrete before modern transformer constructions."
     },
     {
       "id": "gnn-geometry",
@@ -296,7 +340,9 @@
       "main": "Wilson, Bechler-Speicher & Veličković, [Cayley Graph Propagation](https://proceedings.mlr.press/v269/wilson25a.html) (2025), an expander-based propagation template.",
       "recent": "Liang et al., [Mitigating Over-Squashing in Graph Neural Networks by Spectrum-Preserving Sparsification](https://proceedings.mlr.press/v267/liang25a.html) (ICML 2025), a comparison of graph modification and propagation costs.",
       "focus": "Use a bottleneck graph to distinguish over-squashing from over-smoothing and from limited graph-distinguishing expressivity. Explain expander connectivity, inspect one propagation experiment, and account for the cost of modifying graph connectivity.",
-      "number": 23
+      "number": 23,
+      "priority": 21,
+      "recommendation": "A strong graph subject that can supply a short bottleneck comparison within the higher-priority graph seminar when slots are limited."
     }
   ],
   "weeks": [
@@ -365,5 +411,7 @@
       "topic": "TBD",
       "presenter": "TBD"
     }
-  ]
+  ],
+  "priority_note": "Suggested selection priorities for this graduate seminar, balancing major conceptual gaps, mathematical substance, accessible foundations, current research and breadth across deep learning. The first 13 form a provisional shortlist. Topic numbers remain stable; weekly selections, teaching order and presenters are TBD.",
+  "priority_shortlist": 13
 }

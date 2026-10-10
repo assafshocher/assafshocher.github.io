@@ -5,7 +5,7 @@ Static graduate seminar website. Served at /ddl/ by the parent GitHub Pages repo
 Pages: index.html, schedule.html, seminar.html. Downloadable syllabus: assets/syllabus.pdf.
 Each selected topic gets two academic hours. Meeting details, dates, course registration fields, assessment weights and presenter assignments remain TBD. No exam.
 
-The reading programme is a candidate pool larger than the course. All candidates have equal status; only selected topics enter the final 13-week schedule. The weekly table currently has TBD for every topic and presenter, with no dates. Every candidate has an explicit stable number for discussion, independent of the week it might eventually be assigned. Counts on the website and syllabus are generated from the data.
+The reading programme is a candidate pool larger than the course. All candidates remain available; only selected topics enter the final 13-week schedule. The weekly table currently has TBD for every topic and presenter, with no dates. Every candidate has an explicit stable number for discussion, independent of its selection priority and the week it might eventually be assigned. The website and PDF list candidates in recommended selection-priority order, with a short rationale for each. This is an editorial recommendation, not a teaching order. Counts on the website and syllabus are generated from the data.
 
 Each candidate supplies one coherent reading bundle: foundations, a central paper, recent developments and presentation scope. Related work is combined where it supports one question; directions that need their own seminar have separate candidate entries. Individual supplementary papers can remain in the bundle without becoming a second full presentation. Flow matching is assumed background from the base course.
 
@@ -16,14 +16,16 @@ Everyone completes one shared required pre-reading per selected meeting. Present
 course.json is the canonical source. It contains:
 
 - parts: topic-family id and title.
-- topics: id, number, part, topic, question, foundations, main, recent and focus. number is an explicit positive integer, unique across the pool; retain it when editing or reordering a candidate. Optional scope describes what fits one session. Optional aliases list legacy fragment IDs to preserve old links after topic revisions.
+- topics: id, number, priority, recommendation, part, topic, question, foundations, main, recent and focus. number is an explicit positive integer, unique across the pool; retain it when editing or reordering a candidate. priority is a separate unique integer ranking from 1 through the candidate count. recommendation is a short selection rationale. Optional scope describes what fits one session. Optional aliases list legacy fragment IDs to preserve old links after topic revisions.
 - weeks: week number, selected topic and presenter; topic and presenter remain TBD until assigned.
 - duration: the session-duration label, currently Two academic hours.
+- priority_note: the editorial explanation of the selection priorities and provisional shortlist. It appears on the homepage, topic page and PDF.
+- priority_shortlist: the number of priorities in the provisional shortlist; this does not assign weeks or remove other candidates.
 
 Edit course.json to update topics, questions, background, main papers, recent developments and presentation scope. Then run:
 
     python3 scripts/build.py
 
-The generator requires reportlab and updates all three HTML pages, schedule.json and the downloadable PDF together. It validates that all candidate numbers are positive and unique. Commit both the data and generated outputs. HTML is pre-rendered so every reading bundle remains visible without JavaScript. Search filters the pool by text or an exact candidate number, such as #7, topic 7 or 7. Existing week-fragment and legacy-topic links still reach the relevant candidate card, without assigning that topic to a week. The generator retains the existing SVG artwork.
+The generator requires reportlab and updates all three HTML pages, schedule.json and the downloadable PDF together. It validates that all candidate numbers are positive and unique and that priorities rank each candidate once. Commit both the data and generated outputs. HTML is pre-rendered in priority order, so every reading bundle remains visible without JavaScript. Search filters the pool by text or an exact candidate number, such as #7, topic 7 or 7. Family links filter the ranked index and cards while preserving priority order, and search combines with that filter. All topics resets both filters. Existing topic, week-fragment and legacy-topic links reveal their destination even after filtering, without assigning that topic to a week. The generator retains the existing SVG artwork.
 
 style.css is adapted from the user's Modern Computer Vision course stylesheet. ddl.css adds seminar-specific components. The SVG artwork is an original vector interpretation of the network-within-a-network concept; the original generated image was unavailable in the conversation export.
