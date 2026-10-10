@@ -94,17 +94,6 @@
       "number": 5
     },
     {
-      "id": "rl-reasoning",
-      "topic": "RL for reasoning with verifiable rewards",
-      "question": "Does reward-based training discover successful reasoning behavior or change which existing behavior is sampled?",
-      "foundations": "[Spinning Up: Part 3—Introduction to Policy Optimization](https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html), selected sections on the log-derivative policy gradient and baselines. Reserve 25–30 minutes to introduce policies, sampled completions, rewards and group-relative advantages; prior RL coursework is not assumed.",
-      "main": "DeepSeek-AI et al., [DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning](https://arxiv.org/abs/2501.12948) (2025), focusing on R1-Zero and the learning objective.",
-      "recent": "Yue et al., [Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?](https://arxiv.org/abs/2504.13837) (2025). Counterpoint: Liu et al., [ProRL: Prolonged Reinforcement Learning Expands Reasoning Boundaries in Large Language Models](https://arxiv.org/abs/2505.24864) (2025).",
-      "focus": "Derive the policy-gradient identity before introducing group-relative advantages, clipping and KL regularization. Compare pass@k evidence under the papers' different training and evaluation settings; finite sampling cannot establish that a base model assigns zero probability to a solution.",
-      "part": 2,
-      "number": 6
-    },
-    {
       "id": "recurrent-depth",
       "part": 2,
       "topic": "Recurrent depth and latent reasoning",
@@ -113,7 +102,7 @@
       "main": "Geiping et al., [Scaling up Test-Time Compute with Latent Reasoning: A Recurrent Depth Approach](https://arxiv.org/abs/2502.05171) (NeurIPS 2025).",
       "recent": "Jolicoeur-Martineau, [Less is More: Recursive Reasoning with Tiny Networks](https://arxiv.org/abs/2510.04871) (2025). A short comparison with recursive refinement on puzzles.",
       "focus": "Trace one recurrent block, explain how it is trained across iteration counts, and assess performance against inference compute. Use tiny recursive models as a comparison. Distinguish iteration count, parameter count and demonstrated reasoning performance.",
-      "number": 7
+      "number": 6
     },
     {
       "id": "jepa",
@@ -124,7 +113,7 @@
       "recent": "Maes et al., [LeWorldModel: Stable End-to-End Joint-Embedding Predictive Architecture from Pixels](https://arxiv.org/abs/2603.19312) (2026).",
       "focus": "Trace the representation-prediction objective and action-conditioned planning loop, then analyze a planning result and its data requirements. Contrast target-network stabilization with regularizing the latent distribution; representation quality and accurate action-conditioned dynamics are separate questions.",
       "part": 3,
-      "number": 8
+      "number": 7
     },
     {
       "id": "online-continual-learning",
@@ -136,7 +125,7 @@
       "recent": "Cignoni et al., [CLA: Latent Alignment for Online Continual Self-Supervised Learning](https://proceedings.mlr.press/v330/cignoni26a.html) (CoLLAs 2026): compare representation alignment with labeled prediction constraints. Conceptual companion: Dohare et al., [Loss of Plasticity in Deep Continual Learning](https://www.nature.com/articles/s41586-024-07711-7) (Nature 2024), which distinguishes forgetting old knowledge from losing the ability to learn new tasks; its broader continual-learning experiments are not all single-pass online protocols.",
       "focus": "Derive the local KL/Fisher constraint and the preconditioned update on a small example. Explain damping, memory representativeness and the difference between forgetting and loss of plasticity. Evaluate accuracy during the stream as well as at its end. Check what information each experiment provides: OCAR hides task boundaries, but its class-incremental replay-Fisher weighting uses the number of new classes per experience.",
       "scope": "Two academic hours: derive OCAR’s replay-constrained update, inspect one streaming experiment, and use CLA to connect prediction preservation with self-supervised representation alignment. A one-pass incoming stream can allow replay and bounded repeated updates on the current minibatch; it does not imply exactly one gradient step per observation.",
-      "number": 9
+      "number": 8
     },
     {
       "id": "representation-alignment",
@@ -148,7 +137,7 @@
       "main": "Schnaus, Dagès, Cremers, Wang & Isola, [Shared Geometry As A Rosetta Stone: Cross-Modal Alignment Without Paired Data](https://arxiv.org/abs/2610.09411) (October 2026 preprint); the authors’ [interactive project](https://dominik-schnaus.github.io/unpaired-rosetta/) illustrates coarse cross-modal alignment without pairs at the alignment stage.",
       "recent": "Gröger, Wen & Brbic, [Revisiting the Platonic Representation Hypothesis: An Aristotelian View](https://proceedings.mlr.press/v306/groger26a.html) (ICML 2026). Use the critique to examine which definitions and comparisons support claims about shared representations.",
       "focus": "Treat Rosetta as a practical test of a consequence of the Platonic hypothesis. Explain its coarse geometric initialization and alternating assignment / Procrustes updates, then examine the broad semantic structure it recovers and the finer details it misses. Paired samples are still used for evaluation and the CKA analysis of when alignment succeeds. Distinguish useful geometric correspondence from universal convergence or canonical features.",
-      "number": 10
+      "number": 9
     },
     {
       "id": "hypernetworks",
@@ -160,7 +149,7 @@
       "recent": "Liu, Wang, Mao, Gelberg, Maron & Zhang, [SHINE: A Scalable In-Context Hypernetwork for Mapping Context to LoRA in a Single Pass](https://proceedings.mlr.press/v306/liu26ek.html) (ICML 2026), a contemporary application that converts context into adapters. Supporting application reading: Charakorn et al., [Doc-to-LoRA: Learning to Instantly Internalize Contexts](https://proceedings.mlr.press/v306/charakorn26a.html) (ICML 2026), amortized context distillation. Further mathematical reading: Dym, Lawrence & Siegel, [Equivariant Frames and the Impossibility of Continuous Canonicalization](https://proceedings.mlr.press/v235/dym24a.html) (ICML 2024), for the continuity issue in the group-action settings studied there; its theorem is distinct from the MLP weight-space expressivity result.",
       "focus": "Derive the hidden-neuron permutation action for a small MLP and construct a simple equivariant weight-processing layer. Explain why arbitrary flattening obscures this structure. Define a canonical representative using the same neuron-permutation example, outline one universality result under a general-position assumption, and inspect a degenerate counterexample. Keep the broader continuity and topology proofs as further reading. End with a short SHINE example contrasting direct adapter generation with iterative parameter updates. SHINE does not instantiate the DWS construction; keep the MLP expressivity results separate from the empirical claims about LLM adaptation.",
       "scope": "Two academic hours: a hidden-neuron permutation example, one equivariant weight-processing layer, a selected expressivity result and a brief adapter-generation application. Basic symmetry is integrated background; general canonicalization topology is further reading.",
-      "number": 11,
+      "number": 10,
       "aliases": [
         "topic-canonicalization"
       ]
@@ -175,7 +164,7 @@
       "focus": "Use function-space linearization to explain the intuition behind task-vector addition. Then develop expert density and diversity around a pretrained checkpoint, including the probability of finding a useful perturbation after repeated sampling. Compare weight averaging, expert selection and prediction ensembling, accounting for task-data evaluations and inference cost. These neighborhood results do not establish that random initialization or unrestricted gradient descent succeeds.",
       "part": 4,
       "scope": "Two academic hours: introduce task vectors and weight averaging, then center the seminar on Neural Thickets and the difference between combining weights and ensembling predictions.",
-      "number": 12
+      "number": 11
     },
     {
       "id": "features",
@@ -190,7 +179,7 @@
         "topic-circuits"
       ],
       "scope": "Two academic hours: introduce superposition and sparse features, then develop one circuit-tracing case study and causal intervention.",
-      "number": 13
+      "number": 12
     },
     {
       "id": "one-step-generative",
@@ -202,7 +191,7 @@
       "focus": "Introduce sample-based distribution matching, derive the drifting field and frozen-target regression, and study one toy experiment. Compare IMLE’s data-to-generated matching and ROMS-IMLE’s practical changes, including the direction of nearest-neighbor assignment, robust losses and intermediate-resolution supervision. Keep zero-drift and maximum-likelihood claims tied to their assumptions.",
       "part": 5,
       "scope": "One comparative seminar of two academic hours: derive Drifting as the central sample-matching mechanism, then compare IMLE’s nearest-neighbor assignments and ROMS-IMLE’s practical changes.",
-      "number": 14
+      "number": 13
     },
     {
       "id": "diffusion-lm",
@@ -213,7 +202,7 @@
       "recent": "Nie et al., [Large Language Diffusion Models](https://arxiv.org/abs/2502.09992) (LLaDA, 2025).",
       "focus": "Derive the masked-denoising objective and trace one sampling schedule, then compare refinement, parallelism and likelihood evaluation with autoregressive generation. The topic requires discrete corruption and language-specific evaluation beyond a continuous diffusion refresher.",
       "part": 5,
-      "number": 15
+      "number": 14
     },
     {
       "id": "oscillatory-neurons",
@@ -225,7 +214,7 @@
       "main": "Miyato, Löwe, Geiger & Welling, [Artificial Kuramoto Oscillatory Neurons](https://arxiv.org/abs/2410.13821) (ICLR 2025; 2024 preprint).",
       "recent": "Iqbal et al., [Spontaneous symmetry breaking and Goldstone modes for deep information propagation](https://arxiv.org/abs/2605.14685) (2026 preprint). A related perspective on symmetry and persistent information propagation, rather than a direct analysis of AKOrN.",
       "focus": "Derive the two-oscillator intuition, trace the generalized neural update, and study one object-discovery or reasoning experiment. Use the Goldstone paper for a brief connection to depth and memory; its physics derivations are optional.",
-      "number": 16
+      "number": 15
     },
     {
       "id": "gnn-expressivity",
@@ -237,7 +226,7 @@
       "main": "Stoll, Müller & Morris, [Generalizable Insights for Graph Transformers in Theory and Practice](https://arxiv.org/abs/2511.08028) (NeurIPS 2025), selected theory sections and one structural-encoding ablation.",
       "recent": "Wilson, Bechler-Speicher & Veličković, [Cayley Graph Propagation](https://proceedings.mlr.press/v269/wilson25a.html) (2025), an intuitive expander-connectivity example and one propagation-cost comparison; the group-theory construction and spectral proofs are further reading. Ma et al., [Plain Transformers Can be Powerful Graph Learners](https://arxiv.org/abs/2504.12588) (TMLR 2026; 2025 preprint), selected structural-adaptation discussion. Further reading: Liang et al., [Mitigating Over-Squashing in Graph Neural Networks by Spectrum-Preserving Sparsification](https://proceedings.mlr.press/v267/liang25a.html) (ICML 2025).",
       "focus": "Introduce message passing through a small graph. Work through one pair of graphs that 1-WL-style aggregation cannot distinguish and one narrow-cut graph that compresses distant information. Explain why expressivity, over-squashing and over-smoothing are different limitations. Center the main paper on how structural encodings affect graph transformers and one ablation. Use Cayley propagation briefly to compare changing connectivity with changing the model; avoid a second full presentation or claims that attention automatically solves either limitation.",
-      "number": 17,
+      "number": 16,
       "aliases": [
         "topic-gnn-geometry"
       ]

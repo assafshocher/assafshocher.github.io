@@ -143,7 +143,7 @@ for part in parts:
 home = """
 <section class="hero">
   <div class="hero-content"><div class="hero-badge">Graduate seminar · Student led · Semester TBD</div><h1>Deep <span class="accent">Deep</span> Learning</h1><p class="subtitle">Understanding the ideas inside the network.</p></div>
-  <div class="hero-image"><img src="assets/hero.svg" width="1200" height="460" alt="A neural network opens to reveal a smaller cyan network, surrounded by mathematical curves, geometry and oscillatory dynamics."></div>
+  <div class="hero-image"><img src="assets/neural-math.webp" width="1983" height="793" fetchpriority="high" alt="A neural network opens into a transparent geometric core, revealing a curved coordinate grid, a tangent plane and a gradient path through a loss landscape."></div>
   <div class="hero-buttons"><a class="btn btn-primary" href="schedule.html">Explore the topic pool →</a><a class="btn btn-secondary" href="assets/syllabus.pdf" download>Download syllabus (PDF)</a></div>
 </section>
 <section class="section overview-section"><div class="overview-text">""" + overview + """</div></section>
@@ -205,7 +205,7 @@ guide = """
     ("15 min · Evidence", "Present one experiment or ablation that tests the explanation."),
     ("25 min · Discussion", "Discuss limitations, selected recent work, competing explanations and open questions."),
 ]) + """
-<p class="section-end">For RL reasoning, allow 25–30 minutes for the policy-gradient foundations and narrow the paper discussion accordingly. No prior RL course is assumed; the selected tutorial is preparation material.</p></section>
+</section>
 <section class="section"><h2 class="section-title">Choosing a manageable scope</h2><div class="prose">
 <p>Every candidate has one reading bundle and a central question. Build the seminar around its main paper, using the foundations to supply the minimum necessary background and the recent work to extend or question the mechanism.</p>
 <p>Develop one derivation and one decisive experiment in detail. A companion paper can support a comparison through selected results or sections. The scope notes identify which claims fit a two-academic-hour meeting.</p>
