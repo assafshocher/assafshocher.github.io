@@ -36,7 +36,7 @@ if (search) {
       const familyMatch = activeFamily === null || card.dataset.topicFamily === activeFamily;
       const searchMatch = selectedNumber === null
         ? card.textContent.toLocaleLowerCase().includes(query)
-        : (card.dataset.topicNumbers || card.dataset.topicNumber).split(' ').map(Number).includes(selectedNumber);
+        : Number(card.dataset.topicNumber) === selectedNumber;
       card.hidden = !familyMatch || !searchMatch;
       if (!card.hidden) matches++;
     });

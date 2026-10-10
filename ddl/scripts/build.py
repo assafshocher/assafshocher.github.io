@@ -24,13 +24,12 @@ if len(topic_numbers) != len(set(topic_numbers)):
     raise ValueError("Candidate topic numbers must be unique")
 ordered_topics = sorted(topics, key=lambda item: item["number"])
 numbering_note = course.get("numbering_note", "Topic numbers identify candidates; selections and teaching order are TBD.")
-search_numbers = [number for item in topics for number in [item["number"], *item.get("integrated_numbers", [])]]
-if any(type(number) is not int or number < 1 for number in search_numbers) or len(search_numbers) != len(set(search_numbers)):
-    raise ValueError("Current and integrated topic numbers must be unique positive integers")
+if sorted(topic_numbers) != list(range(1, len(topics) + 1)):
+    raise ValueError("Topic numbers must run consecutively from 1 through the candidate count")
 
 
 def topic_number(item):
-    return f'{item["number"]:02}'
+    return str(item["number"])
 
 
 def md(text):
@@ -108,14 +107,12 @@ def reading_card(item):
     legacy = "".join(f'<span class="legacy-anchor" id="week-{week}" aria-hidden="true"></span>' for week in legacy_weeks.get(item["id"], []))
     legacy += "".join(f'<span class="legacy-anchor" id="{html.escape(alias, quote=True)}" aria-hidden="true"></span>' for alias in item.get("aliases", []))
     scope = f'<div class="session-scope"><h4>Scope for one session</h4><p>{md(item["scope"])}</p></div>' if item.get("scope") else ""
-    integration = f'<p class="integration-note">{md(item["integration_note"])}</p>' if item.get("integration_note") else ""
-    numbers = " ".join(str(number) for number in [item["number"], *item.get("integrated_numbers", [])])
     return f"""
-    <article class="reading-card topic-card" id="{identifier}" data-topic-number="{item['number']}" data-topic-numbers="{numbers}" data-topic-family="{item['part']}">
+    <article class="reading-card topic-card" id="{identifier}" data-topic-number="{item['number']}" data-topic-family="{item['part']}">
       {legacy}<div class="topic-top"><span class="topic-label">Topic <span class="topic-number">{topic_number(item)}</span></span><span class="duration">{html.escape(duration)}</span></div>
       <h3>{html.escape(item['topic'])}</h3>
       <p class="topic-family"><a href="#part-{item['part']}" data-family-filter="{item['part']}">{html.escape(part_titles[item['part']])}</a></p>
-{('      ' + integration + chr(10)) if integration else ''}      <p class="question">{html.escape(item['question'])}</p>
+      <p class="question">{html.escape(item['question'])}</p>
       {scope}{reading_bundle(item)}
       <div class="topic-bottom"><span>Shared pre-reading / selected sections / slides / notes: TBD</span><a href="#{identifier}" aria-label="Permanent link to topic {item['number']}: {html.escape(item['topic'])}">Link ↗</a></div>
     </article>"""
@@ -295,8 +292,6 @@ story += [table, Spacer(1, 14), P("Suggested meeting structure", "Heading2"),
 def pdf_bundle(item, title, question=None, scope=None):
     block = [P(title, "Heading2")]
     block.append(P("Topic family: " + part_titles[item["part"]], "SmallDDL"))
-    if item.get("integration_note"):
-        block.append(P(item["integration_note"], "SmallDDL"))
     if question:
         block.append(P(question))
     if scope:
