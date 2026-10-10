@@ -36,7 +36,7 @@ if (search) {
       const familyMatch = activeFamily === null || card.dataset.topicFamily === activeFamily;
       const searchMatch = selectedNumber === null
         ? card.textContent.toLocaleLowerCase().includes(query)
-        : Number(card.dataset.topicNumber) === selectedNumber;
+        : (card.dataset.topicNumbers || card.dataset.topicNumber).split(' ').map(Number).includes(selectedNumber);
       card.hidden = !familyMatch || !searchMatch;
       if (!card.hidden) matches++;
     });
@@ -44,7 +44,7 @@ if (search) {
       row.hidden = document.getElementById(row.dataset.topic).hidden;
     });
     document.querySelector('#topic-index').hidden = matches === 0;
-    document.querySelector('#ranked-topics').hidden = matches === 0;
+    document.querySelector('#topic-readings').hidden = matches === 0;
     familyLinks.forEach(link => {
       if ((link.dataset.familyFilter || null) === activeFamily) link.setAttribute('aria-current', 'true');
       else link.removeAttribute('aria-current');
@@ -53,7 +53,7 @@ if (search) {
       ? 'All topics'
       : familyLinks.find(link => link.dataset.familyFilter === activeFamily).textContent;
     document.querySelector('#result-count').textContent = matches
-      ? `${matches} of ${cards.length} candidate topic${matches === 1 ? '' : 's'} · ${family} · Recommended priority order · Final selection TBD`
+      ? `${matches} of ${cards.length} candidate topic${matches === 1 ? '' : 's'} · ${family} · Final selection TBD`
       : `No matching topics · ${family}. Change the search or choose All topics.`;
   }
 

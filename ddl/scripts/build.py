@@ -22,13 +22,11 @@ if any(type(number) is not int or number < 1 for number in topic_numbers):
     raise ValueError("Each candidate needs a positive integer topic number")
 if len(topic_numbers) != len(set(topic_numbers)):
     raise ValueError("Candidate topic numbers must be unique")
-topic_priorities = [item["priority"] for item in topics]
-if any(type(priority) is not int or priority < 1 for priority in topic_priorities):
-    raise ValueError("Each candidate needs a positive integer selection priority")
-if sorted(topic_priorities) != list(range(1, len(topics) + 1)):
-    raise ValueError("Selection priorities must rank every candidate once")
-ranked_topics = sorted(topics, key=lambda item: item["priority"])
-priority_note = course.get("priority_note", "The priority order is an editorial recommendation for selecting topics, not a weekly teaching order.")
+ordered_topics = sorted(topics, key=lambda item: item["number"])
+numbering_note = course.get("numbering_note", "Topic numbers identify candidates; selections and teaching order are TBD.")
+search_numbers = [number for item in topics for number in [item["number"], *item.get("integrated_numbers", [])]]
+if any(type(number) is not int or number < 1 for number in search_numbers) or len(search_numbers) != len(set(search_numbers)):
+    raise ValueError("Current and integrated topic numbers must be unique positive integers")
 
 
 def topic_number(item):
@@ -110,24 +108,25 @@ def reading_card(item):
     legacy = "".join(f'<span class="legacy-anchor" id="week-{week}" aria-hidden="true"></span>' for week in legacy_weeks.get(item["id"], []))
     legacy += "".join(f'<span class="legacy-anchor" id="{html.escape(alias, quote=True)}" aria-hidden="true"></span>' for alias in item.get("aliases", []))
     scope = f'<div class="session-scope"><h4>Scope for one session</h4><p>{md(item["scope"])}</p></div>' if item.get("scope") else ""
+    integration = f'<p class="integration-note">{md(item["integration_note"])}</p>' if item.get("integration_note") else ""
+    numbers = " ".join(str(number) for number in [item["number"], *item.get("integrated_numbers", [])])
     return f"""
-    <article class="reading-card topic-card" id="{identifier}" data-topic-number="{item['number']}" data-topic-family="{item['part']}" data-priority="{item['priority']}">
-      {legacy}<div class="topic-top"><span class="topic-label">Selection priority <span class="priority-number">{item['priority']}</span> · Topic <span class="topic-number">{topic_number(item)}</span></span><span class="duration">{html.escape(duration)}</span></div>
+    <article class="reading-card topic-card" id="{identifier}" data-topic-number="{item['number']}" data-topic-numbers="{numbers}" data-topic-family="{item['part']}">
+      {legacy}<div class="topic-top"><span class="topic-label">Topic <span class="topic-number">{topic_number(item)}</span></span><span class="duration">{html.escape(duration)}</span></div>
       <h3>{html.escape(item['topic'])}</h3>
       <p class="topic-family"><a href="#part-{item['part']}" data-family-filter="{item['part']}">{html.escape(part_titles[item['part']])}</a></p>
-      <p class="recommendation">{md(item['recommendation'])}</p>
-      <p class="question">{html.escape(item['question'])}</p>
+{('      ' + integration + chr(10)) if integration else ''}      <p class="question">{html.escape(item['question'])}</p>
       {scope}{reading_bundle(item)}
       <div class="topic-bottom"><span>Shared pre-reading / selected sections / slides / notes: TBD</span><a href="#{identifier}" aria-label="Permanent link to topic {item['number']}: {html.escape(item['topic'])}">Link ↗</a></div>
     </article>"""
 
 
 overview = """<p>Major ideas. Fundamental questions. The mathematics underneath.</p>
-<p>Deep Deep Learning is a graduate, student-led seminar for studying ideas you have heard about and want to understand properly. The candidate pool connects neural tangent kernels, feature learning, Mamba, in-context learning, test-time training, hypernetworks, world models, online continual learning, model merging, mechanistic interpretability, new generative frameworks, graph neural networks, KANs, and the theory of why training works.</p>
+<p>Deep Deep Learning is a graduate, student-led seminar for studying ideas you have heard about and want to understand properly. The candidate pool connects neural tangent kernels, μP and feature learning, Mamba, in-context learning, test-time training, hypernetworks, world models, online continual learning, model merging, mechanistic interpretability, new generative frameworks, graph neural networks, and the theory of why training works.</p>
 <p>Each selected topic gets two academic hours. A session builds from the minimum background to one central research paper and selected recent developments. We work through a derivation, examine an experiment, and ask what remains unresolved. Students lead the presentations and discussion.</p>
 <p>Everyone completes one shared pre-reading before each selected meeting. Presenters choose it in consultation with the instructor and announce it one week before class: a tutorial, a short paper or specified sections that take 30–45 minutes. Two guiding questions accompany the reading; each student arrives with one question or point of confusion.</p>
 <p>The reading pool is larger than the course. Students and the instructor choose which topics enter the final schedule; unchosen topics are not assigned. Topic selections and presenter assignments are TBD.</p>"""
-overview += f'<p>{md(priority_note)} Topic numbers stay fixed so candidates remain easy to reference.</p>'
+overview += f'<p>{md(numbering_note)}</p>'
 logistics = [
     ("Format", f'{len(weeks)} planned weekly student-led seminars. {html.escape(duration)} per selected topic. No exam.'),
     ("Topic selection", f'{len(topics)} candidate topics with background, a main paper and recent reading. Final selection and order: <span class="tbd">TBD</span>.'),
@@ -165,8 +164,8 @@ home = """
 (ROOT / "index.html").write_text(page("index.html", "Home", home))
 
 index_rows = "".join(
-    f'<tr class="topic-index-row" data-topic="topic-{item["id"]}" data-topic-family="{item["part"]}" data-priority="{item["priority"]}"><td class="topic-priority">{item["priority"]}</td><td class="topic-index-number">{topic_number(item)}</td><th scope="row"><a href="#topic-{item["id"]}">{html.escape(item["topic"])}</a><p class="index-recommendation">{md(item["recommendation"])}</p></th></tr>'
-    for item in ranked_topics
+    f'<tr class="topic-index-row" data-topic="topic-{item["id"]}" data-topic-family="{item["part"]}"><td class="topic-index-number">{topic_number(item)}</td><th scope="row"><a href="#topic-{item["id"]}">{html.escape(item["topic"])}</a></th></tr>'
+    for item in ordered_topics
 )
 week_rows = "".join(
     f'<tr><th scope="row">{item["week"]:02}</th><td class="tbd">{html.escape(item.get("topic", "TBD"))}</td><td class="tbd">{html.escape(item.get("presenter", "TBD"))}</td></tr>'
@@ -179,15 +178,15 @@ family_anchors += "".join(f'<span class="filter-anchor" id="part-{part["id"]}" a
 schedule = f"""
 <section class="section page-heading"><div class="hero-badge">Candidate pool · Two academic hours per selected topic</div><h1>Topics &amp; readings</h1><p class="section-subtitle">Learn the foundations, understand a central paper, examine what came next.</p>
 <p>These {len(topics)} topics are candidates for the seminar. Only the topics students and the instructor choose will enter the final {len(weeks)}-week schedule. Selection, order and presenter assignments are TBD.</p>
-<p>{md(priority_note)} Selection priority is shown separately from the stable topic number, so previous references keep their meaning.</p>
+<p>{md(numbering_note)}</p>
 <p>Each selected topic gets two academic hours and one focused question, with one reading bundle. The main paper is the center; background and recent developments supply the context and discussion. Topic numbers identify candidates and are independent of the weekly schedule.</p>
 <p>All students complete one required shared pre-reading, chosen by the presenters in consultation with the instructor and announced one week before class. Allow 30–45 minutes for a tutorial, a short paper or specified sections. Presenters include two guiding questions; each student brings one question or point of confusion. The main paper is optional for the audience unless selected as the shared pre-reading. Specific pre-readings are TBD.</p>
 <p>The reading bundles connect foundational ideas to recent work. Use the scope and presentation focus to decide which sections to develop carefully in class. Supplementary papers support that question; every linked paper need not become a full presentation. Flow matching is assumed background from the base course.</p>
 <p class="section-end"><a class="btn btn-secondary" href="assets/syllabus.pdf" download>Download syllabus (PDF)</a></p></section>
-<section class="section schedule-tools">{family_anchors}<label for="reading-search">Find a topic number, author or paper</label><input id="reading-search" type="search" placeholder="Try #7, Mamba, KAN or convergence…" autocomplete="off"><p id="result-count" class="muted" aria-live="polite">{len(topics)} candidate topics · Recommended priority order · Final selection TBD</p><div class="part-links" role="group" aria-label="Filter by topic family">{part_links}</div></section>
-<section class="section overview-section" id="topic-index"><h2 class="section-title">Recommended priority</h2><p class="section-subtitle">Selection recommendations, with stable topic numbers for reference.</p><div class="schedule-overview topic-overview"><table><thead><tr><th scope="col">Priority</th><th scope="col">Topic #</th><th scope="col">Topic</th></tr></thead><tbody>{index_rows}</tbody></table></div></section>"""
-schedule += '<section class="section schedule-part" id="ranked-topics"><h2 class="section-title">Readings in priority order</h2><div class="topic-list">'
-schedule += "".join(reading_card(item) for item in ranked_topics)
+<section class="section schedule-tools">{family_anchors}<label for="reading-search">Find a topic number, author or paper</label><input id="reading-search" type="search" placeholder="Try #7, Mamba, μP or convergence…" autocomplete="off"><p id="result-count" class="muted" aria-live="polite">{len(topics)} candidate topics · Final selection TBD</p><div class="part-links" role="group" aria-label="Filter by topic family">{part_links}</div></section>
+<section class="section overview-section" id="topic-index"><h2 class="section-title">Topic index</h2><p class="section-subtitle">Browse by topic number or use the family filters above.</p><div class="schedule-overview topic-overview"><table><thead><tr><th scope="col">Topic #</th><th scope="col">Topic</th></tr></thead><tbody>{index_rows}</tbody></table></div></section>"""
+schedule += '<section class="section schedule-part" id="topic-readings"><h2 class="section-title">Topics and readings</h2><div class="topic-list">'
+schedule += "".join(reading_card(item) for item in ordered_topics)
 schedule += "</div></section>"
 schedule += f"""<section class="section" id="weekly-schedule"><div class="eyebrow">Assignments to follow</div><h2 class="section-title">Weekly schedule</h2><p class="section-subtitle">{len(weeks)} planned meetings. Topic selections and student presenters are TBD; dates have not been assigned.</p><div class="schedule-overview"><table><thead><tr><th scope="col">Week</th><th scope="col">Selected topic</th><th scope="col">Presenter</th></tr></thead><tbody>{week_rows}</tbody></table></div></section>"""
 (ROOT / "schedule.html").write_text(page("schedule.html", "Topics & readings", schedule))
@@ -257,7 +256,7 @@ story = [
     Spacer(1, 14),
     P("Instructor: Assaf Shocher. Course contact and office hours: TBD."),
     P("Course description", "Heading2"),
-    P("Major ideas in deep learning, studied through foundational material, a central paper and recent developments. The candidate pool includes NTK, Mamba, in-context learning, test-time training, hypernetworks, world models, online continual learning, model merging, interpretability, new generative frameworks, graph neural networks, KANs, and the theory of why training works."),
+    P("Major ideas in deep learning, studied through foundational material, a central paper and recent developments. The candidate pool includes NTK/μP, Mamba, in-context learning, test-time training, hypernetworks, world models, online continual learning, model merging, interpretability, new generative frameworks, graph neural networks, and the theory of why training works."),
     P("Topic selection", "Heading2"),
     P(f"The {len(topics)} topics in this syllabus are candidates, not weekly assignments. Students and the instructor choose which topics enter the final {len(weeks)}-week schedule. Unchosen topics are not assigned. Selection, order and presenter assignments: TBD. Each selected topic gets two academic hours."),
     P("Learning objectives", "Heading2"),
@@ -290,13 +289,14 @@ story += [table, Spacer(1, 14), P("Suggested meeting structure", "Heading2"),
           P("Choosing a manageable scope", "Heading2"),
           P("Each candidate has one reading bundle and a central question. Build around its main paper, using selected foundation and companion sections to explain and assess the mechanism. Develop one derivation and one decisive experiment carefully. Candidate numbers are references for discussion, independent of assigned week numbers."),
           PageBreak(), P("Candidate topic pool", "TitleDDL"),
-          P(priority_note + " Each reading bundle connects one main paper to selected foundations and recent developments. Shared pre-readings and selected sections: TBD.")]
+          P(numbering_note + " Each reading bundle connects one main paper to selected foundations and recent developments. Shared pre-readings and selected sections: TBD.")]
 
 
 def pdf_bundle(item, title, question=None, scope=None):
     block = [P(title, "Heading2")]
     block.append(P("Topic family: " + part_titles[item["part"]], "SmallDDL"))
-    block.append(P("Selection rationale: " + item["recommendation"], "SmallDDL"))
+    if item.get("integration_note"):
+        block.append(P(item["integration_note"], "SmallDDL"))
     if question:
         block.append(P(question))
     if scope:
@@ -307,8 +307,8 @@ def pdf_bundle(item, title, question=None, scope=None):
     return block
 
 
-for item in ranked_topics:
-    title = f'Priority {item["priority"]} · Topic {topic_number(item)} · {item["topic"]}'
+for item in ordered_topics:
+    title = f'Topic {topic_number(item)} · {item["topic"]}'
     story.append(KeepTogether(pdf_bundle(item, title, item["question"], item.get("scope"))))
 story.append(P("Course website: [Deep Deep Learning](https://assafshocher.github.io/ddl/)", "SmallDDL"))
 
