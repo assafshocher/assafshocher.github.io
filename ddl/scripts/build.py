@@ -86,12 +86,15 @@ def cards(items):
 
 
 def reading_bundle(item):
+    labels = item.get("reading_labels", {})
+    pre_reading = f'<div class="presentation-focus"><h4>Suggested shared pre-reading</h4><p>{md(item["pre_reading"])}</p></div>' if item.get("pre_reading") else ""
+    reading_note = f'<div class="session-scope"><h4>Guarantee boundaries</h4><p>{md(item["reading_note"])}</p></div>' if item.get("reading_note") else ""
     return f"""<div class="reading-grid">
-        <div><h4>Background &amp; foundations</h4><p>{md(item['foundations'])}</p></div>
-        <div class="main-reading"><h4>Main paper</h4><p>{md(item['main'])}</p></div>
-        <div><h4>Recent development &amp; discussion</h4><p>{md(item['recent'])}</p></div>
+        <div><h4>{html.escape(labels.get('foundations', 'Background & foundations'))}</h4><p>{md(item['foundations'])}</p></div>
+        <div class="main-reading"><h4>{html.escape(labels.get('main', 'Main paper'))}</h4><p>{md(item['main'])}</p></div>
+        <div><h4>{html.escape(labels.get('recent', 'Recent development & discussion'))}</h4><p>{md(item['recent'])}</p></div>
       </div>
-      <div class="presentation-focus"><h4>Presentation focus</h4><p>{md(item['focus'])}</p></div>"""
+      <div class="presentation-focus"><h4>Presentation focus</h4><p>{md(item['focus'])}</p></div>{pre_reading}{reading_note}"""
 
 
 # Existing links reach the relevant candidate without assigning it to a week.
@@ -119,7 +122,7 @@ def reading_card(item):
 
 
 overview = """<p>Major ideas. Fundamental questions. The mathematics underneath.</p>
-<p>Deep Deep Learning is a graduate, student-led seminar for studying ideas you have heard about and want to understand properly. The candidate pool connects neural tangent kernels, μP and feature learning, Mamba, in-context learning, test-time training, hypernetworks, world models, online continual learning, model merging, mechanistic interpretability, new generative frameworks, graph neural networks, and the theory of why training works.</p>
+<p>Deep Deep Learning is a graduate, student-led seminar for studying ideas you have heard about and want to understand properly. The candidate pool connects neural tangent kernels, μP and feature learning, Mamba, in-context learning, test-time training, hypernetworks, world models, online continual learning, model merging, mechanistic interpretability, new generative frameworks, graph neural networks, and the theory of why training works. <a href="schedule.html#topic-stop-gradient-games">Stop-Gradient, Games, and Learning Dynamics</a> asks when learning optimizes a potential and when convergence needs a different argument.</p>
 <p>Each selected topic gets two academic hours. A session builds from the minimum background to one central research paper and selected recent developments. We work through a derivation, examine an experiment, and ask what remains unresolved. Students lead the presentations and discussion.</p>
 <p>Everyone completes one shared pre-reading before each selected meeting. Presenters choose it in consultation with the instructor and announce it one week before class: a tutorial, a short paper or specified sections that take 30–45 minutes. Two guiding questions accompany the reading; each student arrives with one question or point of confusion.</p>
 <p>The reading pool is larger than the course. Students and the instructor choose which topics enter the final schedule; unchosen topics are not assigned. Topic selections and presenter assignments are TBD.</p>"""
@@ -253,7 +256,7 @@ story = [
     Spacer(1, 14),
     P("Instructor: Assaf Shocher. Course contact and office hours: TBD."),
     P("Course description", "Heading2"),
-    P("Major ideas in deep learning, studied through foundational material, a central paper and recent developments. The candidate pool includes NTK/μP, Mamba, in-context learning, test-time training, hypernetworks, world models, online continual learning, model merging, interpretability, new generative frameworks, graph neural networks, and the theory of why training works."),
+    P("Major ideas in deep learning, studied through foundational material, a central paper and recent developments. The candidate pool includes NTK/μP, Mamba, in-context learning, test-time training, hypernetworks, world models, online continual learning, model merging, interpretability, new generative frameworks, graph neural networks, the theory of why training works, and stop-gradient, games and learning dynamics."),
     P("Topic selection", "Heading2"),
     P(f"The {len(topics)} topics in this syllabus are candidates, not weekly assignments. Students and the instructor choose which topics enter the final {len(weeks)}-week schedule. Unchosen topics are not assigned. Selection, order and presenter assignments: TBD. Each selected topic gets two academic hours."),
     P("Learning objectives", "Heading2"),
@@ -296,8 +299,13 @@ def pdf_bundle(item, title, question=None, scope=None):
         block.append(P(question))
     if scope:
         block.append(P("Scope for one session: " + scope, "SmallDDL"))
+    labels = item.get("reading_labels", {})
     for label, field in [("Background", "foundations"), ("Main paper", "main"), ("Recent development & discussion", "recent"), ("Presentation focus", "focus")]:
+        label = labels.get(field, label)
         block.append(P(label + ": " + item[field], "SmallDDL"))
+    for label, field in [("Suggested shared pre-reading", "pre_reading"), ("Guarantee boundaries", "reading_note")]:
+        if item.get(field):
+            block.append(P(label + ": " + item[field], "SmallDDL"))
     block.append(Spacer(1, 10))
     return block
 
