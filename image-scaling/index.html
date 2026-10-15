@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>A Unified Theory of Image Scaling</title>
+  <meta name="description" content="Point Spread Functions, Discrete Kernels, and Scale-Spaces. Assaf Shocher, Technion. Paper, video, and ResizeRight Optics code.">
+  <link rel="canonical" href="https://assafshocher.github.io/image-scaling/">
+  <meta property="og:title" content="A Unified Theory of Image Scaling">
+  <meta property="og:description" content="Point Spread Functions, Discrete Kernels, and Scale-Spaces. Assaf Shocher, Technion.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://assafshocher.github.io/image-scaling/">
+  <meta property="og:image" content="https://assafshocher.github.io/image-scaling/assets/kernels.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../escher/assets/site.css">
+  <link rel="stylesheet" href="../assets/katex/katex.min.css">
+  <link rel="stylesheet" href="assets/project.css">
+  <script defer src="../assets/katex/katex.min.js"></script>
+  <script defer src="../assets/katex/auto-render.min.js"></script>
+  <script defer src="assets/project.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#abstract">Skip to the abstract</a>
+<nav class="home-link" aria-label="Home"><a href="../">← Assaf Shocher</a></nav>
+<svg class="icon-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+  <symbol id="i-paper" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 4l-4 16"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path d="M9 6H3v7h6V6Zm12 0h-6v7h6V6ZM9 13c0 4-2 5-5 5m17-5c0 4-2 5-5 5"/></symbol>
+</defs></svg>
+<header class="paper-header">
+  <h1>A Unified Theory of Image Scaling:<span>Point Spread Functions,<br class="mobile-break"> Discrete Kernels, and Scale-Spaces</span></h1>
+  <div class="authors"><a href="../">Assaf Shocher</a></div>
+  <p class="affiliation">Faculty of Data and Decision Sciences<br>Technion — Israel Institute of Technology</p>
+  <div class="resource-links">
+    <!-- Replace this self-link with the public arXiv URL after announcement. -->
+    <a class="resource" href="./" title="The arXiv link will be added after approval"><svg class="icon"><use href="#i-paper"/></svg>Paper</a>
+    <a class="resource" href="https://github.com/assafshocher/ResizeRightOptics"><svg class="icon"><use href="#i-code"/></svg>Code</a>
+    <a class="resource" href="#video"><svg class="icon"><use href="#i-play"/></svg>Video</a>
+    <a class="resource" href="#citation"><svg class="icon"><use href="#i-quote"/></svg>BibTeX</a>
+  </div>
+</header>
+<main>
+  <figure class="wide kernel-figure">
+    <a href="assets/kernels.webp" aria-label="Open the continuous kernel families at full size"><picture><source media="(max-width: 600px)" srcset="assets/thumbnail.webp"><img src="assets/kernels.webp" width="2164" height="489" alt="Continuous kernel families plotted against position and scale. Red slices specify a kernel or point spread function; the remaining family follows from consistency."></picture></a>
+    <figcaption>One specified kernel or point spread function determines a family of kernels across scales. The given slice is marked in red.</figcaption>
+  </figure>
+  <section id="abstract" class="text-section">
+    <h2>Abstract</h2>
+    <p>We derive the optically aligned system of image-scaling operators $\mathbf{K}_s$ that reproduces optical zoom (exact zoom-out, canonical zoom-in), by identifying a Huygens-like consistency principle in which each pixel acts as a secondary source. The system is determined in closed form by the camera's point spread function (PSF), itself the operator $\mathbf{K}_0$. The operators compose, $\mathbf{K}_{s'} \circ \mathbf{K}_s = \mathbf{K}_{ss'}$ (with band projection for down-up), and account for both upscaling and downscaling, which form a Moore–Penrose pseudoinverse pair, $\mathbf{K}_{1/s} = \mathbf{K}_s^\dagger$. We show that image scaling, as routinely practiced, is neither optically faithful nor internally consistent; for example, common anti-aliasing rules generally correspond to no camera, and two resizes by a factor of $1/2$ generally do not equal one resize by a factor of $1/4$. Gaussian scale-space kernels cannot be exact finite-aperture PSFs. Gaussian scale-space is an idealized special case of what emerges here: a generalized scale-space for sampled images, derived entirely from camera optics, bidirectional, and not limited to Gaussian kernels. The system goes beyond scaling and supports composable and invertible subpixel geometric transformations. We empirically validate its optical predictions with real captures and noisy optics simulations, and demonstrate its practical impact on the stability of tasks such as super-resolution and classification.</p>
+  </section>
+  <section id="video" class="wide video-section">
+    <h2>Video</h2>
+    <div class="video-frame"><iframe width="1280" height="720" src="https://www.youtube-nocookie.com/embed/rJA-o38VrLw" title="A Unified Theory of Image Scaling — animated explanation" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+    <p class="video-link"><a href="https://www.youtube.com/watch?v=rJA-o38VrLw">Watch on YouTube ↗</a></p>
+  </section>
+  <section id="citation" class="text-section citation-section">
+    <div class="section-heading"><h2>BibTeX</h2><button class="copy-button" id="copy-bib" type="button">Copy</button></div>
+    <pre><code id="bibtex">@misc{shocher2026unified,
+  title  = {A Unified Theory of Image Scaling:
+            Point Spread Functions, Discrete Kernels, and Scale-Spaces},
+  author = {Shocher, Assaf},
+  year   = {2026},
+  url    = {https://assafshocher.github.io/image-scaling/}
+}</code></pre>
+    <p class="bib-download"><a href="citation.bib" download>Download citation</a></p>
+    <p id="copy-status" role="status" class="sr-only"></p>
+  </section>
+</main>
+<footer class="page-footer text-section"><a href="../">Assaf Shocher</a> · Technion</footer>
+</body>
+</html>
