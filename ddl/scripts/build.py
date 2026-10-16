@@ -88,7 +88,7 @@ def cards(items):
 def reading_bundle(item):
     labels = item.get("reading_labels", {})
     pre_reading = f'<div class="presentation-focus"><h4>Suggested shared pre-reading</h4><p>{md(item["pre_reading"])}</p></div>' if item.get("pre_reading") else ""
-    reading_note = f'<div class="session-scope"><h4>Guarantee boundaries</h4><p>{md(item["reading_note"])}</p></div>' if item.get("reading_note") else ""
+    reading_note = f'<div class="session-scope"><h4>{html.escape(labels.get("reading_note", "Guarantee boundaries"))}</h4><p>{md(item["reading_note"])}</p></div>' if item.get("reading_note") else ""
     return f"""<div class="reading-grid">
         <div><h4>{html.escape(labels.get('foundations', 'Background & foundations'))}</h4><p>{md(item['foundations'])}</p></div>
         <div class="main-reading"><h4>{html.escape(labels.get('main', 'Main paper'))}</h4><p>{md(item['main'])}</p></div>
@@ -100,7 +100,7 @@ def reading_bundle(item):
 # Existing links reach the relevant candidate without assigning it to a week.
 legacy_weeks = {
     "ntk": [1], "mup": [2], "mamba": [3], "icl": [4], "ttt": [5, 6, 7],
-    "jepa": [8], "merging": [9], "features": [10, 11],
+    "jepa": [8], "merging": [9], "features": [10], "circuits": [11],
     "one-step-generative": [12, 13],
 }
 
@@ -125,11 +125,11 @@ overview = """<p>Major ideas. Fundamental questions. The mathematics underneath.
 <p>Deep Deep Learning is a graduate, student-led seminar for studying ideas you have heard about and want to understand properly. The candidate pool connects neural tangent kernels, μP and feature learning, Mamba, in-context learning, test-time training, hypernetworks, world models, online continual learning, model merging, mechanistic interpretability, new generative frameworks, graph neural networks, and the theory of why training works. <a href="schedule.html#topic-stop-gradient-games">Stop-Gradient, Games, and Learning Dynamics</a> asks when learning optimizes a potential and when convergence needs a different argument.</p>
 <p>Each selected topic gets two academic hours. A session builds from the minimum background to one central research paper and selected recent developments. We work through a derivation, examine an experiment, and ask what remains unresolved. Students lead the presentations and discussion.</p>
 <p>Everyone completes one shared pre-reading before each selected meeting. Presenters choose it in consultation with the instructor and announce it one week before class: a tutorial, a short paper or specified sections that take 30–45 minutes. Two guiding questions accompany the reading; each student arrives with one question or point of confusion.</p>
-<p>The reading pool is larger than the course. Students and the instructor choose which topics enter the final schedule; unchosen topics are not assigned. Topic selections and presenter assignments are TBD.</p>"""
+<p>The reading pool is larger than the course. Week 10 asks whether neural networks are intrinsically entangled or whether our tools obscure their structure; Week 11 develops circuit tracing and the implications of choosing units of analysis. Students and the instructor choose the remaining topics. Dates and all presenter assignments are TBD.</p>"""
 overview += f'<p>{md(numbering_note)}</p>'
 logistics = [
     ("Format", f'{len(weeks)} planned weekly student-led seminars. {html.escape(duration)} per selected topic. No exam.'),
-    ("Topic selection", f'{len(topics)} candidate topics with background, a main paper and recent reading. Final selection and order: <span class="tbd">TBD</span>.'),
+    ("Topic selection", f'{len(topics)} reading bundles. Weeks 10–11: mechanistic interpretability. Remaining selection and order: <span class="tbd">TBD</span>.'),
     ("When", 'Semester, day and meeting time: <span class="tbd">TBD</span>. The schedule uses week numbers.'),
     ("Where", 'Room and delivery mode: <span class="tbd">TBD</span>.'),
     ("Registration", 'Course number, credits and enrollment: <span class="tbd">TBD</span>.'),
@@ -167,8 +167,17 @@ index_rows = "".join(
     f'<tr class="topic-index-row" data-topic="topic-{item["id"]}" data-topic-family="{item["part"]}"><td class="topic-index-number">{topic_number(item)}</td><th scope="row"><a href="#topic-{item["id"]}">{html.escape(item["topic"])}</a></th></tr>'
     for item in ordered_topics
 )
+def weekly_topic(item):
+    title = html.escape(item.get("topic", "TBD"))
+    if item.get("topic_id"):
+        if item["topic_id"] not in {topic["id"] for topic in topics}:
+            raise ValueError("Weekly assignment references an unknown topic")
+        return f'<td><a href="#topic-{html.escape(item["topic_id"], quote=True)}">{title}</a></td>'
+    return f'<td class="tbd">{title}</td>'
+
+
 week_rows = "".join(
-    f'<tr><th scope="row">{item["week"]:02}</th><td class="tbd">{html.escape(item.get("topic", "TBD"))}</td><td class="tbd">{html.escape(item.get("presenter", "TBD"))}</td></tr>'
+    f'<tr><th scope="row">{item["week"]:02}</th>{weekly_topic(item)}<td class="tbd">{html.escape(item.get("presenter", "TBD"))}</td></tr>'
     for item in weeks
 )
 part_links = '<a href="#all-topics" data-family-filter="" aria-current="true">All topics</a>'
@@ -177,7 +186,7 @@ family_anchors = '<span class="filter-anchor" id="all-topics" aria-hidden="true"
 family_anchors += "".join(f'<span class="filter-anchor" id="part-{part["id"]}" aria-hidden="true"></span>' for part in parts)
 schedule = f"""
 <section class="section page-heading"><div class="hero-badge">Candidate pool · Two academic hours per selected topic</div><h1>Topics &amp; readings</h1><p class="section-subtitle">Learn the foundations, understand a central paper, examine what came next.</p>
-<p>These {len(topics)} topics are candidates for the seminar. Only the topics students and the instructor choose will enter the final {len(weeks)}-week schedule. Selection, order and presenter assignments are TBD.</p>
+<p>These {len(topics)} reading bundles form the pool for the {len(weeks)}-week seminar. Weeks 10–11 cover mechanistic interpretability; the remaining selections and order, dates and all presenter assignments are TBD.</p>
 <p>{md(numbering_note)}</p>
 <p>Each selected topic gets two academic hours and one focused question, with one reading bundle. The main paper is the center; background and recent developments supply the context and discussion. Topic numbers identify candidates and are independent of the weekly schedule.</p>
 <p>All students complete one required shared pre-reading, chosen by the presenters in consultation with the instructor and announced one week before class. Allow 30–45 minutes for a tutorial, a short paper or specified sections. Presenters include two guiding questions; each student brings one question or point of confusion. The main paper is optional for the audience unless selected as the shared pre-reading. Specific pre-readings are TBD.</p>
@@ -188,13 +197,13 @@ schedule = f"""
 schedule += '<section class="section schedule-part" id="topic-readings"><h2 class="section-title">Topics and readings</h2><div class="topic-list">'
 schedule += "".join(reading_card(item) for item in ordered_topics)
 schedule += "</div></section>"
-schedule += f"""<section class="section" id="weekly-schedule"><div class="eyebrow">Assignments to follow</div><h2 class="section-title">Weekly schedule</h2><p class="section-subtitle">{len(weeks)} planned meetings. Topic selections and student presenters are TBD; dates have not been assigned.</p><div class="schedule-overview"><table><thead><tr><th scope="col">Week</th><th scope="col">Selected topic</th><th scope="col">Presenter</th></tr></thead><tbody>{week_rows}</tbody></table></div></section>"""
+schedule += f"""<section class="section" id="weekly-schedule"><div class="eyebrow">Weeks 10–11: mechanistic interpretability</div><h2 class="section-title">Weekly schedule</h2><p class="section-subtitle">{len(weeks)} planned meetings. Week 10 debates units of analysis; Week 11 studies circuit tracing. Other topics, all student presenters and dates remain TBD.</p><div class="schedule-overview"><table><thead><tr><th scope="col">Week</th><th scope="col">Selected topic</th><th scope="col">Presenter</th></tr></thead><tbody>{week_rows}</tbody></table></div></section>"""
 (ROOT / "schedule.html").write_text(page("schedule.html", "Topics & readings", schedule))
 
 guide = """
 <section class="section page-heading"><div class="hero-badge">Prepare · Explain · Discuss</div><h1>Student-led seminars</h1><p class="section-subtitle">One focused question, developed over two academic hours.</p><p>Each meeting develops one fundamental question through a central paper and selected background or comparison material. Start with the older idea, uncover the main mechanism, and use evidence to assess the explanation.</p></section>
 <section class="section"><h2 class="section-title">Before your seminar</h2><ol class="guide-list">
-<li>Choose a numbered candidate from the topic pool and coordinate one focused question with the instructor. Only selected topics enter the schedule; the selection process and presenter assignments are TBD.</li>
+<li>Choose a numbered candidate from the topic pool and coordinate one focused question with the instructor. Weeks 10–11 cover mechanistic interpretability; remaining selections and all presenter assignments are TBD.</li>
 <li>Read the main paper and the relevant foundation material. Identify the minimum background needed for the mechanism. Use selected recent work to extend or question the explanation.</li>
 <li>Choose the shared pre-reading with the instructor and announce it one week before class; follow the policy below.</li>
 <li>Prepare one careful derivation, one decisive experiment and one unresolved question. State the assumptions behind each claim. A companion paper can supply a comparison without becoming a second full presentation.</li>
@@ -258,7 +267,7 @@ story = [
     P("Course description", "Heading2"),
     P("Major ideas in deep learning, studied through foundational material, a central paper and recent developments. The candidate pool includes NTK/μP, Mamba, in-context learning, test-time training, hypernetworks, world models, online continual learning, model merging, interpretability, new generative frameworks, graph neural networks, the theory of why training works, and stop-gradient, games and learning dynamics."),
     P("Topic selection", "Heading2"),
-    P(f"The {len(topics)} topics in this syllabus are candidates, not weekly assignments. Students and the instructor choose which topics enter the final {len(weeks)}-week schedule. Unchosen topics are not assigned. Selection, order and presenter assignments: TBD. Each selected topic gets two academic hours."),
+    P(f"The {len(topics)} reading bundles form the pool for the {len(weeks)}-week seminar. Week 10 debates units of analysis in mechanistic interpretability; Week 11 retains circuit tracing. Students and the instructor choose the remaining topics and order. Dates and all presenter assignments: TBD. Each selected topic gets two academic hours."),
     P("Learning objectives", "Heading2"),
     P("Explain a mathematical mechanism; identify its assumptions; assess an experiment that tests an explanation; connect recent research to older ideas; formulate a precise unresolved question."),
     P("Prerequisites & logistics", "Heading2"),
@@ -271,11 +280,11 @@ story = [
     P("Cite papers, figures, code and other sources; distinguish the authors' claims from your own analysis. Formal academic-integrity and AI-use policies, course forum and accessibility arrangements: TBD."),
     PageBreak(),
     P("Weekly schedule", "TitleDDL"),
-    P("Week numbers only. Topic selections and student presenters are TBD. The candidate pool below is larger than the final course."),
+    P("Week numbers only. Weeks 10–11 cover units of analysis and circuit tracing. Other topics, all student presenters and dates are TBD. The reading pool below is larger than the final course."),
     Spacer(1, 12),
 ]
 table_rows = [[P("Week", "SmallDDL"), P("Selected topic", "SmallDDL"), P("Presenter", "SmallDDL")]]
-table_rows += [[P(str(item["week"]), "SmallDDL"), P(item.get("topic", "TBD"), "SmallDDL"), P(item.get("presenter", "TBD"), "SmallDDL")] for item in weeks]
+table_rows += [[P(str(item["week"]), "SmallDDL"), P(f'[{item["topic"]}](https://assafshocher.github.io/ddl/schedule.html#topic-{item["topic_id"]})' if item.get("topic_id") else item.get("topic", "TBD"), "SmallDDL"), P(item.get("presenter", "TBD"), "SmallDDL")] for item in weeks]
 table = Table(table_rows, colWidths=[38, 350, 110], repeatRows=1)
 table.setStyle(TableStyle([
     ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#e9f2f5")),
@@ -305,7 +314,7 @@ def pdf_bundle(item, title, question=None, scope=None):
         block.append(P(label + ": " + item[field], "SmallDDL"))
     for label, field in [("Suggested shared pre-reading", "pre_reading"), ("Guarantee boundaries", "reading_note")]:
         if item.get(field):
-            block.append(P(label + ": " + item[field], "SmallDDL"))
+            block.append(P(labels.get(field, label) + ": " + item[field], "SmallDDL"))
     block.append(Spacer(1, 10))
     return block
 
@@ -321,7 +330,7 @@ def footer(canvas, document):
     canvas.line(42, 38, 553, 38)
     canvas.setFont("Helvetica", 8)
     canvas.setFillColor(colors.HexColor("#526878"))
-    canvas.drawString(42, 25, "Deep Deep Learning | Candidate reading pool - final selection TBD")
+    canvas.drawString(42, 25, "Deep Deep Learning | Weeks 10-11: interpretability | Other selections TBD")
     canvas.drawRightString(553, 25, str(document.page))
 
 

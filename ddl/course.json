@@ -1,6 +1,6 @@
 {
   "duration": "Two academic hours",
-  "selection": "Candidate topics; final selections and presenter assignments TBD",
+  "selection": "Weeks 10–11: mechanistic interpretability; other topic selections, dates and presenter assignments TBD",
   "parts": [
     {
       "id": 1,
@@ -53,7 +53,7 @@
       "foundations": "Karimi, Nutini & Schmidt, [Linear Convergence of Gradient and Proximal-Gradient Methods Under the Polyak-Lojasiewicz Condition](https://arxiv.org/abs/1608.04636) (2016), the PL inequality and gradient-flow loss decay. Historical context: Choromanska et al., [The Loss Surfaces of Multilayer Networks](https://proceedings.mlr.press/v38/choromanska15.html) (2015; 2014 preprint), the spin-glass analogy and its assumptions. Optional contrast: Soudry & Hoffer, [Exponentially vanishing sub-optimal local minima in multilayer neural networks](https://arxiv.org/abs/1702.05777) (ICLR 2018), volumes of regions containing minima versus a training trajectory. Brief dynamics background: Cohen et al., [Gradient Descent on Neural Networks Typically Occurs at the Edge of Stability](https://arxiv.org/abs/2103.00065) (ICLR 2021), one oscillatory training plot and the quadratic stability threshold 2 / learning rate.",
       "main": "Dana, Pillaud-Vivien & Bach, [Convergence of Shallow ReLU Networks on Weakly Interacting Data](https://papers.nips.cc/paper_files/paper/2025/file/08f805247677d42eac83664ccf9ef3ef-Paper-Conference.pdf) (NeurIPS 2025). Gradient flow in finite shallow ReLU networks, weakly interacting inputs and a particular asymmetric randomized initialization.",
       "recent": "Petit, Poon & Peyré, [On the global convergence of gradient flow for wide shallow models beyond homogeneous nonlinearities](https://arxiv.org/abs/2605.10775) (2026). The result is conditional: if the studied Wasserstein gradient flow converges, its limit is globally optimal. Watch list: Soudry’s [publication page](https://soudry.github.io/publications/) lists Global Convergence in Deep Networks via the Second Law of Thermodynamics (NeurIPS 2026); a linked manuscript was unavailable when this list was checked, so reading and claims remain TBD. Supporting dynamics comparison: Cohen et al., [Understanding Optimization in Deep Learning with Central Flows](https://proceedings.iclr.cc/paper_files/paper/2025/hash/62bf42cc047db5b290e7d5737c1f6a8d-Abstract-Conference.html) (ICLR 2025), the gradient-descent illustration and [authors' explanation](https://centralflows.github.io/). Further reading: Berthier, [The Multiple Timescales of Gradient Descent on the Edge of Stability: A Perturbative Derivation of the Central Flow](https://arxiv.org/abs/2609.01034) (2026); its formal derivation does not supply a global-convergence proof.",
-      "focus": "Derive loss decay from a PL inequality, then explain how the main paper maintains a useful trajectory-wise condition. Inspect its data, initialization, width and gradient-flow assumptions. Contrast this proof with a quadratic discrete-time stability calculation and one edge-of-stability observation. Distinguish landscape geometry, convergence, oscillatory dynamics, solution selection and generalization. Central flows describe averaged dynamics; they are not a general global-convergence theorem. Keep the recent conditional result separate from unrestricted guarantees for finite deep networks trained with SGD or Adam. The complementary [Topic 17](https://assafshocher.github.io/ddl/schedule.html#topic-stop-gradient-games) studies updates that need not be gradients and convergence through Lyapunov arguments.",
+      "focus": "Derive loss decay from a PL inequality, then explain how the main paper maintains a useful trajectory-wise condition. Inspect its data, initialization, width and gradient-flow assumptions. Contrast this proof with a quadratic discrete-time stability calculation and one edge-of-stability observation. Distinguish landscape geometry, convergence, oscillatory dynamics, solution selection and generalization. Central flows describe averaged dynamics; they are not a general global-convergence theorem. Keep the recent conditional result separate from unrestricted guarantees for finite deep networks trained with SGD or Adam. The complementary [Topic 18](https://assafshocher.github.io/ddl/schedule.html#topic-stop-gradient-games) studies updates that need not be gradients and convergence through Lyapunov arguments.",
       "number": 2,
       "aliases": [
         "topic-central-flows"
@@ -168,18 +168,35 @@
     },
     {
       "id": "features",
-      "topic": "Mechanistic interpretability: from features to circuits",
-      "question": "How do interpretable features support a circuit explanation, and how can we test that explanation causally?",
-      "foundations": "Elhage et al., [Toy Models of Superposition](https://transformer-circuits.pub/2022/toy_model/index.html) (2022), one small example of sparse features sharing dimensions. Selected background: Elhage et al., [A Mathematical Framework for Transformer Circuits](https://transformer-circuits.pub/2021/framework/index.html) (2021), the residual stream; Templeton et al., [Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html) (2024), the sparse-autoencoder objective and one feature illustration.",
-      "main": "Ameisen et al., [Circuit Tracing: Revealing Computational Graphs in Language Models](https://transformer-circuits.pub/2025/attribution-graphs/methods.html) (2025).",
-      "recent": "Kamath et al., [Tracing Attention Computation Through Feature Interactions](https://transformer-circuits.pub/2025/attention-qk/index.html) (2025). Limitation reading: Leask et al., [Sparse Autoencoders Do Not Find Canonical Units of Analysis](https://arxiv.org/abs/2502.04878) (2025), a caution about treating extracted features as canonical units.",
-      "focus": "Use a toy example to explain superposition and introduce sparse feature extraction briefly. Center the presentation on how a replacement model produces an attribution graph, one circuit case study and a causal intervention. Distinguish sparse autoencoders from the tracing method’s replacement model. Assess omitted computations and approximation error; interpreting a feature and validating a circuit are different steps.",
+      "number": 12,
       "part": 4,
-      "aliases": [
-        "topic-circuits"
-      ],
-      "scope": "Two academic hours: introduce superposition and sparse features, then develop one circuit-tracing case study and causal intervention.",
-      "number": 12
+      "topic": "Mechanistic interpretability: are neural networks already clean?",
+      "question": "Are neural networks intrinsically entangled, or are we looking at them incorrectly?",
+      "scope": "Week 10, two academic hours: one toy superposition derivation, the SAE objective, and a debate about the evidence for native neurons versus extracted features. Use selected sections; the optional critique is a short comparison. Dates and presenter: TBD.",
+      "foundations": "Elhage et al., [Toy Models of Superposition](https://arxiv.org/abs/2209.10652) (2022): derive a small sparse-feature example and explain when sharing dimensions helps. Templeton et al., [Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html) (2024): the sparse-autoencoder objective, one recovered feature and one intervention. Distinguish a toy-model result from evidence about a trained language model.",
+      "main": "Nick Cammarata / Goodfire, [Neural Networks Are Already Clean](https://already-clean.goodfire.com/#zooming-out) (October 2026). Contemporary main discussion: read The Short Version, the cat/car case in Cars and Animals, and Zooming Out. Cammarata proposes that some apparent entanglement reflects shared generalization and imperfect tools, and advocates studying native neurons and circuits. Treat this fresh essay as a provisional working hypothesis, not established consensus.",
+      "recent": "Leask et al., [Sparse Autoencoders Do Not Find Canonical Units of Analysis](https://arxiv.org/abs/2502.04878) (ICLR 2025). Use the abstract and selected SAE-stitching or meta-SAE results to examine completeness and atomicity. Noncanonical features may still be useful; this critique does not establish the Goodfire hypothesis.",
+      "focus": "Derive how sparse features can share a low-dimensional representation and write the SAE reconstruction-plus-sparsity objective. Debate whether a multi-concept neuron indicates feature packing, a shared abstraction, or a measurement artifact. Compare the evidence each account predicts and propose a controlled intervention or held-out test that could distinguish them. Separate interpretability, completeness and uniqueness. Close by choosing units for [Week 11 circuit tracing](https://assafshocher.github.io/ddl/schedule.html#topic-circuits): native neurons, learned features or subspaces.",
+      "reading_labels": {
+        "foundations": "Foundations: superposition and SAEs",
+        "main": "Main discussion: a provisional hypothesis",
+        "recent": "Optional critique",
+        "reading_note": "Evidence status"
+      },
+      "pre_reading": "30–45-minute audience assignment: the selected Goodfire sections above, with the Toy Models toy setup as background. Guiding questions: what observation would distinguish shared generalization from superposition, and what would justify treating a chosen unit as part of a causal explanation? Final sections: TBD with the presenter and instructor.",
+      "reading_note": "October 2026: the Goodfire essay presents an informal, fresh and provisional hypothesis, not established consensus. Evaluate its examples and extrapolations separately; broader claims need independent tests. Toy-model superposition, useful SAE features and noncanonical decompositions can coexist. The readings frame a debate rather than settle it."
+    },
+    {
+      "id": "circuits",
+      "number": 13,
+      "part": 4,
+      "topic": "Mechanistic interpretability: circuit tracing",
+      "question": "How do chosen units of analysis support a circuit explanation, and how can we test that explanation causally?",
+      "scope": "Week 11, two academic hours: retain one circuit-tracing case study and causal intervention, using Week 10 to question the choice of units. Dates and presenter: TBD.",
+      "foundations": "Elhage et al., [A Mathematical Framework for Transformer Circuits](https://transformer-circuits.pub/2021/framework/index.html) (2021), selected residual-stream and path-composition background. Recall the superposition and SAE foundations from [Week 10](https://assafshocher.github.io/ddl/schedule.html#topic-features). Distinguish native neurons, residual-stream directions and learned features before drawing a graph.",
+      "main": "Ameisen et al., [Circuit Tracing: Revealing Computational Graphs in Language Models](https://transformer-circuits.pub/2025/attribution-graphs/methods.html) (2025).",
+      "recent": "Kamath et al., [Tracing Attention Computation Through Feature Interactions](https://transformer-circuits.pub/2025/attention-qk/index.html) (2025). Revisit Week 10's competing accounts of units of analysis when assessing which nodes and edges a tracing method exposes; the Goodfire hypothesis motivates a comparison, not a replacement for causal validation.",
+      "focus": "Center the presentation on how a replacement model produces an attribution graph, one circuit case study and a causal intervention. Distinguish SAEs from the tracing method's replacement model. Make the Week 10 connection explicit: how would a graph and its explanation change if its nodes were native neurons, extracted features or subspaces? Assess omitted computations, reconstruction error and sensitivity to the decomposition. Interpreting a unit and validating its causal role are separate steps; a noncanonical unit can still support a useful, limited explanation."
     },
     {
       "id": "one-step-generative",
@@ -188,10 +205,10 @@
       "foundations": "Yujia Li, Swersky & Zemel, [Generative Moment Matching Networks](https://proceedings.mlr.press/v37/li15.html) (ICML 2015), selected kernel/MMD material. Ke Li & Jitendra Malik, [Implicit Maximum Likelihood Estimation](https://arxiv.org/abs/1809.09087) (2018), the data-to-generated nearest-neighbor assignment and regression algorithm.",
       "main": "Deng, He Li, Tianhong Li, Du & He, [*Generative Modeling via Drifting*](https://arxiv.org/abs/2602.04770) (2026). Estimate an attraction-repulsion field from real and generated samples and fit frozen drifted targets.",
       "recent": "Chirag Vashist & Ke Li, [ROMS-IMLE: A Minimalist Approach to Competitive Single-Step Generative Modelling](https://arxiv.org/abs/2607.19332) (2026). Compare nearest-neighbor assignment, robust losses and intermediate-resolution supervision with the drifting update. Optional theory: Esteban-Casadevall et al., [Kernel-Gradient Drifting Models](https://arxiv.org/abs/2605.10727) (2026), including Max Welling. The authors’ [ROMS-IMLE method page](https://serchirag.github.io/roms-imle/) provides additional explanation and experiments.",
-      "focus": "Introduce sample-based distribution matching, derive the drifting field and frozen-target regression, and study one toy experiment. Compare IMLE’s data-to-generated matching and ROMS-IMLE’s practical changes, including the direction of nearest-neighbor assignment, robust losses and intermediate-resolution supervision. Keep zero-drift and maximum-likelihood claims tied to their assumptions. For the conservatism of drifting fields and stop-gradient dynamics, see [Topic 17](https://assafshocher.github.io/ddl/schedule.html#topic-stop-gradient-games).",
+      "focus": "Introduce sample-based distribution matching, derive the drifting field and frozen-target regression, and study one toy experiment. Compare IMLE’s data-to-generated matching and ROMS-IMLE’s practical changes, including the direction of nearest-neighbor assignment, robust losses and intermediate-resolution supervision. Keep zero-drift and maximum-likelihood claims tied to their assumptions. For the conservatism of drifting fields and stop-gradient dynamics, see [Topic 18](https://assafshocher.github.io/ddl/schedule.html#topic-stop-gradient-games).",
       "part": 5,
       "scope": "One comparative seminar of two academic hours: derive Drifting as the central sample-matching mechanism, then compare IMLE’s nearest-neighbor assignments and ROMS-IMLE’s practical changes.",
-      "number": 13
+      "number": 14
     },
     {
       "id": "diffusion-lm",
@@ -202,7 +219,7 @@
       "recent": "Nie et al., [Large Language Diffusion Models](https://arxiv.org/abs/2502.09992) (LLaDA, 2025).",
       "focus": "Derive the masked-denoising objective and trace one sampling schedule, then compare refinement, parallelism and likelihood evaluation with autoregressive generation. The topic requires discrete corruption and language-specific evaluation beyond a continuous diffusion refresher.",
       "part": 5,
-      "number": 14
+      "number": 15
     },
     {
       "id": "oscillatory-neurons",
@@ -214,7 +231,7 @@
       "main": "Miyato, Löwe, Geiger & Welling, [Artificial Kuramoto Oscillatory Neurons](https://arxiv.org/abs/2410.13821) (ICLR 2025; 2024 preprint).",
       "recent": "Iqbal et al., [Spontaneous symmetry breaking and Goldstone modes for deep information propagation](https://arxiv.org/abs/2605.14685) (2026 preprint). A related perspective on symmetry and persistent information propagation, rather than a direct analysis of AKOrN.",
       "focus": "Derive the two-oscillator intuition, trace the generalized neural update, and study one object-discovery or reasoning experiment. Use the Goldstone paper for a brief connection to depth and memory; its physics derivations are optional.",
-      "number": 15
+      "number": 16
     },
     {
       "id": "gnn-expressivity",
@@ -226,14 +243,14 @@
       "main": "Stoll, Müller & Morris, [Generalizable Insights for Graph Transformers in Theory and Practice](https://arxiv.org/abs/2511.08028) (NeurIPS 2025), selected theory sections and one structural-encoding ablation.",
       "recent": "Wilson, Bechler-Speicher & Veličković, [Cayley Graph Propagation](https://proceedings.mlr.press/v269/wilson25a.html) (2025), an intuitive expander-connectivity example and one propagation-cost comparison; the group-theory construction and spectral proofs are further reading. Ma et al., [Plain Transformers Can be Powerful Graph Learners](https://arxiv.org/abs/2504.12588) (TMLR 2026; 2025 preprint), selected structural-adaptation discussion. Further reading: Liang et al., [Mitigating Over-Squashing in Graph Neural Networks by Spectrum-Preserving Sparsification](https://proceedings.mlr.press/v267/liang25a.html) (ICML 2025).",
       "focus": "Introduce message passing through a small graph. Work through one pair of graphs that 1-WL-style aggregation cannot distinguish and one narrow-cut graph that compresses distant information. Explain why expressivity, over-squashing and over-smoothing are different limitations. Center the main paper on how structural encodings affect graph transformers and one ablation. Use Cayley propagation briefly to compare changing connectivity with changing the model; avoid a second full presentation or claims that attention automatically solves either limitation.",
-      "number": 16,
+      "number": 17,
       "aliases": [
         "topic-gnn-geometry"
       ]
     },
     {
       "id": "stop-gradient-games",
-      "number": 17,
+      "number": 18,
       "part": 1,
       "topic": "Stop-Gradient, Games, and Learning Dynamics",
       "question": "When is a learning rule optimizing an objective, and how can we establish convergence when it is not?",
@@ -299,13 +316,15 @@
     },
     {
       "week": 10,
-      "topic": "TBD",
-      "presenter": "TBD"
+      "topic": "Mechanistic interpretability: units of analysis",
+      "presenter": "TBD",
+      "topic_id": "features"
     },
     {
       "week": 11,
-      "topic": "TBD",
-      "presenter": "TBD"
+      "topic": "Mechanistic interpretability: circuit tracing",
+      "presenter": "TBD",
+      "topic_id": "circuits"
     },
     {
       "week": 12,
@@ -318,5 +337,5 @@
       "presenter": "TBD"
     }
   ],
-  "numbering_note": "Topic numbers identify candidate seminars. Students and the instructor choose which topics enter the final schedule; selections, teaching order and presenters are TBD."
+  "numbering_note": "Topic numbers identify reading bundles, independently of week numbers. Weeks 10 and 11 cover units of analysis and circuit tracing respectively. Students and the instructor choose the remaining topics and teaching order; dates and all presenters are TBD."
 }

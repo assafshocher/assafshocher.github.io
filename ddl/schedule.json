@@ -46,13 +46,15 @@
   },
   {
     "week": 10,
-    "topic": "TBD",
-    "presenter": "TBD"
+    "topic": "Mechanistic interpretability: units of analysis",
+    "presenter": "TBD",
+    "topic_id": "features"
   },
   {
     "week": 11,
-    "topic": "TBD",
-    "presenter": "TBD"
+    "topic": "Mechanistic interpretability: circuit tracing",
+    "presenter": "TBD",
+    "topic_id": "circuits"
   },
   {
     "week": 12,
