@@ -70,7 +70,7 @@ def page(name, title, content):
   <main id="main">{content}</main>
   <footer>
     <div>Deep Deep Learning · Graduate research seminar</div>
-    <p>Course number, semester, meeting details &amp; assessment weights: TBD</p>
+    <p>Spring 2027 · Course number, meeting details &amp; assessment weights: TBD</p>
     <p><a href="assets/syllabus.pdf" download>Download syllabus</a> · <a href="https://assafshocher.github.io/mcv/">Modern Computer Vision</a> · <a href="https://assafshocher.github.io/">Assaf Shocher</a></p>
   </footer>
 </body>
@@ -130,7 +130,7 @@ overview += f'<p>{md(numbering_note)}</p>'
 logistics = [
     ("Format", f'{len(weeks)} planned weekly student-led seminars. {html.escape(duration)} per selected topic. No exam.'),
     ("Topic selection", f'{len(topics)} reading bundles. Weeks 10–11: mechanistic interpretability. Remaining selection and order: <span class="tbd">TBD</span>.'),
-    ("When", 'Semester, day and meeting time: <span class="tbd">TBD</span>. The schedule uses week numbers.'),
+    ("When", 'Spring 2027. Day and meeting time: <span class="tbd">TBD</span>. The schedule uses week numbers.'),
     ("Where", 'Room and delivery mode: <span class="tbd">TBD</span>.'),
     ("Registration", 'Course number, credits and enrollment: <span class="tbd">TBD</span>.'),
     ("Preparation", 'Working knowledge of deep learning, linear algebra, probability, calculus and optimization. Formal prerequisites: <span class="tbd">TBD</span>.'),
@@ -145,7 +145,7 @@ for part in parts:
         families += f'<a href="schedule.html#part-{part["id"]}"><span class="eyebrow">Topic family {part["id"]:02}</span><h3>{html.escape(part["title"])}</h3><span>{count} {noun} →</span></a>'
 home = """
 <section class="hero">
-  <div class="hero-content"><div class="hero-badge">Graduate seminar · Student led · Semester TBD</div><h1>Deep <span class="accent">Deep</span> Learning</h1><p class="subtitle">Understanding the ideas inside the network.</p></div>
+  <div class="hero-content"><div class="hero-badge">Graduate seminar · Student led · Spring 2027</div><h1>Deep <span class="accent">Deep</span> Learning</h1><p class="subtitle">Understanding the ideas inside the network.</p></div>
   <div class="hero-image"><img src="assets/neural-math.webp" width="1983" height="793" fetchpriority="high" alt="A neural network opens into a transparent geometric core, revealing a curved coordinate grid, a tangent plane and a gradient path through a loss landscape."></div>
   <div class="hero-buttons"><a class="btn btn-primary" href="schedule.html">Explore the topic pool →</a><a class="btn btn-secondary" href="assets/syllabus.pdf" download>Download syllabus (PDF)</a></div>
 </section>
@@ -261,7 +261,7 @@ story = [
     P("Technion - Israel Institute of Technology", "SmallDDL"),
     P("Faculty of Data and Decision Sciences", "SmallDDL"),
     P("Deep Deep Learning", "TitleDDL"),
-    P("Graduate student-led research seminar | Semester: TBD | Course number: TBD"),
+    P("Graduate student-led research seminar | Spring 2027 | Course number: TBD"),
     Spacer(1, 14),
     P("Instructor: Assaf Shocher. Course contact and office hours: TBD."),
     P("Course description", "Heading2"),
