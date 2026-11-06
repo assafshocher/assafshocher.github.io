@@ -2,8 +2,16 @@
   {
     "name": "Asaf Fliesher",
     "degree": "M.Sc.",
-    "photo": null,
-    "url": null
+    "photo": "assets/members/asaf-fliesher.png",
+    "url": null,
+    "photo_shape": "circle",
+    "photo_width": 146,
+    "photo_height": 214,
+    "photo_crop": [
+      0,
+      24,
+      146
+    ]
   },
   {
     "name": "Nevo-Jonathan Sznajder",
