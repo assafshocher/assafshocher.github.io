@@ -16,8 +16,16 @@
   {
     "name": "Nevo-Jonathan Sznajder",
     "degree": "M.Sc.",
-    "photo": null,
-    "url": "https://www.linkedin.com/in/nevo-sznajder-916622279/"
+    "photo": "assets/members/nevo-sznajder.jpg",
+    "url": "https://www.linkedin.com/in/nevo-sznajder-916622279/",
+    "photo_shape": "circle",
+    "photo_width": 2000,
+    "photo_height": 1500,
+    "photo_crop": [
+      1170,
+      485,
+      580
+    ]
   },
   {
     "name": "Amit Arad",
