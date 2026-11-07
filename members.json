@@ -135,8 +135,16 @@
   {
     "name": "Tom Shur",
     "degree": "M.Sc.",
-    "photo": null,
-    "url": null
+    "photo": "assets/members/tom-shur.png",
+    "url": null,
+    "photo_shape": "circle",
+    "photo_width": 640,
+    "photo_height": 640,
+    "photo_crop": [
+      220,
+      120,
+      220
+    ]
   },
   {
     "name": "Yamit Ehrlich",
