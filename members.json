@@ -11,7 +11,9 @@
       0,
       24,
       146
-    ]
+    ],
+    "research_topic": "Color constancy and visual sensing",
+    "faculty": "Faculty of Data and Decision Sciences"
   },
   {
     "name": "Nevo-Jonathan Sznajder",
@@ -25,7 +27,9 @@
       1170,
       485,
       580
-    ]
+    ],
+    "research_topic": "Spectral clustering as a neural layer",
+    "faculty": "The Henry and Marilyn Taub Faculty of Computer Science"
   },
   {
     "name": "Amit Arad",
@@ -39,7 +43,9 @@
       180,
       65,
       450
-    ]
+    ],
+    "research_topic": "Gradients and learning dynamics",
+    "faculty": "Faculty of Mathematics"
   },
   {
     "name": "Dor Shaul",
@@ -53,7 +59,9 @@
       170,
       5,
       460
-    ]
+    ],
+    "research_topic": "Linearized world models",
+    "faculty": "The Andrew and Erna Viterbi Faculty of Electrical and Computer Engineering"
   },
   {
     "name": "François Oren Chikli",
@@ -67,7 +75,9 @@
       15,
       0,
       420
-    ]
+    ],
+    "research_topic": "Super-resolution and image consistency",
+    "faculty": "Faculty of Data and Decision Sciences"
   },
   {
     "name": "Raz Haim",
@@ -82,7 +92,9 @@
       0,
       650
     ],
-    "photo_backdrop": true
+    "photo_backdrop": true,
+    "research_topic": "Generative Learned Image Compression at Ultra-Low Bitrates",
+    "faculty": "Faculty of Data and Decision Sciences"
   },
   {
     "name": "Ron Libman",
@@ -96,7 +108,9 @@
       130,
       80,
       620
-    ]
+    ],
+    "research_topic": "Pseudo-invertible autoencoders in latent diffusion models for consistent image editing",
+    "faculty": "Faculty of Data and Decision Sciences"
   },
   {
     "name": "Shahar Merom",
@@ -110,7 +124,9 @@
       650,
       350,
       900
-    ]
+    ],
+    "research_topic": "Parallel training with neural tangent kernels",
+    "faculty": "Faculty of Data and Decision Sciences"
   },
   {
     "name": "Sophia Feldman",
@@ -124,7 +140,9 @@
       175,
       0,
       980
-    ]
+    ],
+    "research_topic": "Geometry and image generation",
+    "faculty": "Faculty of Data and Decision Sciences"
   },
   {
     "name": "Tal Gorbunov",
@@ -138,7 +156,9 @@
       450,
       530,
       650
-    ]
+    ],
+    "research_topic": "Attention through the lens of graphs",
+    "faculty": "Faculty of Data and Decision Sciences"
   },
   {
     "name": "Tom Shur",
@@ -152,7 +172,9 @@
       220,
       120,
       220
-    ]
+    ],
+    "research_topic": "Linearizing continuous generative flows",
+    "faculty": "Faculty of Data and Decision Sciences"
   },
   {
     "name": "Yamit Ehrlich",
@@ -166,7 +188,9 @@
       0,
       0,
       192
-    ]
+    ],
+    "research_topic": "Generalized inverses of neural networks",
+    "faculty": "Faculty of Data and Decision Sciences"
   },
   {
     "name": "Assaf Shocher",
