@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Your Codec, Your Generator: Idempotent Generative Compression without Retraining</title>
+  <meta name="description" content="Training-free adaptation of pretrained image codecs for idempotent recompression and decoding with independently chosen generative priors. Raz Haim and Assaf Shocher, Technion.">
+  <meta property="og:title" content="Your Codec, Your Generator: Idempotent Generative Compression without Retraining">
+  <meta property="og:description" content="Pretrained codecs, adapted without retraining: stable under recompression, decodable with any generator. Raz Haim and Assaf Shocher, Technion.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://assafshocher.github.io/your-codec/">
+  <meta property="og:image" content="https://assafshocher.github.io/your-codec/assets/media/teaser-preview.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://assafshocher.github.io/your-codec/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="assets/project-nav.css">
+  <link rel="stylesheet" href="assets/page.css">
+  <script defer src="assets/site.js"></script>
+  <script defer src="assets/compare.js"></script>
+  <script defer src="assets/page.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#abstract">Skip to the abstract</a>
+<svg class="icon-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+  <symbol id="i-paper" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 4l-4 16"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path d="M9 6H3v7h6V6Zm12 0h-6v7h6V6ZM9 13c0 4-2 5-5 5m17-5c0 4-2 5-5 5"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
+</defs></svg>
+<nav class="project-nav" aria-label="Project navigation">
+  <div class="project-nav-inner"><a class="project-nav-title" href="./">Your Codec, Your Generator</a><div class="project-tabs"><a href="./" aria-current="page">Overview</a><a href="viewer.html">Interactive results</a></div></div>
+</nav>
+<header class="paper-header">
+  <h1>Your Codec, Your Generator:<span>Idempotent Generative Compression without Retraining</span></h1>
+  <div class="authors">
+    <a href="https://www.linkedin.com/in/razhaim/">Raz Haim</a>
+    <a href="https://assafshocher.github.io/">Assaf Shocher</a>
+  </div>
+  <p class="affiliation">Technion — Israel Institute of Technology</p>
+  <div class="resource-links">
+    <a class="resource placeholder" href="#" aria-disabled="true" title="The arXiv link will be added here"><svg class="icon"><use href="#i-paper"/></svg>Paper <span class="soon">soon</span></a>
+    <a class="resource placeholder" href="#" aria-disabled="true" title="The code link will be added here"><svg class="icon"><use href="#i-code"/></svg>Code <span class="soon">soon</span></a>
+    <a class="resource" href="viewer.html"><svg class="icon"><use href="#i-play"/></svg>Interactive results</a>
+    <a class="resource" href="#citation"><svg class="icon"><use href="#i-quote"/></svg>BibTeX</a>
+  </div>
+</header>
+<main>
+  <section class="hero wide" id="hero" aria-label="Recompression in motion">
+    <div class="hero-pair">
+      <figure class="hero-panel"><div class="hero-frame" id="hero-plain">
+        <img src="assets/hero/aeic_r1.webp" class="on" alt="Original codec, round 1"><img src="assets/hero/aeic_r10.webp" alt="Original codec, round 10"><img src="assets/hero/aeic_r20.webp" alt="Original codec, round 20"><img src="assets/hero/aeic_r50.webp" alt="Original codec, round 50">
+        <span class="flick-badge" id="hero-badge-plain"></span></div><figcaption>Original codec (AEIC)</figcaption></figure>
+      <figure class="hero-panel"><div class="hero-frame">
+        <img src="assets/hero/adapted.webp" class="on" alt="With our adapter, the same image at every round">
+        <span class="flick-badge" id="hero-badge-ours"></span><span class="flick-eq">identical at every round</span></div><figcaption>Same codec with our adapter</figcaption></figure>
+    </div>
+    <div class="hero-bar">
+      <button type="button" class="play-btn" id="hero-play" aria-pressed="true">Pause</button>
+      <div class="hero-steps" role="group" aria-label="Round"><button type="button" data-hero-round="1">Round 1</button><button type="button" data-hero-round="10">10</button><button type="button" data-hero-round="20">20</button><button type="button" data-hero-round="50">50</button></div>
+    </div>
+    <p class="hero-caption">A Kodak image decoded, stored as 8-bit, and compressed again, 50 times. Labels: PSNR and bpp.</p>
+  </section>
+
+  <section class="teaser wide" aria-label="Teaser figure">
+    <figure>
+      <img src="assets/media/teaser.png" width="2860" height="740" alt="Left: an image recompressed 1, 10, 20 and 50 times with a pretrained codec drifts, while the adapted codec reproduces the same image at every round. Middle: PSNR across 50 recompression rounds; ours stays flat while methods designed for idempotency lose quality. Right: patch FID versus PSNR for regular and generative decoding of the same bitstreams.">
+      <figcaption class="teaser-under"><p>(a) 1, 10, 20, and 50 recompressions, with and without our adapter. (b) PSNR across recompression rounds against methods designed for idempotency, at a common initial bitrate, on Kodak benchmark. (c) Nonlinear back-projection controls the perception–distortion trade-off. Each colored curve varies decoding while keeping the transmitted bitstreams fixed. Top labels indicate bitrate in bpp.</p></figcaption>
+    </figure>
+  </section>
+
+  <section id="abstract" class="text-section">
+    <h2>Abstract</h2>
+    <p>We introduce an image compression framework with three properties: (i)&nbsp;adaptation of pretrained codecs without retraining or fine-tuning, (ii)&nbsp;cycle-consistent recompression, even of already-encoded images, and (iii)&nbsp;decoding with independently chosen generative priors. We wrap the frozen encoder with non-learned operations so that every continuous latent has a preimage, yielding a surjective pseudo-invertible neural network. A nonlinear right inverse built from the pretrained decoder satisfies <span class="math"><var>E</var>′(<var>D</var>′(<var>E</var>′(<var>x</var>))) = <var>E</var>′(<var>x</var>)</span>. To extend consistency to quantized bitstreams, the receiver searches for a continuous latent that reproduces both the transmitted main symbols and entropy side information. A successful search and an exact correction preserve both streams under deterministic coding; the final reconstruction is checked through the actual coding path.</p>
+    <p>The encoder’s pseudo-inverse enables a nonlinear counterpart of back-projection. In the linear case, back-projection has the closed-form solution <span class="math"><var>x</var>′ = <var>x</var> + <var>A</var><sup>†</sup>(<var>y</var> − <var>Ax</var>)</span>, giving the closest reconstruction to <var>x</var> satisfying <span class="math"><var>Ax</var>′ = <var>y</var></span>. Our nonlinear formulation enforces the transmitted code on proposals from an independently chosen generative model. Adjusting the starting noise controls the prior’s influence without changing that code.</p>
+    <p>Experiments show small first-pass quality changes, higher retained quality than trained consistency codecs over 50 recompressions, also under 8-bit storage, and decoder-side control of the perception–distortion trade-off. Decoupling the codec from its prior lets the receiver adopt future generators without retraining or re-encoding.</p>
+  </section>
+
+  <section class="plain-section wide" id="codecs">
+    <div class="section-heading"><h2>Eight pretrained codecs, no retraining</h2><a class="quiet-link" href="viewer.html">More examples in the viewer <span aria-hidden="true">↗</span></a></div>
+    <p class="section-intro">Each chain recompresses the same Kodak image 50 times, with 8-bit storage (GLC: float chain). Both panels flicker between round 1 and round 50: the original codec drifts, while the adapted codec reproduces its round-1 image exactly and does not move.</p>
+    <div id="codec-compare">
+      <div class="compare-controls">
+        <div class="pill-row" id="cmp-codecs" role="tablist" aria-label="Codec"></div>
+        <div class="seg-group">
+          <button type="button" class="play-btn" id="cmp-play" aria-pressed="true">Pause</button>
+          <div class="seg" role="group" aria-label="View"><button type="button" data-zoom="0">Full image</button><button type="button" data-zoom="1">Zoom</button></div>
+        </div>
+      </div>
+      <div class="flick-pair" id="cmp-pair">
+        <figure class="flick-panel" data-arm="plain"><div class="flick-frame"><img data-round="1" alt=""><img data-round="50" alt=""><span class="flick-badge"></span><span class="flick-eq">identical to round 1</span></div><figcaption>Original codec</figcaption></figure>
+        <figure class="flick-panel" data-arm="ours"><div class="flick-frame"><img data-round="1" alt=""><img data-round="50" alt=""><span class="flick-badge"></span><span class="flick-eq">identical to round 1</span></div><figcaption>With our adapter</figcaption></figure>
+      </div>
+      <p class="cmp-caption" id="cmp-caption"></p>
+    </div>
+    <script type="application/json" id="codecs-data">{"width":768,"height":512,"original":"assets/codecs/original.webp","codecs":[{"name":"AEIC","rate":"ft2","chain":"8-bit PNG","rounds":{"1":{"plain":{"src":"assets/codecs/aeic_plain_r1.webp","psnr":27.12,"bpp":0.0352},"ours":{"src":"assets/codecs/aeic_ours_r1.webp","psnr":27.12,"equalsRound1":true,"bpp":0.0352}},"50":{"plain":{"src":"assets/codecs/aeic_plain_r50.webp","psnr":13.44,"bpp":0.0538},"ours":{"src":"assets/codecs/aeic_ours_r1.webp","psnr":27.12,"equalsRound1":true,"bpp":0.0352}}}},{"name":"HPCM","rate":"λ = .0067","chain":"8-bit PNG","rounds":{"1":{"plain":{"src":"assets/codecs/hpcm_plain_r1.webp","psnr":35.1},"ours":{"src":"assets/codecs/hpcm_ours_r1.webp","psnr":35.07,"equalsRound1":true}},"50":{"plain":{"src":"assets/codecs/hpcm_plain_r50.webp","psnr":27.64},"ours":{"src":"assets/codecs/hpcm_ours_r1.webp","psnr":35.07,"equalsRound1":true}}}},{"name":"ELIC","rate":"λ = .032","chain":"8-bit PNG","rounds":{"1":{"plain":{"src":"assets/codecs/elic_plain_r1.webp","psnr":33.33},"ours":{"src":"assets/codecs/elic_ours_r1.webp","psnr":33.33,"equalsRound1":true}},"50":{"plain":{"src":"assets/codecs/elic_plain_r50.webp","psnr":28.44},"ours":{"src":"assets/codecs/elic_ours_r1.webp","psnr":33.33,"equalsRound1":true}}}},{"name":"MS-ILLM","rate":".45","chain":"8-bit PNG","rounds":{"1":{"plain":{"src":"assets/codecs/msillm_plain_r1.webp","psnr":34.54,"bpp":0.3108724},"ours":{"src":"assets/codecs/msillm_ours_r1.webp","psnr":34.53,"equalsRound1":true,"bpp":0.3108724}},"50":{"plain":{"src":"assets/codecs/msillm_plain_r50.webp","psnr":25.92,"bpp":0.3653158},"ours":{"src":"assets/codecs/msillm_ours_r1.webp","psnr":34.53,"equalsRound1":true,"bpp":0.3108724}}}},{"name":"Hyperprior","rate":"q4","chain":"8-bit PNG","rounds":{"1":{"plain":{"src":"assets/codecs/hyperprior_plain_r1.webp","psnr":35.37,"bpp":0.2638346},"ours":{"src":"assets/codecs/hyperprior_ours_r1.webp","psnr":35.13,"equalsRound1":true,"bpp":0.2638346}},"50":{"plain":{"src":"assets/codecs/hyperprior_plain_r50.webp","psnr":31.31,"bpp":0.1451823},"ours":{"src":"assets/codecs/hyperprior_ours_r1.webp","psnr":35.13,"equalsRound1":true,"bpp":0.2638346}}}},{"name":"TCM","rate":"λ = .0067","chain":"8-bit PNG","rounds":{"1":{"plain":{"src":"assets/codecs/tcm_plain_r1.webp","psnr":35.36,"bpp":0.1415202},"ours":{"src":"assets/codecs/tcm_ours_r1.webp","psnr":35.35,"equalsRound1":true,"bpp":0.1415202}},"50":{"plain":{"src":"assets/codecs/tcm_plain_r50.webp","psnr":30.29,"bpp":0.0883789},"ours":{"src":"assets/codecs/tcm_ours_r1.webp","psnr":35.35,"equalsRound1":true,"bpp":0.1415202}}}},{"name":"Mean-scale","rate":"q3","chain":"8-bit PNG","rounds":{"1":{"plain":{"src":"assets/codecs/meanscale_plain_r1.webp","psnr":33.69,"bpp":0.1600749},"ours":{"src":"assets/codecs/meanscale_ours_r1.webp","psnr":33.65,"equalsRound1":true,"bpp":0.1600749}},"50":{"plain":{"src":"assets/codecs/meanscale_plain_r50.webp","psnr":26.99,"bpp":0.0734863},"ours":{"src":"assets/codecs/meanscale_ours_r1.webp","psnr":33.65,"equalsRound1":true,"bpp":0.1600749}}}},{"name":"GLC","rate":"q3","chain":"float chain","rounds":{"1":{"plain":{"src":"assets/codecs/glc_plain_r1.webp","psnr":26.57},"ours":{"src":"assets/codecs/glc_ours_r1.webp","psnr":26.58,"equalsRound1":true}},"50":{"plain":{"src":"assets/codecs/glc_plain_r50.webp","psnr":12.12},"ours":{"src":"assets/codecs/glc_ours_r1.webp","psnr":26.58,"equalsRound1":true}}}}],"crop":{"x":16,"y":32,"size":192}}</script>
+  </section>
+
+  <section class="figure-section" id="generators">
+    <div class="text-section">
+      <h2>Choose the generator at decoding time</h2>
+      <p>The receiver chooses a prior and its influence after encoding, without weight updates.</p>
+    </div>
+    <div class="wide gen" id="gen">
+      <div class="gen-controls"><div class="pill-row" id="gen-buttons" role="group" aria-label="Decoder"></div><button type="button" class="play-btn" id="gen-play" aria-pressed="true">Pause</button></div>
+      <div class="gen-views"><div class="gen-full"><div class="gen-box"></div></div><div class="gen-crop"></div></div>
+      <p class="gen-label" id="gen-label"></p>
+      <p class="cmp-caption">HPCM λ = .0018, Kodak kodim16. Every decoder reads the same bitstream; right: the 128×128 detail outlined on the left, enlarged. PixNerd uses its tuned setting; Z-Image uses an untuned setting. Whole-image PSNR ↑ and DISTS ↓.</p>
+      <script type="application/json" id="gen-data">{"width":768,"height":512,"crop":{"x":56,"y":296,"size":128},"bpp":0.0577,"decoders":[{"key":"original","name":"Original image","src":"images/378577671fd427e4.webp"},{"key":"regular","name":"Regular adapted","src":"images/7ac13cd0e41799af.webp","psnr":29.27,"dists":0.28,"bpp":0.0577},{"key":"pixnerd","name":"NLBP: PixNerd","src":"images/9bc876ccd5090dc3.webp","psnr":28.12,"dists":0.146,"bpp":0.0577},{"key":"zimage","name":"NLBP: Z-Image","src":"images/450352781dfa6b9a.webp","psnr":28.22,"dists":0.19,"bpp":0.0577}]}</script>
+    </div>
+  </section>
+
+  <section class="plain-section" id="method">
+    <div class="text-section">
+      <h2>How it works</h2>
+      <p>We wrap the frozen encoder with non-learned operations so that every continuous latent has a preimage, which turns it into a surjective pseudo-invertible network. A nonlinear right inverse built from the pretrained decoder makes recompression consistent: <span class="math"><var>E</var>′(<var>D</var>′(<var>E</var>′(<var>x</var>))) = <var>E</var>′(<var>x</var>)</span>. For quantized bitstreams, the receiver searches for a continuous latent that reproduces both the transmitted main symbols and the entropy side information, and writes it into the image. No network is retrained.</p>
+    </div>
+    <figure class="wide figure-block">
+      <div><a href="assets/media/method.png" aria-label="Open the method figure"><img src="assets/media/method.png" width="2729" height="1138" loading="lazy" alt="Method diagram. (a) Encoding: PCA splits the image into a and b; b passes through the frozen encoder E, a is scaled by c and added, giving the latent y, which is quantized and entropy coded with the frozen hyperprior. (b) Decoding: target search selects y-star, and the explicit write W places it into the image while keeping the b part of the decoded image."></a></div>
+      <figcaption>(a) The adapted encoder <var>E</var>′ splits the image with PCA, passes one part through the frozen encoder <var>E</var>, and adds the other part scaled by <var>c</var>. (b) Decoding: target search selects a latent <var>y</var><sup>⋆</sup> that reproduces the transmitted symbols, and the explicit write <var>W</var> writes it while preserving <var>b</var><sub>D</sub>, the complementary PCA part of the decoded image. The first encode uses <var>E</var>, later ones <var>E</var>′. Dark blocks are frozen pretrained networks.</figcaption>
+    </figure>
+      <ol class="method-steps wide">
+      <li><span class="step-number">01</span><h3>Wrap the frozen encoder</h3><p>Non-learned operations give every continuous latent a preimage. No network is retrained.</p></li>
+      <li><span class="step-number">02</span><h3>Search for the code</h3><p>The receiver finds a latent that reproduces the transmitted symbols and side information.</p></li>
+      <li><span class="step-number">03</span><h3>Decode with any generator</h3><p>Nonlinear back-projection keeps the code while a chosen prior adds detail.</p></li>
+    </ol>
+  </section>
+
+  <section class="supplement-callout text-section">
+    <h2>Interactive results</h2>
+    <p>Step through recompression rounds and flicker between methods, storage protocols, and decoders that read the same bitstream.</p>
+    <a class="resource" href="viewer.html"><svg class="icon"><use href="#i-play"/></svg>Open the viewer</a>
+    <p class="small-note">About 106 MB of lossless images, loaded on demand.</p>
+  </section>
+
+  <section id="citation" class="text-section citation-section">
+    <div class="section-heading"><h2>BibTeX</h2><button class="copy-button" id="copy-bib" type="button"><svg class="icon"><use href="#i-copy"/></svg><span>Copy</span></button></div>
+<pre><code id="bibtex">@misc{haim2026yourcodec,
+  title   = {Your Codec, Your Generator: Idempotent Generative Compression without Retraining},
+  author  = {Haim, Raz and Shocher, Assaf},
+  url     = {https://assafshocher.github.io/your-codec/},
+  year    = {2026}
+}</code></pre>
+    <p id="copy-status" role="status" class="sr-only"></p>
+  </section>
+</main>
+<footer class="page-footer text-section">
+  <p>Page layout adapted from <a href="https://assafshocher.github.io/escher/">Moore, Escher, Penrose</a>.</p>
+</footer>
+</body>
+</html>

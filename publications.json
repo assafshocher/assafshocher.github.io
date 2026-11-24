@@ -1,5 +1,27 @@
 [
   {
+    "id": "your-codec",
+    "title": "Your Codec, Your Generator: Idempotent Generative Compression without Retraining",
+    "authors": [
+      "Raz Haim",
+      "<strong>Assaf Shocher</strong>"
+    ],
+    "venue": "Preprint 2026",
+    "year": 2026,
+    "image": "assets/your-codec.webp",
+    "image_hover": "assets/your-codec-hover.gif",
+    "image_width": 464,
+    "image_height": 207,
+    "preview_width": 464,
+    "preview_height": 207,
+    "links": {
+      "page": "https://assafshocher.github.io/your-codec/",
+      "demo": "https://assafshocher.github.io/your-codec/viewer.html"
+    },
+    "abstract": "We adapt pretrained image codecs without retraining so that recompression preserves their bitstreams, even for already-encoded images. A pseudo-invertible encoder also lets the receiver use a generative model of their choice while staying consistent with the transmitted code. Across 50 rounds, the adapted codecs retain more image quality than trained consistency codecs.",
+    "bibtex": "@misc{haim2026yourcodec, title={Your Codec, Your Generator: Idempotent Generative Compression without Retraining}, author={Haim, Raz and Shocher, Assaf}, year={2026}, url={https://assafshocher.github.io/your-codec/}}"
+  },
+  {
     "id": "image-scaling",
     "title": "A Unified Theory of Image Scaling: Point Spread Functions, Discrete Kernels, and Scale-Spaces",
     "authors": ["<strong>Assaf Shocher</strong>"],
