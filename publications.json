@@ -1,5 +1,35 @@
 [
   {
+    "id": "deja-vae",
+    "title": "Déjà-VAE: Training-Free Consistent Editing with Pseudo-Invertible Encoders and Latent Back-Projection",
+    "authors": [
+      "Ron Libman*",
+      "Yamit Ehrlich*",
+      "Ohad Fried",
+      "<strong>Assaf Shocher</strong>"
+    ],
+    "author_links": {
+      "Ron Libman": "https://il.linkedin.com/in/ron-libman-8826ab1b9",
+      "Yamit Ehrlich": "https://il.linkedin.com/in/yamit-ehrlich-563255133",
+      "Ohad Fried": "https://www.ohadf.com/",
+      "Assaf Shocher": "https://assafshocher.github.io/"
+    },
+    "venue": "Preprint 2026",
+    "year": 2026,
+    "image": "assets/deja-vae.webp",
+    "image_hover": "assets/deja-vae-hover.gif",
+    "image_width": 448,
+    "image_height": 269,
+    "preview_width": 448,
+    "preview_height": 269,
+    "links": {
+      "page": "https://assafshocher.github.io/deja-vae/",
+      "supp": "https://assafshocher.github.io/deja-vae/supp/pastebench_viewer.html"
+    },
+    "abstract": "Déjà-VAE combines exact autoencoding consistency with training-free stabilization of successive image edits. It adapts a pretrained VAE into a pseudo-invertible codec, then uses adaptive wavelet back-projection to reduce changes outside the intended edit. PasteBench tests how well the original image is preserved after ten objects are added and then removed.",
+    "bibtex": "@misc{libman2026dejavae, title={Déjà-VAE: Training-Free Consistent Editing with Pseudo-Invertible Encoders and Latent Back-Projection}, author={Libman, Ron and Ehrlich, Yamit and Fried, Ohad and Shocher, Assaf}, year={2026}, url={https://assafshocher.github.io/deja-vae/}}"
+  },
+  {
     "id": "your-codec",
     "title": "Your Codec, Your Generator: Idempotent Generative Compression without Retraining",
     "authors": [

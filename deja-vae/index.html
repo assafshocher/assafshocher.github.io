@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Déjà-VAE</title>
+<link rel="canonical" href="https://assafshocher.github.io/deja-vae/">
+<meta property="og:title" content="Déjà-VAE: Training-Free Consistent Editing with Pseudo-Invertible Encoders and Latent Back-Projection">
+<meta property="og:url" content="https://assafshocher.github.io/deja-vae/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://assafshocher.github.io/assets/deja-vae.webp">
+<meta name="theme-color" content="#ffffff">
+<meta name="description" content="Déjà-VAE: training-free consistent editing with pseudo-invertible encoders and latent back-projection.">
+<link rel="icon" type="image/png" sizes="64x64" href="static/img/favicon.png">
+<link rel="apple-touch-icon" href="static/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+<header class="masthead container">
+  <h1 class="title">
+    <span class="title-name">
+      <img class="title-logo" src="static/img/logo.png" alt="" width="70" height="70">
+      <span>Déjà-VAE</span>
+    </span>
+    Training-Free Consistent Editing with <span class="title-accent">Pseudo-Invertible Encoders</span> and <span class="title-accent">Latent Back-Projection</span>
+  </h1>
+  <p class="authors">
+    <span class="author-name"><a href="https://il.linkedin.com/in/ron-libman-8826ab1b9">Ron&nbsp;Libman</a><sup>1*</sup></span>
+    <span class="author-name"><a href="https://il.linkedin.com/in/yamit-ehrlich-563255133">Yamit&nbsp;Ehrlich</a><sup>1*</sup></span>
+    <span class="author-name"><a href="https://www.ohadf.com/">Ohad&nbsp;Fried</a><sup>2</sup></span>
+    <span class="author-name"><a href="https://assafshocher.github.io/">Assaf&nbsp;Shocher</a><sup>1</sup></span>
+  </p>
+  <p class="affil"><span><sup>1</sup>Technion – Israel Institute of Technology</span><span><sup>2</sup>Reichman University</span></p>
+  <p class="equal"><sup>*</sup>Equal contribution</p>
+  <nav class="links" aria-label="Project links">
+    <span class="btn btn-soon">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      Paper <span class="btn-note">soon</span></span>
+    <span class="btn btn-soon">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Code <span class="btn-note">soon</span></span>
+    <a class="btn" href="supp/pastebench_viewer.html">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 16l5-5 4 4 3-3 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      Supplementary</a>
+    <a class="btn" href="#bibtex">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v16l-6-4-6 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      BibTeX</a>
+  </nav>
+</header>
+</div>
+
+<main class="container" id="content">
+
+  <!-- ===================== Teaser: PasteBench turn viewer ===================== -->
+  <section class="card teaser-card" id="viewer">
+    <div class="tv-top">
+      <div class="tv-pick">
+        <span class="tv-pick-k">Compare</span>
+        <div class="chips" id="methodChips" role="group" aria-label="Baseline"></div>
+      </div>
+      <div class="seg" id="sceneSeg" role="group" aria-label="Scene"></div>
+    </div>
+    <div class="turn-viewer" id="tv">
+      <div class="tv-panels">
+        <div class="tv-panel">
+          <div class="tv-frame"><img id="imgBase" alt="Baseline output at the selected stage"><span class="tv-label" id="tagBase">FLUX.2</span></div>
+        </div>
+        <div class="tv-panel tv-ours">
+          <div class="tv-frame"><img id="imgOurs" alt="Déjà-VAE output at the selected stage"><span class="tv-label">Déjà&#8209;VAE (ours)</span></div>
+        </div>
+      </div>
+      <div class="tv-stages" id="stages" role="tablist" aria-label="Stage">
+        <button role="tab" type="button" data-turn="0" aria-selected="false"><b>Original</b><span>the input scene</span></button>
+        <button role="tab" type="button" data-turn="10" aria-selected="false"><b>All pasted</b><span>after turn 10</span></button>
+        <button role="tab" type="button" data-turn="20" aria-selected="true"><b>All removed</b><span>after turn 20</span></button>
+      </div>
+    </div>
+    <p class="caption teaser-caption">PasteBench with FLUX.2 [klein] 9B and 8&#8209;bit image hand&#8209;offs: ten objects are pasted and harmonized one per turn, then removed in reverse order. After all twenty turns, an ideal editor returns the original scene unchanged.</p>
+  </section>
+
+  <!-- ===================== Abstract ===================== -->
+  <section class="card">
+    <div class="card-head"><h2>Abstract</h2></div>
+    <div class="prose">
+      <p>Consistency is essential to generative workflows: repeated processing should preserve information beyond the changes explicitly requested. In latent diffusion models, this requires stability both when moving between latent and pixel spaces and when applying successive edits. Autoencoding errors and unintended changes from the editing model can accumulate across these operations, progressively altering image structure, texture, and color.</p>
+      <p>We introduce Déjà&#8209;VAE, a framework that combines exact autoencoding consistency with calibrated editing stabilization, without training or fine&#8209;tuning. Its autoencoding component converts a pretrained variational autoencoder into a surjective pseudo&#8209;invertible neural network, with a fixed gain balancing deviations from the pretrained encoder and decoder. The modified decoder <span class="m">D'</span> is an explicit nonlinear right inverse of the encoder <span class="m">E'</span>, satisfying <span class="m">E'(D'(z))=z</span> by construction. Consequently, <span class="m">D'</span> is a reflexive generalized inverse: latent round trips preserve their input, up to numerical precision, and repeated image reconstruction is idempotent.</p>
+      <p>To suppress editing drift, adaptive wavelet back&#8209;projection finds the closest latent to the editor's output in <span class="m">\ell_2</span>, subject to matching the previous latent on wavelet coefficients whose changes fall below calibrated thresholds. This correction is applied once per turn, with no additional network evaluations after calibration. Together, these components support workflows that remain in latent space or interleave generation with pixel&#8209;space operations and constraints. Tests across models and editing benchmarks show less drift than stock pipelines and dedicated consistency methods.</p>
+    </div>
+  </section>
+
+  <!-- ===================== Method ===================== -->
+  <section class="card" id="method">
+    <div class="card-head"><h2>Method</h2></div>
+    <figure class="figure figure-first">
+      <img class="method-img" src="static/img/fig_codec.png" alt="Diagram of the Déjà-VAE encoder and decoder" loading="lazy">
+      <figcaption><b>The Déjà&#8209;VAE codec.</b> A fixed PCA basis splits an image into low&#8209;variance <em>reserved</em> coordinates <span class="m">x_0</span>, one per latent entry, and the <em>retained</em> rest <span class="m">x_1</span>. The encoder <span class="m">E'(x)=c\,x_0+E(\mu+U_1^{\top}x_1)</span> runs the frozen encoder <span class="m">E</span> on the retained image and adds the reserved coordinates with a fixed gain <span class="m">c</span>. The decoder keeps the retained coordinates of <span class="m">D(z)</span> and solves for the reserved ones, so the encoder maps its output straight back to <span class="m">z</span>. Blue blocks are pretrained.</figcaption>
+    </figure>
+    <div class="bp-row">
+      <figure class="figure">
+        <img class="method-img" src="static/img/fig_bp.png" alt="Diagram of adaptive latent back-projection" loading="lazy">
+      </figure>
+      <div class="bp-text">
+        <p><b>Latent back&#8209;projection.</b> After each turn, the change <span class="m">d=z_{\text{edit}}-z_{\text{prev}}</span> is moved to a two&#8209;level Haar basis <span class="m">W</span>. Coefficients whose change is below a calibrated threshold return to their input values; all others stay edited:</p>
+        <div class="eq" data-tex="z^{+}=z_{\text{prev}}+W^{\top}(I-S^{\top}S)\,W d"></div>
+        <p class="caption">Thresholds combine a per&#8209;turn noise estimate from the finest diagonal band with a band profile measured once per editor on no&#8209;op chains.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="card" id="bibtex">
+    <div class="card-head card-head-row"><h2>BibTeX</h2><button class="copy" id="copyBib" type="button">Copy</button></div>
+<pre class="bib" id="bibText">@misc{dejavae,
+  title  = {D{\'e}j{\`a}-VAE: Training-Free Consistent Editing with
+            Pseudo-Invertible Encoders and Latent Back-Projection},
+  author = {Libman, Ron and Ehrlich, Yamit and Fried, Ohad and Shocher, Assaf},
+  year   = {2026}
+}</pre>
+  </section>
+</main>
+
+<footer class="footer container">
+  <p>Déjà&#8209;VAE: Training&#8209;Free Consistent Editing with Pseudo&#8209;Invertible Encoders and Latent Back&#8209;Projection</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="static/js/data.js"></script>
+<script src="static/js/main.js"></script>
+</body>
+</html>
